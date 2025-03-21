@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color:  #3a506b;
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.message {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.message h1 {
+    color:  #5bc0be;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+.message p {
+    font-size: 1.2rem;
+    color:  #5bc0be;
+}
+.payment-section {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.payment-section h2 {
+    font-size: 1.8rem;
+    color: #3a506b;
+    margin-bottom: 20px;
+}
+/* Estilo do formulário de pagamento */
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.payment-form label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+.payment-form select, 
+.payment-form input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid black
+}
+.payment-form .credit-card-fields {
+    display: none;
+}
+.payment-form button {
+    padding: 14px 0;
+    background-color: #5bc0be;
+    border: none;
+    color: black;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.payment-form button:hover {
+    background-color: #4fa3a0;
+}
+/* Estilo do botão de voltar */
+.back-button {
+    margin-top: 30px;
+    text-align: center;
+}
+.btn-back {
+    padding: 14px 0;
+    background-color: #5bc0be;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+}
+.btn-back:hover {
+    background-color: #478d8c;
+}
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .message h1 {
+        font-size: 2rem;
+    }
+    .payment-form {
+        width: 90%;
+    }
+    .btn-back {
+        width: 100%;
+    }
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/obrigado.css">
+    <title>Obrigado por escolher nossa plataforma de jogos!</title>
+</head>
+<body>
+    <div class="container">
+        <div class="message">
+            <h1>Obrigado por escolher nossa plataforma de jogos!</h1>
+            <p>Estamos muito felizes por você estar aqui. Prepare-se para viver uma experiência incrível com nossos jogos. A diversão está apenas começando!</p>
+            <p>Agora, vamos concluir sua compra e garantir que você aproveite ao máximo nossos jogos.</p>
+        </div>
+
+        <div class="payment-section">
+            <h2>Selecione seu método de pagamento:</h2>
+            <form id="paymentForm" onsubmit="return confirmPaymentMethod()">
+        
+                <label for="payment-method">Escolha uma forma de pagamento:</label>
+                <select name="payment-method" id="payment-method" onchange="toggleCreditCardFields()">
+                    <option value="credit-card">Cartão de Crédito</option>
+                    <option value="pix">Cartão de Débito</option>
+                 
+                </select>
+
+                <div class="credit-card-fields" id="credit-card-fields">
+                    <label for="card-number">Número do Cartão:</label>
+                    <input type="text" id="card-number" name="card-number" placeholder="Número do cartão" maxlength="16" oninput="validateInput(event)" required>
+                
+                    <label for="expiration-date">Data de Expiração:</label>
+                    <input type="text" id="expiration-date" name="expiration-date" placeholder="DD/MM" maxlength="5" oninput="formatExpirationDate(event)" required>
+                
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="CVV" maxlength="3" oninput="validateInput(event)" required>
+                </div>
+
+                <div class="payment-button">
+                    <button type="submit">Confirmar Pagamento</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Botão de voltar -->
+        <div class="back-button">
+            <button class="btn-back" onclick="window.location.href='index1.html'">Voltar para o Início</button>
+        </div>
+    </div>
+
+    <script>
+        // validar a entrada de números nos campos
+        function validateInput(event) {
+            var inputValue = event.target.value;
+            inputValue = inputValue.replace(/\D/g, '');  // Remove tudo que não for número
+            event.target.value = inputValue;
+        }
+    
+        // formatar a data de expiração no formato dd/mm
+        function formatExpirationDate(event) {
+            var input = event.target;
+            var value = input.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+    
+            if (value.length >= 2) {
+                // Adiciona a barra "/" após o segundo dígito (mês)
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+    
+            input.value = value; // Atualiza o valor no campo
+        }
+    </script>
+</body>
+</html>

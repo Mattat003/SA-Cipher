@@ -1,0 +1,165 @@
+@charset "utf-8";
+
+   body{
+	   margin:0 auto;
+	   font-family:Adobe Hebrew, Roman New Times;
+	   background-color:#1c2541;
+   }
+
+     header {
+		 height:170px;
+	     background-color:#000000;
+	 }
+	 header img {
+		 float:left;
+		 height:150px;
+		 width:150px;
+		 margin:10px;
+		 animation-name: example;
+  		 animation-duration: 4s;
+  		 animation-delay: -2s;
+	 }
+	 header h1 {
+		 float:left;
+		 margin:50px 0 0 30px;
+		 font-size:60px;
+		 color:#ffffff;
+	 }
+	 
+     nav {
+		 clear:both;
+		 width:80%;
+		 margin:0px auto;
+		 height:55px;
+		 float: right;
+	 }	 
+	 nav a {
+		 color:white;
+		 text-decoration:none;
+		 text-align:center;
+	 }
+	 nav .opcao {
+		 float:right;
+		 width:31.3%;
+		 background-color:#0c142e;
+		 padding:10px 0;
+		 margin:0 1%;
+		 font-size:26px;
+	 }
+	 nav .opcao:hover {
+		 background-color:#1c2541;
+	 }
+	 
+	 section {
+		 clear:both;
+		 min-height:680px;
+		 width:100%;
+		 margin-top:0px;
+	 }
+	 footer {
+		 background: color #1c2541;;
+		 color:#fff;
+		 text-align:center;
+		 padding:10px;
+	 }
+     section #topo {
+		 width:1150px;
+		 margin:170px auto;
+		 height:90px;
+		 /*background-color:red;*/
+	 }
+	 
+	 .medo {
+		 height:340px;
+		 width:260px;
+	 }
+	 .esquerdo {
+		 float:left;
+	 }
+	 
+	 section #titulos {
+		 height:80px;
+		 width:650px;
+		 margin:0px auto;
+	 }
+	 h2 {
+		 text-align:center;
+		 margin-top:40px;
+		 margin-bottom:20px;
+		 font-family:roman new times;
+		 font-size:40px;
+		 color:white;
+	 }
+	 h3 {
+		 text-align:center;
+		 margin-top:40px;
+		 font-size:20px;
+		 color:firebrick;
+	 }
+	 section p {
+		 clear:both;
+		 text-align:center;
+		 margin:90px 20px;
+		 color:white;
+	 }
+
+	 * { margin: 0; padding: 0; }
+
+	 .slidejogos {
+		display: block;
+		height: 293px;
+		width: 600px;
+		margin: auto;
+		margin-top: 20px;
+		position: relative;
+	}
+	
+	.slidejogos li {
+		list-style: none;
+		position: absolute;
+	}
+	
+	.slidejogos img {
+		margin: auto;
+		height: 100%;
+		width: 100%;
+		vertical-align: top;
+	}
+
+	.slidejogos input{
+		display: none;
+	}
+
+	.slidejogos label{
+		background-color: #5bc0be;
+		bottom: 10px;
+		cursor: pointer;
+		display: block;
+		height: 10px;
+		position: absolute;
+		width: 10px;
+		z-index: 10;
+	}
+
+	.slidejogos li:nth-child(1) label{
+		left: 10px;
+	}
+
+	.slidejogos li:nth-child(2) label{
+		left: 40px;
+	}
+
+	.slidejogos li:nth-child(3) label{
+		left: 70px;
+	}
+
+	.slidejogos img{
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.slidejogos li input:checked ~ img{
+		opacity: 1;
+		visibility: visible;
+		z-index: 10;
+	}

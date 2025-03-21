@@ -1,0 +1,323 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0d1b2a;
+    color: #fff;
+    margin: 0;
+}
+
+/* Cabeçalho fixo */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #0d1b2a;
+    color: #00ffcc;
+    padding: 20px;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 255, 204, 0.5);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 10px rgba(0, 255, 204, 0.8);
+}
+
+header .cabeçalho-link {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 10px 0;
+}
+
+header .cabeçalho-link li a {
+    color: #00ffcc;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header .cabeçalho-link li a:hover {
+    background-color: #00e5ff;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+}
+
+/* Espaço debaixo do cabeçalho */
+body {
+    padding-top: 120px; /* Espaço pro cabeçalho fixo */
+}
+
+/* Seção de boas-vindas (no meio) */
+.Meio {
+    text-align: center;
+    margin-top: 60px;
+    padding: 40px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.Meio h1 {
+    font-size: 3rem;
+    color: #00ffcc;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0, 255, 204, 0.8);
+}
+
+.Meio p {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+/* Seção de Destaques */
+section h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    color: #ff00ff;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 10px rgba(255, 0, 255, 0.8);
+}
+
+.Container-card-1 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.cards {
+    height: 300px;
+    background-color: #1c2541;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 255, 204, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cards img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* interatividade dos "Destaques" */
+.cards:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 255, 204, 0.5); 
+}
+
+/* Seção CTA (Call to Action) */
+.cta {
+    background-color: #00ffcc;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 60px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 255, 204, 0.3);
+}
+
+.text-cta h6 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.text-cta h4 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.text-cta .btn {
+    padding: 15px 30px;
+    background-color: #00ffcc;
+    color: #1c2541;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.text-cta .btn:hover {
+    background-color: #00e5ff;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+}
+
+section h1 {
+    text-align: center;
+    font-size: 36px;
+    margin: 40px 0;
+}
+
+.Container-card-1 {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.cards {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cards img {
+    width: 100%;
+    border-radius: 8px;
+    max-width: 300px;
+}
+
+.cards:hover {
+    transform: scale(1.05);
+}
+
+.cta {
+    background-color: #5bc0be;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.text-cta h6 {
+    font-size: 18px;
+    color: white;
+}
+
+.text-cta h4 {
+    font-size: 48px;
+    color: white;
+    margin: 20px 0;
+}
+
+.text-cta .btn {
+    padding: 12px 25px;
+    background-color: #479694;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.text-cta .btn:hover {
+    background-color: #366968;
+}
+
+.Categorias {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.Container-jogos {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.jogo {
+    background-color: #5bc0be;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    width: 23%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.jogo:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.6);
+}
+
+.jogo img {
+    width: 100%;
+    border-radius: 8px;
+    max-height: 250px;
+    object-fit: cover;
+}
+
+.jogo p {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.jogo h5 {
+    font-size: 14px;
+    color: rgb(95, 95, 95);
+}
+
+.jogo a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.jogo a:hover {
+    color: #00ffcc;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+}
+
+.logo {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0;
+    overflow: hidden;
+}
+
+.logo img {
+    width: 15%;
+    max-width: 150px;
+    object-fit: contain;
+    animation: scroll-left 1s linear infinite;
+}
+@keyframes scroll-left {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.last-text {
+    text-align: center;
+    padding: 20px;
+    background-color: #0d1b2a;
+    color: #00ffcc;
+    font-size: 1rem;
+    margin-top: 50px;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+section, .logo, .cta {
+    animation: fadeIn 1.5s ease-in-out;
+} 

@@ -1,0 +1,164 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0d1b2a; /* Azul escuro */
+    color: #fff;
+    margin: 0;
+}
+
+/* Cabeçalho fixo */
+header {
+    background-color: #0d1b2a;
+    color: #00bcd4; /* Neon Ciano */
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 255, 204, 0.5); /* Neon box-shadow */
+}
+
+header .logo h1 {
+    font-size: 2rem;
+    letter-spacing: 5px;
+    color: #00bcd4; /* Neon Ciano */
+    margin-bottom: 10px;
+}
+
+header .cabeçalho-link ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+header .cabeçalho-link ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header .cabeçalho-link ul li a {
+    text-decoration: none;
+    color: #00bcd4;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+header .cabeçalho-link ul li a:hover {
+    background-color: #00e5ff; /* Neon blue */
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.7); /* Neon hover effect */
+}
+
+/* Espaço abaixo do cabeçalho */
+body {
+    padding-top: 120px; /* Espaço para o cabeçalho fixo */
+}
+
+/* Seção de contato */
+section.contato {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 255, 204, 0.5); /* Neon box-shadow */
+    margin-top: 80px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.contato h2 {
+    font-size: 3rem;
+    color: #00bcd4; /* Neon Ciano */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0, 255, 204, 0.8); /* Neon glow */
+}
+
+.contato p {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form label {
+    font-size: 1.1rem;
+    color: #00bcd4; /* Neon Ciano */
+}
+
+form input, form textarea {
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #00bcd4; /* Ciano */
+    border-radius: 10px;
+    background-color: #1c2541; /* Azul escuro para os campos */
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 255, 204, 0.3); /* Neon box-shadow */
+    transition: box-shadow 0.3s ease;
+}
+
+form input:focus, form textarea:focus {
+    outline: none;
+    border-color: #00bcd4;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.7); /* Neon focus effect */
+}
+
+form button {
+    padding: 15px 30px;
+    background-color: #00bcd4; /* Neon Ciano */
+    color: #1c2541;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 255, 204, 0.5); /* Neon box-shadow */
+    transition: all 0.3s ease;
+}
+
+form button:hover {
+    background-color: #00e5ff; /* Neon blue */
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.7); /* Neon hover effect */
+}
+
+/* Rodapé */
+footer .last-text {
+    text-align: center;
+    padding: 20px;
+    background-color: #0d1b2a;
+    color: #00bcd4; /* Neon Ciano */
+    font-size: 1rem;
+    margin-top: 50px;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Adicionar animação para fade-in nas seções */
+section, .logo, .cta {
+    animation: fadeIn 1.5s ease-in-out;
+}

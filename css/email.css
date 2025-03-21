@@ -1,0 +1,75 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Para centralizar verticalmente */
+    height: 100vh;
+    background: #3a506b;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: #5bc0be;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: white;
+    width: 320px; /* Tamanho fixo para evitar que fique esticado */
+    box-sizing: border-box; /* Inclui o padding no tamanho total */
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 1.5em; /* Tamanho da fonte */
+}
+
+.code-inputs {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.code-inputs input {
+    width: 60px; /* Tamanho fixo para evitar esticar */
+    height: 60px;
+    text-align: center;
+    font-size: 1.5em;
+    border-radius: 5px;
+    border: none;
+    background-color: whitesmoke;
+    color: gray;
+    transition: all 0.2s ease-in-out; /* Transição suave */
+}
+
+.code-inputs input:focus {
+    outline: 2px solid #388887;
+    background-color: #f0f0f0; /* Leve mudança de cor no foco */
+}
+
+.verificar {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: black;
+    background-color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px; /* Espaçamento entre o botão e os campos */
+}
+
+.verificar:hover {
+    background-color: #388887; /* Mudança de cor no hover */
+    color: white; /* Cor do texto no hover */
+}
+
+@media (max-width: 400px) {
+    .container {
+        width: 90%; /* Para telas menores, a largura da container diminui */
+    }
+
+    .code-inputs input {
+        width: 45px; /* Ajuste do tamanho dos inputs para telas pequenas */
+        height: 45px;
+    }
+}

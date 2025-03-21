@@ -1,0 +1,94 @@
+/* Estilo básico do corpo */
+body {
+    font-family: Arial, sans-serif; /* Definindo uma fonte legível */
+    background-color:  #3a506b;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Centralizando e estilizando o título e a imagem */
+.quadrado {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.quadrado h1 {
+    font-size: 48px;
+    color: #5bc0be; /* Cor chamativa para o título */
+    margin-bottom: 10px;
+    text-transform: uppercase; /* Título em letras maiúsculas */
+}
+
+.quadrado img {
+    width: 70%;
+    max-width: 300px; /* Tamanho máximo da imagem */
+    height: auto;
+    border-radius: 10px; /* Bordas arredondadas na imagem */
+    box-shadow: 0 4px 8px #5bc0be; /* Sombra suave */
+    transition: transform 0.3s ease; /* Transição suave ao passar o mouse */
+}
+
+.quadrado img:hover {
+    transform: scale(1.03); /* Imagem aumenta de tamanho quando o mouse passa sobre ela */
+}
+
+/* Estilo para o texto da história */
+.história {
+    margin-top: 40px;
+    padding: 0 20px;
+    text-align: justify; /* Justificando o texto */
+}
+
+.história h2 {
+    font-size: 20px;
+    line-height: 1.0; /* Espaçamento entre as linhas */
+    color: white    ;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+/* Estilo para o botão */
+/* Centraliza o container dos botões */
+.botões-container {
+    text-align: center; /* Centraliza os botões horizontalmente */
+    margin-top: 40px;   /* Ajuste a margem para dar um espaço acima, se necessário */
+}
+
+/* Estilo dos botões */
+button {
+    display: inline-block; /* Faz os botões ficarem lado a lado */
+    background-color: #5bc0be; /* Cor de fundo do botão */
+    color: white;
+    font-size: 18px;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    width: 200px; /* Define a largura dos botões */
+    margin-right: 10px; /* Espaçamento entre os botões */
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease; /* Transição suave ao passar o mouse */
+}
+
+/* Estilo dos links dentro dos botões */
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Efeito de hover */
+button:hover {
+    background-color: #4a9998; /* Cor mais escura no hover */
+}
+.last-text {
+    background-color: #2d2d2d;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 30px;
+}
+

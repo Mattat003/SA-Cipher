@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/login.css">
+        <script src="javascript/jv.js" defer></script>
+    </head>
+    <body>
+        <div class="right-login">
+            <div class="card-login">
+                <h1> LOGIN </h1>
+                <form name="frmlogin" action="index1.html" method="get" onsubmit="return validaFormulario()">
+                    <div class="textfield">
+                        <label for="usuario">Usuário</label>
+                        <input type="text" name="txtusuario" id="usuario" placeholder="Usuário">
+                    </div>
+                    <div class="textfield">
+                        <label for="senha">Senha</label>
+                        <input type="password" name="txtsenha" id="senha" placeholder="Senha">
+                    </div>
+                    <div class="btn-container">
+                        <button type="submit" class="btn-login">Login</button>
+                        <a href="senha.html">
+                            <button class="btn-login" type="button">Esqueceu a senha?</button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

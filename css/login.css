@@ -1,0 +1,112 @@
+/* Estilos Gerais */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    background-color: #3a506b; /* Fundo geral */
+    overflow: hidden; /* Bloqueia rolagem */
+}
+
+/* Layout principal (login) */
+.right-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card-login {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 35px;
+    background-color: #5bc0be;
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px white;
+    text-align: center;
+}
+
+.card-login h1 {
+    color: white;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+/* Estilo dos campos de entrada */
+.textfield {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.textfield > input {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 12pt;
+    box-shadow: 0px 10px 40px rgb(209, 197, 197);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.textfield > label {
+    color: black;
+    margin-bottom: 10px;
+}
+
+.textfield > input::placeholder {
+    color: gray;
+}
+
+/* Estilo do botão de login e do botão "Esqueceu a senha?" */
+.btn-login, .btn-login[type="button"] {
+    width: 100%;
+    padding: 16px 0px;
+    margin: 10px 0; /* Ajustado para espaçamento entre os botões */
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 3px;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: 0px 10px 40px -12px white;
+}
+
+/* Estilo específico para o botão "Esqueceu a senha?" */
+.btn-login[type="button"] {
+    background-color: #ffffff;
+    color: #00796b; /* Cor do texto */
+    font-weight: 800; /* Fonte igual ao botão de login */
+    padding: 16px 0px; /* Mesma altura do botão de login */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border-radius: 8px;
+}
+
+/* Responsividade: telas menores */
+@media only screen and (max-width: 950px) {
+    .card-login {
+        width: 85%; /* O card ocupa mais espaço em telas pequenas */
+    }
+}
+
+/* Adiciona transição suave aos botões */
+.btn-login, .btn-login[type="button"] {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover do botão de "Esqueceu a senha?" */
+.btn-login[type="button"]:hover {
+    background-color: #00796b;
+    color: white;
+}
