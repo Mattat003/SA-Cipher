@@ -1,17 +1,17 @@
 # Projeto SA - Cipher
 
 <h1 align="center">Olá 👋, nós somos a Cipher Enterprise</h1>
-<h3 align="center">Empresa de venda de jogos eletronicos!</h3>
+<h3 align="center">Empresa de venda e gerenciamento de jogos eletronicos!</h3>
 
 <h3 align="left">Nosso Site:</h3>
 <p align="left">
-  O Cipher é um site dedicado a oferecer uma seleção cuidadosamente curada de jogos digitais. Aqui, não apenas vendemos jogos – trazemos uma experiência única de compra, onde você tem acesso a títulos originais, criativos e inovadores de desenvolvedores de todo o mundo.
+  A Cipher é um site dedicado a oferecer uma seleção cuidadosamente curada de jogos digitais. Aqui, não vendemos jogos virtualmente – trazemos uma experiência única de compra, onde você tem acesso a títulos originais, criativos e inovadores de desenvolvedores de todo o mundo presencialmente como nos velhos tempos!
 
-Nosso objetivo é ser o ponto de encontro de jogadores que buscam jogos com histórias envolventes, mecânicas originais e um toque pessoal. Se você está procurando uma nova aventura, um desafio ou algo diferente, no Cipher você encontrará jogos para todas as plataformas, com opções para todos os gostos.
+Nosso objetivo é ser o ponto de encontro de jogadores que buscam jogos com histórias envolventes, mecânicas originais e um toque pessoal. Se você está procurando uma nova aventura, um desafio ou algo diferente, na Cipher você encontrará jogos para todas as plataformas, com opções para todos os gostos.
 
-Além disso, nos preocupamos com a experiência do usuário, oferecendo uma plataforma fácil de navegar, com pagamentos seguros e suporte dedicado para garantir que sua compra e experiência no nosso site sejam sempre satisfatórias.
+Além disso, nos preocupamos com a experiência do usuário, oferecendo uma plataforma fácil de navegar, com gerenciamento da biblioteca de jogos, resgate de jogos seguros e suporte dedicado para garantir que sua experiência no nosso site sejam sempre satisfatórias.
 
-No Cipher, você não apenas compra jogos, você apoia os desenvolvedores que estão criando o futuro dos games. Embarque nessa jornada com a gente!
+Na Cipher, você não apenas gerencia seus jogos, você apoia os desenvolvedores parceiros que estão criando o futuro dos games. Embarque nessa jornada com a gente!
 </p>
 
 <h3 align="left">Linguagens e Ferramentas:</h3>
