@@ -1,6 +1,6 @@
 # Projeto SA - Cipher
 
-<h1 align="center">Olá 👋, nós somos a Cipher Corporation</h1>
+<h1 align="center">Olá 👋, nós somos a Cipher Enterprise</h1>
 <h3 align="center">Empresa de venda de jogos eletronicos!</h3>
 
 <h3 align="left">Nosso Site:</h3>
