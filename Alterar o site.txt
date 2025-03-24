@@ -1,0 +1,11 @@
+Alterar o Front-End ();
+Ordem Alfabetica;
+Pesquisa;
+Filtragem de pesquisa;
+Página de DLCs;
+Reviews;
+Login de ADM;
+Easter Eggs;
+Friv;
+Recomendados;
+Banco de Dados;
