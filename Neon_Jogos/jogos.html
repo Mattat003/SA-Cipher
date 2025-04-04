@@ -4,59 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Dário</title>
+
+    <!-- Importação do Chart.js para exibição de gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Importação do arquivo CSS externo -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    
+    <!-- Container principal que envolve todo o conteúdo -->
     <div class="container">
+
+        <!-- Barra lateral esquerda -->
         <aside class="sidebar">
+
+            <!-- Área de perfil do usuário -->
             <div class="perfil">
-                <div class="avatar"></div>
-                <h2>Dário</h2>
+                <img class="avatar" src="img/negan.jpg" alt="Avatar de Dário">
+                <h2>Negan</h2>
             </div>
+
+            <!-- Seção de jogos registrados -->
             <div class="jogos">
                 <h3>Jogos registrados</h3>
                 <div class="jogos-lista">
                     <ul id="listaJogos">
+                        <!-- Lista de jogos com imagens -->
                         <li>
                             <p>The Walking Dead</p>
                             <img src="img/walking_dead.jpg" alt="The Walking Dead">
                         </li>
                         <li>
                             <p>Mario</p>
-                            <img src="img/mario.jpg" alt="Mario">
+                            <img src="img/mario.png" alt="Mario">
                         </li>
                         <li>
                             <p>Sonic</p>
                             <img src="img/sonic.jpg" alt="Sonic">
                         </li>
                     </ul>
-                    <button id="addJogo">ADD jogo</button>
+                    <!-- Botão para adicionar novo jogo (função futura) -->
+                    <button id="addJogo">ADD jogo - Função em breve</button>
                 </div>
             </div>
+
+            <!-- Seção de denúncias -->
             <div class="denuncias">
                 <h3>Denúncias</h3>
+                <!-- Cada denúncia contém um ícone de usuário, texto e um alerta -->
                 <div class="denuncia">
                     <div class="icon user"></div>
-                    <div class="chat"></div>
+                    <div class="chat">Todo bugado os gráficos, melhorem</div>
                     <div class="alert"></div>
                 </div>
                 <div class="denuncia">
                     <div class="icon user"></div>
-                    <div class="chat"></div>
+                    <div class="chat">Jogos Lastimáveis, melhorem</div>
                     <div class="alert"></div>
                 </div>
+
+                <!-- 🎯 FILTRO DE COMENTÁRIOS -->
+                <div class="comentarios-filtrados">
+                    <h4>Comentários dos jogos</h4>
+
+                    <!-- Dropdown para selecionar comentários de jogos específicos -->
+                    <select id="filtroJogo">
+                        <option value="todos">Todos</option>
+                        <option value="walkingdead">The Walking Dead</option>
+                        <option value="mario">Mario</option>
+                        <option value="sonic">Sonic</option>
+                    </select>
+
+                    <!-- Lista de comentários filtrados por jogo -->
+                    <div id="comentarios">
+                        <div class="comentario" data-jogo="walkingdead">
+                            <strong>Rick:</strong> Muito emocionante!
+                        </div>
+                        <div class="comentario" data-jogo="mario">
+                            <strong>Luigi:</strong> Clássico e divertido!
+                        </div>
+                        <div class="comentario" data-jogo="sonic">
+                            <strong>Tails:</strong> Velocidade insana!
+                        </div>
+                    </div>
+                </div>
+                <!-- 🔚 FIM DO FILTRO -->
             </div>
         </aside>
+
+        <!-- Conteúdo principal (Gráfico e Formulário de Sugestão) -->
         <main class="content">
             <h3>Informações estatísticas</h3>
+        
+            <!-- Área onde o gráfico será exibido -->
             <div class="grafico">
-                <div class="barra azul"></div>
-                <div class="barra verde"></div>
-                <div class="barra laranja"></div>
-                <div class="barra vermelha"></div>
+                <canvas id="graficoJogos"></canvas>
+            </div>
+        
+            <!-- Formulário para sugerir um novo jogo -->
+            <div class="sugestao">
+                <h3>💡 Sugira um novo jogo</h3>
+        
+                <form id="formSugestao">
+                    <!-- Campo para inserir o nome do jogo -->
+                    <input type="text" placeholder="Nome do jogo" required>
+
+                    <!-- Campo de texto para justificar a sugestão -->
+                    <textarea placeholder="Por que esse jogo deveria estar aqui?" required></textarea>
+
+                    <!-- Botão de envio do formulário -->
+                    <button type="submit">Enviar sugestão</button>
+                </form>
             </div>
         </main>
     </div>
+
+    <!-- Importação do arquivo JavaScript -->
     <script src="script.js"></script>
+
 </body>
 </html>
