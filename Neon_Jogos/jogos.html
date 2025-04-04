@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Dário</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="perfil">
+                <div class="avatar"></div>
+                <h2>Dário</h2>
+            </div>
+            <div class="jogos">
+                <h3>Jogos registrados</h3>
+                <div class="jogos-lista">
+                    <ul id="listaJogos">
+                        <li>The Walking Dead</li>
+                        <li>Mario</li>
+                        <li>Sonic</li>
+                    </ul>
+                    <button id="addJogo">ADD jogo</button>
+                </div>
+            </div>
+            <div class="denuncias">
+                <h3>Denúncias</h3>
+                <div class="denuncia">
+                    <div class="icon user"></div>
+                    <div class="chat"></div>
+                    <div class="alert"></div>
+                </div>
+                <div class="denuncia">
+                    <div class="icon user"></div>
+                    <div class="chat"></div>
+                    <div class="alert"></div>
+                </div>
+            </div>
+        </aside>
+        <main class="content">
+            <h3>Informações estatísticas</h3>
+            <div class="grafico">
+                <div class="barra azul"></div>
+                <div class="barra verde"></div>
+                <div class="barra laranja"></div>
+                <div class="barra vermelha"></div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
