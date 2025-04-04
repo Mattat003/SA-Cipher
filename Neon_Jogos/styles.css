@@ -61,9 +61,17 @@ body {
 .jogos-lista li {
     background: white;
     color: black;
-    padding: 5px;
-    margin: 5px 0;
+    padding: 10px;
+    margin: 10px 0;
     border-radius: 5px;
+    text-align: center;
+}
+
+.jogos-lista img {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    margin-top: 5px;
 }
 
 #addJogo {
