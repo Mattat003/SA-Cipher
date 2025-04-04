@@ -1,50 +1,63 @@
+/* Estilo geral do corpo da página */
 body {
-    background-color: #13072A;
-    color: white;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+    background-color: #13072A; /* Cor de fundo escura */
+    color: white; /* Texto branco */
+    font-family: Arial, sans-serif; /* Fonte usada no site */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove preenchimento padrão */
+    text-align: center; /* Centraliza o conteúdo */
 }
+
+/* Barra de navegação superior */
 .navbar {
-    background-color: #3D1172;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
+    background-color: #3D1172; /* Fundo roxo escuro */
+    padding: 10px; /* Espaçamento interno */
+    display: flex; /* Layout flexível */
+    justify-content: space-between; /* Espaço entre elementos */
+    align-items: center; /* Alinha verticalmente os itens */
+    position: relative; /* Para posicionar a sidebar de forma absoluta */
 }
+
+/* Imagem de perfil */
 .profile-img {
     width: 60px;
     height: 60px;
-    border-radius: 50%;
-    cursor: pointer;
-    margin-left: 15px;
+    border-radius: 50%; /* Deixa a imagem redonda */
+    cursor: pointer; /* Muda o cursor ao passar por cima */
+    margin-left: 15px; /* Espaçamento à esquerda */
 }
+
+/* Container da sidebar (menu lateral) */
 .sidebar {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    text-align: right;
+    position: absolute; /* Posiciona em relação à navbar */
+    right: 20px; /* Alinhado à direita */
+    top: 10px; /* Um pouco abaixo do topo */
+    text-align: right; /* Alinha os botões à direita */
 }
+
+/* Botão para abrir o menu (ícone ☰) */
 .menu-btn {
-    font-size: 24px;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
+    font-size: 24px; /* Tamanho do ícone */
+    background: none; /* Sem fundo */
+    border: none; /* Sem borda */
+    color: white; /* Cor do ícone */
+    cursor: pointer; /* Muda o cursor ao passar por cima */
 }
+
+/* Conteúdo do menu lateral (botões) */
 .sidebar-content {
-    display: none;
-    flex-direction: column;
-    background-color: #4B1E88;
+    display: none; /* Escondido por padrão */
+    flex-direction: column; /* Organiza os botões em coluna */
+    background-color: #4B1E88; /* Cor de fundo do menu */
     padding: 20px;
     border-radius: 10px;
     width: 200px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
 }
+
+/* Estilo dos botões dentro do menu lateral */
 .sidebar-content button {
-    background-color: #FFD700;
+    background-color: #FFD700; /* Amarelo */
     border: none;
     padding: 10px;
     margin: 5px 0;
@@ -52,12 +65,18 @@ body {
     cursor: pointer;
     font-weight: bold;
 }
+
+/* Efeito ao passar o mouse nos botões do menu */
 .sidebar-content button:hover {
-    background-color: #ffcc00;
+    background-color: #ffcc00; /* Amarelo mais claro */
 }
+
+/* Exibe o conteúdo do menu ao passar o mouse sobre a sidebar */
 .sidebar:hover .sidebar-content {
     display: flex;
 }
+
+/* Cabeçalho principal da página */
 .header {
     background-color: #3D1172;
     padding: 20px;
@@ -65,13 +84,17 @@ body {
     font-weight: bold;
     margin-top: 10px;
 }
+
+/* Seção da biblioteca de jogos */
 .library {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    display: grid; /* Layout em grade */
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas de tamanho igual */
+    gap: 20px; /* Espaçamento entre os itens */
     padding: 40px;
     justify-content: center;
 }
+
+/* Estilo de cada bloco de jogo */
 .game-tile {
     width: 250px;
     height: 300px;
@@ -82,18 +105,24 @@ body {
     align-items: center;
     justify-content: center;
     padding: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animações suaves */
 }
+
+/* Imagem dentro de cada bloco de jogo */
 .game-tile img {
     width: 180px;
     height: 180px;
     border-radius: 10px;
-    object-fit: cover;
+    object-fit: cover; /* Mantém proporção da imagem */
 }
+
+/* Título do jogo */
 .game-tile h3 {
     margin-top: 10px;
     font-size: 18px;
 }
+
+/* Botão "Jogar" */
 .play-btn {
     background-color: #FFD700;
     border: none;
@@ -103,10 +132,14 @@ body {
     cursor: pointer;
     font-weight: bold;
 }
+
+/* Efeito ao passar o mouse sobre o bloco do jogo */
 .game-tile:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+    transform: scale(1.1); /* Aumenta levemente o tamanho */
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3); /* Sombra clara */
 }
+
+/* Rodapé da página */
 footer {
     background-color: #3D1172;
     padding: 10px;
