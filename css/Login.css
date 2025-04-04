@@ -1,0 +1,91 @@
+/* Reset básico para remover margens e preenchimentos padrão dos navegadores */
+* {
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; /* Faz com que largura e altura incluam bordas e preenchimentos */
+    font-family: Arial, sans-serif; 
+}
+
+/* Estilização do corpo da página */
+body {
+    background-color: #12002b; 
+    display: flex; /* Usa flexbox para centralizar o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100vh; /* Faz a altura ocupar toda a tela */
+}
+
+/* Container principal do login */
+.login-container {
+    background-color: #3a166c; /* Define o fundo do container (tom mais claro de roxo) */
+    padding: 40px; /* Adiciona espaço interno */
+    border-radius: 10px; /* Arredonda as bordas */
+    text-align: center; /* Centraliza o texto */
+    color: white; /* Define a cor do texto */
+    width: 350px; /* Define a largura do container */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Adiciona uma leve sombra ao redor */
+}
+
+/* Título do login */
+h2 {
+    font-size: 28px; /* Define o tamanho da fonte */
+    margin-bottom: 20px; /* Adiciona espaçamento abaixo do título */
+    font-family: 'Georgia', serif; /* Usa uma fonte serifada para dar destaque */
+}
+
+/* Estilização dos rótulos (labels) */
+label {
+    font-weight: bold; /* Deixa o texto em negrito */
+    display: block; /* Faz o label ocupar toda a linha */
+    text-align: left; /* Alinha o texto à esquerda */
+    margin-bottom: 5px; /* Adiciona espaçamento abaixo do label */
+}
+
+/* Estilização dos campos de entrada */
+input {
+    width: 100%; /* Faz o input ocupar toda a largura do container */
+    padding: 10px; /* Adiciona espaçamento interno */
+    border-radius: 5px; /* Arredonda as bordas */
+    border: none; /* Remove a borda padrão */
+    margin-bottom: 15px; /* Adiciona espaçamento abaixo do input */
+    background-color: #6828a5; /* Define a cor de fundo do input */
+    color: white; /* Define a cor do texto dentro do input */
+    outline: none; /* Remove o contorno ao clicar no input */
+}
+
+/* Estilização do texto de placeholder dentro do input */
+input::placeholder {
+    color: #cbbde2; /* Define uma cor mais clara para o texto de placeholder */
+}
+
+/* Link de recuperação de senha */
+a {
+    display: block; /* Faz o link ocupar toda a linha */
+    text-align: left; /* Alinha o link à esquerda */
+    color: #cbbde2; /* Define a cor do link */
+    text-decoration: none; /* Remove o sublinhado do link */
+    font-size: 14px; /* Define o tamanho da fonte */
+    margin-bottom: 15px; /* Adiciona espaçamento abaixo do link */
+}
+
+/* Efeito ao passar o mouse sobre o link */
+a:hover {
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
+
+/* Botão de login */
+button {
+    background-color: #8639df; /* Define a cor de fundo do botão */
+    color: white; /* Define a cor do texto do botão */
+    padding: 12px; /* Adiciona espaçamento interno */
+    border: none; /* Remove a borda padrão */
+    width: 100%; /* Faz o botão ocupar toda a largura disponível */
+    border-radius: 5px; /* Arredonda as bordas do botão */
+    font-size: 16px; /* Define o tamanho do texto */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+
+/* Efeito ao passar o mouse sobre o botão */
+button:hover {
+    background-color: #7525c8; /* Muda a cor de fundo quando o mouse passa sobre o botão */
+}
