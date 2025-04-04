@@ -1,0 +1,116 @@
+body {
+    background-color: #13072A;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.navbar {
+    background-color: #3D1172;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 15px;
+}
+.sidebar {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    text-align: right;
+}
+.menu-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+.sidebar-content {
+    display: none;
+    flex-direction: column;
+    background-color: #4B1E88;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+.sidebar-content button {
+    background-color: #FFD700;
+    border: none;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.sidebar-content button:hover {
+    background-color: #ffcc00;
+}
+.sidebar:hover .sidebar-content {
+    display: flex;
+}
+.header {
+    background-color: #3D1172;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.library {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 40px;
+    justify-content: center;
+}
+.game-tile {
+    width: 250px;
+    height: 300px;
+    background-color: #4B1E88;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.game-tile img {
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.game-tile h3 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+.play-btn {
+    background-color: #FFD700;
+    border: none;
+    padding: 8px 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.game-tile:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+}
+footer {
+    background-color: #3D1172;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
