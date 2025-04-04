@@ -4,8 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
+    <link rel="stylesheet" href="css/perfil.css">
+    <script src="js/menuperfil.js"></script>    
 </head>
 <body>
+    <div class="paginaperfil">
+        <!-- Parte central: atividades recentes (com nome e foto dentro) -->
+        <div class="conteudo">
+            <div class="atividades">
+                
+                <!-- Nome e Foto do Usuário -->
+                <div class="foto">
+                    <img src="img/perfil.png" alt="Foto de Perfil">
+                    <span class="nomeusuario">Matheus</span>
+                </div>
     
+                <h3>Atividades Recentes</h3>
+    
+                <div class="jogo">
+                    <img src="img/dgslife.jpg" alt="Dogs Life">
+                    <div class="info">
+                        <h4>Dogs Life</h4>
+                        <p>Horas Jogadas</p>
+                        <div class="barra">
+                            <div class="progresso" style="width: 30%;"></div>
+                        </div>
+                        <p>Conquistas 30%</p>
+                    </div>
+                </div>
+    
+                <div class="jogo">
+                    <img src="img/BaldS.png" alt="Bald Simulator">
+                    <div class="info">
+                        <h4>Bald Simulator</h4>
+                        <p>Horas Jogadas</p>
+                        <div class="barra">
+                            <div class="progresso" style="width: 95%;"></div>
+                        </div>
+                        <p>Conquistas 95%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lateral">
+            <div class="amigos">
+              <h3>Amizades:</h3>
+              <ul>
+                <li>Amanda <button>Conversar</button></li>
+                <li>Endryo <button>Conversar</button></li>
+                <li>Neon <button>Conversar</button></li>
+                <li>Pamella <button>Conversar</button></li>
+              </ul>
+            </div>
+            <div class="grupos">
+              <h3>Grupos</h3>
+              <ul>
+                <li>Time RPG <button>Entrar</button></li>
+                <li>Senas/Senai <button>Entrar</button></li>
+                <li>Rogério Fan Club <button>Entrar</button></li>
+              </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--Sidemenu (<aside> representa uma seção de uma página 
+        com conteúdo que é relacionado ao conteúdo do seu entorno)-->
+    <!-- Botão de abrir menu -->
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <!-- Menu lateral -->
+    <aside class="side-menu" id="sideMenu">
+        <div class="menu">
+            <div class="menu-item">Biblioteca</div>
+            <div class="menu-item">Capturas</div>
+            <div class="menu-item">Minhas Reviews</div>
+        </div>
+    </aside>
+
 </body>
 </html>
