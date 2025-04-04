@@ -1,3 +1,4 @@
+/* Zera margem/padding e define modelo de caixa para facilitar o layout */
 * {
     margin: 0;
     padding: 0;
@@ -5,23 +6,26 @@
     font-family: Arial, sans-serif;
 }
 
+/* Define o body como flex container centralizado e com altura da viewport */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #1b0134;
+    height: 155vh; /* Altura maior que 100vh para caber tudo */
+    background-color: #1b0134; /* Roxo escuro de fundo */
 }
 
+/* Container principal com layout flex horizontal */
 .container {
     display: flex;
     width: 80%;
-    max-width: 900px;
+    max-width: 1500px;
     background: #4b0082;
     border-radius: 10px;
-    overflow: hidden;
+    overflow: hidden; /* Esconde overflow (útil para bordas arredondadas) */
 }
 
+/* Barra lateral */
 .sidebar {
     width: 35%;
     background: #5a0096;
@@ -29,11 +33,13 @@ body {
     color: white;
 }
 
+/* Área de perfil do usuário */
 .perfil {
     text-align: center;
     margin-bottom: 20px;
 }
 
+/* Avatar circular */
 .avatar {
     width: 70px;
     height: 70px;
@@ -42,10 +48,12 @@ body {
     margin: 0 auto;
 }
 
+/* Margem superior para seções dentro da sidebar */
 .jogos, .denuncias {
     margin-top: 20px;
 }
 
+/* Estiliza lista de jogos */
 .jogos-lista {
     background: #7733aa;
     padding: 10px;
@@ -53,27 +61,55 @@ body {
     text-align: center;
 }
 
+/* Remove bullets da lista */
 .jogos-lista ul {
     list-style: none;
     padding: 0;
 }
 
-.jogos-lista li {
-    background: white;
-    color: black;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    text-align: center;
+/* Estiliza itens da lista, comentários e denúncias com efeito de vidro */
+.jogos-lista li,
+.comentario,
+.denuncia {
+    background: rgba(255, 255, 255, 0.1); /* Transparente */
+    backdrop-filter: blur(8px); /* Efeito vidro */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
 }
 
+/* Efeito de leve aumento ao passar o mouse */
+.jogos-lista li:hover,
+.comentario:hover,
+.denuncia:hover {
+    transform: scale(1.03);
+}
+
+/* Para itens da lista, move levemente para cima no hover */
+.jogos-lista li:hover {
+    transform: translateY(-5px);
+}
+
+/* Estiliza imagens dos jogos */
 .jogos-lista img {
-    width: 100px;
-    height: 100px;
-    border-radius: 5px;
-    margin-top: 5px;
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 15px;
+    background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
+/* Efeito visual ao passar o mouse sobre imagem */
+.jogos-lista img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.4);
+    border: 2px solid #fff;
+    box-shadow: 0 0 20px #a700ff, 0 0 40px #a700ff;
+}
+
+/* Botão de adicionar jogo */
 #addJogo {
     background: black;
     color: white;
@@ -82,8 +118,16 @@ body {
     cursor: pointer;
     margin-top: 10px;
     border-radius: 5px;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
+/* Hover do botão */
+#addJogo:hover {
+    background: #333;
+    transform: scale(1.05);
+}
+
+/* Denúncia visual */
 .denuncia {
     display: flex;
     align-items: center;
@@ -91,8 +135,10 @@ body {
     margin-top: 10px;
     padding: 10px;
     border-radius: 5px;
+    color:black;
 }
 
+/* Ícone do usuário na denúncia */
 .user {
     width: 30px;
     height: 30px;
@@ -100,6 +146,7 @@ body {
     border-radius: 50%;
 }
 
+/* Caixa de texto na denúncia */
 .chat {
     flex: 1;
     height: 20px;
@@ -108,6 +155,7 @@ body {
     border-radius: 5px;
 }
 
+/* Alerta visual (círculo amarelo) */
 .alert {
     width: 20px;
     height: 20px;
@@ -115,30 +163,177 @@ body {
     border-radius: 50%;
 }
 
+/* Conteúdo principal da direita */
 .content {
-    width: 65%;
-    padding: 20px;
-    color: white;
-    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px; /* Espaço interno */
 }
 
+/* Container do gráfico */
 .grafico {
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
     display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-    height: 150px;
-    background: rgba(255, 255, 255, 0.1);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Canvas do gráfico */
+canvas {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     padding: 10px;
-    margin-top: 20px;
 }
 
+/* Barras de exemplo */
 .barra {
     width: 30px;
     border-radius: 5px;
 }
 
+/* Cores das barras */
 .azul { height: 50px; background: blue; }
 .verde { height: 100px; background: green; }
 .laranja { height: 80px; background: orange; }
 .vermelha { height: 40px; background: red; }
+
+/* Caixa de filtro de comentários */
+.comentarios-filtrados {
+    margin-top: 20px;
+    background: #7733aa;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Título do filtro */
+.comentarios-filtrados h4 {
+    margin-bottom: 10px;
+    color: white;
+    font-size: 16px;
+}
+
+/* Estilo do select (filtro dropdown) */
+#filtroJogo {
+    width: 100%;
+    padding: 6px;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+    background-color: #5a0096;
+    color: white;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* Comentários filtrados */
+#comentarios {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Estilo individual do comentário */
+.comentario {
+    background: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: left;
+}
+
+/* Animações de entrada de tela para os principais blocos */
+.container, .sidebar, .content {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.6s ease forwards;
+}
+
+/* Keyframes da animação fadeIn */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Títulos estilizados com sombra */
+.sidebar h3,
+.content h3,
+.comentarios-filtrados h4 {
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Bloco de sugestão de novo jogo */
+.sugestao {
+    margin-top: 40px;
+    background-color: #3a006d;
+    padding: 25px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+/* Título do formulário */
+.sugestao h3 {
+    margin-bottom: 15px;
+}
+
+/* Formulário com espaçamento */
+.sugestao form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Inputs e textarea do formulário */
+.sugestao input,
+.sugestao textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    resize: none; /* Impede redimensionamento */
+}
+
+/* Botão do formulário */
+.sugestao button {
+    background-color: #5a0096;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Efeito hover do botão */
+.sugestao button:hover {
+    background-color: #7733aa;
+}
+
+/* Rodapé */
+.rodape {
+    width: 100%;
+    background-color: #320052;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    margin-top: 20px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+}
