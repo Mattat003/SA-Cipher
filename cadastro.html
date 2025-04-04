@@ -4,47 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Cadastro </title>
- 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" type="text/css" href="cadastro.css">
 </head>
 <body>
     <form>
         <fieldset>
-            <legend> Cadastro </legend>
-            <label> Nome </label>
-            <input name="nome" type="name" maxlength="15" placeholder="Digite seu nome">
+            <legend>Cadastro</legend>
+
+            <label>Nome</label>
+            <input name="nome" type="text" maxlength="15" placeholder="Digite seu nome">
             <br>
-            <label> Usuário </label>
-            <input name="usuario" type="usuario" maxlength="15" placeholder="Digite o nome de usuário">
+            <label>Usuário</label>
+            <input name="usuario" type="text" maxlength="15" placeholder="Digite o nome de usuário">
             <br>
-            <label> Email</label>
+            <label>Email</label>
             <input name="email" type="email" required maxlength="50" placeholder="Digite seu email">
             <br>
-            <label> Senha </label>
-<div class="password-container">
-    <input id="senha" name="senha" type="password" maxlength="8" placeholder="Digite sua senha">
-    <span class="toggle-password" onclick="mostrarSenha('senha')">👁️</span>
-</div>
-<br>
-<label> Confirme sua Senha </label>
-<div class="password-container">
-    <input id="confirmar-senha" name="senha" type="password" maxlength="8" placeholder="Digite sua senha">
-    <span class="toggle-password" onclick="mostrarSenha('confirmar-senha')">👁️</span>
-</div>
-
+            <label>Senha</label>
+            <div class="password-container">
+                <input id="senha" name="senha" type="password" maxlength="8" placeholder="Digite sua senha">
+                <span class="material-symbols-outlined" onclick="mostrarSenha('senha', this)">visibility</span>
+            </div>
+            <BR>
+            <label>Confirme sua Senha</label>
+            <div class="password-container">
+                <input id="confirma-senha" name="confirma-senha" type="password" maxlength="8" placeholder="Digite novamente">
+                <span class="material-symbols-outlined" onclick="mostrarSenha('confirma-senha', this)">visibility</span>
+            </div>
+            
         </fieldset>
-        <input type="submit" value="Cadastrar-se"> 
+        <br>
+        <input type="submit" value="Cadastrar-se">
     </form>
+
     <script>
-        function mostrarSenha(id) {
+        function mostrarSenha(id, el) {
             const input = document.getElementById(id);
             if (input.type === "password") {
                 input.type = "text";
+                el.innerText = "visibility_off";
             } else {
                 input.type = "password";
+                el.innerText = "visibility";
             }
         }
-        </script>
-        
+    </script>
 </body>
 </html>
