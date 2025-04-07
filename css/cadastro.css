@@ -79,26 +79,34 @@ input[type="submit"] {
     transition: 0.3s;
 }
 
-/* Efeito ao passar o mouse */
-input[type="submit"]:hover {
-    background-color: #ad7ae4;
+input {
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* Mais padding à direita para o ícone */
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    background-color: #6828a5;
+    color: white;
+    outline: none;
+    font-size: 16px; /* Tamanho do texto e placeholder */
 }
+
 .password-container {
     position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.password-container input {
     width: 100%;
-    padding-right: 40px; /* Espaço para o ícone */
 }
 
-.toggle-password {
+.password-container .material-symbols-outlined {
     position: absolute;
     right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
-    font-size: 18px;
+    color: #cbbde2; /* Cor igual ao placeholder */
+    font-size: 20px; /* Tamanho do ícone */
+}
+
+/* Ajuste para quando o ícone estiver ativo (senha visível) */
+.password-container .material-symbols-outlined.active {
     color: white;
-    user-select: none;
 }
