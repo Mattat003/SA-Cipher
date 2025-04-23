@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esqueceu a senha</title>
+    <link rel="stylesheet" href="css/esqueceuSenha.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+<body>
+    <div class="login-container">
+        <h1> Redefina uma nova senha! </h1>
+        <label for = "email"> Email: </label>
+        <input type="email" id="email" placeholder="Digite seu email">
+        <label for="senha"> Digite sua nova senha: </label>
+        <div class="password-container">
+            <input id="senha" name="senha" type="password" maxlength="8" placeholder="Digite sua nova senha">
+            <span class="material-symbols-outlined" onclick="mostrarSenha('senha', this)">visibility</span>
+        </div>
+        <label>Confirme sua Senha</label>
+        <div class="password-container">
+            <input id="confirma-senha" name="confirma-senha" type="password" maxlength="8" placeholder="Digite novamente">
+            <span class="material-symbols-outlined" onclick="mostrarSenha('confirma-senha', this)">visibility</span>
+        </div>
+        </div>
+        <script>
+            function mostrarSenha(id, el) {
+                const input = document.getElementById(id);
+                if (input.type === "password") {
+                    input.type = "text";
+                    el.innerText = "visibility_off";
+                } else {
+                    input.type = "password";
+                    el.innerText = "visibility";
+                }
+            }
+        </script>
+</body>
+</html>

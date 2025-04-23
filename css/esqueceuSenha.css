@@ -1,0 +1,202 @@
+/* Reset básico para remover margens e preenchimentos padrão dos navegadores */
+* {
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; /* Faz com que largura e altura incluam bordas e preenchimentos */
+    font-family: Arial, sans-serif; 
+}
+
+/* Estilização do corpo da página */
+body {
+    background-color: #12002b; 
+    display: flex; /* Usa flexbox para centralizar o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100vh; /* Faz a altura ocupar toda a tela */
+}
+
+/* Container principal do login */
+.login-container {
+    background-color: #3a166c; 
+    padding: 40px; /* Adiciona espaço interno */
+    border-radius: 10px; 
+    text-align: center; 
+    color: white;
+    width: 350px; /* Define a largura do container */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Adiciona uma leve sombra ao redor */
+}
+
+/* Título do login */
+h2 {
+    font-size: 28px; 
+    margin-bottom: 20px; 
+    font-family: 'Georgia', serif; /* Usa uma fonte serifada para dar destaque */
+}
+
+/* Estilização dos rótulos (labels) */
+label {
+    font-weight: bold; 
+    display: block; /* Faz o label ocupar toda a linha */
+    text-align: left; 
+    margin-bottom: 5px; 
+}
+
+/* Estilização dos campos de entrada */
+input {
+    width: 100%; 
+    padding: 10px; 
+    border-radius: 5px;
+    border: none; 
+    margin-bottom: 15px; 
+    background-color: #6828a5; 
+    color: white; 
+    outline: none; 
+}
+
+/* Estilização do texto de placeholder dentro do input */
+input::placeholder {
+    color: #cbbde2; 
+}
+
+/* Link de recuperação de senha */
+a {
+    display: block; 
+    text-align: left; 
+    color: #cbbde2; 
+    text-decoration: none; /* Remove o sublinhado do link */
+    font-size: 14px; 
+    margin-bottom: 15px; 
+}
+
+/* Efeito ao passar o mouse sobre o link */
+a:hover {
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
+
+/* Botão de login */
+button {
+    background-color: #8639df; 
+    color: white; 
+    padding: 12px; 
+    border: none; 
+    width: 100%; 
+    border-radius: 5px; /* Arredonda as bordas do botão */
+    font-size: 16px; 
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+
+/* Efeito ao passar o mouse sobre o botão */
+button:hover {
+    background-color: #7525c8; 
+}
+/* Reset básico para remover margens e preenchimentos padrão dos navegadores */
+* {
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; /* Faz com que largura e altura incluam bordas e preenchimentos */
+    font-family: Arial, sans-serif; 
+}
+
+/* Estilização do corpo da página */
+body {
+    background-color: #12002b; 
+    display: flex; /* Usa flexbox para centralizar o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100vh; /* Faz a altura ocupar toda a tela */
+}
+
+/* Container principal do login */
+.login-container {
+    background-color: #3a166c; 
+    padding: 40px; /* Adiciona espaço interno */
+    border-radius: 10px; 
+    text-align: center; 
+    color: white;
+    width: 350px; /* Define a largura do container */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Adiciona uma leve sombra ao redor */
+}
+
+/* Título do login */
+h2 {
+    font-size: 28px; 
+    margin-bottom: 20px; 
+    font-family: 'Georgia', serif; /* Usa uma fonte serifada para dar destaque */
+}
+
+/* Estilização dos rótulos (labels) */
+label {
+    font-weight: bold; 
+    display: block; /* Faz o label ocupar toda a linha */
+    text-align: left; 
+    margin-bottom: 5px; 
+}
+
+/* Estilização dos campos de entrada */
+input {
+    width: 100%; 
+    padding: 10px; 
+    border-radius: 5px;
+    border: none; 
+    margin-bottom: 15px; 
+    background-color: #6828a5; 
+    color: white; 
+    outline: none; 
+}
+
+/* Estilização do texto de placeholder dentro do input */
+input::placeholder {
+    color: #cbbde2; 
+}
+
+/* Link de recuperação de senha */
+a {
+    display: block; 
+    text-align: left; 
+    color: #cbbde2; 
+    text-decoration: none; /* Remove o sublinhado do link */
+    font-size: 14px; 
+    margin-bottom: 15px; 
+}
+
+/* Efeito ao passar o mouse sobre o link */
+a:hover {
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
+
+/* Botão de login */
+button {
+    background-color: #8639df; 
+    color: white; 
+    padding: 12px; 
+    border: none; 
+    width: 100%; 
+    border-radius: 5px; /* Arredonda as bordas do botão */
+    font-size: 16px; 
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+
+/* Efeito ao passar o mouse sobre o botão */
+button:hover {
+    background-color: #7525c8; 
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container .material-symbols-outlined {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #cbbde2; /* Cor igual ao placeholder */
+    font-size: 20px; /* Tamanho do ícone */
+}
+
+/* Ajuste para quando o ícone estiver ativo (senha visível) */
+.password-container .material-symbols-outlined.active {
+    color: white;
+}
