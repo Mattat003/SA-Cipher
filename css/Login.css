@@ -1,91 +1,96 @@
 /* Reset básico para remover margens e preenchimentos padrão dos navegadores */
 * {
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; /* Faz com que largura e altura incluam bordas e preenchimentos */
-    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 /* Estilização do corpo da página */
 body {
-    background-color: #12002b; 
-    display: flex; /* Usa flexbox para centralizar o conteúdo */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    height: 100vh; /* Faz a altura ocupar toda a tela */
+    background: linear-gradient(to right, #0f0c29, #302b63, #24243e); /* Degradê inicial mais escuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 /* Container principal do login */
 .login-container {
-    background-color: #3a166c; 
-    padding: 40px; /* Adiciona espaço interno */
-    border-radius: 10px; 
-    text-align: center; 
+    background: linear-gradient(to right, #6a0dad, #5b009d); /* Gradiente mais escuro no container */
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
     color: white;
-    width: 350px; /* Define a largura do container */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Adiciona uma leve sombra ao redor */
+    width: 350px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7); /* Sombra mais intensa */
 }
 
 /* Título do login */
 h2 {
-    font-size: 28px; 
-    margin-bottom: 20px; 
-    font-family: 'Georgia', serif; /* Usa uma fonte serifada para dar destaque */
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-family: 'Georgia', serif;
+    color: #f2f2f2; /* Cor mais clara para o título */
 }
 
 /* Estilização dos rótulos (labels) */
 label {
-    font-weight: bold; 
-    display: block; /* Faz o label ocupar toda a linha */
-    text-align: left; 
-    margin-bottom: 5px; 
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #cbbde2; /* Cor mais suave para os labels */
 }
 
 /* Estilização dos campos de entrada */
 input {
-    width: 100%; 
-    padding: 10px; 
-    border-radius: 5px;
-    border: none; 
-    margin-bottom: 15px; 
-    background-color: #6828a5; 
-    color: white; 
-    outline: none; 
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 15px;
+    background: linear-gradient(145deg, #3b007b, #6a0dad); /* Gradiente mais escuro para os inputs */
+    color: white;
+    outline: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Sombra suave nos campos */
 }
 
 /* Estilização do texto de placeholder dentro do input */
 input::placeholder {
-    color: #cbbde2; 
+    color: #a8a8b2; /* Cor mais clara para o placeholder */
 }
 
 /* Link de recuperação de senha */
 a {
-    display: block; 
-    text-align: left; 
-    color: #cbbde2; 
-    text-decoration: none; /* Remove o sublinhado do link */
-    font-size: 14px; 
-    margin-bottom: 15px; 
+    display: block;
+    text-align: left;
+    color: #cbbde2;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 15px;
 }
 
 /* Efeito ao passar o mouse sobre o link */
 a:hover {
-    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+    text-decoration: underline;
 }
 
 /* Botão de login */
 button {
-    background-color: #8639df; 
-    color: white; 
-    padding: 12px; 
-    border: none; 
-    width: 100%; 
-    border-radius: 5px; /* Arredonda as bordas do botão */
-    font-size: 16px; 
-    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    background: linear-gradient(to right, #5b009d, #4c0089); /* Gradiente mais escuro no botão */
+    color: white;
+    padding: 12px;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7); /* Sombra mais forte no botão */
 }
 
 /* Efeito ao passar o mouse sobre o botão */
 button:hover {
-    background-color: #7525c8; 
+    background: linear-gradient(to right, #490073, #5b009d); /* Alteração do gradiente no hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8); /* Sombra mais intensa ao passar o mouse */
 }

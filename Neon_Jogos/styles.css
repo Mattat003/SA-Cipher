@@ -11,7 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 155vh; /* Altura maior que 100vh para caber tudo */
+    height: 185vh; /* Altura maior que 100vh para caber tudo */
     background-color: #1b0134; /* Roxo escuro de fundo */
 }
 

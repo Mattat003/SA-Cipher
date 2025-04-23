@@ -1,202 +1,123 @@
-/* Reset básico para remover margens e preenchimentos padrão dos navegadores */
+/* Reset básico */
 * {
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; /* Faz com que largura e altura incluam bordas e preenchimentos */
-    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-/* Estilização do corpo da página */
+/* Corpo com fundo em degradê escuro */
 body {
-    background-color: #12002b; 
-    display: flex; /* Usa flexbox para centralizar o conteúdo */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    height: 100vh; /* Faz a altura ocupar toda a tela */
+    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* Container principal do login */
+/* Container do login */
 .login-container {
-    background-color: #3a166c; 
-    padding: 40px; /* Adiciona espaço interno */
-    border-radius: 10px; 
-    text-align: center; 
+    background: linear-gradient(to right, #6a0dad, #5b009d);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
     color: white;
-    width: 350px; /* Define a largura do container */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Adiciona uma leve sombra ao redor */
+    width: 350px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
 }
 
-/* Título do login */
+/* Título */
 h2 {
-    font-size: 28px; 
-    margin-bottom: 20px; 
-    font-family: 'Georgia', serif; /* Usa uma fonte serifada para dar destaque */
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-family: 'Georgia', serif;
+    color: #f2f2f2;
 }
 
-/* Estilização dos rótulos (labels) */
+/* Rótulos */
 label {
-    font-weight: bold; 
-    display: block; /* Faz o label ocupar toda a linha */
-    text-align: left; 
-    margin-bottom: 5px; 
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #cbbde2;
+    font-family: Arial, sans-serif;
 }
 
-/* Estilização dos campos de entrada */
+/* Caixa de entrada */
 input {
-    width: 100%; 
-    padding: 10px; 
-    border-radius: 5px;
-    border: none; 
-    margin-bottom: 15px; 
-    background-color: #6828a5; 
-    color: white; 
-    outline: none; 
-}
-
-/* Estilização do texto de placeholder dentro do input */
-input::placeholder {
-    color: #cbbde2; 
-}
-
-/* Link de recuperação de senha */
-a {
-    display: block; 
-    text-align: left; 
-    color: #cbbde2; 
-    text-decoration: none; /* Remove o sublinhado do link */
-    font-size: 14px; 
-    margin-bottom: 15px; 
-}
-
-/* Efeito ao passar o mouse sobre o link */
-a:hover {
-    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
-}
-
-/* Botão de login */
-button {
-    background-color: #8639df; 
-    color: white; 
-    padding: 12px; 
-    border: none; 
-    width: 100%; 
-    border-radius: 5px; /* Arredonda as bordas do botão */
-    font-size: 16px; 
-    cursor: pointer; /* Muda o cursor para indicar que é clicável */
-}
-
-/* Efeito ao passar o mouse sobre o botão */
-button:hover {
-    background-color: #7525c8; 
-}
-/* Reset básico para remover margens e preenchimentos padrão dos navegadores */
-* {
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; /* Faz com que largura e altura incluam bordas e preenchimentos */
-    font-family: Arial, sans-serif; 
-}
-
-/* Estilização do corpo da página */
-body {
-    background-color: #12002b; 
-    display: flex; /* Usa flexbox para centralizar o conteúdo */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    height: 100vh; /* Faz a altura ocupar toda a tela */
-}
-
-/* Container principal do login */
-.login-container {
-    background-color: #3a166c; 
-    padding: 40px; /* Adiciona espaço interno */
-    border-radius: 10px; 
-    text-align: center; 
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* espaço para o ícone */
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 15px;
+    background: linear-gradient(145deg, #3b007b, #6a0dad);
     color: white;
-    width: 350px; /* Define a largura do container */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Adiciona uma leve sombra ao redor */
+    outline: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* Título do login */
-h2 {
-    font-size: 28px; 
-    margin-bottom: 20px; 
-    font-family: 'Georgia', serif; /* Usa uma fonte serifada para dar destaque */
-}
-
-/* Estilização dos rótulos (labels) */
-label {
-    font-weight: bold; 
-    display: block; /* Faz o label ocupar toda a linha */
-    text-align: left; 
-    margin-bottom: 5px; 
-}
-
-/* Estilização dos campos de entrada */
-input {
-    width: 100%; 
-    padding: 10px; 
-    border-radius: 5px;
-    border: none; 
-    margin-bottom: 15px; 
-    background-color: #6828a5; 
-    color: white; 
-    outline: none; 
-}
-
-/* Estilização do texto de placeholder dentro do input */
+/* Placeholder */
 input::placeholder {
-    color: #cbbde2; 
+    color: #a8a8b2;
 }
 
-/* Link de recuperação de senha */
+/* Link de redefinição de senha */
 a {
-    display: block; 
-    text-align: left; 
-    color: #cbbde2; 
-    text-decoration: none; /* Remove o sublinhado do link */
-    font-size: 14px; 
-    margin-bottom: 15px; 
+    display: block;
+    text-align: left;
+    color: #cbbde2;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-family: 'Georgia', serif; /* mesma fonte do título */
 }
 
-/* Efeito ao passar o mouse sobre o link */
+/* Hover no link */
 a:hover {
-    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+    text-decoration: underline;
 }
 
-/* Botão de login */
+/* Botão */
 button {
-    background-color: #8639df; 
-    color: white; 
-    padding: 12px; 
-    border: none; 
-    width: 100%; 
-    border-radius: 5px; /* Arredonda as bordas do botão */
-    font-size: 16px; 
-    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    background: linear-gradient(to right, #5b009d, #4c0089);
+    color: white;
+    padding: 12px;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
 }
 
-/* Efeito ao passar o mouse sobre o botão */
+/* Hover do botão */
 button:hover {
-    background-color: #7525c8; 
+    background: linear-gradient(to right, #490073, #5b009d);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8);
 }
 
+/* Container da senha com ícone */
 .password-container {
     position: relative;
     width: 100%;
 }
 
+.password-container input {
+    padding-right: 40px; /* garante espaço pro ícone */
+}
+
 .password-container .material-symbols-outlined {
     position: absolute;
-    right: 10px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #cbbde2; /* Cor igual ao placeholder */
-    font-size: 20px; /* Tamanho do ícone */
+    color: #cbbde2;
+    font-size: 20px;
+    pointer-events: auto;
 }
 
-/* Ajuste para quando o ícone estiver ativo (senha visível) */
 .password-container .material-symbols-outlined.active {
     color: white;
 }
