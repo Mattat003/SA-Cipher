@@ -18,6 +18,22 @@ header {
     position: relative;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombrinha sutil para o header */
 }
+img {
+    height: 50px;
+    position: relative;
+    justify-content: left;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* espaço entre o h1 e a imagem */
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
 
 /* Estilo para o título */
 h1 {
