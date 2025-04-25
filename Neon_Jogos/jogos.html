@@ -49,23 +49,38 @@
                 </div>
             </div>
 
-            <!-- Seção de denúncias -->
-            <div class="denuncias">
-                <h3>Denúncias</h3>
-                <!-- Cada denúncia contém um ícone de usuário, texto e um alerta -->
-                <div class="denuncia">
-                    <div class="icon user"></div>
-                    <div class="chat">Todo bugado os gráficos, melhorem</div>
-                    <div class="alert"></div>
+            <!-- NOVA SEÇÃO DE ABAS -->
+            <div class="secao-abas">
+                <h3>Interações</h3>
+                
+                <!-- Botões de navegação das abas -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="denuncias-tab">Denúncias</button>
+                    <button class="tab-btn" data-tab="comentarios-tab">Comentários</button>
                 </div>
-                <div class="denuncia">
-                    <div class="icon user"></div>
-                    <div class="chat">Jogos Lastimáveis, melhorem</div>
-                    <div class="alert"></div>
+                
+                <!-- Conteúdo da aba de denúncias -->
+                <div id="denuncias-tab" class="tab-content active">
+                    <!-- Cada denúncia contém um ícone de usuário, texto e um alerta -->
+                    <div class="comentario">
+                        <img src="https://64.media.tumblr.com/f21e169d5b41ed16c294a03abe409fec/d6ea97302ab8bae5-cc/s540x810/a89027b8eda7889e6da3c3af780014b561a38111.jpg" alt="Foto de perfil">
+                        <div class="texto-comentario">
+                          <div class="nome">Dean Winchester</div>
+                          <div class="mensagem">Todo bugado os gráficos, melhorem</div>
+                        </div>
+                    </div>
+                      
+                    <div class="comentario">
+                        <img src="https://hips.hearstapps.com/hmg-prod/images/jack-black-gettyimages-1193008127.jpg" alt="Foto de perfil">
+                        <div class="texto-comentario">
+                          <div class="nome">Jack Black</div>
+                          <div class="mensagem">Jogos Lastimáveis, melhorem</div>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- 🎯 FILTRO DE COMENTÁRIOS -->
-                <div class="comentarios-filtrados">
+                
+                <!-- Conteúdo da aba de comentários filtrados -->
+                <div id="comentarios-tab" class="tab-content">
                     <h4>Comentários dos jogos</h4>
 
                     <!-- Dropdown para selecionar comentários de jogos específicos -->
@@ -89,7 +104,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- 🔚 FIM DO FILTRO -->
             </div>
         </aside>
 
@@ -120,8 +134,10 @@
         </main>
     </div>
 
-    <!-- Importação do arquivo JavaScript -->
+    <!-- Importação do arquivo JavaScript original -->
     <script src="script.js"></script>
-
+    
+    <!-- Importação do novo script para gerenciar as abas -->
+    <script src="tabs.js"></script>
 </body>
 </html>
