@@ -7,7 +7,7 @@ body {
 
 /* Estilo para o header */
 header {
-    background-color: #300050;
+    background-color: #300050cb;
     width: 100%;
     height: 70px;
     display: flex;
@@ -32,6 +32,7 @@ img {
 .logo img {
     height: 50px;
     width: auto;
+    filter: drop-shadow(0 0 5px rgba(122, 90, 245, 0.4));
 }
 
 
@@ -149,15 +150,16 @@ h1 {
     transition: transform 0.3s ease-in-out; /* Transição suave para a imagem */
 }
 
-/* Estilos para o balão de texto */
 .carousel-caption {
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente para melhorar a legibilidade */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(11, 12, 16, 0.9));
     color: white;
-    padding: 20px;
-    border-radius: 10px;
-    transition: transform 1.0s ease-in-out; /* Transição suave para o balão de texto */
+    padding: 30px;
+    border-radius: 0 0 12px 12px;
 }
-
 /* Efeito de hover nos elementos do carrossel */
 .carousel-item:hover {
     transform: scale(1.05); /* Aumenta o carrossel (imagem + balão de texto) */
@@ -181,6 +183,37 @@ h1 {
 .carousel-caption p {
     font-size: 1.2rem;
     font-style: italic;
+}
+@media (max-width: 768px) {
+    header {
+        height: 70px;
+        padding: 0 15px;
+    }
+    
+    .logo img {
+        height: 40px;
+    }
+    
+    h1 {
+        font-size: 18px;
+    }
+    
+    .busca {
+        width: 200px;
+    }
+    
+    .carousel-caption h5 {
+        font-size: 1.5rem;
+    }
+    
+    .carousel-caption p {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+    
+    .carousel-item img {
+        height: 350px;
+    }
 }
 
 
