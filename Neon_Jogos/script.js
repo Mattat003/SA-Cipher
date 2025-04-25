@@ -89,4 +89,31 @@ document.getElementById('formSugestao').addEventListener('submit', function(e) {
     alert('Sugestão enviada com sucesso! 🎮'); // Exibe um alerta de sucesso
     
     this.reset(); // Reseta os campos do formulário após o envio
+}); 
+
+// Script para gerenciar as abas interativas (tabs.js)
+document.addEventListener('DOMContentLoaded', function() {
+    // Selecionar todos os botões de aba
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    
+    // Adicionar evento de clique a cada botão
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remover classe 'active' de todos os botões e conteúdos
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Adicionar classe 'active' ao botão clicado
+            this.classList.add('active');
+            
+            // Mostrar o conteúdo correspondente
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
 });
