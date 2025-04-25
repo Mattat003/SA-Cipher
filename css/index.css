@@ -1,163 +1,293 @@
-/* Estilo básico para o body */
-body {
-    background-color: #12002b;
-    font-family: Arial, sans-serif;
-    margin: 0;
+/* ===== VARIÁVEIS DE CORES ===== */
+:root {
+    --dark-primary: #0d021a;
+    --dark-secondary: #12002b;
+    --dark-accent: #1e003a;
+    --purple-primary: #5d3bad;
+    --purple-secondary: #7a5af5;
+    --purple-light: #9b59b6;
+    --text-primary: #f0e6ff;
+    --text-secondary: #c7b3e6;
+    --shadow-dark: rgba(0, 0, 0, 0.5);
+    --shadow-light: rgba(122, 90, 245, 0.3);
 }
 
-/* Estilo para o header */
+/* ===== ESTILOS GERAIS ===== */
+body {
+    background-color: var(--dark-secondary);
+    color: var(--text-primary);
+    font-family: 'Motiva Sans', 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* ===== HEADER ESTILIZADO ===== */
 header {
-    background-color: #300050;
+    background: linear-gradient(135deg, var(--dark-accent), #2a0a4a);
     width: 100%;
-    height: 70px;
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 40px;
     box-sizing: border-box;
-    position: relative;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombrinha sutil para o header */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px var(--shadow-dark);
+    border-bottom: 1px solid var(--purple-primary);
 }
-img {
-    height: 50px;
-    position: relative;
-    justify-content: left;
-}
+
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px; /* espaço entre o h1 e a imagem */
+    gap: 15px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.03);
 }
 
 .logo img {
     height: 50px;
     width: auto;
+    filter: drop-shadow(0 0 8px var(--shadow-light));
+    transition: transform 0.3s ease;
 }
 
+.logo img:hover {
+    transform: rotate(-5deg);
+}
 
-/* Estilo para o título */
 h1 {
     color: white;
-    text-align: left;
-    font-size: 24px;
+    font-size: 2rem;
     margin: 0;
-    font-weight: bold;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px var(--shadow-dark);
+    background: linear-gradient(to right, #ffffff, #c084fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: all 0.3s ease;
 }
 
-/* Estilos para o nav */
-nav {
-    display: flex;
-    align-items: center;
-    gap: 30px;
+/* ===== BARRA DE BUSCA ===== */
+.busca {
+    position: relative;
+    width: 350px;
 }
 
-/* Estilo para a lista no nav */
-nav ul {
-    list-style-type: none;
-    display: flex;
-    margin: 0;
-}
-
-/* Estilo para os itens do menu */
-nav ul li {
-    margin: 0;
-}
-
-/* Estilo para os links */
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-/* Efeito de hover nos links */
-nav ul li a:hover {
-    background-color: #7525c8;
-    transform: scale(1.05);
-}
-
-/* Estilos para o campo de busca */
-#busca {
-    display: flex;
-    align-items: center;
-}
-
-#txtbusca {
-    padding: 8px 12px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 2px solid #ccc;
-    margin-left: 10px;
-    background-color: #fff;
-    transition: border-color 0.3s ease;
-}
-
-/* Efeito de foco no campo de busca */
-#txtbusca:focus {
-    border-color: #7525c8;
-    outline: none;
-}
-
-/* Estilo geral para o carrossel */
-.carousel {
-    max-width: 1200px;
-    margin: 30px auto; /* Espaço entre o carrossel e outros elementos */
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra suave */
-    overflow: hidden; /* Garante que as bordas arredondadas fiquem visíveis */
-}
-
-/* Estilo geral para o carrossel */
-.carousel-item {
-    transition: transform 0.3s ease-in-out; /* Transição suave para o conjunto de transformações */
-    position: relative; /* Garante que o conteúdo fique em relação ao carrossel */
-}
-
-/* Estilos para a imagem dentro do carrossel */
-.carousel-item img {
-    border-radius: 10px; /* Arredonda as bordas da imagem */
-    object-fit: cover; /* Garante que a imagem cubra o espaço do carrossel sem distorcer */
-    height: 500px; /* Define uma altura fixa para a imagem */
-    transition: transform 0.3s ease-in-out; /* Transição suave para a imagem */
-}
-
-/* Estilos para o balão de texto */
-.carousel-caption {
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente para melhorar a legibilidade */
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    transition: transform 1.0s ease-in-out; /* Transição suave para o balão de texto */
-}
-
-/* Efeito de hover nos elementos do carrossel */
-.carousel-item:hover {
-    transform: scale(1.05); /* Aumenta o carrossel (imagem + balão de texto) */
-}
-
-.carousel-item img:hover {
-    transform: scale(1.05); /* Aumenta a imagem quando hover */
-}
-
-.carousel-caption:hover {
-    transform: scale(1.05); /* Aumenta o balão de texto quando hover */
-}
-
-/* Estilo para o título */
-.carousel-caption h5 {
-    font-size: 2rem; /* Tamanho maior para o título */
-    font-weight: bold;
-}
-
-/* Estilo para a descrição */
-.carousel-caption p {
+.lupa {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
     font-size: 1.2rem;
-    font-style: italic;
+    color: var(--text-secondary);
+    pointer-events: none;
 }
 
+#searchInput {
+    width: 100%;
+    padding: 12px 40px 12px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #2a2540;
+    background-color: #1e1b2e;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px var(--shadow-dark);
+}
 
+#searchInput:focus {
+    border-color: var(--purple-secondary);
+    background-color: #252836;
+    outline: none;
+    box-shadow: 0 0 0 3px var(--shadow-light);
+}
 
+#searchInput::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
 
+.search-results {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background-color: #252836;
+    color: white;
+    border-radius: 8px;
+    padding: 0;
+    z-index: 1000;
+    box-shadow: 0 8px 20px var(--shadow-dark);
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--purple-primary);
+}
+
+.search-results::-webkit-scrollbar {
+    width: 8px;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+    background-color: var(--purple-primary);
+    border-radius: 4px;
+}
+
+.result-item {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #2a2e3c;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-item:hover {
+    background-color: rgba(93, 59, 173, 0.2);
+    color: white;
+}
+
+/* ===== CARROSSEL ===== */
+.carousel {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px var(--shadow-dark);
+    margin-top: 30px;
+    border: 1px solid var(--purple-primary);
+}
+
+.carousel-inner {
+    border-radius: 12px;
+}
+
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.85);
+    transition: filter 0.5s ease;
+}
+
+.carousel:hover .carousel-item img {
+    filter: brightness(0.7);
+}
+
+.carousel-item.active img {
+    filter: brightness(0.8);
+}
+
+.carousel-caption {
+    background: linear-gradient(transparent, rgba(13, 2, 26, 0.9));
+    padding: 30px;
+    border-radius: 0 0 12px 12px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: left;
+}
+
+.carousel-caption h5 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px var(--shadow-dark);
+    color: white;
+}
+
+.carousel-caption p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 70%;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 992px) {
+    header {
+        padding: 0 25px;
+        height: 70px;
+    }
+    
+    .logo img {
+        height: 40px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .busca {
+        width: 280px;
+    }
+    
+    .carousel-caption h5 {
+        font-size: 1.8rem;
+    }
+    
+    .carousel-caption p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .logo {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .busca {
+        width: 100%;
+    }
+    
+    .carousel-item img {
+        height: 350px;
+    }
+    
+    .carousel-caption {
+        padding: 20px;
+    }
+    
+    .carousel-caption h5 {
+        font-size: 1.5rem;
+    }
+    
+    .carousel-caption p {
+        max-width: 100%;
+    }
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.search-results {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ===== BOTÕES DO CARROSSEL (ESCONDIDOS POR PADRÃO) ===== */
+.carousel-control-prev,
+.carousel-control-next {
+    display: none;
+}
