@@ -44,65 +44,34 @@ h1 {
     font-weight: bold;
 }
 
-/* Estilos para o nav */
-nav {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-/* Estilo para a lista no nav */
-nav ul {
-    list-style-type: none;
-    display: flex;
-    margin: 0;
-}
-
-/* Estilo para os itens do menu */
-nav ul li {
-    margin: 0;
-}
-
-/* Estilo para os links */
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-/* Efeito de hover nos links */
-nav ul li a:hover {
-    background-color: #7525c8;
-    transform: scale(1.05);
-}
 
 /* Estilos para o campo de busca */
 #busca {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end; /* Alinha o conteúdo à direita */
     padding: 10px;
 }
 
+/* Estilo para a caixa de busca */
 .busca {
     position: relative;
     width: 320px;
-    margin: 0 auto;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* Lupa dentro da caixa de busca */
 .lupa {
     position: absolute;
     top: 50%;
-    left: 280px;
+    right: 10px; /* Ajuste a lupa para a extremidade direita */
     transform: translateY(-50%);
     font-size: 18px;
     color: #888;
     pointer-events: none;
 }
 
+/* Estilo do campo de entrada de busca */
 #searchInput {
     width: 100%;
     padding: 12px 16px;
@@ -115,6 +84,7 @@ nav ul li a:hover {
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilo ao focar no campo de entrada */
 #searchInput:focus {
     border-color: #9b59b6;
     background-color: #fff;
@@ -122,6 +92,7 @@ nav ul li a:hover {
     box-shadow: 0 0 6px rgba(155, 89, 182, 0.4);
 }
 
+/* Estilo dos resultados da busca */
 .search-results {
     position: absolute;
     top: 110%;
@@ -139,6 +110,7 @@ nav ul li a:hover {
     overflow-y: auto;
 }
 
+/* Estilo dos itens dos resultados */
 .result-item {
     display: block;
     padding: 10px 16px;
@@ -148,10 +120,10 @@ nav ul li a:hover {
     transition: background-color 0.2s ease;
 }
 
+/* Estilo de hover nos itens dos resultados */
 .result-item:hover {
     background-color: #310052;
 }
-
 
 
 /* Estilo geral para o carrossel */
