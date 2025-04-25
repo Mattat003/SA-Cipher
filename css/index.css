@@ -86,6 +86,7 @@ nav ul li a:hover {
 }
 
 #txtbusca {
+    font-family: Georgia, 'Times New Roman', Times, serif;
     padding: 8px 12px;
     font-size: 16px;
     border-radius: 5px;
@@ -93,6 +94,7 @@ nav ul li a:hover {
     margin-left: 10px;
     background-color: #fff;
     transition: border-color 0.3s ease;
+    color: #000000;
 }
 
 /* Efeito de foco no campo de busca */
@@ -158,6 +160,32 @@ nav ul li a:hover {
     font-style: italic;
 }
 
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #1e003a;
+    color: white;
+    border-radius: 4px;
+    margin-top: 5px;
+    padding: 5px 0;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.result-item {
+    display: block;
+    padding: 6px 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.result-item:hover {
+    background-color: #310052;
+}
 
 
 
