@@ -83,25 +83,76 @@ nav ul li a:hover {
 #busca {
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 10px;
 }
 
-#txtbusca {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    padding: 8px 12px;
+.busca {
+    position: relative;
+    width: 320px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.lupa {
+    position: absolute;
+    top: 50%;
+    left: 280px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #888;
+    pointer-events: none;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 12px 16px;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 2px solid #ccc;
-    margin-left: 10px;
-    background-color: #fff;
-    transition: border-color 0.3s ease;
-    color: #000000;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Efeito de foco no campo de busca */
-#txtbusca:focus {
-    border-color: #7525c8;
+#searchInput:focus {
+    border-color: #9b59b6;
+    background-color: #fff;
     outline: none;
+    box-shadow: 0 0 6px rgba(155, 89, 182, 0.4);
 }
+
+.search-results {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background-color: #1e003a;
+    color: white;
+    border-radius: 8px;
+    margin-top: 5px;
+    padding: 6px 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.result-item {
+    display: block;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    transition: background-color 0.2s ease;
+}
+
+.result-item:hover {
+    background-color: #310052;
+}
+
+
 
 /* Estilo geral para o carrossel */
 .carousel {
@@ -160,32 +211,7 @@ nav ul li a:hover {
     font-style: italic;
 }
 
-.search-results {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #1e003a;
-    color: white;
-    border-radius: 4px;
-    margin-top: 5px;
-    padding: 5px 0;
-    z-index: 10;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-    display: none;
-}
 
-.result-item {
-    display: block;
-    padding: 6px 10px;
-    cursor: pointer;
-    text-decoration: none;
-    color: white;
-}
-
-.result-item:hover {
-    background-color: #310052;
-}
 
 
 
