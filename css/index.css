@@ -45,6 +45,10 @@ header {
 .logo img:hover {
     transform: rotate(-5deg);
 }
+.logo h1 {
+    margin-left: 40px;
+}
+
 
 h1 {
     font-size: 2rem;
@@ -276,7 +280,7 @@ h1 {
         max-width: 100%;
     }
 }
-
+/*Menu sidebar */
 aside {
     position: fixed;
     top: 0;
