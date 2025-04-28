@@ -5,7 +5,7 @@
 
 <h3 align="left">Nosso Site:</h3>
 <p align="left">
-  O Cipher é um site dedicado a oferecer uma seleção cuidadosamente curada de jogos digitais. Aqui, não vendemos jogos, nós trazemos uma experiência única, onde você tem acesso a títulos obtidos fisicamente diretamente pelo site.
+  O Cipher é um site dedicado a oferecer uma interface de organização. Aqui, não vendemos jogos, nós trazemos uma experiência única, onde você tem acesso a títulos obtidos fisicamente diretamente pelo site. Os jogos são exclusivamente comprados pela loja fisica.
 
 Nosso objetivo é ser o local perfeito para armazenamento e organização dos seus jogos, quantas vezes você perdeu o dvd do jogo no sofa?
 
