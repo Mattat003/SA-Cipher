@@ -269,3 +269,26 @@ aside button:hover {
     margin: 5px 0;
     border-radius: 5px;
 }
+/* Personalizando o fundo e as letras do Toast */
+.toast {
+    background-color: #4b0082 !important; /* Cor de fundo do Toast */
+    color: #f0e6ff !important; /* Cor das letras */
+    border-radius: 10px !important; /* Bordas arredondadas */
+    font-weight: 500 !important; /* Peso da fonte */
+}
+
+/* Personalizando o cabeçalho do Toast */
+.toast-header {
+    background-color: #8a2be2 !important; /* Cor de fundo do cabeçalho */
+    color: #fff !important; /* Cor das letras no cabeçalho */
+}
+
+/* Personalizando o corpo do Toast */
+.toast-body {
+    background-color: #4b0082 !important; /* Cor de fundo do corpo do Toast */
+}
+
+/* Personalizando o botão de fechar */
+.btn-close {
+    color: #fff !important; /* Cor do botão de fechar */
+}

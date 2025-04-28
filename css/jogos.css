@@ -20,6 +20,7 @@ body {
     padding: 20px;
     max-width: 1200px;
     margin: auto;
+    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
 }
 
 h1 {
@@ -84,6 +85,7 @@ button:hover {
 }
 
 #Requisitos {
+  
     background-color: var(--steam-darker);
     padding: 30px;
     border-radius: 10px;
