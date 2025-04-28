@@ -57,7 +57,7 @@ body {
 
 /* Estilo dos botões dentro do menu lateral */
 .sidebar-content button {
-    background-color: #FFD700; /* Amarelo */
+    background-color: #9b3aa7; 
     border: none;
     padding: 10px;
     margin: 5px 0;
@@ -68,7 +68,7 @@ body {
 
 /* Efeito ao passar o mouse nos botões do menu */
 .sidebar-content button:hover {
-    background-color: #ffcc00; /* Amarelo mais claro */
+    background-color: #9b3aa7; /* Amarelo mais claro */
 }
 
 /* Exibe o conteúdo do menu ao passar o mouse sobre a sidebar */
@@ -124,7 +124,7 @@ body {
 
 /* Botão "Jogar" */
 .play-btn {
-    background-color: #FFD700;
+    background-color: #9b3aa7;
     border: none;
     padding: 8px 15px;
     margin-top: 10px;
