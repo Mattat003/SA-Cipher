@@ -22,8 +22,20 @@
             <span class="lupa">&#128269;</span>
             <input type="text" id="searchInput" placeholder="Buscar...">
             <div id="results" class="search-results"></div>
+
+            <!-- Botão de abrir menu -->
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <!-- Menu lateral -->
+            <aside class="side-menu" id="sideMenu">
+            <div class="menu">
+                <div class="menu-item">Biblioteca</div>
+                <div class="menu-item">Capturas</div>
+                <div class="menu-item">Minhas Reviews</div>
+            </div>
+    </aside>
         </div>
-    
+        
+        
     </header>
 
     
@@ -106,6 +118,11 @@
             document.getElementById("results").innerHTML = "";
             document.getElementById("results").style.display = "none";
         });
+
+        function toggleMenu() {
+        const menu = document.getElementById("sideMenu");
+        menu.classList.toggle("open");
+}
     </script>
     
     
