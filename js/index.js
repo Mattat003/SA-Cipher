@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Itens de exemplo para busca
     const items = {
         "The Last of Us": "tlou.html",
-        "Red Dead Redemption 2": "rdr2.html",
+        "Red Dead Redemption 2": "rdr.html",
         "Minecraft": "minecraft.html",
         "God of War": "gow.html",
         "Cyberpunk 2077": "cyberpunk.html",
         "Hollow Knight": "hollowknight.html",
-        "FIFA 24": "fifa.html"
+        "FIFA 22": "fifa.html"
     };
 
     // Limpar o campo de busca quando a página for carregada
