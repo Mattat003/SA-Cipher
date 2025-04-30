@@ -24,6 +24,7 @@ header {
     border-bottom: 1px solid #5d3bad;
 }
 
+
 .logo {
     display: flex;
     align-items: center;
@@ -64,8 +65,10 @@ h1 {
 }
 
 .busca {
+    margin-left: auto; /* Remove margem anterior */
+    width: 350px; /* Mantém largura original */
     position: relative;
-    width: 350px;
+    margin-right: 12px;
 }
 
 .lupa {
@@ -378,4 +381,17 @@ aside button:hover {
 
 .menu-item:hover {
     background-color: #7a5af5;
+}
+.material-symbols-outlined {
+    font-size: 60px;
+    transform: translateX(10px);
+    transform: translateY(5px);
+    border-radius: 100%;
+    color: #5b16b4;     /* Cor do ícone (substitua #333 por qualquer cor desejada) */
+    transition: all 0.3s ease;
+}
+.material-symbols-outlined:hover {
+    /* Mudanças que ocorrem quando o mouse passa sobre o ícone */
+    box-shadow: 0 10px 20px rgba(180, 20, 180, 0.9); /* Aumenta a sombra */
+    color: #5b16b4; ; /* Muda a cor do ícone ao passar o mouse */
 }
