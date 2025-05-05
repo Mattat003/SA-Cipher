@@ -1,149 +1,166 @@
-/* Estilo geral do corpo da página */
+/* Estilo geral da página */
 body {
-    background-color: #13072A; /* Cor de fundo escura */
-    color: white; /* Texto branco */
-    font-family: Arial, sans-serif; /* Fonte usada no site */
-    margin: 0; /* Remove margens padrão */
-    padding: 0; /* Remove preenchimento padrão */
-    text-align: center; /* Centraliza o conteúdo */
-}
-
-/* Barra de navegação superior */
-.navbar {
-    background-color: #3D1172; /* Fundo roxo escuro */
-    padding: 10px; /* Espaçamento interno */
-    display: flex; /* Layout flexível */
-    justify-content: space-between; /* Espaço entre elementos */
-    align-items: center; /* Alinha verticalmente os itens */
-    position: relative; /* Para posicionar a sidebar de forma absoluta */
-}
-
-/* Imagem de perfil */
-.profile-img {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    color: white;
+    text-align: center;
+  }
+  
+  /* Navbar moderna com degradê */
+  .navbar {
+    background: linear-gradient(to right, #6a0dad, #9b00e8);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Imagem de perfil */
+  .profile-img {
     width: 60px;
     height: 60px;
-    border-radius: 50%; /* Deixa a imagem redonda */
-    cursor: pointer; /* Muda o cursor ao passar por cima */
-    margin-left: 15px; /* Espaçamento à esquerda */
-}
-
-/* Container da sidebar (menu lateral) */
-.sidebar {
-    position: absolute; /* Posiciona em relação à navbar */
-    right: 20px; /* Alinhado à direita */
-    top: 10px; /* Um pouco abaixo do topo */
-    text-align: right; /* Alinha os botões à direita */
-}
-
-/* Botão para abrir o menu (ícone ☰) */
-.menu-btn {
-    font-size: 24px; /* Tamanho do ícone */
-    background: none; /* Sem fundo */
-    border: none; /* Sem borda */
-    color: white; /* Cor do ícone */
-    cursor: pointer; /* Muda o cursor ao passar por cima */
-}
-
-/* Conteúdo do menu lateral (botões) */
-.sidebar-content {
-    display: none; /* Escondido por padrão */
-    flex-direction: column; /* Organiza os botões em coluna */
-    background-color: #4B1E88; /* Cor de fundo do menu */
-    padding: 20px;
-    border-radius: 10px;
-    width: 200px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
-}
-
-/* Estilo dos botões dentro do menu lateral */
-.sidebar-content button {
-    background-color: #9b3aa7; 
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 15px;
+    border: 2px solid #ffffff55;
+    transition: transform 0.3s ease;
+  }
+  
+  .profile-img:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Botão do menu */
+  .menu-btn {
+    font-size: 28px;
+    background: none;
     border: none;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* Container da sidebar */
+  .sidebar {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    text-align: right;
+  }
+  
+  /* Conteúdo da sidebar */
+  .sidebar-content {
+    display: none;
+    flex-direction: column;
+    background: linear-gradient(145deg, #6a0dad, #9b00e8);
+    padding: 20px;
+    border-radius: 15px;
+    width: 220px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  }
+  
+  .sidebar-content button {
+    background-color: #b23be0;
+    border: none;
+    padding: 12px;
+    margin: 6px 0;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-}
-
-/* Efeito ao passar o mouse nos botões do menu */
-.sidebar-content button:hover {
-    background-color: #9b3aa7; /* Amarelo mais claro */
-}
-
-/* Exibe o conteúdo do menu ao passar o mouse sobre a sidebar */
-.sidebar:hover .sidebar-content {
+    color: white;
+    transition: background 0.3s ease;
+  }
+  
+  .sidebar-content button:hover {
+    background-color: #d471ff;
+  }
+  
+  /* Mostrar menu ao passar o mouse */
+  .sidebar:hover .sidebar-content {
     display: flex;
-}
-
-/* Cabeçalho principal da página */
-.header {
-    background-color: #3D1172;
-    padding: 20px;
-    font-size: 24px;
+  }
+  
+  /* Cabeçalho principal */
+  .header {
+    background: linear-gradient(to right, #6a0dad, #9b00e8);
+    padding: 30px 20px;
+    font-size: 30px;
     font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     margin-top: 10px;
-}
-
-/* Seção da biblioteca de jogos */
-.library {
-    display: grid; /* Layout em grade */
-    grid-template-columns: repeat(4, 1fr); /* 4 colunas de tamanho igual */
-    gap: 20px; /* Espaçamento entre os itens */
-    padding: 40px;
-    justify-content: center;
-}
-
-/* Estilo de cada bloco de jogo */
-.game-tile {
-    width: 250px;
-    height: 300px;
-    background-color: #4B1E88;
-    border-radius: 15px;
+  }
+  
+  /* Grade da biblioteca */
+  .library {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    padding: 60px;
+    justify-items: center;
+  }
+  
+  /* Card de jogo moderno */
+  .game-tile {
+    background: linear-gradient(145deg, #6a0dad, #9b00e8);
+    width: 260px;
+    height: 360px;
+    border-radius: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animações suaves */
-}
-
-/* Imagem dentro de cada bloco de jogo */
-.game-tile img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    border: 2px solid #ffffff20;
+    overflow: hidden;
+  }
+  
+  .game-tile:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Imagem do jogo */
+  .game-tile img {
     width: 180px;
     height: 180px;
-    border-radius: 10px;
-    object-fit: cover; /* Mantém proporção da imagem */
-}
-
-/* Título do jogo */
-.game-tile h3 {
+    border-radius: 15px;
+    object-fit: cover;
+    border-bottom: 2px solid #ffffff33;
+  }
+  
+  /* Título do jogo */
+  .game-tile h3 {
     margin-top: 10px;
-    font-size: 18px;
-}
-
-/* Botão "Jogar" */
-.play-btn {
-    background-color: #9b3aa7;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  /* Botão "Jogar" */
+  .play-btn {
+    background-color: #d471ff;
     border: none;
-    padding: 8px 15px;
+    padding: 10px 20px;
     margin-top: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-}
-
-/* Efeito ao passar o mouse sobre o bloco do jogo */
-.game-tile:hover {
-    transform: scale(1.1); /* Aumenta levemente o tamanho */
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3); /* Sombra clara */
-}
-
-/* Rodapé da página */
-footer {
-    background-color: #3D1172;
-    padding: 10px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
+    color: white;
+    transition: background 0.3s ease;
+  }
+  
+  .play-btn:hover {
+    background-color: #e4b2ff;
+  }
+  
+  /* Rodapé */
+  footer {
+    background: linear-gradient(to right, #6a0dad, #9b00e8);
+    padding: 15px;
+    font-size: 14px;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.5);
+  }
+  
