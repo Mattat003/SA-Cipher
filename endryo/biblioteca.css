@@ -1,166 +1,207 @@
 /* Estilo geral da página */
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-    color: white;
-    text-align: center;
-  }
-  
-  /* Navbar moderna com degradê */
-  .navbar {
-    background: linear-gradient(to right, #6a0dad, #9b00e8);
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  }
-  
-  /* Imagem de perfil */
-  .profile-img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    cursor: pointer;
-    margin-left: 15px;
-    border: 2px solid #ffffff55;
-    transition: transform 0.3s ease;
-  }
-  
-  .profile-img:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Botão do menu */
-  .menu-btn {
-    font-size: 28px;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-  }
-  
-  /* Container da sidebar */
-  .sidebar {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    text-align: right;
-  }
-  
-  /* Conteúdo da sidebar */
-  .sidebar-content {
-    display: none;
-    flex-direction: column;
-    background: linear-gradient(145deg, #6a0dad, #9b00e8);
-    padding: 20px;
-    border-radius: 15px;
-    width: 220px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-  }
-  
-  .sidebar-content button {
-    background-color: #b23be0;
-    border: none;
-    padding: 12px;
-    margin: 6px 0;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-    transition: background 0.3s ease;
-  }
-  
-  .sidebar-content button:hover {
-    background-color: #d471ff;
-  }
-  
-  /* Mostrar menu ao passar o mouse */
-  .sidebar:hover .sidebar-content {
-    display: flex;
-  }
-  
-  /* Cabeçalho principal */
-  .header {
-    background: linear-gradient(to right, #6a0dad, #9b00e8);
-    padding: 30px 20px;
-    font-size: 30px;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    margin-top: 10px;
-  }
-  
-  /* Grade da biblioteca */
-  .library {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 40px;
-    padding: 60px;
-    justify-items: center;
-  }
-  
-  /* Card de jogo moderno */
-  .game-tile {
-    background: linear-gradient(145deg, #6a0dad, #9b00e8);
-    width: 260px;
-    height: 360px;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-    border: 2px solid #ffffff20;
-    overflow: hidden;
-  }
-  
-  .game-tile:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
-  }
-  
-  /* Imagem do jogo */
-  .game-tile img {
-    width: 180px;
-    height: 180px;
-    border-radius: 15px;
-    object-fit: cover;
-    border-bottom: 2px solid #ffffff33;
-  }
-  
-  /* Título do jogo */
-  .game-tile h3 {
-    margin-top: 10px;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  /* Botão "Jogar" */
-  .play-btn {
-    background-color: #d471ff;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-    transition: background 0.3s ease;
-  }
-  
-  .play-btn:hover {
-    background-color: #e4b2ff;
-  }
-  
-  /* Rodapé */
-  footer {
-    background: linear-gradient(to right, #6a0dad, #9b00e8);
-    padding: 15px;
-    font-size: 14px;
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.5);
-  }
-  
+  margin: 0;
+  font-family: 'Motiva Sans', 'Segoe UI', sans-serif;
+  background-color: #12002b;
+  color: #f0e6ff;
+  text-align: center;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Navbar moderna com degradê */
+.navbar {
+  background: linear-gradient(135deg, #1e003a, #2a0a4a);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #5d3bad;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Imagem de perfil */
+.profile-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #7a5af5;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 0 10px rgba(122, 90, 245, 0.5);
+  background: rgba(30, 0, 58, 0.7);
+}
+
+.profile-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(122, 90, 245, 0.8);
+  border-color: #9d7aff;
+  background: rgba(46, 0, 88, 0.7);
+}
+
+/* Botão do menu */
+.menu-btn {
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: #f0e6ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menu-btn:hover {
+  color: #c084fc;
+}
+
+/* Container da sidebar */
+.sidebar {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  text-align: right;
+}
+
+/* Conteúdo da sidebar */
+.sidebar-content {
+  display: none;
+  flex-direction: column;
+  background: linear-gradient(145deg, #1e003a, #2a0a4a);
+  padding: 20px;
+  border-radius: 15px;
+  width: 220px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  border: 1px solid #5d3bad;
+}
+
+.sidebar-content button {
+  background-color: #510d96;
+  border: none;
+  padding: 12px;
+  margin: 6px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #f0e6ff;
+  transition: all 0.3s ease;
+  border: 1px solid #7a5af5;
+}
+
+.sidebar-content button:hover {
+  background-color: #7a5af5;
+  color: white;
+}
+
+/* Mostrar menu ao passar o mouse */
+.sidebar:hover .sidebar-content {
+  display: flex;
+}
+
+/* Cabeçalho principal */
+.header {
+  background: linear-gradient(135deg, #1e003a, #2a0a4a);
+  padding: 30px 20px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  margin-top: 10px;
+  border-bottom: 1px solid #5d3bad;
+}
+
+.header h1 {
+  font-size: 2rem;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to right, #ffffff, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: all 0.3s ease;
+}
+
+/* Grade da biblioteca */
+.library {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+  padding: 60px;
+  justify-items: center;
+}
+
+/* Card de jogo moderno */
+.game-tile {
+  background: linear-gradient(145deg, #1e003a, #2a0a4a);
+  width: 260px;
+  height: 360px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 12px 30px rgba(93, 59, 173, 0.6);
+  border: 1px solid #5d3bad;
+  overflow: hidden;
+}
+
+.game-tile:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(93, 59, 173, 0.8);
+}
+
+/* Imagem do jogo */
+.game-tile img {
+  width: 180px;
+  height: 180px;
+  border-radius: 15px;
+  object-fit: cover;
+  border-bottom: 2px solid #7a5af533;
+  filter: brightness(0.9);
+  transition: filter 0.3s ease;
+}
+
+.game-tile:hover img {
+  filter: brightness(1);
+}
+
+/* Título do jogo */
+.game-tile h3 {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #f0e6ff;
+}
+
+/* Botão "Jogar" */
+.play-btn {
+  background-color: #7a5af5;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  transition: all 0.3s ease;
+  border: 1px solid #9d7aff;
+}
+
+.play-btn:hover {
+  background-color: #9d7aff;
+  box-shadow: 0 0 15px rgba(157, 122, 255, 0.5);
+}
+
+/* Rodapé */
+footer {
+  background: linear-gradient(135deg, #1e003a, #2a0a4a);
+  padding: 15px;
+  font-size: 14px;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid #5d3bad;
+}
