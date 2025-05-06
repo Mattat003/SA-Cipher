@@ -121,7 +121,14 @@ insert genero values
 (23,'Simulação'),
 (24,'Survival'),
 (25,'Tiro (FPS/TPS)'),
-(26,'Visual Novel');
+(26,'Visual Novel'),
+(27,'Co-op Local'),
+(28,'Co-op Online'),
+(29,'LAN'),
+(30,'Multijogador Online'),
+(31,'PvE (Player vs Enviroment)'),
+(32,'PvP (Player vc Player)'),
+(33,'Singleplayer');
 select * from genero;
 /*=================*/
 
