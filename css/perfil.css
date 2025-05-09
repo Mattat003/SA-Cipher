@@ -10,30 +10,29 @@
 
 body {
     background-color: #12002b;
-    width: 100%;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     overflow-x: hidden;
 }
-
 .paginaperfil {
+    flex: 1;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    height: 100vh;
-    background-color: #0d021a;
     gap: 20px;
     padding: 20px;
-    
+    background-color: #0d021a;
+    margin-bottom: 0;
 }
-
 .conteudo {
     width: 60vw;
     min-width: 320px;
     background: #2a0a4a;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 1px 0px rgb(160, 43, 175);
+    box-shadow: 0 5 px 20px rgb(160, 43, 175);
 }
 
 .lateral {
@@ -294,4 +293,3 @@ aside button:hover {
 .btn-close {
     color: #fff !important; /* Cor do botão de fechar */
 }
-
