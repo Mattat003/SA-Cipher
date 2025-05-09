@@ -3,91 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <title>Perfil com Câmera</title>
-    <style>
-        body {
-            background-color: #12002b;
-            color: #f0e6ff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .foto-perfil {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin-bottom: 20px;
-        }
-
-        .foto-perfil img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px solid #f0e6ff;
-            object-fit: cover;
-            cursor: pointer;
-        }
-
-        .foto-perfil::after {
-            content: '📷';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background: #510d96;
-            color: #f0e6ff;
-            border-radius: 50%;
-            padding: 5px;
-            font-size: 20px;
-            transform: translate(30%, 30%);
-        }
-
-        h2 {
-            margin-bottom: 20px;
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
-        .botoes {
-            display: flex;
-            gap: 10px;
-        }
-
-        .botoes button {
-            background-color: #510d96;
-            color: #f0e6ff;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .botoes button:hover {
-            background-color: #7a5af5;
-        }
-
-        /* Estilo do vídeo da câmera */
-        #camera {
-            display: none;
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="estilos.css">
 </head>
+<style>
+    body {
+    background-color: #12002b;
+    color: #f0e6ff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.foto-perfil {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+.foto-perfil img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f0e6ff;
+    cursor: pointer;
+}
+
+
+.foto-perfil::after {
+    content: '📷';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #510d96;
+    color: #f0e6ff;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 20px;
+    transform: translate(30%, 30%);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.botoes {
+    display: flex;
+    gap: 10px;
+}
+
+.botoes button {
+    background-color: #510d96;
+    color: #f0e6ff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botoes button:hover {
+    background-color: #7a5af5;
+}
+
+/* Estilo do vídeo da câmera */
+#camera {
+    display: none;
+    margin-top: 20px;
+}
+
+</style>
 <body>
 
     <h2>Seu Perfil</h2>
 
     <div class="foto-perfil">
         <label for="upload-foto">
-            <img id="imagem-perfil" src="https://via.placeholder.com/120x120.png?text=Perfil" alt="Foto de Perfil">
-        </label>
-        <input type="file" id="upload-foto" accept="image/*">
+            <img id="imagem-perfil" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Foto de Perfil">
+          </label>
+          <input type="file" id="upload-foto" accept="image/*" hidden>
+          
     </div>
 
     <div class="botoes">
@@ -107,7 +111,7 @@
         const tirarFoto = document.getElementById('tirar-foto');
         const camera = document.getElementById('camera');
 
-        const fotoPadrao = "https://via.placeholder.com/120x120.png?text=Perfil"; // foto padrão
+        const fotoPadrao = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
 
         trocarFoto.addEventListener('click', () => {
             uploadFoto.click(); // simula o clique no input
@@ -160,8 +164,4 @@
     </script>
 
 </body>
-<<<<<<<< HEAD:teste1.html
 </html>
-========
-</html>
->>>>>>>> 152614e9574bfd3cc1c62c47eba93b19e65b6dfd:teste/testeFoto.html
