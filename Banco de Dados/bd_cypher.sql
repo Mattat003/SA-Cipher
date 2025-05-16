@@ -275,6 +275,16 @@ insert usuario values
 (4,'Júlia Monteiro','julia.monteiro@gmail.com','JMonteiro!22','2025-01-10'),
 (5,'Caio Silveira','caio.silveira@gmail.com','Caio_S1lv#','2025-04-05');
 select * from usuario;
+
+ALTER TABLE usuario MODIFY senha_user VARCHAR(255) NOT NULL;
+ALTER TABLE adm MODIFY senha_user VARCHAR(255) NOT NULL;
+INSERT INTO usuario (nome_user, email_user, senha_user, data_criacao) VALUES ('Pamella Rafaeli', 'pamella@email.com', '123', NOW());
+ALTER TABLE usuario ADD COLUMN senha_temporaria BOOLEAN DEFAULT FALSE;
+ALTER TABLE usuario MODIFY senha_user VARCHAR(255) NOT NULL;
+ALTER TABLE adm MODIFY senha_user VARCHAR(255) NOT NULL;
+
+
+
 /*=================*/
 
 /*Ver TUDO*/
