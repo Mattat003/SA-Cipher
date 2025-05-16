@@ -1,0 +1,82 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Fundo com degradê escuro */
+body {
+    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container principal */
+.container {
+    background: linear-gradient(to right, #6a0dad, #5b009d);
+    padding: 40px;
+    border-radius: 15px;
+    width: 400px;
+    color: white;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Título */
+.container h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+    font-family: 'Georgia', serif;
+    color: #f2f2f2;
+}
+
+/* Labels */
+label {
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #cbbde2;
+}
+
+/* Inputs */
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 20px;
+    background: linear-gradient(145deg, #3b007b, #6a0dad);
+    color: white;
+    outline: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Placeholder */
+input::placeholder {
+    color: #a8a8b2;
+}
+
+/* Botão */
+button {
+    background: linear-gradient(to right, #5b009d, #4c0089);
+    color: white;
+    padding: 12px;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    transition: 0.3s ease;
+}
+
+/* Hover botão */
+button:hover {
+    background: linear-gradient(to right, #490073, #5b009d);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8);
+}
