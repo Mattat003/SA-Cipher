@@ -7,7 +7,8 @@ pk_usuario int auto_increment primary key,
 nome_user varchar(40) not null,
 email_user varchar(40) not null,
 senha_user varchar(16) not null,
-data_criacao datetime
+data_criacao datetime,
+codigo_recuperacao tinyint(1) DEFAULT '0'
 );
 
 create table cargo(
@@ -38,14 +39,6 @@ nome_jogo varchar(100) not null,
 data_lanc date not null,
 fk_codigo int not null,
 foreign key (fk_codigo) references codigo_game(pk_codgame)
-on delete restrict 
-on update cascade,
-fk_dev int not null,
-foreign key (fk_dev) references desenvolvedora(pk_dev)
-on delete restrict 
-on update cascade,
-fk_pub int not null,
-foreign key (fk_pub) references publicadora(pk_publi)
 on delete restrict 
 on update cascade
 );
@@ -248,12 +241,12 @@ select * from codigo_game;
 
 /*ADD Jogos*/
 insert jogo values
-(1,'The Last of Us Part II','2020-06-19',1,6,5),
-(2,'Elden Ring','2022-02-25',2,7,7),
-(3,'Mario Odyssey','2017-10-27',3,1,1),
-(4,'Enigma do Medo','2024-11-28',4,10,10),
-(5,'Blue Prince','2025-04-10',5,8,9),
-(6,'Assassin''s Creed Valhalla','2020-11-10',6,4,4);
+(1,'The Last of Us Part II','2020-06-19',1),
+(2,'Elden Ring','2022-02-25',2),
+(3,'Mario Odyssey','2017-10-27',3),
+(4,'Enigma do Medo','2024-11-28',4),
+(5,'Blue Prince','2025-04-10',5),
+(6,'Assassin''s Creed Valhalla','2020-11-10',6);
 select * from jogo;
 /*=================*/
 
@@ -269,11 +262,11 @@ select * from adm;
 
 /*ADD Usuários*/
 insert usuario values
-(1,'Lúcio Andrade','lucio.andrade@hotmail.com','L@ndrade2024!','2024-03-15'),
-(2,'Maya Costa','maya.costa@gmail.com','Maya#C0st@!','2024-07-02'),
-(3,'Henrique Vasques','henrique.vasques@gmail.com','HenV@1234#','2024-11-28'),
-(4,'Júlia Monteiro','julia.monteiro@gmail.com','JMonteiro!22','2025-01-10'),
-(5,'Caio Silveira','caio.silveira@gmail.com','Caio_S1lv#','2025-04-05');
+(1,'Lúcio Andrade','lucio.andrade@hotmail.com','L@ndrade2024!','2024-03-15',0),
+(2,'Maya Costa','maya.costa@gmail.com','Maya#C0st@!','2024-07-02',0),
+(3,'Henrique Vasques','henrique.vasques@gmail.com','HenV@1234#','2024-11-28',0),
+(4,'Júlia Monteiro','julia.monteiro@gmail.com','JMonteiro!22','2025-01-10',0),
+(5,'Caio Silveira','caio.silveira@gmail.com','Caio_S1lv#','2025-04-05',0);
 select * from usuario;
 /*=================*/
 
