@@ -9,10 +9,10 @@
 /* Corpo da página */
 body {
     background-color: #12002b; /* Roxo escuro */
-    display: flex;
+    display:flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Ocupa a tela toda */
+    height: 110vh; /* Ocupa a tela toda */
 }
 
 /* Formulário */
@@ -22,7 +22,7 @@ form {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     width: 450px;
-    height: 690px;
+    height: 620px;
 }
 
 /* Fieldset */
