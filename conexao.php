@@ -8,7 +8,7 @@ $host = 'localhost';
 
 // $dbname: Define o nome do banco de dados ao qual queremos nos conectar.
 // Neste caso, o banco de dados se chama 'senai_login'.
-$dbname = 'bd_cypher';
+$dbname = 'bd_cypher2';
 
 // $user: Define o nome de usuário para acessar o banco de dados.
 // 'root' é um usuário comum em ambientes de desenvolvimento MySQL,

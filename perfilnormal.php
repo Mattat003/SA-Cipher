@@ -1,3 +1,11 @@
+<?php
+session_start();
+$nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -152,7 +160,10 @@
                     <input type="file" id="upload-foto" accept="image/*" hidden>
                 </div>
 
-                <div class="profile-name">Matheus</div>
+                <div class="profile-name">
+                <?php echo htmlspecialchars($_SESSION['usuario']); ?>
+                </div>
+
 
                 <!-- Botões de ação - Versão melhorada -->
                 <div class="photo-actions">
