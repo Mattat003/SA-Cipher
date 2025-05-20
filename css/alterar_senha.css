@@ -1,0 +1,118 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fundo com degradê escuro */
+body {
+    background: linear-gradient(135deg, #0f0c29, #302b63);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Container principal */
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 40px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 450px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+}
+
+/* Título */
+.container h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #ffffff, #e0c3fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600;
+}
+
+/* Labels */
+label {
+    font-weight: 500;
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    color: #e0c3fc;
+    font-size: 14px;
+}
+
+/* Inputs */
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    outline: none;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+input[type="password"]:focus {
+    border-color: #9a66df;
+    box-shadow: 0 0 0 3px rgba(154, 102, 223, 0.2);
+}
+
+/* Placeholder */
+input::placeholder {
+    color: #cbbde2;
+    opacity: 0.7;
+}
+
+/* Botão */
+button {
+    background: linear-gradient(to right, #8639df, #6a0dad);
+    color: white;
+    padding: 14px;
+    border: none;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(134, 57, 223, 0.3);
+}
+
+button:hover {
+    background: linear-gradient(to right, #6a0dad, #5b009d);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(134, 57, 223, 0.4);
+}
+
+/* Mensagem de status */
+.status-message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.status-message.success {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.status-message.error {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}

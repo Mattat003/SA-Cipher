@@ -1,0 +1,200 @@
+/* Estilo Geral */
+:root {
+  --deep-purple: #12002b;
+  --dark-purple: #1e003a;
+  --medium-purple: #2a0a4a;
+  --accent-purple: #5d3bad;
+  --neon-purple: #7a5af5;
+  --light-purple: #9d7aff;
+  --text-primary: #f0e6ff;
+  --text-secondary: #c7b3e6;
+}
+
+body {
+  font-family: 'Motiva Sans', 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, var(--deep-purple), var(--dark-purple));
+  color: var(--text-primary);
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Cabeçalho */
+h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #ffffff, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  margin: 20px 0 40px;
+  padding-bottom: 15px;
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+}
+
+h2 {
+  color: var(--neon-purple);
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--accent-purple);
+  padding-bottom: 8px;
+}
+
+/* Layout Principal */
+.game-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  align-items: flex-start;
+}
+
+.game-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.game-image img {
+  width: 100%;
+  border-radius: 15px;
+  border: 2px solid var(--accent-purple);
+  box-shadow: 0 8px 25px rgba(93, 59, 173, 0.6);
+}
+
+.game-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.game-info p {
+  text-align: justify;
+  color: var(--text-secondary);
+}
+
+/* Botão */
+button {
+  background: linear-gradient(135deg, var(--accent-purple), #510d96);
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(93, 59, 173, 0.4);
+  border: 1px solid var(--light-purple);
+  display: inline-block;
+}
+
+button:hover {
+  background: linear-gradient(135deg, var(--neon-purple), var(--accent-purple));
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(122, 90, 245, 0.7);
+}
+
+.video-container {
+  max-width: 92%;
+  margin: 10px auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--accent-purple);
+  background-color: #000;
+}
+
+.video-container video {
+  width: 100%;
+  height: 650px; /* Ajuste como quiser */
+  object-fit: cover;
+  display: block;
+}
+
+
+
+.requisitos-container {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.requisito-coluna {
+  flex: 1;
+  min-width: 280px;
+  background: rgba(13, 2, 26, 0.3);
+  padding: 20px;
+  border-left: 3px solid var(--neon-purple);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-family: 'Consolas', monospace;
+}
+
+.requisito-coluna h3 {
+  color: var(--neon-purple);
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+header {
+  background: linear-gradient(135deg, #1e003a, #2a0a4a);
+  padding: 30px 20px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  margin-top: 10px;
+  margin-bottom: 40px; /* <-- adiciona espaço abaixo do header */
+  border-bottom: 1px solid #5d3bad;
+  text-align: center;
+}
+
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .game-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    margin: 20px auto 0;
+  }
+}
+
+@media (max-width: 576px) {
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  #Requisitos {
+    padding: 20px;
+  }
+}
