@@ -50,15 +50,23 @@ on delete restrict
 on update cascade
 );
 
-CREATE TABLE historico_jogos (
+CREATE TABLE amigos (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT NOT NULL,
-    jogo_id INT NOT NULL,
-    data_entrada DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (usuario_id) REFERENCES usuario(pk_usuario) ON DELETE CASCADE,
-    FOREIGN KEY (jogo_id) REFERENCES jogo(pk_jogo) ON DELETE CASCADE
-) ENGINE=InnoDB;
-/*=================*/
+    usuario_id INT,
+    amigo_id INT,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(pk_usuario),
+    FOREIGN KEY (amigo_id) REFERENCES usuario(pk_usuario)
+);
+CREATE TABLE mensagens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    de_id INT,
+    para_id INT,
+    mensagem TEXT NOT NULL,
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (de_id) REFERENCES usuario(pk_usuario),
+    FOREIGN KEY (para_id) REFERENCES usuario(pk_usuario)
+);
+
 
 
 /*Tabela de Categorias*/
@@ -289,8 +297,6 @@ ALTER TABLE usuario MODIFY senha_user VARCHAR(255) NOT NULL;
 ALTER TABLE adm MODIFY senha_user VARCHAR(255) NOT NULL;
 INSERT INTO usuario (nome_user, email_user, senha_user, data_criacao) VALUES ('Pamella Rafaeli', 'pamella@email.com', '123', NOW());
 ALTER TABLE usuario ADD COLUMN senha_temporaria BOOLEAN DEFAULT FALSE;
-SHOW COLUMNS FROM usuario;
--- Verifique as colunas da tabela usuario
 DESCRIBE usuario;
 
 -- Verifique as colunas da tabela historico_jogos

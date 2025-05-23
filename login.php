@@ -1,65 +1,60 @@
-    <?php
-    session_start();
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
+<?php
+session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-    require_once 'conexao.php';
+require_once 'conexao.php';
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Higienização das entradas (evita ataques de XSS)
-        $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
-        $senha = $_POST["senha"];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Pega o email cru do POST, e limpa espaços em branco
+    $email_raw = $_POST["email"] ?? '';
+    $email = filter_var(trim($email_raw), FILTER_SANITIZE_EMAIL);
 
-        // Verificar se o email é válido
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $erro = "Formato de email inválido!";
-        } else {
-            // Consultar no banco de dados
-            $stmt = $pdo->prepare("SELECT * FROM usuario WHERE email_user = :email");
-            $stmt->bindParam(":email", $email);
-            $stmt->execute();
+    // Valida o email
+    if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erro = "Formato de email inválido!";
+    } else {
+        // Consulta no banco
+        $stmt = $pdo->prepare("SELECT * FROM usuario WHERE email_user = :email");
+        $stmt->bindParam(":email", $email);
+        $stmt->execute();
 
-            if ($stmt->rowCount() == 1) {
-                $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($stmt->rowCount() == 1) {
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                // Verifica a senha
-                if (password_verify($senha, $usuario['senha_user'])) {
+            // Verifica a senha
+            if (password_verify($_POST["senha"], $usuario['senha_user'])) {
 
-                    // Salvar informações do usuário na sessão, incluindo a foto de perfil
-                    $_SESSION['pk_usuario'] = $usuario['pk_usuario'];
-                    $_SESSION['usuario'] = $usuario['nome_user'];
-                    $_SESSION['foto_perfil'] = $usuario['foto_perfil']; // Aqui armazenamos a foto de perfil
+                // Salvar infos na sessão
+                $_SESSION['pk_usuario'] = $usuario['pk_usuario'];
+                $_SESSION['usuario'] = $usuario['nome_user'];
+                $_SESSION['foto_perfil'] = $usuario['foto_perfil'];
 
-                    // Se a senha for temporária, direciona o usuário para a troca de senha
-                    if ($usuario['senha_temporaria']) {
-                        header("Location: alterar_senha.php");
-                        exit();
-                    } else {
-                        // Se a senha estiver ok, redireciona para a página principal
-                        session_write_close(); // Garante que a sessão seja salva
-                        header("Location: index.php");
-                        exit();
-                    }
+                // Redireciona conforme senha temporária
+                if ($usuario['senha_temporaria']) {
+                    header("Location: alterar_senha.php");
+                    exit();
                 } else {
-                    // Senha incorreta
-                    $erro = "Email ou senha inválidos!";
+                    session_write_close();
+                    header("Location: index.php");
+                    exit();
                 }
             } else {
-                // Email não encontrado
                 $erro = "Email ou senha inválidos!";
             }
+        } else {
+            $erro = "Email ou senha inválidos!";
         }
     }
-    ?>
-
-    <!DOCTYPE html>
-    <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8"/>
-        <title>Login</title>
-        <style>
-/* Reset básico */
-* {
+}
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+    <style>
+       * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -182,28 +177,26 @@ p[style='color: #ffcccc;'] {
     margin-top: -10px;
 }
 
-            </style>
-    </head>
-    <body>
-    <div class="login-container">
-        <h2>Login</h2>
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <h2>Login</h2>
 
-        <!-- Exibe mensagem de erro se houver -->
-        <?php if (isset($erro)) { echo "<p style='color: #ffcccc;'>$erro</p>"; } ?>
+    <?php if (isset($erro)) { echo "<p style='color: #ffcccc;'>$erro</p>"; } ?>
 
-        <form action="login.php" method="post">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required placeholder="Digite seu email">
+    <form action="login.php" method="post">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required placeholder="Digite seu email" value="<?= htmlspecialchars($email_raw ?? '') ?>">
 
-            <label for="senha">Senha:</label>
-            <input type="password" name="senha" id="senha" required placeholder="Digite sua senha">
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" id="senha" required placeholder="Digite sua senha">
 
-            <button type="submit">Entrar</button>
-        </form>
+        <button type="submit">Entrar</button>
+    </form>
 
-        <p><a href="esqueceuSenha.php">Esqueci minha senha</a></p>
-        <p><a href="cadastro.php">Criar conta</a></p>
-    </div>
-    </body>
-    </html>
-    
+    <p><a href="esqueceuSenha.php">Esqueci minha senha</a></p>
+    <p><a href="cadastro.php">Criar conta</a></p>
+</div>
+</body>
+</html>

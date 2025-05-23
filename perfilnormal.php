@@ -220,7 +220,7 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
               <ul>
                 <li>Amanda 
                 <button type="button" class="btn btn-primary" id="liveToastBtn"> Solicitar amizade</button></li>
-                <li>Endryo <button>Conversar</button></li>
+                <li>Endryo <a href = "chat.php"><button>Conversar</button></a></li>
                 <li>Neon <button>Conversar</button></li>
                 <li>Pamella <button>Conversar</button></li>
               </ul>
