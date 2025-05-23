@@ -59,6 +59,28 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
             <span class="material-symbols-outlined">account_circle</span>
         </a>
     </div>
+
+    <div class="perfil">
+    <a href="perfilnormal.php">
+        <span class="material-symbols-outlined">account_circle</span>
+    </a>
+    <?php
+    // Verifica se o usuário é admin pelo email
+    if (isset($_SESSION['pk_usuario'])) {
+        require_once 'conexao.php';
+        $stmt = $pdo->prepare("SELECT email_user FROM usuario WHERE pk_usuario = :id");
+        $stmt->bindParam(':id', $_SESSION['pk_usuario']);
+        $stmt->execute();
+        $user = $stmt->fetch();
+        
+        if ($user && $user['email_user'] == 'admin@seuSite.com') { // Mesmo email usado no login
+            echo '<a href="admin.php" style="margin-left: 15px; color: gold;">
+                    <span class="material-symbols-outlined">admin_panel_settings</span>
+                  </a>';
+        }
+    }
+    ?>
+</div>
 </header>
 
 <!-- Conteúdo da página (carrossel, biblioteca, etc) -->
