@@ -60,22 +60,7 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
         </a>
     </div>
 
-    <div class="perfil">
-    <a href="perfilnormal.php">
-        <span class="material-symbols-outlined">account_circle</span>
-    </a>
-    <div class="perfil">
-    <?php if (isset($_SESSION['is_admin'])): ?>
-        <a href="admin.php" style="margin-right: 15px; color: gold;">
-            <span class="material-symbols-outlined">admin_panel_settings</span>
-        </a>
-    <?php endif; ?>
     
-    <a href="<?php echo isset($_SESSION['is_admin']) ? 'perfiladmin.php' : 'perfilnormal.php'; ?>">
-        <span class="material-symbols-outlined">account_circle</span>
-    </a>
-</div>
-</div>
 </header>
 
 <!-- Conteúdo da página (carrossel, biblioteca, etc) -->
