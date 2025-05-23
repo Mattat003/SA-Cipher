@@ -6,7 +6,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Corpo com fundo em degradê escuro */
+/* Fundo com degradê escuro */
 body {
     background: linear-gradient(135deg, #0f0c29, #302b63);
     display: flex;
@@ -16,24 +16,24 @@ body {
     padding: 20px;
 }
 
-/* Container do login */
-.login-container {
+/* Container principal */
+.container {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 40px;
     border-radius: 15px;
-    text-align: center;
-    color: white;
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
+    color: white;
+    text-align: center;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
 }
 
 /* Título */
-h1 {
-    font-size: 28px;
+.container h2 {
+    font-size: 24px;
     margin-bottom: 25px;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(to right, #ffffff, #e0c3fc);
@@ -43,7 +43,7 @@ h1 {
     font-weight: 600;
 }
 
-/* Rótulos */
+/* Labels */
 label {
     font-weight: 500;
     display: block;
@@ -53,8 +53,8 @@ label {
     font-size: 14px;
 }
 
-/* Caixa de entrada */
-input {
+/* Inputs */
+input[type="password"] {
     width: 100%;
     padding: 12px 15px;
     border-radius: 8px;
@@ -67,7 +67,7 @@ input {
     transition: all 0.3s ease;
 }
 
-input:focus {
+input[type="password"]:focus {
     border-color: #9a66df;
     box-shadow: 0 0 0 3px rgba(154, 102, 223, 0.2);
 }
@@ -91,7 +91,6 @@ button {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(134, 57, 223, 0.3);
-    margin-top: 10px;
 }
 
 button:hover {
@@ -100,23 +99,20 @@ button:hover {
     box-shadow: 0 6px 20px rgba(134, 57, 223, 0.4);
 }
 
-/* Link de voltar */
-.back-link {
-    display: block;
-    text-align: center;
+/* Mensagem de status */
+.status-message {
     margin-top: 20px;
-    color: #cbbde2;
+    padding: 10px;
+    border-radius: 5px;
     font-size: 14px;
 }
 
-.back-link a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
+.status-message.success {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
 }
 
-.back-link a:hover {
-    color: #e0c3fc;
-    text-decoration: underline;
+.status-message.error {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
 }

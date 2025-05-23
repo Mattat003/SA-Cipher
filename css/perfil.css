@@ -5,16 +5,24 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    color: #f0e6ff;
+}
+.atividades h4,
+.atividades p {
+    color: #ffffff;
 }
 
-body {
-    background-color: #12002b;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
+ h3 {
+    color: #ffffff;
 }
+
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #12002b;
+}
+
 .paginaperfil {
     flex: 1;
     display: flex;
@@ -23,7 +31,7 @@ body {
     align-items: flex-start;
     gap: 20px;
     padding: 20px;
-    background-color: #0d021a;
+   
     margin-bottom: 0;
 }
 .conteudo {
@@ -32,7 +40,7 @@ body {
     background: #2a0a4a;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 5 px 20px rgb(160, 43, 175);
+ 
 }
 
 .lateral {
@@ -90,37 +98,9 @@ aside {
     z-index: 1000;
 }
 
-aside.open {
-    transform: translateX(0);
-}
 
-aside button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    border: none;
-    background: none;
-    color: #f0e6ff;
-    text-align: left;
-    font-size: 16px;
-    cursor: pointer;
-}
 
-aside button:hover {
-    background-color: #1e003a;
-}
 
-#menuToggle {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    background: none;
-    border: none;
-    color: #f0e6ff;
-    font-size: 30px;
-    cursor: pointer;
-    z-index: 1100;
-}
 
 .foto {
     display: flex;
@@ -191,59 +171,8 @@ aside button:hover {
     border-radius: 5px;
 }
 
-.menu-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: #510d96;
-    color: #f0e6ff;
-    padding: 10px 15px;
-    font-size: 24px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 1100;
-}
 
-.side-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 100vh;
-    background-color: #2a0a4a;
-    padding: 20px;
-    color: #f0e6ff;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    padding-top: 80px;
-}
 
-.side-menu.open {
-    transform: translateX(0);
-}
-
-.menu {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.menu-item {
-    background-color: #510d96;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background 0.3s;
-}
-
-.menu-item:hover {
-    background-color: #7a5af5;
-}
 
 .social {
     margin-top: 20px;
@@ -265,7 +194,7 @@ aside button:hover {
 .amigos li, .grupos li {
     background: #000000;
     color: rgb(255, 255, 255);
-    text-shadow: 0 3px 4px#ff00b3;
+ 
     padding: 5px;
     margin: 5px 0;
     border-radius: 5px;

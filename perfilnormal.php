@@ -1,11 +1,19 @@
+<?php
+session_start();
+$nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-    <link rel="stylesheet" href="css/perfil.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/perfil.css">
     <style>
         /* Área da foto de perfil - Versão melhorada */
         .profile-picture-container {
@@ -152,7 +160,10 @@
                     <input type="file" id="upload-foto" accept="image/*" hidden>
                 </div>
 
-                <div class="profile-name">Matheus</div>
+                <div class="profile-name">
+                <?php echo htmlspecialchars($_SESSION['usuario']); ?>
+                </div>
+
 
                 <!-- Botões de ação - Versão melhorada -->
                 <div class="photo-actions">
@@ -229,7 +240,9 @@
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <aside class="side-menu" id="sideMenu">
         <div class="menu">
-            <div class="menu-item">Biblioteca</div>
+            <div class="menu-item">
+                <a href="../SA-Cipher/endryo/biblioteca.html" class="play-btn">Biblioteca</a>
+            </div>
             <div class="menu-item">Capturas</div>
             <div class="menu-item">Minhas Reviews</div>
         </div>

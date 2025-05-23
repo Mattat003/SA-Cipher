@@ -6,9 +6,9 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Corpo com fundo em degradê escuro */
+/* Corpo da página */
 body {
-    background: linear-gradient(135deg, #0f0c29, #302b63);
+    background: linear-gradient(135deg, #12002b, #2c0367);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,50 +16,56 @@ body {
     padding: 20px;
 }
 
-/* Container do login */
-.login-container {
+/* Formulário */
+form {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 40px;
+    padding: 30px;
     border-radius: 15px;
-    text-align: center;
-    color: white;
-    width: 100%;
-    max-width: 400px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+    width: 100%;
+    max-width: 450px;
+    color: white;
 }
 
-/* Título */
-h1 {
+/* Fieldset */
+fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Título do formulário */
+legend {
     font-size: 28px;
+    font-weight: 600;
+    text-align: center;
     margin-bottom: 25px;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(to right, #ffffff, #e0c3fc);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-weight: 600;
 }
 
-/* Rótulos */
+/* Estilo dos labels */
 label {
     font-weight: 500;
-    display: block;
-    text-align: left;
-    margin-bottom: 8px;
     color: #e0c3fc;
+    margin-top: 5px;
     font-size: 14px;
 }
 
-/* Caixa de entrada */
+/* Campos de entrada */
 input {
     width: 100%;
     padding: 12px 15px;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 20px;
+    margin-top: 5px;
     background: rgba(255, 255, 255, 0.05);
     color: white;
     outline: none;
@@ -78,45 +84,67 @@ input::placeholder {
     opacity: 0.7;
 }
 
-/* Botão */
-button {
+/* Botão de envio */
+input[type="submit"] {
     background: linear-gradient(to right, #8639df, #6a0dad);
     color: white;
-    padding: 14px;
-    border: none;
-    width: 100%;
-    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    cursor: pointer;
     font-size: 16px;
     font-weight: 600;
-    cursor: pointer;
+    border-radius: 8px;
+    border: none;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(134, 57, 223, 0.3);
-    margin-top: 10px;
 }
 
-button:hover {
+input[type="submit"]:hover {
     background: linear-gradient(to right, #6a0dad, #5b009d);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(134, 57, 223, 0.4);
 }
 
-/* Link de voltar */
-.back-link {
-    display: block;
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container .material-symbols-outlined {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #cbbde2;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.password-container .material-symbols-outlined:hover {
+    color: white;
+}
+
+.password-container .material-symbols-outlined.active {
+    color: white;
+}
+
+/* Adicionar link para login */
+.login-link {
     text-align: center;
     margin-top: 20px;
     color: #cbbde2;
     font-size: 14px;
 }
 
-.back-link a {
+.login-link a {
     color: white;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
-.back-link a:hover {
+.login-link a:hover {
     color: #e0c3fc;
     text-decoration: underline;
 }
