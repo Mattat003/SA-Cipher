@@ -19,40 +19,43 @@ $nome_Cargo = $cargo['nome_cargo'];
 
 //DEFINIÇÃO DAS PERMISSÕES POR PERFIL
 $permissoes = [
-    1=> ["Cadastrar" =>["cadastro_usuario.php", "cadastro_perfil.php", "cadastro_cliente.php", 
-    "cadastro_fornecedor.php", "cadastro_produto.php", "cadastro_funcionario.php"], 
+    //ADM GERAL
+    1=> ["Cadastrar" =>["cadastrar_usuario.php", "cadastrar_cargo.php", "cadastrar_pub.php", 
+    "cadastrar_jogo.php", "cadastrar_dev.php"], 
 
-    "Buscar" =>["buscar_usuario.php", "buscar_perfil.php", "buscar_cliente.php", 
-    "buscar_fornecedor.php", "buscar_produto.php", "buscar_funcionario.php"], 
+    "Buscar" =>["buscar_usuario.php", "buscar_cargo.php", "buscar_pub.php", 
+    "buscar_jogo.php", "buscar_dev.php"], 
 
-    "Alterar" =>["alterar_usuario.php", "alterar_perfil.php", "alterar_cliente.php", 
-    "alterar_fornecedor.php", "alterar_produto.php", "alterar_funcionario.php"], 
+    "Alterar" =>["alterar_usuario.php", "alterar_cargo.php", "alterar_pub.php", 
+    "alterar_jogo.php", "alterar_dev.php"], 
 
-    "Excluir" =>["excluir_usuario.php", "excluir_perfil.php", "excluir_cliente.php", 
-    "excluir_fornecedor.php", "excluir_produto.php", "excluir_funcionario.php"]],
-
-
-    2=> ["Cadastrar" =>["cadastro_cliente.php"], 
-
-    "Buscar" =>["buscar_cliente.php", "buscar_fornecedor.php", "buscar_produto.php"], 
-
-    "Alterar" =>["alterar_cliente.php", "alterar_fornecedor.php"]], 
+    "Excluir" =>["excluir_usuario.php", "excluir_cargo.php", "excluir_pub.php", 
+    "excluir_jogo.php", "excluir_dev.php"]],
 
 
-    3=> ["Cadastrar" =>["cadastro_fornecedor.php", "cadastro_produto.php"], 
+    //FUNCIONARIO 
+    2=> ["Cadastrar" =>["cadastrar_usuario.php", "cadastrar_pub.php", "cadastrar_dev.php"], 
 
-    "Buscar" =>["buscar_cliente.php", "buscar_fornecedor.php", "buscar_produto.php"], 
+    "Buscar" =>["buscar_usuario.php", "buscar_jogo.php", "buscar_pub.php", "buscar_dev.php"], 
 
-    "Alterar" =>["alterar_fornecedor.php", "alterar_produto.php"], 
+    "Alterar" =>["alterar_usuario.php", "alterar_pub.php", "alterar_dev.php"],
 
-    "Excluir" =>["excluir_produto.php"]],
+    "Excluir" =>["excluir_usuario.php", "excluir_pub.php", "excluir_jogo.php", 
+    "excluir_dev.php"]], 
 
 
-    4=> ["Cadastrar" =>["cadastro_cliente.php"], 
+    //MODERADOR
+    3=> ["Cadastrar" =>["cadastrar_pub.php", "cadastrar_jogo.php", "cadastrar_dev.php"], 
 
-    "Buscar" =>["buscar_produto.php"], 
+    "Buscar" =>["buscar_pub.php", "buscar_jogo.php", "buscar_dev.php"], 
 
-    "Alterar" =>["alterar_cliente.php"]], 
+    "Alterar" =>["alterar_pub.php", "alterar_jogo.php", "alterar_dev.php"], 
+
+    "Excluir" =>["excluir_pub.php", "excluir_jogo.php", "excluir_dev.php"]],
+
+
+    //USUARIO NORMAL
+    4=> ["Buscar" =>["buscar_pub.php", "buscar_jogo.php", "buscar_dev.php"]], 
 
 ];
 //OBTENDO AS OPÇÕES DISPONIVEIS PARA O PERFIL LOGADO
