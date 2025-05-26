@@ -1,5 +1,5 @@
 <?php
-require 'config.php';
+require 'conexao.php';
 
 // Destroi todas as informações da sessão
 $_SESSION = array();
