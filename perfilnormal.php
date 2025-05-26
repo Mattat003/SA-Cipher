@@ -217,23 +217,8 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
         <!-- Lateral -->
         <div class="lateral">
             <div class="amigos">
-              <h3>Amizades:</h3>
-              <ul>
-                <li>Amanda 
-                <button type="button" class="btn btn-primary" id="liveToastBtn"> Solicitar amizade</button></li>
-                <li>Endryo <a href = "chat.php"><button>Conversar</button></a></li>
-                <li>Neon <button>Conversar</button></li>
-                <li>Pamella <button>Conversar</button></li>
-              </ul>
-            </div>
-            <div class="grupos">
-              <h3>Grupos</h3>
-              <ul>
-                <li>Time RPG <button>Entrar</button></li>
-                <li>Senas/Senai <button>Entrar</button></li>
-                <li>Rogério Fan Club <button>Entrar</button></li>
-              </ul>
-            </div>
+              <h3><a href = "chat.php">Chat</a></h3>
+             
         </div>
     </div>
 
