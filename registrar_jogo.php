@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'config.php';
+require_once 'conexao.php';
 
 if (!isset($_SESSION['pk_usuario']) || !isset($_GET['jogo_id']) || !isset($_GET['redirect'])) {
     header('Location: login.php');
@@ -28,4 +28,4 @@ try {
 // Redireciona para o jogo
 header("Location: " . $redirect_url);
 exit;
-?>  
+?>
