@@ -51,7 +51,7 @@ try {
     // Se ocorrer qualquer erro (uma PDOException) durante a tentativa de conexão no bloco 'try',
     // o código dentro deste bloco 'catch' será executado.
 
-    // $e é um objeto que contém informações sobre o erro que ocorreu.
+    // $e é um objeto que contém informações sobre o erro que ocorreu.a
     // $e->getMessage() retorna uma mensagem descrevendo o erro.
 
     // die() interrompe a execução do script e exibe uma mensagem.
