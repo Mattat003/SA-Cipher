@@ -3,121 +3,120 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Corpo com fundo em degradê escuro */
 body {
-    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    background: linear-gradient(135deg, #0f0c29, #302b63);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 /* Container do login */
 .login-container {
-    background: linear-gradient(to right, #6a0dad, #5b009d);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 40px;
     border-radius: 15px;
     text-align: center;
     color: white;
-    width: 350px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
 }
 
 /* Título */
-h2 {
+h1 {
     font-size: 28px;
-    margin-bottom: 20px;
-    font-family: 'Georgia', serif;
-    color: #f2f2f2;
+    margin-bottom: 25px;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #ffffff, #e0c3fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600;
 }
 
 /* Rótulos */
 label {
-    font-weight: bold;
+    font-weight: 500;
     display: block;
     text-align: left;
-    margin-bottom: 5px;
-    color: #cbbde2;
-    font-family: Arial, sans-serif;
+    margin-bottom: 8px;
+    color: #e0c3fc;
+    font-size: 14px;
 }
 
 /* Caixa de entrada */
 input {
     width: 100%;
-    padding: 10px 40px 10px 10px; /* espaço para o ícone */
-    border-radius: 10px;
-    border: none;
-    margin-bottom: 15px;
-    background: linear-gradient(145deg, #3b007b, #6a0dad);
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
     color: white;
     outline: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: #9a66df;
+    box-shadow: 0 0 0 3px rgba(154, 102, 223, 0.2);
 }
 
 /* Placeholder */
 input::placeholder {
-    color: #a8a8b2;
-}
-
-/* Link de redefinição de senha */
-a {
-    display: block;
-    text-align: left;
     color: #cbbde2;
-    text-decoration: none;
-    font-size: 14px;
-    margin-bottom: 15px;
-    font-family: 'Georgia', serif; /* mesma fonte do título */
-}
-
-/* Hover no link */
-a:hover {
-    text-decoration: underline;
+    opacity: 0.7;
 }
 
 /* Botão */
 button {
-    background: linear-gradient(to right, #5b009d, #4c0089);
+    background: linear-gradient(to right, #8639df, #6a0dad);
     color: white;
-    padding: 12px;
+    padding: 14px;
     border: none;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 8px;
     font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(134, 57, 223, 0.3);
+    margin-top: 10px;
 }
 
-/* Hover do botão */
 button:hover {
-    background: linear-gradient(to right, #490073, #5b009d);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8);
+    background: linear-gradient(to right, #6a0dad, #5b009d);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(134, 57, 223, 0.4);
 }
 
-/* Container da senha com ícone */
-.password-container {
-    position: relative;
-    width: 100%;
-}
-
-.password-container input {
-    padding-right: 40px; /* garante espaço pro ícone */
-}
-
-.password-container .material-symbols-outlined {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
+/* Link de voltar */
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
     color: #cbbde2;
-    font-size: 20px;
-    pointer-events: auto;
+    font-size: 14px;
 }
 
-.password-container .material-symbols-outlined.active {
+.back-link a {
     color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.back-link a:hover {
+    color: #e0c3fc;
+    text-decoration: underline;
 }

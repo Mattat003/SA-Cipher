@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once 'conexao.php'; 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['pk_usuario'])) {
     header('Location: login.php');
@@ -10,7 +10,6 @@ if (!isset($_SESSION['pk_usuario'])) {
 // Pega o nome do usuário da sessão
 $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -55,10 +54,12 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
     </div>
 
     <div class="perfil">
-        <a href="../SA-Cipher/perfilnormal.html">
+        <a href="perfilnormal.php">
             <span class="material-symbols-outlined">account_circle</span>
         </a>
     </div>
+
+    
 </header>
 
 <!-- Conteúdo da página (carrossel, biblioteca, etc) -->
@@ -135,42 +136,42 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
     <div class="game-tile">
         <img src="endryo/img/game1.jpg" alt="Jogo 1" />
         <h3>Grand Theft Auto 6</h3>
-        <a href="../SA-Cipher/endryo/Jogo-do-Mario-main/index.html" class="play-btn">Jogar</a>
+        <a href="endryo/Jogo-do-Mario-main/index.html" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
         <img src="endryo/img/game2.jpg" alt="Jogo 2" />
         <h3>Jujutsu Kaisen Game Memory</h3>
-        <a href="../SA-Cipher/endryo/JJk-Card-Game-main/index.html" class="play-btn">Jogar</a>
+        <a href="endryo/JJk-Card-Game-main/index.html" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
         <img src="endryo/img/game3.jpg" alt="Jogo 3" />
         <h3>Metroid Prime 4: Beyond</h3>
-        <button class="play-btn">Jogar</button>
+        <a href="#" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
         <img src="endryo/img/game4.jpg" alt="Jogo 4" />
         <h3>Pokémon Legends: Z-A</h3>
-        <button class="play-btn">Jogar</button>
+        <a href="#" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
         <img src="endryo/img/game5.jpg" alt="Jogo 5" />
         <h3>Death Stranding 2</h3>
-        <button class="play-btn">Jogar</button>
+        <a href="#" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
         <img src="endryo/img/game6.jpg" alt="Jogo 6" />
         <h3>Elden Ring: Nightreign</h3>
-        <button class="play-btn">Jogar</button>
+        <a href="#" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
         <img src="endryo/img/game7.jpg" alt="Jogo 7" />
         <h3>Final Fantasy VII Rebirth</h3>
-        <button class="play-btn">Jogar</button>
+        <a href="#" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
         <img src="endryo/img/game8.jpg" alt="Jogo 8" />
         <h3>League of Legends</h3>
-        <button class="play-btn">Jogar</button>
+        <a href="#" class="play-btn">Jogar</a>
     </div>
 </div>
 
