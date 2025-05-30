@@ -1,67 +1,15 @@
 <?php
 session_start();
-require_once 'conexao.php';
-
+require_once 'conexao.php'; 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['pk_usuario'])) {
     header('Location: login.php');
     exit();
 }
 
-//OBTENDO O NOME DO PERFIL DO USUARIO LOGADO
-$pk_cargo = $_SESSION['cargo'];
-$sqlCargo = "SELECT nome_cargo FROM cargo WHERE pk_cargo = :pk_cargo";
-$stmtCargo = $pdo->prepare($sqlPerfil);
-$stmtCargo->bindParam(':pk_cargo', $pk_cargo);
-$stmtCargo->execute();
-$cargo = $stmtCargo->fetch(PDO::FETCH_ASSOC);
-$nome_Cargo = $cargo['nome_cargo'];
-
-//DEFINIÇÃO DAS PERMISSÕES POR PERFIL
-$permissoes = [
-    //ADM GERAL
-    1=> ["Cadastrar" =>["cadastrar_usuario.php", "cadastrar_cargo.php", "cadastrar_pub.php", 
-    "cadastrar_jogo.php", "cadastrar_dev.php"], 
-
-    "Buscar" =>["buscar_usuario.php", "buscar_cargo.php", "buscar_pub.php", 
-    "buscar_jogo.php", "buscar_dev.php"], 
-
-    "Alterar" =>["alterar_usuario.php", "alterar_cargo.php", "alterar_pub.php", 
-    "alterar_jogo.php", "alterar_dev.php"], 
-
-    "Excluir" =>["excluir_usuario.php", "excluir_cargo.php", "excluir_pub.php", 
-    "excluir_jogo.php", "excluir_dev.php"]],
-
-
-    //FUNCIONARIO 
-    2=> ["Cadastrar" =>["cadastrar_usuario.php", "cadastrar_pub.php", "cadastrar_dev.php"], 
-
-    "Buscar" =>["buscar_usuario.php", "buscar_jogo.php", "buscar_pub.php", "buscar_dev.php"], 
-
-    "Alterar" =>["alterar_usuario.php", "alterar_pub.php", "alterar_dev.php"],
-
-    "Excluir" =>["excluir_usuario.php", "excluir_pub.php", "excluir_jogo.php", 
-    "excluir_dev.php"]], 
-
-
-    //MODERADOR
-    3=> ["Cadastrar" =>["cadastrar_pub.php", "cadastrar_jogo.php", "cadastrar_dev.php"], 
-
-    "Buscar" =>["buscar_pub.php", "buscar_jogo.php", "buscar_dev.php"], 
-
-    "Alterar" =>["alterar_pub.php", "alterar_jogo.php", "alterar_dev.php"], 
-
-    "Excluir" =>["excluir_pub.php", "excluir_jogo.php", "excluir_dev.php"]],
-
-
-    //USUARIO NORMAL
-    4=> ["Buscar" =>["buscar_pub.php", "buscar_jogo.php", "buscar_dev.php"]], 
-
-];
-//OBTENDO AS OPÇÕES DISPONIVEIS PARA O PERFIL LOGADO
-$opcoes_menu = $permissoes[$id_perfil];
+// Pega o nome do usuário da sessão
+$nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
