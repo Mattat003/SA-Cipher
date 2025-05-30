@@ -66,6 +66,16 @@ CREATE TABLE mensagens (
     FOREIGN KEY (de_id) REFERENCES usuario(pk_usuario),
     FOREIGN KEY (para_id) REFERENCES usuario(pk_usuario)
 );
+	CREATE TABLE pedidos_amizade (
+		id INT AUTO_INCREMENT PRIMARY KEY,
+		de_id INT NOT NULL,          -- usuário que enviou o pedido
+		para_id INT NOT NULL,        -- usuário que receberá o pedido
+		status ENUM('pendente', 'aceito', 'recusado') NOT NULL DEFAULT 'pendente',
+		data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		FOREIGN KEY (de_id) REFERENCES usuario(pk_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+		FOREIGN KEY (para_id) REFERENCES usuario(pk_usuario) ON DELETE CASCADE ON UPDATE CASCADE
+	);
+
 
 
 
