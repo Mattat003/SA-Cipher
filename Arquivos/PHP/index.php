@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once 'conexao.php'; 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['pk_usuario'])) {
     header('Location: login.php');
@@ -10,7 +10,6 @@ if (!isset($_SESSION['pk_usuario'])) {
 // Pega o nome do usuário da sessão
 $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
