@@ -24,8 +24,8 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     
     <!-- Seu CSS personalizado -->
-    <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet" href="endryo/biblioteca.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../endryo/biblioteca.css" />
     
     <!-- Fonte Motiva Sans -->
     <link href="https://fonts.cdnfonts.com/css/motiva-sans" rel="stylesheet" />
@@ -38,7 +38,7 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 <header>
     <div class="logo">
         <h1>CIPHER</h1>
-        <img src="img/capybara.png" alt="Logo Capivara" />
+        <img src="../img/capybara.png" alt="Logo Capivara" />
     </div>
 
     <?php if ($nomeUsuario): ?>
@@ -82,35 +82,35 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
         <!-- Slides -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="img/tlou.jpg" class="d-block w-100" alt="Imagem 1" />
+                <img src="../img/tlou.jpg" class="d-block w-100" alt="Imagem 1" />
                 <div class="carousel-caption d-none d-md-block">
                     <h5>The Last of Us 2</h5>
                     <p>Uma jornada emocionante de sobrevivência.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/red dead.jpg" class="d-block w-100" alt="Imagem 2" />
+                <img src="../img/red dead.jpg" class="d-block w-100" alt="Imagem 2" />
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Red Dead Redemption 2</h5>
                     <p>Explore o Velho Oeste e viva uma história épica.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/minecraft.jpeg" class="d-block w-100" alt="Imagem 3" />
+                <img src="../img/minecraft.jpeg" class="d-block w-100" alt="Imagem 3" />
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Minecraft</h5>
                     <p>Construa, explore e crie sua própria aventura.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/elden ring.jpg" class="d-block w-100" alt="Imagem 4" />
+                <img src="../img/elden ring.jpg" class="d-block w-100" alt="Imagem 4" />
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Elden Ring</h5>
                     <p>Levante-se e seja guiado pela graça para portar o poder do Anel Prístino e se torne um Lorde Prístino nas Terras Intermédias.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="img/subnautica.jpg" class="d-block w-100" alt="Imagem 5" />
+                <img src="../img/subnautica.jpg" class="d-block w-100" alt="Imagem 5" />
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Subnáutica</h5>
                     <p>Mergulhe nas profundezas de um mundo subaquático alienígena repleto de maravilhas e perigos.</p>
@@ -134,42 +134,42 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 
 <div class="library">
     <div class="game-tile">
-        <img src="endryo/img/game1.jpg" alt="Jogo 1" />
+        <img src="../endryo/img/game1.jpg" alt="Jogo 1" />
         <h3>Grand Theft Auto 6</h3>
-        <a href="endryo/Jogo-do-Mario-main/index.html" class="play-btn">Jogar</a>
+        <a href="../endryo/Jogo-do-Mario-main/index.html" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="endryo/img/game2.jpg" alt="Jogo 2" />
+        <img src="../endryo/img/game2.jpg" alt="Jogo 2" />
         <h3>Jujutsu Kaisen Game Memory</h3>
-        <a href="endryo/JJk-Card-Game-main/index.html" class="play-btn">Jogar</a>
+        <a href="../endryo/JJk-Card-Game-main/index.html" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="endryo/img/game3.jpg" alt="Jogo 3" />
+        <img src="../endryo/img/game3.jpg" alt="Jogo 3" />
         <h3>Metroid Prime 4: Beyond</h3>
         <a href="#" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="endryo/img/game4.jpg" alt="Jogo 4" />
+        <img src="../endryo/img/game4.jpg" alt="Jogo 4" />
         <h3>Pokémon Legends: Z-A</h3>
         <a href="#" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="endryo/img/game5.jpg" alt="Jogo 5" />
+        <img src="../endryo/img/game5.jpg" alt="Jogo 5" />
         <h3>Death Stranding 2</h3>
         <a href="#" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="endryo/img/game6.jpg" alt="Jogo 6" />
+        <img src="../endryo/img/game6.jpg" alt="Jogo 6" />
         <h3>Elden Ring: Nightreign</h3>
         <a href="#" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="endryo/img/game7.jpg" alt="Jogo 7" />
+        <img src="../endryo/img/game7.jpg" alt="Jogo 7" />
         <h3>Final Fantasy VII Rebirth</h3>
         <a href="#" class="play-btn">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="endryo/img/game8.jpg" alt="Jogo 8" />
+        <img src="../endryo/img/game8.jpg" alt="Jogo 8" />
         <h3>League of Legends</h3>
         <a href="#" class="play-btn">Jogar</a>
     </div>
