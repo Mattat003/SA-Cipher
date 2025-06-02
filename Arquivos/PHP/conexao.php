@@ -4,7 +4,7 @@
     // $host: Define o endereço do servidor onde o banco de dados está hospedado.
     // 'localhost' significa que o banco de dados está rodando na mesma máquina
     // que o servidor web (onde o PHP está sendo executado).
-    $host = 'localhost';
+    $host = 'localhost:3306';
 
     // $dbname: Define o nome do banco de dados ao qual queremos nos conectar.
     // Neste caso, o banco de dados se chama 'senai_login'.
