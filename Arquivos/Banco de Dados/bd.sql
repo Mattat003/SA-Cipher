@@ -334,4 +334,5 @@ select * from plataforma;
 select * from publicadora;
 select * from tema;
 select * from usuario;
+select * from mensagens;
 /*=================*
