@@ -2,10 +2,17 @@
 session_start();
 require 'conexao.php';
 
+if (isset($_GET['sair']) && $_GET['sair'] === 'true') {
+    session_destroy();
+    header('Location: index.php');
+    exit();
+}
+
 if (!isset($_SESSION['pk_usuario'])) {
     header('Location: login.php');
     exit();
 }
+
 
 $usuario_id = $_SESSION['pk_usuario'];
 $usuario_nome = $_SESSION['usuario'];
@@ -238,7 +245,8 @@ $amigos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <a href="adicionar_amigo.php">+ Adicionar amigo</a>
     <a href="pedidos_recebidos.php" style="margin-top: 10px;">Ver pedidos de amizade</a>
-    <a href="logout.php" style="margin-top: 10px;">Sair</a>
+    <a href="index.php" style="margin-top: 10px;">Sair</a>
+
 </div>
 
 <div id="chat-container">
