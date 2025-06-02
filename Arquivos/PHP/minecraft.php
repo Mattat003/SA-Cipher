@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft</title>
-    <link rel="website icon" type="png" href="img/capybara.png">
-    <link rel="stylesheet" href="css/jogos.css">
+    <link rel="website icon" type="png" href="../img/capybara.png">
+    <link rel="stylesheet" href="../css/jogos.css">
 </head>
 <body>
     <header>Minecraft</header>
     <div class="game-container">
         <div class="game-image">
-            <img src="img/mine.avif">
+            <img src="../img/mine.avif">
         </div>
         <div class="game-info">
         <h2> Descrição </h2>
@@ -24,8 +24,8 @@
 </div>
 
 <div class="video-container">
-    <video autoplay muted loop playsinline poster="img/poster.jpg">
-        <source src="img/Spring to Life ｜ Official Minecraft Trailer.mp4   " type="video/mp4">
+    <video autoplay muted loop playsinline poster="../img/poster.jpg">
+        <source src="../img/Spring to Life ｜ Official Minecraft Trailer.mp4   " type="video/mp4">
         Seu navegador não suporta a reprodução de vídeo.
     </video>
 </div>

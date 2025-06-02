@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Alterar Senha</title>
-    <link rel="stylesheet" href="css/alterar_senha.css"> <!-- se tiver -->
+    <link rel="stylesheet" href="../css/alterar_senha.css"> <!-- se tiver -->
 </head>
 <body>
     <div class="container">

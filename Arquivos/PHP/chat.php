@@ -245,7 +245,7 @@ $amigos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <a href="adicionar_amigo.php">+ Adicionar amigo</a>
     <a href="pedidos_recebidos.php" style="margin-top: 10px;">Ver pedidos de amizade</a>
-    <a href="index.php" style="margin-top: 10px;">Sair</a>
+    <a href="perfilnormal.php" style="margin-top: 10px;">Voltar</a>
 
 </div>
 

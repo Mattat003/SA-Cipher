@@ -75,6 +75,12 @@ CREATE TABLE mensagens (
 		FOREIGN KEY (de_id) REFERENCES usuario(pk_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
 		FOREIGN KEY (para_id) REFERENCES usuario(pk_usuario) ON DELETE CASCADE ON UPDATE CASCADE
 	);
+CREATE TABLE historico_jogos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(100) NOT NULL,
+    nome_jogo VARCHAR(100) NOT NULL,
+    hora_entrada DATETIME NOT NULL
+);
 
 
 
@@ -335,4 +341,5 @@ select * from publicadora;
 select * from tema;
 select * from usuario;
 select * from mensagens;
+select * from historico_jogos;
 /*=================*

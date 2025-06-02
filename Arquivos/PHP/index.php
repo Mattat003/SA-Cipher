@@ -25,13 +25,13 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
     
     <!-- Seu CSS personalizado -->
     <link rel="stylesheet" href="../css/index.css" />
-    <link rel="stylesheet" href="../endryo/biblioteca.css" />
+    <link rel="stylesheet" href="../css/biblioteca.css" />
     
     <!-- Fonte Motiva Sans -->
     <link href="https://fonts.cdnfonts.com/css/motiva-sans" rel="stylesheet" />
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="img/capybara.png" />
+    <link rel="icon" type="image/png" href="../img/capybara.png" />
 </head>
 <body>
 
@@ -134,63 +134,121 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 
 <div class="library">
     <div class="game-tile">
-        <img src="../endryo/img/game1.jpg" alt="Jogo 1" />
+        <img src="game1.jpg" alt="Jogo 1" />
         <h3>Grand Theft Auto 6</h3>
-        <a href="../endryo/Jogo-do-Mario-main/index.html" class="play-btn">Jogar</a>
+        <a href="#" onclick="registrarEEntrar('Grand Theft Auto 6', 'URL'); return false;">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="../endryo/img/game2.jpg" alt="Jogo 2" />
+        <img src="../img/game2.jpg" alt="Jogo 2" />
         <h3>Jujutsu Kaisen Game Memory</h3>
-        <a href="../endryo/JJk-Card-Game-main/index.html" class="play-btn">Jogar</a>
+        <a href="#" onclick="registrarEEntrar('Jujutsu Kaisen Game Memory', 'URL'); return false;">Jogar</a>
     </div>
+   
+
     <div class="game-tile">
-        <img src="../endryo/img/game3.jpg" alt="Jogo 3" />
+        <img src="../img/game3.jpg" alt="Jogo 3" />
         <h3>Metroid Prime 4: Beyond</h3>
-        <a href="#" class="play-btn">Jogar</a>
+        <a href="#" onclick="registrarEEntrar('Metroid Prime 4: Beyond', 'URL'); return false;">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="../endryo/img/game4.jpg" alt="Jogo 4" />
+        <img src="../img/game4.jpg" alt="Jogo 4" />
         <h3>Pokémon Legends: Z-A</h3>
-        <a href="#" class="play-btn">Jogar</a>
+        <a href="#" onclick="registrarEEntrar('Pokémon Legends: Z-A', 'URL'); return false;">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="../endryo/img/game5.jpg" alt="Jogo 5" />
+        <img src="../img/game5.jpg" alt="Jogo 5" />
         <h3>Death Stranding 2</h3>
-        <a href="#" class="play-btn">Jogar</a>
+        <a href="#" onclick="registrarEEntrar('Death Stranding 2', 'URL'); return false;">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="../endryo/img/game6.jpg" alt="Jogo 6" />
+        <img src="../img/game6.jpg" alt="Jogo 6" />
         <h3>Elden Ring: Nightreign</h3>
-        <a href="#" class="play-btn">Jogar</a>
+        <a href="#" onclick="registrarEEntrar('Elden Ring: Nightreign', 'URL'); return false;">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="../endryo/img/game7.jpg" alt="Jogo 7" />
+        <img src="../img/game7.jpg" alt="Jogo 7" />
         <h3>Final Fantasy VII Rebirth</h3>
-        <a href="#" class="play-btn">Jogar</a>
+        <a href="#" onclick="registrarEEntrar('Final Fantasy VII Rebirth', 'URL'); return false;">Jogar</a>
     </div>
     <div class="game-tile">
-        <img src="../endryo/img/game8.jpg" alt="Jogo 8" />
+        <img src="../img/game8.jpg" alt="Jogo 8" />
         <h3>League of Legends</h3>
-        <a href="#" class="play-btn">Jogar</a>
+        <a href="#" onclick="registrarEEntrar('League of Legends', 'URL'); return false;">Jogar</a>
     </div>
 </div>
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/index.js"></script>
 <script>
-    window.addEventListener("pageshow", () => {
-        document.getElementById("searchInput").value = "";
-        const results = document.getElementById("results");
-        results.innerHTML = "";
-        results.style.display = "none";
+   document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    const resultsContainer = document.getElementById("results");
+
+    // Itens de exemplo para busca
+    const items = {
+        "Cyberpunk 2077": "cyberpunk.php",
+        "The Last of Us": "tlou.php",
+        "Red Dead Redemption 2": "rdr.php",
+        "Minecraft": "minecraft.php",
+        "God of War": "gow.php",
+        "Hollow Knight": "hollowknight.php",
+        "FIFA 22": "fifa.php"
+    };
+
+    // Limpar o campo de busca quando a página for carregada
+    window.addEventListener('load', function() {
+        searchInput.value = '';  // Limpa o campo de busca
+        resultsContainer.innerHTML = '';  // Limpa qualquer resultado anterior
+        resultsContainer.style.display = "none";  // Esconde a lista de resultados
     });
 
-    function toggleMenu() {
-        const menu = document.getElementById("sideMenu");
-        menu.classList.toggle("open");
-    }
+    // Função para tratar o input de busca
+    searchInput.addEventListener("input", () => {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        resultsContainer.innerHTML = "";  // Limpa os resultados anteriores
+
+        if (searchTerm === "") {
+            resultsContainer.style.display = "none";  // Esconde resultados quando não há texto
+            return;
+        }
+
+        const filteredItems = Object.keys(items).filter(item =>
+            item.toLowerCase().includes(searchTerm)
+        );
+
+        if (filteredItems.length > 0) {
+            filteredItems.forEach(item => {
+                const link = document.createElement("a");
+                link.className = "result-item";
+                link.textContent = item;
+                link.href = items[item];  // Vai para a página correspondente
+                resultsContainer.appendChild(link);
+            });
+        } else {
+            const noResult = document.createElement("div");
+            noResult.className = "result-item";
+            noResult.textContent = "Nenhum resultado encontrado.";
+            resultsContainer.appendChild(noResult);
+        }
+
+        resultsContainer.style.display = "block";  // Exibe os resultados
+    });
+});
+
 </script>
+<script>
+    function registrarEEntrar(nomeJogo, urlDestino) {
+    fetch('registrar_entrada.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'nome_jogo=' + encodeURIComponent(nomeJogo)
+    })
+    .then(response => response.json())
+    .then(data => {
+        window.location.href = urlDestino;
+    });
+}
+    </script>
 
 </body>
 </html>

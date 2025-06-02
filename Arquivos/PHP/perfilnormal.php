@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'conexao.php';
+echo "<!-- USUARIO DA SESSAO: " . $_SESSION['usuario'] . " -->";
 $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
 ?>
 
@@ -14,6 +15,7 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="../css/perfil.css">
     <style>
         /* Área da foto de perfil - Versão melhorada */
@@ -187,29 +189,13 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
                 </div>
 
                 <!-- Resto do conteúdo -->
-                <h3>Atividades Recentes</h3>
-                <div class="jogo">
-                    <img src="img/dgslife.jpg" alt="Dogs Life">
-                    <div class="info">
-                        <h4>Dogs Life</h4>
-                        <p>Horas Jogadas</p>
-                        <div class="barra">
-                            <div class="progresso" style="width: 30%;"></div>
-                        </div>
-                        <p>Conquistas 30%</p>
-                    </div>
-                </div>
+              
 
-                <div class="jogo">
-                    <img src="img/BaldS.png" alt="Bald Simulator">
-                    <div class="info">
-                        <h4>Bald Simulator</h4>
-                        <p>Horas Jogadas</p>
-                        <div class="barra">
-                            <div class="progresso" style="width: 95%;"></div>
-                        </div>
-                        <p>Conquistas 95%</p>
-                    </div>
+               
+         <!-- NOVA SEÇÃO: Histórico de Jogos -->
+         <h3 style="margin-top:30px;">Histórico de Jogos</h3>
+                <div id="historico-jogos">
+                  <p>Carregando histórico...</p>
                 </div>
             </div>
         </div>
@@ -217,105 +203,120 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
         <!-- Lateral -->
         <div class="lateral">
             <div class="amigos">
-              <h3><a href = "chat.php">Chat</a></h3>
-             
-        </div>
-    </div>
-
-    <!-- Menu lateral -->
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <aside class="side-menu" id="sideMenu">
-        <div class="menu">
-            <div class="menu-item">
-                <a href="../SA-Cipher/endryo/biblioteca.html" class="play-btn">Biblioteca</a>
+                <h3>
+                <a href="chat.php">
+                    <i class="bi bi-chat-dots"></i>
+                    Chat
+                </a>
+                </h3>
+                <span style="color:#f0e6ff; font-size:0.97rem; margin-top:8px; display:block; text-align:center;">
+                Converse agora com seus amigos!
+                </span>
             </div>
-            <div class="menu-item">Capturas</div>
-            <div class="menu-item">Minhas Reviews</div>
-        </div>
-    </aside>
-
-    <!-- Toast -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">Notificação</strong>
-                <small>Agora</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-            <div class="toast-body">
-                Solicitação enviada!
-            </div>
-        </div>
-    </div>
-
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        const uploadFoto = document.getElementById('upload-foto');
-        const imagemPerfil = document.getElementById('imagem-perfil');
-        const trocarFoto = document.getElementById('trocar-foto');
-        const removerFoto = document.getElementById('remover-foto');
-        const tirarFoto = document.getElementById('tirar-foto');
-        const camera = document.getElementById('camera');
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        const fotoPadrao = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+<script>
+    // --- FOTO DE PERFIL ---
+    const uploadFoto = document.getElementById('upload-foto');
+    const imagemPerfil = document.getElementById('imagem-perfil');
+    const trocarFoto = document.getElementById('trocar-foto');
+    const removerFoto = document.getElementById('remover-foto');
+    const tirarFoto = document.getElementById('tirar-foto');
+    const camera = document.getElementById('camera');
 
-        trocarFoto.addEventListener('click', () => {
-            uploadFoto.click();
-        });
+    const fotoPadrao = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
 
-        uploadFoto.addEventListener('change', function () {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    imagemPerfil.src = e.target.result;
-                }
-                reader.readAsDataURL(file);
+    trocarFoto.addEventListener('click', () => {
+        uploadFoto.click();
+    });
+
+    uploadFoto.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagemPerfil.src = e.target.result;
             }
-        });
-
-        removerFoto.addEventListener('click', () => {
-            imagemPerfil.src = fotoPadrao;
-            uploadFoto.value = "";
-        });
-
-        tirarFoto.addEventListener('click', async () => {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                camera.srcObject = stream;
-                camera.style.display = 'block';
-
-                setTimeout(() => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = camera.videoWidth;
-                    canvas.height = camera.videoHeight;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(camera, 0, 0, canvas.width, canvas.height);
-
-                    imagemPerfil.src = canvas.toDataURL('image/png');
-
-                    stream.getTracks().forEach(track => track.stop());
-                    camera.style.display = 'none';
-                }, 2000);
-            } catch (error) {
-                alert('Erro ao acessar a câmera: ' + error.message);
-            }
-        });
-
-        const toastTrigger = document.getElementById('liveToastBtn');
-        const toastLiveExample = document.getElementById('liveToast');
-
-        if (toastTrigger) {
-            toastTrigger.addEventListener('click', () => {
-                const toast = new bootstrap.Toast(toastLiveExample);
-                toast.show();
-            });
+            reader.readAsDataURL(file);
         }
-    </script>
-    </body>
+    });
+
+    removerFoto.addEventListener('click', () => {
+        imagemPerfil.src = fotoPadrao;
+        uploadFoto.value = "";
+    });
+
+    tirarFoto.addEventListener('click', async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            camera.srcObject = stream;
+            camera.style.display = 'block';
+
+            setTimeout(() => {
+                const canvas = document.createElement('canvas');
+                canvas.width = camera.videoWidth;
+                canvas.height = camera.videoHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(camera, 0, 0, canvas.width, canvas.height);
+
+                imagemPerfil.src = canvas.toDataURL('image/png');
+
+                stream.getTracks().forEach(track => track.stop());
+                camera.style.display = 'none';
+            }, 2000);
+        } catch (error) {
+            alert('Erro ao acessar a câmera: ' + error.message);
+        }
+    });
+
+    // --- HISTÓRICO DE JOGOS ---
+    function carregarHistorico() {
+        fetch('listar_historico.php')
+            .then(r => r.json())
+            .then(historico => {
+                let html = '';
+                if (historico.length === 0) {
+                    html = '<p>Nenhum histórico encontrado.</p>';
+                } else {
+                    historico.forEach(item => {
+                        const data = new Date(item.hora_entrada.replace(' ', 'T') + '-03:00'); // Horário de Brasília
+                        const dataFormatada = data.toLocaleString('pt-BR');
+                        html += `
+                        <div class="jogo">
+        
+                            <div class="info">
+                                <h4>${item.nome_jogo}</h4>
+                                <p style="margin-bottom:0; color:#bbb; font-size:0.97rem;">
+                                    Jogou em: <span style="color:#ddd;">${dataFormatada}</span>
+                                </p>
+                            </div>
+                        </div>`;
+                    });
+                }
+                document.getElementById('historico-jogos').innerHTML = html;
+            })
+            .catch(() => {
+                document.getElementById('historico-jogos').innerHTML = '<p>Erro ao carregar histórico.</p>';
+            });
+    }
+    // Chama a função ao abrir a página do perfil
+    carregarHistorico();
+
+    // Toast (opcional, não interfere no histórico)
+    const toastTrigger = document.getElementById('liveToastBtn');
+    const toastLiveExample = document.getElementById('liveToast');
+    if (toastTrigger && toastLiveExample) {
+        toastTrigger.addEventListener('click', () => {
+            const toast = new bootstrap.Toast(toastLiveExample);
+            toast.show();
+        });
+    }
+</script>
+</body>
 </html>

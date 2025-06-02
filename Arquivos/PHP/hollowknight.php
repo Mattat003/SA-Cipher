@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hollow Knight</title>
-    <link rel="website icon" type="png" href="img/capybara.png">
-    <link rel="stylesheet" href="css/jogos.css">
+    <link rel="website icon" type="png" href="../img/capybara.png">
+    <link rel="stylesheet" href="../css/jogos.css">
 </head>
 <body>
     <header> Hollow Knight </header>
     <div class="game-container">
         <div class="game-image">
-            <img src="img/hollowKnigth.avif">
+            <img src="../img/hollowKnigth.avif">
         </div>
     <div class="game-info">
     <!-- Descrição-->
@@ -24,8 +24,8 @@
 </div>
 
 <div class="video-container">
-    <video autoplay muted loop playsinline poster="img/poster.jpg">
-        <source src="img/Hollow Knight - Release Trailer.mp4  " type="video/mp4">
+    <video autoplay muted loop playsinline poster="../img/poster.jpg">
+        <source src="../img/Hollow Knight - Release Trailer.mp4  " type="video/mp4">
         Seu navegador não suporta a reprodução de vídeo.
     </video>
 </div>
