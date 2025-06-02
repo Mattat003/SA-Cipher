@@ -186,12 +186,8 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
                 <div class="camera-controls">
                     <button class="capture-btn" id="capturar-foto">Capturar</button>
                     <button class="capture-btn" id="cancelar-camera" style="background: #dc3545;">Cancelar</button>
-                </div>
-
-                <!-- Resto do conteúdo -->
+             </div>
               
-
-               
          <!-- NOVA SEÇÃO: Histórico de Jogos -->
          <h3 style="margin-top:30px;">Histórico de Jogos</h3>
                 <div id="historico-jogos">
@@ -199,21 +195,33 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
                 </div>
             </div>
         </div>
-
+        
         <!-- Lateral -->
         <div class="lateral">
-            <div class="amigos">
-                <h3>
-                <a href="chat.php">
-                    <i class="bi bi-chat-dots"></i>
-                    Chat
+    <div class="amigos">
+        <h3>
+            <a href="chat.php">
+                <i class="bi bi-chat-dots"></i>
+                Chat
+            </a>
+        </h3>
+        <span style="color:#f0e6ff; font-size:0.97rem; margin-top:8px; display:block; text-align:center;">
+            Converse agora com seus amigos!
+        </span>
+   
+   
+        <div class="sair">
+            <h3>
+                <a href="logout.php">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sair
                 </a>
-                </h3>
-                <span style="color:#f0e6ff; font-size:0.97rem; margin-top:8px; display:block; text-align:center;">
-                Converse agora com seus amigos!
-                </span>
+            </h3>
             </div>
-            </div>
+        </div>
+    </div>
+</div>
+           
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
