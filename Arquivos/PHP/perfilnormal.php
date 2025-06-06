@@ -154,6 +154,7 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
 
     <div class="paginaperfil">
         <div class="conteudo">
+           
             <div class="atividades">
 
                 <!-- Área da foto - Versão melhorada -->
@@ -187,6 +188,7 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
                     <button class="capture-btn" id="capturar-foto">Capturar</button>
                     <button class="capture-btn" id="cancelar-camera" style="background: #dc3545;">Cancelar</button>
              </div>
+             
               
          <!-- NOVA SEÇÃO: Histórico de Jogos -->
          <h3 style="margin-top:30px;">Histórico de Jogos</h3>
