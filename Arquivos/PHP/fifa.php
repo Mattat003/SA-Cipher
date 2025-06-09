@@ -19,7 +19,7 @@
      <p> FIFA 22 traz o futebol ainda mais realista, com novos recursos de jogabilidade, gráficos melhorados
          e modos como Carreira, Ultimate Team e Volta. Viva a emoção dos campos com autenticidade e inovação.
     </p>
-        <button> Jogar </button>
+    <button onclick="window.location.href='comprar.php'">Comprar</button>
     </div>
 </div>
 <div class="video-container">

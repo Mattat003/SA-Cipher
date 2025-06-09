@@ -19,7 +19,7 @@
      <p> Em Cyberpunk 2077, você é V, um mercenário em uma cidade futurista obcecada por poder, glamour e tecnologia.
          Personalize suas habilidades, explore Night City e lute para conquistar um implante lendário capaz de mudar tudo.
         </p>
-        <button> Jogar </button>
+        <button onclick="window.location.href='comprar.php'">Comprar</button>
     </div>
 </div>
 <div class="video-container">
