@@ -1,8 +1,20 @@
 <?php
 session_start();
-require_once 'conexao.php';
-echo "<!-- USUARIO DA SESSAO: " . $_SESSION['usuario'] . " -->";
+require_once 'conexao.php'; // conexão PDO
+
 $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
+$foto_perfil_padrao = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+$foto_perfil = $foto_perfil_padrao;
+
+if (isset($_SESSION['usuario'])) {
+    $stmt = $pdo->prepare("SELECT foto_perfil FROM usuario WHERE nome_user = :nome");
+    $stmt->bindParam(":nome", $_SESSION['usuario']);
+    $stmt->execute();
+    $foto_bd = $stmt->fetchColumn();
+    if (!empty($foto_bd)) {
+        $foto_perfil = "../" . $foto_bd;
+    }
+}
 ?>
 
 
@@ -130,6 +142,42 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
         .capture-btn:hover {
             background: #7a5af5;
         }
+        .voltar-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            }
+
+            .voltar-btn {
+            background: #510d96;
+            color: #f0e6ff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+           
+            min-width: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(81, 13, 150, 0.2);
+            }
+
+            .voltar-btn:hover {
+            background: #7a5af5;
+          
+            box-shadow: 0 4px 12px rgba(81, 13, 150, 0.3);
+            }
+            .voltar-btn a {
+            text-decoration: none;
+            color: inherit; 
+        }
+
+
 
         /* Responsivo */
         @media (max-width: 576px) {
@@ -154,15 +202,15 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
 
     <div class="paginaperfil">
         <div class="conteudo">
-           
             <div class="atividades">
-
+                <!-- Voltar-->
+            <button class="voltar-btn" id="voltar"><a href = "index.php">Voltar</a></button>
                 <!-- Área da foto - Versão melhorada -->
                 <div class="profile-picture-container" onclick="document.getElementById('upload-foto').click()">
-                    <img id="imagem-perfil" class="profile-picture" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Foto de Perfil">
-                    <div class="edit-overlay">✎</div>
-                    <input type="file" id="upload-foto" accept="image/*" hidden>
-                </div>
+                <img id="imagem-perfil" class="profile-picture" src="<?php echo htmlspecialchars($foto_perfil); ?>" alt="Foto de Perfil">
+                <div class="edit-overlay">✎</div>
+                <input type="file" id="upload-foto" accept="image/*" hidden>
+            </div>
 
                 <div class="profile-name">
                 <?php echo htmlspecialchars($_SESSION['usuario']); ?>
@@ -189,7 +237,7 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
                     <button class="capture-btn" id="cancelar-camera" style="background: #dc3545;">Cancelar</button>
              </div>
              
-              
+           
          <!-- NOVA SEÇÃO: Histórico de Jogos -->
          <h3 style="margin-top:30px;">Histórico de Jogos</h3>
                 <div id="historico-jogos">
@@ -231,7 +279,7 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
+    <script>
     // --- FOTO DE PERFIL ---
     const uploadFoto = document.getElementById('upload-foto');
     const imagemPerfil = document.getElementById('imagem-perfil');
@@ -239,8 +287,7 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
     const removerFoto = document.getElementById('remover-foto');
     const tirarFoto = document.getElementById('tirar-foto');
     const camera = document.getElementById('camera');
-
-    const fotoPadrao = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+    const fotoPadrao = "<?php echo $foto_perfil_padrao; ?>";
 
     trocarFoto.addEventListener('click', () => {
         uploadFoto.click();
@@ -249,17 +296,34 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
     uploadFoto.addEventListener('change', function () {
         const file = this.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                imagemPerfil.src = e.target.result;
-            }
-            reader.readAsDataURL(file);
+            const formData = new FormData();
+            formData.append('foto', file);
+            fetch('upload_foto.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(r => r.json())
+            .then(dados => {
+                if (dados.ok) {
+                    imagemPerfil.src = "../" + dados.caminho + '?' + new Date().getTime();
+                } else {
+                    alert(dados.erro || 'Erro ao fazer upload.');
+                }
+            })
+            .catch(() => alert('Erro ao conectar ao servidor.'));
         }
     });
 
     removerFoto.addEventListener('click', () => {
-        imagemPerfil.src = fotoPadrao;
-        uploadFoto.value = "";
+        fetch('remover_foto.php', { method: 'POST' })
+        .then(r => r.json())
+        .then(dados => {
+            if (dados.ok) {
+                imagemPerfil.src = fotoPadrao;
+            } else {
+                alert(dados.erro || 'Erro ao remover foto.');
+            }
+        });
     });
 
     tirarFoto.addEventListener('click', async () => {
@@ -267,16 +331,13 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
             camera.srcObject = stream;
             camera.style.display = 'block';
-
             setTimeout(() => {
                 const canvas = document.createElement('canvas');
                 canvas.width = camera.videoWidth;
                 canvas.height = camera.videoHeight;
                 const ctx = canvas.getContext('2d');
                 ctx.drawImage(camera, 0, 0, canvas.width, canvas.height);
-
                 imagemPerfil.src = canvas.toDataURL('image/png');
-
                 stream.getTracks().forEach(track => track.stop());
                 camera.style.display = 'none';
             }, 2000);
@@ -288,25 +349,32 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
     // --- HISTÓRICO DE JOGOS ---
     function carregarHistorico() {
         fetch('listar_historico.php')
-            .then(r => r.json())
+            .then(r => {
+                if (!r.ok) throw new Error("Erro ao buscar histórico");
+                return r.json();
+            })
             .then(historico => {
                 let html = '';
-                if (historico.length === 0) {
+                if (!Array.isArray(historico) || historico.length === 0) {
                     html = '<p>Nenhum histórico encontrado.</p>';
                 } else {
                     historico.forEach(item => {
-                        const data = new Date(item.hora_entrada.replace(' ', 'T') + '-03:00'); // Horário de Brasília
-                        const dataFormatada = data.toLocaleString('pt-BR');
+                        let dataFormatada = '';
+                        if (item.hora_entrada) {
+                            let data = new Date(item.hora_entrada.replace(' ', 'T'));
+                            // Ajuste de fuso se necessário:
+                            // data.setHours(data.getHours() - 3);
+                            dataFormatada = data.toLocaleString('pt-BR');
+                        }
                         html += `
-                        <div class="jogo">
-        
-                            <div class="info">
-                                <h4>${item.nome_jogo}</h4>
-                                <p style="margin-bottom:0; color:#bbb; font-size:0.97rem;">
-                                    Jogou em: <span style="color:#ddd;">${dataFormatada}</span>
-                                </p>
-                            </div>
-                        </div>`;
+                            <div class="jogo">
+                                <div class="info">
+                                    <h4>${item.nome_jogo ? item.nome_jogo : 'Jogo desconhecido'}</h4>
+                                    <p style="margin-bottom:0; color:#bbb; font-size:0.97rem;">
+                                        Jogou em: <span style="color:#ddd;">${dataFormatada}</span>
+                                    </p>
+                                </div>
+                            </div>`;
                     });
                 }
                 document.getElementById('historico-jogos').innerHTML = html;
@@ -315,18 +383,7 @@ $nome = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuário';
                 document.getElementById('historico-jogos').innerHTML = '<p>Erro ao carregar histórico.</p>';
             });
     }
-    // Chama a função ao abrir a página do perfil
     carregarHistorico();
-
-    // Toast (opcional, não interfere no histórico)
-    const toastTrigger = document.getElementById('liveToastBtn');
-    const toastLiveExample = document.getElementById('liveToast');
-    if (toastTrigger && toastLiveExample) {
-        toastTrigger.addEventListener('click', () => {
-            const toast = new bootstrap.Toast(toastLiveExample);
-            toast.show();
-        });
-    }
-</script>
+    </script>
 </body>
 </html>

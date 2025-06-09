@@ -32,23 +32,7 @@ pk_codgame int auto_increment primary key,
 codigo varchar(29)
 );
 
-create table jogo(
-pk_jogo int auto_increment primary key,
-nome_jogo varchar(100) not null,
-data_lanc date not null,
-fk_codigo int not null,
-foreign key (fk_codigo) references codigo_game(pk_codgame)
-on delete restrict 
-on update cascade,
-fk_dev int not null,
-foreign key (fk_dev) references desenvolvedora(pk_dev)
-on delete restrict 
-on update cascade,
-fk_pub int not null,
-foreign key (fk_pub) references publicadora(pk_publi)
-on delete restrict 
-on update cascade
-);
+
 
 CREATE TABLE amigos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -81,7 +65,23 @@ CREATE TABLE historico_jogos (
     nome_jogo VARCHAR(100) NOT NULL,
     hora_entrada DATETIME NOT NULL
 );
-
+create table jogo(
+pk_jogo int auto_increment primary key,
+nome_jogo varchar(100) not null,
+data_lanc date not null,
+fk_codigo int not null,
+foreign key (fk_codigo) references codigo_game(pk_codgame)
+on delete restrict 
+on update cascade,
+fk_dev int not null,
+foreign key (fk_dev) references desenvolvedora(pk_dev)
+on delete restrict 
+on update cascade,
+fk_pub int not null,
+foreign key (fk_pub) references publicadora(pk_publi)
+on delete restrict 
+on update cascade
+);
 
 
 
@@ -318,9 +318,9 @@ DESCRIBE usuario;
 -- Verifique as colunas da tabela historico_jogos
 DESCRIBE historico_jogos;
 
--- Se necessário, altere a tabela para adicionar a coluna correta
-ALTER TABLE usuario CHANGE nome nome_user VARCHAR(100);
--- Ou use o nome correto na sua consulta se a coluna se chama 'nome'
+ALTER TABLE usuario ADD COLUMN foto_perfil VARCHAR(255) NULL AFTER senha_temporaria;
+
+
 
 
 
