@@ -1,0 +1,1121 @@
+/* Reset e Base */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Novas cores base: roxo primário, azul secundário */
+    --primary-color: #7B1FA2; /* Um roxo mais escuro e sóbrio */
+    --primary-light: #9C27B0; /* Um roxo mais claro para hovers */
+    --secondary-color: #1976D2; /* Um azul vibrante */
+    --secondary-light: #2196F3; /* Um azul mais claro para hovers */
+
+    --success-color: #4CAF50; /* Verde */
+    --danger-color: #F44336; /* Vermelho */
+    --warning-color: #FFC107; /* Amarelo */
+    --info-color: #2196F3; /* Azul */
+
+    /* Cores de texto */
+    --text-dark: #212121; /* Quase preto */
+    --text-medium: #424242; /* Cinza escuro */
+    --text-light: #757575; /* Cinza médio */
+    --text-white: #FFFFFF; /* Branco */
+
+    /* Gradientes */
+    --bg-gradient: linear-gradient(135deg, var(--primary-color) 0%, #4A0070 100%); /* Roxo para roxo mais escuro */
+    --sidebar-gradient: linear-gradient(180deg, var(--primary-color) 0%, #4A0070 100%);
+
+    /* Cores de fundo e superfície */
+    --bg-light: #f0f2f5; /* Fundo geral claro */
+    --surface-card: #FFFFFF; /* Cartões e elementos de superfície */
+    --border-color: #e0e0e0; /* Bordas sutis */
+    --shadow-light: rgba(0, 0, 0, 0.08); /* Sombra leve */
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* Sombra média */
+
+    /* Tamanhos de fonte */
+    --font-size-base: 16px;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+
+    /* Espaçamentos */
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 20px;
+    --spacing-lg: 32px;
+    --spacing-xl: 48px;
+
+    /* Border-radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-light);
+}
+
+ul {
+    list-style: none;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    outline: none;
+}
+
+/* Layout Principal */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg-light);
+    overflow-x: hidden; /* Garante que não haja scroll horizontal desnecessário */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background: var(--sidebar-gradient);
+    color: var(--text-white);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px var(--shadow-medium);
+    transition: width 0.3s ease, transform 0.3s ease; /* Adicionado transform para mobile */
+    flex-shrink: 0; /* Previne que a sidebar encolha */
+    z-index: 1000; /* Garante que a sidebar fique acima do conteúdo */
+}
+
+.sidebar.collapsed {
+    width: 80px; /* Largura para ícones */
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: var(--spacing-md);
+}
+
+.sidebar.collapsed .sidebar-header {
+    justify-content: center; /* Centraliza o logo quando colapsado */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar.collapsed .logo span {
+    display: none; /* Esconde o texto do logo quando colapsado */
+}
+
+.logo i {
+    font-size: 1.0rem;
+    color: var(--secondary-light);
+}
+
+.logo-highlight {
+    color: var(--secondary-color);
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: var(--text-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar.collapsed .sidebar-toggle {
+    margin-left: auto; /* Empurra o botão para a direita */
+    margin-right: auto;
+}
+
+.sidebar-profile {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: var(--spacing-md);
+    position: relative; /* Para o dropdown */
+}
+
+.sidebar.collapsed .sidebar-profile {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--spacing-xs) 0;
+}
+
+.profile-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--secondary-color);
+    flex-shrink: 0; /* Impede que a imagem encolha */
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sidebar.collapsed .profile-avatar {
+    width: 40px;
+    height: 40px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    color: var(--text-white);
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer; /* Para o dropdown */
+}
+
+.sidebar.collapsed .profile-info {
+    display: none; /* Esconde info quando colapsado */
+}
+
+.profile-name {
+    font-weight: 600;
+    font-size: var(--font-size-md);
+}
+
+.profile-role {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Profile Dropdown (Sidebar e Topbar) */
+.profile-dropdown {
+    position: absolute;
+    top: 100%; /* Abaixo do profile-info */
+    left: 0;
+    background-color: var(--surface-card);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 4px 15px var(--shadow-medium);
+    z-index: 100;
+    min-width: 180px;
+    display: none; /* Escondido por padrão */
+    overflow: hidden;
+    margin-top: var(--spacing-xs); /* Espaçamento */
+}
+
+.profile-dropdown.show {
+    display: block;
+}
+
+.profile-dropdown a {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-dark);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.profile-dropdown a i {
+    margin-right: var(--spacing-xs);
+    color: var(--text-light);
+}
+
+.profile-dropdown a:hover {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+}
+
+.profile-dropdown a:hover i {
+    color: var(--primary-color);
+}
+
+
+/* Sidebar Menu */
+.sidebar-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Espaçamento entre os itens do menu */
+}
+
+.sidebar-menu li {
+    position: relative;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: rgba(255, 255, 255, 0.85);
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar-menu a i {
+    font-size: 1.2rem;
+    margin-right: var(--spacing-sm);
+    transition: margin-right 0.3s ease;
+    flex-shrink: 0;
+}
+
+.sidebar.collapsed .sidebar-menu a i {
+    margin-right: 0; /* Remove margem quando colapsado */
+    font-size: 1.5rem; /* Aumenta um pouco o ícone */
+}
+
+.sidebar.collapsed .sidebar-menu a span {
+    display: none; /* Esconde o texto do link */
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--text-white);
+}
+
+.sidebar-menu .menu-title {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.5);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar.collapsed .menu-title {
+    text-align: center;
+    font-size: 0.7rem; /* Menor quando colapsado */
+    padding: var(--spacing-sm) 0;
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-light);
+    transition: margin-left 0.3s ease; /* Para ajustar com a sidebar */
+}
+
+/* Top Bar */
+.top-bar {
+    background-color: var(--surface-card);
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    z-index: 998; /* Abaixo da sidebar modal */
+}
+
+.top-bar .sidebar-toggle-mobile {
+    display: none; /* Escondido por padrão, só aparece em mobile */
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius-md);
+    padding: 8px 12px;
+    width: 300px;
+}
+
+.search-bar input {
+    border: none;
+    background: none;
+    flex-grow: 1;
+    padding-right: var(--spacing-xs);
+}
+
+.search-bar i {
+    color: var(--text-light);
+}
+
+.top-bar-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    position: relative; /* Para dropdowns */
+}
+
+.notification-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--text-medium);
+    position: relative;
+}
+
+.notification-btn:hover {
+    color: var(--primary-color);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--danger-color);
+    color: var(--text-white);
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.notifications-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--surface-card);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 4px 15px var(--shadow-medium);
+    z-index: 100;
+    min-width: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none; /* Escondido por padrão */
+    margin-top: var(--spacing-xs);
+}
+
+.notifications-dropdown.show {
+    display: block;
+}
+
+.notifications-dropdown h4 {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--primary-color);
+    font-size: var(--font-size-md);
+}
+
+.notifications-dropdown ul {
+    padding: var(--spacing-sm) 0;
+}
+
+.notifications-dropdown li {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.notifications-dropdown li:last-child {
+    border-bottom: none;
+}
+
+.notifications-dropdown a {
+    display: block;
+    text-align: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--secondary-color);
+    font-weight: 500;
+    border-top: 1px solid var(--border-color);
+}
+
+.profile-info-topbar {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text-dark);
+}
+
+.profile-avatar-topbar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Content Sections */
+.content {
+    padding: var(--spacing-md);
+    flex-grow: 1;
+}
+
+.content-section {
+    display: none; /* Esconde todas as seções por padrão */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.content-section.active {
+    display: block; /* Mostra a seção ativa */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content-section h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: var(--spacing-xs);
+}
+
+/* Dashboard */
+.dashboard-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.metric-card {
+    background-color: var(--surface-card);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 10px var(--shadow-light);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.metric-card i {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+.metric-card h3 {
+    font-size: var(--font-size-lg);
+    color: var(--text-medium);
+    margin-bottom: 5px;
+}
+
+.metric-card p {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.chart-filters {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    align-items: flex-end;
+    flex-wrap: wrap; /* Permite que os filtros quebrem linha */
+    background-color: var(--surface-card);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 10px var(--shadow-light);
+}
+
+.chart-filters .input-group {
+    margin-bottom: 0; /* Remove margem de input-group padrão */
+}
+
+.dashboard-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.chart-card {
+    background-color: var(--surface-card);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 10px var(--shadow-light);
+    overflow: hidden; /* Garante que o conteúdo não vaze */
+    height: 400px; /* Altura fixa para os gráficos */
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-card h2 {
+    font-size: var(--font-size-lg);
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.chart-card canvas {
+    max-width: 100%;
+    height: auto; /* Permite que o canvas ajuste sua altura com base na largura máxima */
+    flex-grow: 1; /* Permite que o canvas ocupe o espaço restante */
+}
+
+
+/* Table Styles (General) */
+.table-responsive {
+    overflow-x: auto; /* Permite scroll horizontal em tabelas grandes */
+    margin-bottom: var(--spacing-md);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--surface-card);
+    border-radius: var(--border-radius-md);
+    overflow: hidden; /* Para bordas arredondadas */
+    box-shadow: 0 2px 10px var(--shadow-light);
+}
+
+.data-table th,
+.data-table td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+}
+
+.data-table tbody tr:hover {
+    background-color: var(--bg-light);
+}
+
+.data-table .actions {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.data-table .actions .btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.data-table .actions .btn-icon.edit {
+    color: var(--info-color);
+}
+
+.data-table .actions .btn-icon.delete {
+    color: var(--danger-color);
+}
+
+.data-table .actions .btn-icon.view {
+    color: var(--secondary-color);
+}
+
+.data-table .actions .btn-icon:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background-color: var(--surface-card);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 10px var(--shadow-light);
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-light);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--text-white);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-light);
+}
+
+.btn-ghost {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-medium);
+}
+
+.btn-ghost:hover {
+    background-color: var(--bg-light);
+    border-color: var(--text-light);
+    color: var(--primary-color);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: var(--text-white);
+}
+
+.btn-danger:hover {
+    background-color: #e53935;
+}
+
+
+/* Form Elements */
+.input-group {
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+    color: var(--text-medium);
+    font-size: var(--font-size-sm);
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="password"],
+.input-group input[type="number"],
+.input-group input[type="url"],
+.input-group input[type="date"],
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(123, 31, 162, 0.2);
+}
+
+.input-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: var(--spacing-xs);
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color); /* Cor de destaque para o checkbox */
+}
+
+.checkbox-group label {
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+/* Modals */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-md);
+    backdrop-filter: blur(5px); /* Efeito de blur no fundo */
+}
+
+.modal-content {
+    background-color: var(--surface-card);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 8px 30px var(--shadow-medium);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-content h2 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Calendar Specifics (Game Releases) */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    background-color: var(--surface-card);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 10px var(--shadow-light);
+}
+
+.calendar-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    background-color: var(--surface-card);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 10px var(--shadow-light);
+}
+
+.calendar-grid .day-name {
+    font-weight: 600;
+    text-align: center;
+    color: var(--secondary-color);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.calendar-grid .calendar-day {
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 10px;
+    min-height: 100px; /* Altura mínima para os dias */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.calendar-grid .calendar-day:hover {
+    background-color: #e8eaf6; /* Light blue on hover */
+    border-color: var(--secondary-light);
+}
+
+.calendar-grid .calendar-day.empty {
+    background-color: #f8f8f8;
+    border: 1px dashed var(--border-color);
+    cursor: default;
+}
+
+.calendar-grid .calendar-day.current-month {
+    background-color: var(--surface-card);
+}
+
+.calendar-grid .calendar-day .day-number {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-xs);
+}
+
+.calendar-grid .calendar-day .release-item {
+    background-color: var(--primary-light);
+    color: var(--text-white);
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.calendar-actions {
+    margin-top: var(--spacing-md);
+    text-align: right;
+}
+
+/* Finance Section */
+.finance-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.finance-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* Ensure finance chart cards also have fixed height */
+.finance-charts .chart-card {
+    height: 400px;
+}
+
+
+/* Community Management */
+.community-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.community-card {
+    background-color: var(--surface-card);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 10px var(--shadow-light);
+}
+
+.community-card h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-xs);
+}
+
+/* Table Actions (General for sections with tables) */
+.table-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--spacing-md);
+    gap: var(--spacing-sm);
+}
+
+/* Settings Page */
+.settings-group {
+    background-color: var(--surface-card);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 10px var(--shadow-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+.settings-group h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-xs);
+}
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 80px; /* Colapsa a sidebar em telas médias */
+    }
+
+    .sidebar .logo span,
+    .sidebar .profile-info,
+    .sidebar-menu a span,
+    .sidebar-menu .menu-title {
+        display: none;
+    }
+
+    .sidebar .sidebar-toggle {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sidebar .profile-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .sidebar.collapsed {
+        width: 80px;
+    }
+
+    .main-content {
+        margin-left: 80px; /* Ajusta margem para sidebar colapsada */
+    }
+
+    .top-bar .search-bar {
+        width: 200px; /* Reduz barra de busca */
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        transform: translateX(-100%); /* Esconde completamente fora da tela */
+        width: 280px; /* Largura total em mobile quando aberto */
+        z-index: 1001; /* Acima de tudo para modal */
+        box-shadow: 5px 0 15px var(--shadow-medium);
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(0); /* Mostra a sidebar */
+    }
+
+    .sidebar .logo span,
+    .sidebar .profile-info,
+    .sidebar-menu a span,
+    .sidebar-menu .menu-title {
+        display: block; /* Mostra de volta em mobile quando aberto */
+    }
+
+    .sidebar .sidebar-toggle {
+        display: none; /* Esconde o toggle interno da sidebar */
+    }
+
+    .top-bar .sidebar-toggle-mobile {
+        display: block; /* Mostra o toggle na topbar */
+        margin-right: var(--spacing-md);
+    }
+
+    .main-content {
+        margin-left: 0; /* Remove margem para mobile */
+    }
+
+    /* Overlay para quando a sidebar estiver aberta em mobile */
+    .admin-container.sidebar-open .main-content::before { /* Reusing modal-open class */
+        content: '';
+        position: fixed; /* Use fixed to cover viewport */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+    }
+
+    /* Adjust main content when sidebar is open on mobile */
+    .admin-container.sidebar-open .main-content {
+        margin-left: 280px;
+    }
+}
+
+/* Fix for mobile where sidebar might be partially visible */
+@media (max-width: 768px) {
+    .sidebar.collapsed {
+        width: 0; /* Completely hide when collapsed */
+        left: -80px; /* Ensure it's off-screen */
+    }
+
+    .sidebar:not(.collapsed) {
+        left: 0; /* Bring in when not collapsed */
+    }
+
+    /* Adjust main-content margin when sidebar is NOT collapsed */
+    .admin-container {
+        position: relative; /* For the pseudo-element overlay */
+        overflow-x: hidden; /* Prevent horizontal scroll when sidebar is out */
+    }
+
+    .admin-container.sidebar-open .main-content::before {
+        content: '';
+        position: fixed; /* Use fixed to cover viewport */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+    }
+}

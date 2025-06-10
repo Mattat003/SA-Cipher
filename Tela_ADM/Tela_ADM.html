@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cypher Corporation | Painel Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="Tela_ADM.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="Tela_ADM.js" defer></script>
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-cube"></i>
+                    <img src="capybara.png" alt="Cypher Corporation Logo" style="height: 30px; margin-right: 10px;">
+                    <span>Cipher<span class="logo-highlight">
+                </div>
+                <button class="sidebar-toggle" aria-label="Alternar menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-profile">
+                <div class="profile-avatar">
+                    <img src="https://hips.hearstapps.com/digitalspyuk.cdnds.net/17/42/1508415877-rick-grimes-twd.jpg?crop=0.670xw:1.0xh;center,top&resize=1200:*" alt="Foto de Perfil">
+                </div>
+                <div class="profile-info">
+                    <span class="profile-name">Neon Gustavo Bruehmueller</span>
+                    <span class="profile-role">Administrador</span>
+                    <div class="profile-dropdown">
+                        <a href="#" id="edit-profile-link"><i class="fas fa-user-circle"></i> Editar Perfil</a>
+                        <a href="#"><i class="fas fa-cog"></i> Configurações</a>
+                        <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <ul>
+                    <li><a href="#" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li class="menu-title">Gerenciamento</li>
+                    <li><a href="#" data-section="user-management"><i class="fas fa-users"></i> Usuários</a></li>
+                    <li><a href="#" data-section="permission-management"><i class="fas fa-shield-alt"></i> Permissões e Cargos</a></li>
+                    <li><a href="#" data-section="session-management"><i class="fas fa-history"></i> Gerenciar Sessões</a></li>
+                    <li><a href="#" data-section="game-releases"><i class="fas fa-calendar-alt"></i> Lançamentos de Jogos</a></li>
+                    <li><a href="#" data-section="finance"><i class="fas fa-dollar-sign"></i> Financeiro</a></li>
+                    <li><a href="#" data-section="developer-management"><i class="fas fa-code"></i> Desenvolvedores</a></li>
+                    <li><a href="#" data-section="developer-management"><i class="fas fa-address-book"></i> Painel De Controle</a></li>
+
+                    <li class="menu-title">Análise e Personalização</li>
+                    <li><a href="#" data-section="feedback-management"><i class="fas fa-comments"></i> Feedback</a></li>
+                    <li><a href="#" data-section="support-tickets"><i class="fas fa-ticket-alt"></i> Suporte</a></li>
+                    <li><a href="#" data-section="bug-reports"><i class="fas fa-bug"></i> Relatórios de Bugs</a></li>
+                    <li><a href="#" data-section="shop-products"><i class="fas fa-shopping-bag"></i> Loja e Produtos</a></li>
+                    <li><a href="#" data-section="community-management"><i class="fas fa-users-cog"></i> Gerenciamento da Comunidade</a></li>
+
+                    <li class="menu-title">Sistema</li>
+                    <li><a href="#" data-section="security-logs"><i class="fas fa-shield-alt"></i> Segurança e Logs</a></li>
+                    <li><a href="#" data-section="settings"><i class="fas fa-cog"></i> Configurações</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            <header class="top-bar">
+                <button class="sidebar-toggle-mobile" aria-label="Alternar menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar..." />
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="top-bar-actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="notifications-dropdown">
+                        <h4>Notificações</h4>
+                        <ul>
+                            <li>Novo ticket de suporte de João.</li>
+                            <li>Relatório de bug crítico de Maria.</li>
+                            <li>Atualização de sistema disponível.</li>
+                        </ul>
+                        <a href="#">Ver todas</a>
+                    </div>
+                    <button class="profile-info profile-info-topbar">
+                        <img src="https://hips.hearstapps.com/digitalspyuk.cdnds.net/17/42/1508415877-rick-grimes-twd.jpg?crop=0.670xw:1.0xh;center,top&resize=1200:*" alt="Foto de Perfil" class="profile-avatar-topbar">
+                        Neon
+                    </button>
+                    <div class="profile-dropdown profile-dropdown-topbar">
+                        <a href="#" id="edit-profile-link-topbar"><i class="fas fa-user-circle"></i> Editar Perfil</a>
+                        <a href="#"><i class="fas fa-cog"></i> Configurações</a>
+                        <a href="#" id="logout-btn-topbar"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                    </div>
+                </div>
+            </header>
+
+            <main class="content">
+                <section id="dashboard" class="content-section active">
+                    <h1>Dashboard</h1>
+                    <div class="dashboard-metrics">
+                        <div class="metric-card">
+                            <i class="fas fa-users"></i>
+                            <h3>Total de Usuários</h3>
+                            <p id="total-users">1.250</p>
+                        </div>
+                        <div class="metric-card">
+                            <i class="fas fa-dollar-sign"></i>
+                            <h3>Receita Total</h3>
+                            <p id="total-revenue">R$ 150.000</p>
+                        </div>
+                        <div class="metric-card">
+                            <i class="fas fa-gamepad"></i>
+                            <h3>Jogos Lançados</h3>
+                            <p id="games-launched">25</p>
+                        </div>
+                        <div class="metric-card">
+                            <i class="fas fa-bug"></i>
+                            <h3>Bugs Reportados</h3>
+                            <p id="bugs-reported">12</p>
+                        </div>
+                    </div>
+
+                    <div class="chart-filters">
+                        <div class="input-group">
+                            <label for="time-period">Período:</label>
+                            <select id="time-period">
+                                <option value="day">Dia</option>
+                                <option value="month" selected>Mês</option>
+                                <option value="year">Ano</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="game-filter">Jogo:</label>
+                            <select id="game-filter">
+                                <option value="all">Todos os Jogos</option>
+                                <option value="game-a">Jogo A</option>
+                                <option value="game-b">Jogo B</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary apply-filters">Aplicar Filtros</button>
+                    </div>
+
+                    <div class="dashboard-charts">
+                        <div class="chart-card">
+                            <h2>Crescimento de Usuários</h2>
+                            <canvas id="userGrowthChart"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h2>Vendas por Jogo</h2>
+                            <canvas id="salesByGameChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="user-management" class="content-section">
+                    <h1>Gerenciamento de Usuários</h1>
+                    <div class="table-actions">
+                        <button class="btn btn-primary" id="add-user-btn"><i class="fas fa-plus"></i> Adicionar Usuário</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome de Usuário</th>
+                                    <th>Email</th>
+                                    <th>Cargo</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <button class="btn btn-secondary" id="prev-users-btn">Anterior</button>
+                        <span id="current-page-users">1</span> / <span id="total-pages-users">1</span>
+                        <button class="btn btn-secondary" id="next-users-btn">Próximo</button>
+                    </div>
+                </section>
+
+                <section id="permission-management" class="content-section">
+                    <h1>Gerenciamento de Permissões e Cargos</h1>
+                    <div class="table-actions">
+                        <button class="btn btn-primary" id="add-permission-btn"><i class="fas fa-plus"></i> Adicionar Permissão</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome da Permissão</th>
+                                    <th>Descrição</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="permissions-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <button class="btn btn-secondary" id="prev-permissions-btn">Anterior</button>
+                        <span id="current-page-permissions">1</span> / <span id="total-pages-permissions">1</span>
+                        <button class="btn btn-secondary" id="next-permissions-btn">Próximo</button>
+                    </div>
+                </section>
+
+                <section id="session-management" class="content-section">
+                    <h1>Gerenciar Sessões</h1>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID da Sessão</th>
+                                    <th>Usuário</th>
+                                    <th>IP</th>
+                                    <th>Último Acesso</th>
+                                    <th>Dispositivo</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sessions-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <button class="btn btn-secondary" id="prev-sessions-btn">Anterior</button>
+                        <span id="current-page-sessions">1</span> / <span id="total-pages-sessions">1</span>
+                        <button class="btn btn-secondary" id="next-sessions-btn">Próximo</button>
+                    </div>
+                </section>
+
+                <section id="game-releases" class="content-section">
+                    <h1>Lançamentos de Jogos</h1>
+                    <div class="calendar-header">
+                        <button id="prev-month-btn" class="btn btn-secondary"><i class="fas fa-chevron-left"></i></button>
+                        <h2 id="current-month-year">Junho 2025</h2>
+                        <button id="next-month-btn" class="btn btn-secondary"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="calendar-grid" id="game-release-calendar">
+                        </div>
+                    <div class="calendar-actions">
+                        <button class="btn btn-primary" id="add-game-release-btn"><i class="fas fa-plus"></i> Adicionar Lançamento de Jogo</button>
+                    </div>
+                </section>
+
+                <section id="finance" class="content-section">
+                    <h1>Financeiro</h1>
+                    <div class="finance-overview">
+                        <div class="metric-card">
+                            <h3>Receita Total</h3>
+                            <p id="finance-total-revenue">R$ 150.000</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Despesas Totais</h3>
+                            <p id="finance-total-expenses">R$ 50.000</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Lucro Líquido</h3>
+                            <p id="finance-net-profit">R$ 100.000</p>
+                        </div>
+                    </div>
+                    <div class="finance-charts">
+                        <div class="chart-card">
+                            <h2>Receita ao longo do tempo</h2>
+                            <canvas id="revenueOverTimeChart"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h2>Despesas ao longo do tempo</h2>
+                            <canvas id="expensesOverTimeChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="developer-management" class="content-section">
+                    <h1>Gerenciamento de Desenvolvedores</h1>
+                    <div class="table-actions">
+                        <button class="btn btn-primary" id="add-developer-btn"><i class="fas fa-plus"></i> Adicionar Desenvolvedor</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Equipe</th>
+                                    <th>Cargo</th>
+                                    <th>Email</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="developers-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="developer-painel" class="content-section">
+                    <h1>Painel de Controle</h1>
+                    <div class="developer-actions">
+                        <button class="btn btn-secondary" id="view-developer-dashboard-btn"><i class="fas fa-tachometer-alt"></i> Ver Dashboard do Desenvolvedor</button>
+                        <button class="btn btn-secondary" id="manage-developer-tools-btn"><i class="fas fa-tools"></i> Gerenciar Ferramentas</button>
+                    </div>
+                    <div class="developer-info">
+                        <p>Bem-vindo ao painel de controle do desenvolvedor. Aqui você pode gerenciar suas ferramentas, acessar o dashboard e muito mais.</p>
+                    </div>
+
+                <section id="feedback-management" class="content-section">
+                    <h1>Gerenciamento de Feedback</h1>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Usuário</th>
+                                    <th>Tipo</th>
+                                    <th>Assunto</th>
+                                    <th>Data</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="feedback-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="support-tickets" class="content-section">
+                    <h1>Tickets de Suporte</h1>
+                    <div class="table-actions">
+                        <button class="btn btn-primary"><i class="fas fa-plus"></i> Abrir Novo Ticket</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Usuário</th>
+                                    <th>Assunto</th>
+                                    <th>Status</th>
+                                    <th>Prioridade</th>
+                                    <th>Última Atualização</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tickets-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="bug-reports" class="content-section">
+                    <h1>Relatórios de Bugs</h1>
+                    <div class="table-actions">
+                        <button class="btn btn-primary"><i class="fas fa-plus"></i> Novo Relatório de Bug</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Reportado Por</th>
+                                    <th>Título do Bug</th>
+                                    <th>Status</th>
+                                    <th>Prioridade</th>
+                                    <th>Data</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bug-reports-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                 <section id="shop-products" class="content-section">
+                    <h1>Loja e Produtos</h1>
+                    <div class="table-actions">
+                        <button class="btn btn-primary" id="add-product-btn"><i class="fas fa-plus"></i> Adicionar Produto</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome do Produto</th>
+                                    <th>Preço</th>
+                                    <th>Estoque</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="products-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </section> 
+
+                <section id="community-management" class="content-section">
+                    <h1>Gerenciamento da Comunidade</h1>
+
+                    <div class="community-sections">
+                        <div class="community-card">
+                            <h2>Usuários Banidos</h2>
+                            <div class="table-actions">
+                                <button class="btn btn-primary" id="add-ban-btn"><i class="fas fa-plus"></i> Adicionar Banimento</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Usuário</th>
+                                            <th>Motivo</th>
+                                            <th>Data de Expiração</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="banned-users-table-body">
+                                        </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="community-card">
+                            <h2>Ferramentas de Grupo</h2>
+                            <div class="table-actions">
+                                <button class="btn btn-primary" id="add-group-tool-btn"><i class="fas fa-plus"></i> Adicionar Ferramenta de Grupo</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nome da Ferramenta</th>
+                                            <th>Descrição</th>
+                                            <th>Status</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="group-tools-table-body">
+                                        </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="customization-themes" class="content-section">
+                    <h1>Temas e Customização</h1>
+                    <div class="table-actions">
+                        <button class="btn btn-primary" id="add-theme-btn"><i class="fas fa-plus"></i> Adicionar Novo Tema</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome do Tema</th>
+                                    <th>Autor</th>
+                                    <th>Versão</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="themes-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="customization-banners" class="content-section">
+                    <h1>Gerenciamento de Banners</h1>
+                    <div class="table-actions">
+                        <button class="btn btn-primary" id="add-banner-btn"><i class="fas fa-plus"></i> Adicionar Novo Banner</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome do Banner</th>
+                                    <th>Imagem</th>
+                                    <th>Ativo</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="banners-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="security-logs" class="content-section">
+                    <h1>Segurança e Logs</h1>
+                    <div class="table-actions">
+                        <button class="btn btn-secondary" id="export-logs-btn"><i class="fas fa-download"></i> Exportar Logs</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID do Log</th>
+                                    <th>Data/Hora</th>
+                                    <th>Nível</th>
+                                    <th>Evento</th>
+                                    <th>Usuário</th>
+                                    <th>IP</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logs-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="settings" class="content-section">
+                    <h1>Configurações</h1>
+                    <div class="settings-group">
+                        <h2>Configurações Gerais</h2>
+                        <div class="input-group">
+                            <label for="site-name">Nome do Site:</label>
+                            <input type="text" id="site-name" value="Cypher Corporation">
+                        </div>
+                        <div class="input-group">
+                            <label for="admin-email">E-mail do Administrador:</label>
+                            <input type="email" id="admin-email" value="admin@cyphercorp.com">
+                        </div>
+                        <div class="input-group">
+                            <label for="timezone">Fuso Horário:</label>
+                            <select id="timezone">
+                                <option value="America/Sao_Paulo">América/São Paulo</option>
+                                <option value="UTC">UTC</option>
+                                <option value="America/New_York">América/Nova Iorque</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="save-general-settings-btn">Salvar Configurações Gerais</button>
+                    </div>
+
+                    <div class="settings-group">
+                        <h2>Notificações</h2>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="email-notifications">
+                            <label for="email-notifications">Receber notificações por e-mail</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="sms-notifications">
+                            <label for="sms-notifications">Receber notificações por SMS</label>
+                        </div>
+                        <button class="btn btn-primary" id="save-notification-settings-btn">Salvar Configurações de Notificação</button>
+                    </div>
+
+                    <div class="settings-group">
+                        <h2>Segurança</h2>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="two-factor-auth">
+                            <label for="two-factor-auth">Habilitar Autenticação de Dois Fatores (2FA)</label>
+                        </div>
+                        <button class="btn btn-primary" id="change-password-btn">Alterar Senha</button>
+                        <button class="btn btn-danger" id="logout-all-devices-btn">Sair de Todos os Dispositivos</button>
+                    </div>
+
+                    <div class="settings-group">
+                        <h2>Aparência</h2>
+                        <div class="input-group">
+                            <label for="theme-selector">Tema do Painel:</label>
+                            <select id="theme-selector">
+                                <option value="dark">Escuro</option>
+                                <option value="light">Claro</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="save-appearance-settings-btn">Salvar Aparência</button>
+                    </div>
+
+                    <div class="settings-group">
+                        <h2>Integrações</h2>
+                        <p>Gerencie as integrações com serviços de terceiros.</p>
+                        <button class="btn btn-secondary" id="manage-integrations-btn">Gerenciar Integrações</button>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <div class="modal" id="modal">
+            <div id="user-form-modal" class="modal-content">
+                <h2 id="user-form-title">Adicionar Novo Usuário</h2>
+                <form id="user-form">
+                    <input type="hidden" id="user-id">
+                    <div class="input-group">
+                        <label for="username">Nome de Usuário</label>
+                        <input type="text" id="username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="user-email">E-mail</label>
+                        <input type="email" id="user-email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="user-role">Cargo</label>
+                        <select id="user-role">
+                            <option value="admin">Administrador</option>
+                            <option value="editor">Editor</option>
+                            <option value="viewer">Visualizador</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="user-status">Status</label>
+                        <select id="user-status">
+                            <option value="active">Ativo</option>
+                            <option value="inactive">Inativo</option>
+                            <option value="banned">Banido</option>
+                        </select>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-ghost close-modal-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="permission-form-modal" class="modal-content">
+                <h2 id="permission-form-title">Adicionar Nova Permissão</h2>
+                <form id="permission-form">
+                    <input type="hidden" id="permission-id">
+                    <div class="input-group">
+                        <label for="permission-name">Nome da Permissão</label>
+                        <input type="text" id="permission-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="permission-description">Descrição</label>
+                        <textarea id="permission-description"></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-ghost close-modal-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="game-release-form-modal" class="modal-content">
+                <h2 id="game-release-form-title">Adicionar Novo Lançamento de Jogo</h2>
+                <form id="game-release-form">
+                    <input type="hidden" id="game-release-id">
+                    <div class="input-group">
+                        <label for="game-name">Nome do Jogo</label>
+                        <input type="text" id="game-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="release-date">Data de Lançamento</label>
+                        <input type="date" id="release-date" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="game-platform">Plataforma</label>
+                        <input type="text" id="game-platform" placeholder="Ex: PC, PlayStation, Xbox">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-ghost close-modal-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="developer-form-modal" class="modal-content">
+                <h2 id="developer-form-title">Adicionar Novo Desenvolvedor</h2>
+                <form id="developer-form">
+                    <input type="hidden" id="developer-id">
+                    <div class="input-group">
+                        <label for="developer-name">Nome</label>
+                        <input type="text" id="developer-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="developer-team">Equipe</label>
+                        <input type="text" id="developer-team">
+                    </div>
+                    <div class="input-group">
+                        <label for="developer-role">Cargo</label>
+                        <input type="text" id="developer-role">
+                    </div>
+                    <div class="input-group">
+                        <label for="developer-email">Email</label>
+                        <input type="email" id="developer-email" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-ghost close-modal-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="product-form-modal" class="modal-content">
+                <h2 id="product-form-title">Adicionar Novo Produto</h2>
+                <form id="product-form">
+                    <input type="hidden" id="product-id">
+                    <div class="input-group">
+                        <label for="product-name">Nome do Produto</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="product-price">Preço</label>
+                        <input type="number" id="product-price" step="0.01" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="product-stock">Estoque</label>
+                        <input type="number" id="product-stock" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="product-status">Status</label>
+                        <select id="product-status">
+                            <option value="available">Disponível</option>
+                            <option value="out-of-stock">Fora de Estoque</option>
+                            <option value="discontinued">Descontinuado</option>
+                        </select>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-ghost close-modal-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="ban-form-modal" class="modal-content">
+                <h2 id="ban-form-title">Adicionar Novo Banimento</h2>
+                <form id="ban-form">
+                    <input type="hidden" id="ban-id">
+                    <div class="input-group">
+                        <label for="banned-username">Nome de Usuário</label>
+                        <input type="text" id="banned-username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="ban-reason">Motivo</label>
+                        <textarea id="ban-reason" required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="ban-expiration-date">Data de Expiração (opcional)</label>
+                        <input type="date" id="ban-expiration-date">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-ghost close-modal-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="group-tool-form-modal" class="modal-content">
+                <h2 id="group-tool-form-title">Adicionar Nova Ferramenta de Grupo</h2>
+                <form id="group-tool-form">
+                    <input type="hidden" id="group-tool-id">
+                    <div class="input-group">
+                        <label for="group-tool-name">Nome da Ferramenta</label>
+                        <input type="text" id="group-tool-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="group-tool-description">Descrição</label>
+                        <textarea id="group-tool-description"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="group-tool-status">Status</label>
+                        <select id="group-tool-status">
+                            <option value="active">Ativo</option>
+                            <option value="inactive">Inativo</option>
+                        </select>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-ghost close-modal-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="theme-form-modal" class="modal-content">
+                <h2 id="theme-form-title">Adicionar Novo Tema</h2>
+                <form id="theme-form">
+                    <input type="hidden" id="theme-id">
+                    <div class="input-group">
+                        <label for="theme-name">Nome do Tema</label>
+                        <input type="text" id="theme-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="theme-author">Autor</label>
+                        <input type="text" id="theme-author">
+                    </div>
+                    <div class="input-group">
+                        <label for="theme-version">Versão</label>
+                        <input type="text" id="theme-version">
+                    </div>
+                    <div class="input-group">
+                        <label for="theme-status">Status</label>
+                        <select id="theme-status">
+                            <option value="active">Ativo</option>
+                            <option value="inactive">Inativo</option>
+                        </select>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-ghost close-modal-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="banner-form-modal" class="modal-content">
+                <h2 id="banner-form-title">Adicionar Novo Banner</h2>
+                <form id="banner-form">
+                    <input type="hidden" id="banner-id">
+                    <div class="input-group">
+                        <label for="banner-name">Nome do Banner</label>
+                        <input type="text" id="banner-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="banner-image-url">URL da Imagem</label>
+                        <input type="url" id="banner-image-url" required>
+                    </div>
+                    <div class="input-group checkbox-group">
+                        <input type="checkbox" id="banner-is-active">
+                        <label for="banner-is-active">Ativo</label>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-ghost close-modal-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

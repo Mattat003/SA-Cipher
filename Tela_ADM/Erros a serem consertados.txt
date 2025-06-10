@@ -1,0 +1,49 @@
+Usuários
+
+-Arrumar botão de editar e excluir
+
+Permissões e cargos
+
+-Arrumar botão de editar e excluir
+
+Financeiro:
+
+Adicionar mais coisas
+
+Desenvolvedores:
+
+-Arrumar botão de editar e excluir
+
+Gerenciamento
+
+-Arrumar botão de editar e excluir
+
+Suporte
+
+-Arrumar botão "Abrir Novo Ticket"
+
+Relatório de Bugs:
+
+-Novo relatório de bug
+-Arrumar visualização e conclusão
+
+Loja e produtos
+
+-Arrumar botão de editar e excluir
+
+Gerenciamento da comunidade
+
+-Editar usuários banidos
+-Ferramentas de grupo,editar e excluir
+
+
+TEMAS E COSTOMIZAÇÃO E BANNERS
+-RETIRAR
+
+Segurança e logs
+
+-Colocar mais funções
+-Configurações
+
+
+Tag Cor Roxa:rgba(122,90,245,0.5)
