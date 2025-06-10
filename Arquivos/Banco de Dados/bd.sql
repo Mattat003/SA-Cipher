@@ -7,7 +7,9 @@ pk_usuario int auto_increment primary key,
 nome_user varchar(40) not null,
 email_user varchar(40) not null,
 senha_user varchar(16) not null,
-data_criacao datetime
+data_criacao datetime,
+senha_temporaria BOOLEAN DEFAULT FALSE,
+foto_perfil VARCHAR(255) NULL
 );
 
 create table cargo(
