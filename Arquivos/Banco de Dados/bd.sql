@@ -75,17 +75,9 @@ fk_codigo int not null,
 foreign key (fk_codigo) references codigo_game(pk_codgame)
 on delete restrict 
 on update cascade,
-fk_dev int not null,
-foreign key (fk_dev) references desenvolvedora(pk_dev)
-on delete restrict 
-on update cascade,
-fk_pub int not null,
-foreign key (fk_pub) references publicadora(pk_publi)
-on delete restrict 
-on update cascade
+desenvolvedora varchar(150),
+publicadora varchar(150)
 );
-
-
 
 /*Tabela de Categorias*/
 create table genero(
@@ -116,16 +108,6 @@ nome_idioma varchar(50) not null
 create table modo(
 pk_modo int auto_increment primary key,
 nome_modo varchar(50) not null
-);
-
-create table desenvolvedora(
-pk_dev int auto_increment primary key,
-nome_dev varchar(50) not null
-);
-
-create table publicadora(
-pk_publi int auto_increment primary key,
-nome_publi varchar(50) not null
 );
 /*=================*/
 
@@ -228,36 +210,6 @@ insert estilo values
 (4,'Sandbox'),
 (5,'Crafting');
 select * from estilo;
-/*=================*/
-
-/*ADD Desenvolvedoras*/
-insert desenvolvedora values
-(1,'Nintedo'),
-(2,'Rockstar Games'),
-(3,'Valve'),
-(4,'Ubisoft'),
-(5,'Sony'),
-(6,'Naughty Dog'),
-(7,'FromSoftware'),
-(8,'Dogubomb'),
-(9,'ConcernedApe'),
-(10,'Dumativa');
-select * from desenvolvedora;
-/*=================*/
-
-/*ADD Publicadoras*/
-insert publicadora values
-(1,'Nintedo'),
-(2,'Rockstar Games'),
-(3,'Valve'),
-(4,'Ubisoft'),
-(5,'Sony'),
-(6,'Eletronic Arts'),
-(7,'Bandai Namco'),
-(8,'Annapurna Interactive'),
-(9,'Raw Fury'),
-(10,'Nuuvem');
-select * from publicadora;
 /*=================*/
 
 /*ADD Cargos*/
