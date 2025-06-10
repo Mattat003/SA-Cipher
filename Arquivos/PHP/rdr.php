@@ -19,7 +19,7 @@
          Velho Oeste chega ao fim. Fugindo da lei e enfrentando traições, Arthur precisa escolher entre 
          sua própria sobrevivência e seus ideais. Um épico sobre lealdade, honra e redenção.
         </p>
-        <button> Jogar </button>
+        <button onclick="window.location.href='comprar.php'">Comprar</button>
     </div>
 </div>
 <div class="video-container">

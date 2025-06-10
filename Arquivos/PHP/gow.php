@@ -19,7 +19,7 @@
      <p> Em um novo começo, Kratos vive como um homem comum nos territórios selvagens da mitologia nórdica.
          Ao lado de seu filho Atreus, ele enfrenta deuses e monstros em uma jornada épica de redenção e descoberta.
     </p>
-        <button> Jogar </button>
+    <button onclick="window.location.href='comprar.php'">Comprar</button>
     </div>
 </div>
 <div class="video-container">

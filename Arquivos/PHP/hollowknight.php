@@ -19,7 +19,7 @@
      <p> Em Hollow Knight, explore um vasto reino subterrâneo cheio de mistérios, criaturas estranhas e desafios mortais.
          Embarque em uma jornada épica por Hallownest, enfrentando inimigos e descobrindo segredos antigos.
     </p>
-        <button> Jogar </button>
+    <button onclick="window.location.href='comprar.php'">Comprar</button>
     </div>
 </div>
 

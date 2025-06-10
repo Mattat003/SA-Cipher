@@ -1,0 +1,103 @@
+body {
+    background: linear-gradient(135deg, #0f0c29, #302b63);
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 10px 20px 10px;
+    color: #f0e6ff;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #ffffff, #e0c3fc 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+}
+
+form {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    padding: 35px 30px 25px 30px;
+    max-width: 430px;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(81, 13, 150, 0.24);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+label {
+    font-weight: 500;
+    color: #e0c3fc;
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 400px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    margin-top: 3px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    outline: none;
+    font-size: 15px;
+    transition: border 0.3s, background 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    border: 1.5px solid #9a66df;
+    background: rgba(255,255,255,0.13);
+}
+
+button[type="submit"] {
+    margin-top: 12px;
+    background: linear-gradient(to right, #8639df, #6a0dad 70%);
+    color: #fff;
+    padding: 15px 0;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    box-shadow: 0 4px 15px rgba(134, 57, 223, 0.18);
+    letter-spacing: 0.4px;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(to right, #6a0dad, #510d96);
+    box-shadow: 0 8px 24px rgba(134, 57, 223, 0.22);
+    transform: translateY(-2px) scale(1.025);
+}
+
+p {
+    color: #e0c3fc;
+    text-align: center;
+    margin-top: 8px;
+    font-size: 1.08rem;
+}
+
+@media (max-width: 540px) {
+    form {
+        padding: 20px 10px 15px 10px;
+        max-width: 98vw;
+    }
+    h1 {
+        font-size: 1.3rem;
+    }
+}

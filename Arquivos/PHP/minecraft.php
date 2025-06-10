@@ -19,7 +19,7 @@
            grandes castelos. Sozinho ou com amigos, enfrente criaturas, colete recursos e solte a criatividade 
           para criar o seu próprio universo.
         </p>
-        <button> Jogar </button>
+        <button onclick="window.location.href='comprar.php'">Comprar</button>
     </div>
 </div>
 
