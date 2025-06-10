@@ -326,15 +326,11 @@ UPDATE adm SET email_adm = 'matheus_fm_leal@estudante.sesisenai.org' WHERE pk_ad
 UPDATE adm SET email_adm = 'pamella_rafaeli@estudante.sesisenai.org' WHERE pk_adm = 3;
 UPDATE adm SET fk_cargo = 1 WHERE pk_adm = 3;
 
-
-
-
-
 /*=================*/
 
 /*Ver TUDO*/
 select * from adm;
-select * from cargo;
+select * from perfil;
 select * from codigo_game;
 select * from desenvolvedora;
 select * from estilo;
