@@ -298,6 +298,7 @@ insert adm values
 (4,'Neon Gustavo','neon_bruehmueller@estudante.sesisenai.org.br','8538#5342',3),
 (5,'Amanda de Oliveira','amanda_oliveira22@estudante.sesisenai.org.br','894375AM',2);
 select * from adm;
+
 /*=================*/
 
 /*ADD Usuários*/
@@ -319,6 +320,11 @@ DESCRIBE usuario;
 DESCRIBE historico_jogos;
 
 ALTER TABLE usuario ADD COLUMN foto_perfil VARCHAR(255) NULL AFTER senha_temporaria;
+
+SELECT * FROM adm WHERE email_adm = 'pamella_rafaeli@estudante.sesisenai.org.';
+UPDATE adm SET email_adm = 'matheus_fm_leal@estudante.sesisenai.org' WHERE pk_adm = 1;
+UPDATE adm SET email_adm = 'pamella_rafaeli@estudante.sesisenai.org' WHERE pk_adm = 3;
+UPDATE adm SET fk_cargo = 1 WHERE pk_adm = 3;
 
 
 
