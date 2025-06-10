@@ -1,6 +1,9 @@
 create database bd_cypher2;
 use bd_cypher2;
 
+-- Estrutura para tabela `perfil`
+--
+
 /*tabelas principais*/
 create table usuario(
 pk_usuario int auto_increment primary key,
@@ -10,22 +13,10 @@ senha_user varchar(16) not null,
 data_criacao datetime
 );
 
-create table cargo(
-pk_cargo int auto_increment primary key,
-nome_cargo varchar(50) not null,
-nivel_cargo int not null
-);
-
-create table adm(
-pk_adm int auto_increment primary key,
-nome_adm varchar(40) not null,
-email_adm varchar(40) not null,
-senha_user varchar(16) not null,
-fk_cargo int not null,
-foreign key (fk_cargo) references cargo(pk_cargo)
-on delete restrict 
-on update cascade
-);
+CREATE TABLE IF NOT EXISTS perfil (
+  pk_perfil int primary key AUTO_INCREMENT,
+  nome_perfil varchar(50) NOT NULL
+  );
 
 create table codigo_game(
 pk_codgame int auto_increment primary key,
@@ -71,18 +62,10 @@ nome_jogo varchar(100) not null,
 data_lanc date not null,
 fk_codigo int not null,
 foreign key (fk_codigo) references codigo_game(pk_codgame)
-on delete restrict 
-on update cascade,
-fk_dev int not null,
-foreign key (fk_dev) references desenvolvedora(pk_dev)
-on delete restrict 
-on update cascade,
-fk_pub int not null,
-foreign key (fk_pub) references publicadora(pk_publi)
-on delete restrict 
-on update cascade
+on delete restrict on update cascade,
+desenvolvedora varchar(150),
+publicadora varchar(150)
 );
-
 
 
 /*Tabela de Categorias*/
@@ -116,15 +99,6 @@ pk_modo int auto_increment primary key,
 nome_modo varchar(50) not null
 );
 
-create table desenvolvedora(
-pk_dev int auto_increment primary key,
-nome_dev varchar(50) not null
-);
-
-create table publicadora(
-pk_publi int auto_increment primary key,
-nome_publi varchar(50) not null
-);
 /*=================*/
 
 /*ADD Generos*/
@@ -228,46 +202,6 @@ insert estilo values
 select * from estilo;
 /*=================*/
 
-/*ADD Desenvolvedoras*/
-insert desenvolvedora values
-(1,'Nintedo'),
-(2,'Rockstar Games'),
-(3,'Valve'),
-(4,'Ubisoft'),
-(5,'Sony'),
-(6,'Naughty Dog'),
-(7,'FromSoftware'),
-(8,'Dogubomb'),
-(9,'ConcernedApe'),
-(10,'Dumativa');
-select * from desenvolvedora;
-/*=================*/
-
-/*ADD Publicadoras*/
-insert publicadora values
-(1,'Nintedo'),
-(2,'Rockstar Games'),
-(3,'Valve'),
-(4,'Ubisoft'),
-(5,'Sony'),
-(6,'Eletronic Arts'),
-(7,'Bandai Namco'),
-(8,'Annapurna Interactive'),
-(9,'Raw Fury'),
-(10,'Nuuvem');
-select * from publicadora;
-/*=================*/
-
-/*ADD Cargos*/
-insert cargo values
-(1,'Administrador Geral',5),
-(2,'Gerenciador de Conteúdo',4),
-(3,'Moderador',3),
-(4,'Analista de Dados',4),
-(5,'Suporte Técnico',2);
-select * from cargo;
-/*=================*/
-
 /*ADD Cód. de Jogo*/
 insert codigo_game values
 (1,'ABCD1-EFGH2-IJKL3-MNOP4-QRST5'),
@@ -290,16 +224,6 @@ insert jogo values
 select * from jogo;
 /*=================*/
 
-/*ADD ADMs*/
-insert adm values
-(1,'Matheus Leal','matheus_fm_leal@estudante.sesisenai.org.br','23553#NG',5),
-(2,'Endryo Bittencourt','endryo_bittencourt@estudante.sesisenai.org.br','342#@134',3),
-(3,'Pamella Rafaeli','pamella_rafaeli@estudante.sesisenai.org.br','123#3F37',4),
-(4,'Neon Gustavo','neon_bruehmueller@estudante.sesisenai.org.br','8538#5342',3),
-(5,'Amanda de Oliveira','amanda_oliveira22@estudante.sesisenai.org.br','894375AM',2);
-select * from adm;
-/*=================*/
-
 /*ADD Usuários*/
 insert usuario values
 (1,'Lúcio Andrade','lucio.andrade@hotmail.com','L@ndrade2024!','2024-03-15'),
@@ -308,6 +232,14 @@ insert usuario values
 (4,'Júlia Monteiro','julia.monteiro@gmail.com','JMonteiro!22','2025-01-10'),
 (5,'Caio Silveira','caio.silveira@gmail.com','Caio_S1lv#','2025-04-05');
 select * from usuario;
+
+
+insert perfil values
+(1,"adm"),
+(2,"funcionario"),
+(3,"usuario");
+
+
 
 ALTER TABLE usuario MODIFY senha_user VARCHAR(255) NOT NULL;
 ALTER TABLE adm MODIFY senha_user VARCHAR(255) NOT NULL;
