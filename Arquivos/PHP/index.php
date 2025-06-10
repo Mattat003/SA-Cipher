@@ -9,49 +9,6 @@ if (!isset($_SESSION['pk_usuario'])) {
 
 // Pega o nome do usuário da sessão
 $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
-
-if (!isset($_SESSION['usuario'])) {
-    header("location: login.php");
-    exit();
-}
-
-$id_perfil = $_SESSION['perfil'];
-$sql = "SELECT nome_perfil FROM perfil WHERE id_perfil = :id_perfil";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':id_perfil', $id_perfil);
-$stmt->execute();
-$perfil = $stmt->fetch(PDO::FETCH_ASSOC);
-$nome_perfil = $perfil['nome_perfil'] ?? "Desconhecido";
-
-$permissoes = [
-    1 => [
-        "Cadastrar" => [
-            "cadastro_usuario.php", "cadastro_perfil.php", 
-            "cadastro_jogo.php", "cadastro_funcionario.php"
-        ],
-        "Buscar" => [
-            "buscar_usuario.php", "buscar_perfil.php"
-            "buscar_funcionario.php", "buscar_jogo.php"
-        ],
-        "Alterar" => [
-            "alterar_usuario.php", "alterar_perfil.php"
-            "alterar_funcionario.php", "alterar_jogo.php"
-        ],
-        "Excluir" => [
-            "excluir_usuario.php", "excluir_perfil.php",
-            "excluir_funcionario.php", "excluir_jogo.php"
-        ]
-    ],
-    2 => [
-        "Cadastrar" => ["cadastro_usuario.php"],
-        "Buscar" => ["buscar_usuario.php", "buscar_funcionario.php", "buscar_jogo.php"],
-        "Alterar" => ["alterar_usuario.php", "alterar_jogo.php"],
-        "Excluir" => ["excluir_jogo.php"]
-    ],
-    3 => [
-        "Buscar" => ["buscar_jogo.php"]
-    ]
-];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
