@@ -7,7 +7,9 @@ pk_usuario int auto_increment primary key,
 nome_user varchar(40) not null,
 email_user varchar(40) not null,
 senha_user varchar(16) not null,
-data_criacao datetime
+data_criacao datetime,
+senha_temporaria BOOLEAN DEFAULT FALSE,
+foto_perfil VARCHAR(255) NULL
 );
 
 create table cargo(
@@ -73,17 +75,9 @@ fk_codigo int not null,
 foreign key (fk_codigo) references codigo_game(pk_codgame)
 on delete restrict 
 on update cascade,
-fk_dev int not null,
-foreign key (fk_dev) references desenvolvedora(pk_dev)
-on delete restrict 
-on update cascade,
-fk_pub int not null,
-foreign key (fk_pub) references publicadora(pk_publi)
-on delete restrict 
-on update cascade
+desenvolvedora varchar(150),
+publicadora varchar(150)
 );
-
-
 
 /*Tabela de Categorias*/
 create table genero(
@@ -114,16 +108,6 @@ nome_idioma varchar(50) not null
 create table modo(
 pk_modo int auto_increment primary key,
 nome_modo varchar(50) not null
-);
-
-create table desenvolvedora(
-pk_dev int auto_increment primary key,
-nome_dev varchar(50) not null
-);
-
-create table publicadora(
-pk_publi int auto_increment primary key,
-nome_publi varchar(50) not null
 );
 /*=================*/
 
@@ -228,36 +212,6 @@ insert estilo values
 select * from estilo;
 /*=================*/
 
-/*ADD Desenvolvedoras*/
-insert desenvolvedora values
-(1,'Nintedo'),
-(2,'Rockstar Games'),
-(3,'Valve'),
-(4,'Ubisoft'),
-(5,'Sony'),
-(6,'Naughty Dog'),
-(7,'FromSoftware'),
-(8,'Dogubomb'),
-(9,'ConcernedApe'),
-(10,'Dumativa');
-select * from desenvolvedora;
-/*=================*/
-
-/*ADD Publicadoras*/
-insert publicadora values
-(1,'Nintedo'),
-(2,'Rockstar Games'),
-(3,'Valve'),
-(4,'Ubisoft'),
-(5,'Sony'),
-(6,'Eletronic Arts'),
-(7,'Bandai Namco'),
-(8,'Annapurna Interactive'),
-(9,'Raw Fury'),
-(10,'Nuuvem');
-select * from publicadora;
-/*=================*/
-
 /*ADD Cargos*/
 insert cargo values
 (1,'Administrador Geral',5),
@@ -298,6 +252,7 @@ insert adm values
 (4,'Neon Gustavo','neon_bruehmueller@estudante.sesisenai.org.br','8538#5342',3),
 (5,'Amanda de Oliveira','amanda_oliveira22@estudante.sesisenai.org.br','894375AM',2);
 select * from adm;
+
 /*=================*/
 
 /*ADD Usuários*/
@@ -320,15 +275,16 @@ DESCRIBE historico_jogos;
 
 ALTER TABLE usuario ADD COLUMN foto_perfil VARCHAR(255) NULL AFTER senha_temporaria;
 
-
-
-
+SELECT * FROM adm WHERE email_adm = 'pamella_rafaeli@estudante.sesisenai.org.';
+UPDATE adm SET email_adm = 'matheus_fm_leal@estudante.sesisenai.org' WHERE pk_adm = 1;
+UPDATE adm SET email_adm = 'pamella_rafaeli@estudante.sesisenai.org' WHERE pk_adm = 3;
+UPDATE adm SET fk_cargo = 1 WHERE pk_adm = 3;
 
 /*=================*/
 
 /*Ver TUDO*/
 select * from adm;
-select * from cargo;
+select * from perfil;
 select * from codigo_game;
 select * from desenvolvedora;
 select * from estilo;
