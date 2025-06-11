@@ -1,0 +1,30 @@
+Cargos
+1=ADM
+2=Funcionário
+3=Usuário comum
+
+
+////////////////////////////////////////////////////////////////////////////////////
+1=> ["Cadastrar" =>["cadastro_usuario.php", "cadastro_perfil.php",
+"cadastro_fornecedor.php", "cadastro_jogo.php", "cadastro_funcionario.php"], 
+
+"Buscar" =>["buscar_usuario.php", "buscar_perfil.php", 
+"buscar_fornecedor.php", "buscar_jogo.php", "buscar_funcionario.php"], 
+
+"Alterar" =>["alterar_usuario.php", "alterar_perfil.php", 
+"alterar_fornecedor.php", "alterar_jogo.php", "alterar_funcionario.php"], 
+
+"Excluir" =>["excluir_usuario.php", "excluir_perfil.php", 
+"excluir_fornecedor.php", "excluir_jogo.php", "excluir_funcionario.php"]],
+
+
+2=> ["Cadastrar" =>["cadastro_cliente.php"], 
+"Buscar" =>["buscar_cliente.php", "buscar_fornecedor.php", "buscar_produto.php"], 
+"Alterar" =>["alterar_fornecedor.php"]], 
+
+
+3=> ["Cadastrar" =>["cadastro_fornecedor.php", "cadastro_produto.php"], 
+"Buscar" =>["alterar_fornecedor.php", "buscar_jogo.php"], 
+
+
+];
