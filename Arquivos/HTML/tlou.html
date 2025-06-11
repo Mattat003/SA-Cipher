@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Last of Us 2</title>
-    <link rel="website icon" type="png" href="img/capybara.png">
-    <link rel="stylesheet" href="css/jogos.css">
+    <link rel="website icon" type="png" href="../img/capybara.png">
+    <link rel="stylesheet" href="../css/jogos.css">
 </head>
 <body>
     <header> The Last of Us Part II</header> 
 
     <div class="game-container">
         <div class="game-image">
-            <img src="img/Tema The Last of Us Part II 4K para Windows 10 - Meu Windows.jpg" alt="The Last of Us 2">
+            <img src="../img/Tema The Last of Us Part II 4K para Windows 10 - Meu Windows.jpg" alt="The Last of Us 2">
         </div>
         <div class="game-info">
             <h2>Descrição</h2>
@@ -24,8 +24,8 @@
     </div>
 
     <div class="video-container">
-        <video autoplay muted loop playsinline poster="img/poster.jpg">
-            <source src="img/The Last of Us Part 2 - Official Cinematic Trailer.mp4" type="video/mp4">
+        <video autoplay muted loop playsinline poster="../img/poster.jpg">
+            <source src="../img/The Last of Us Part 2 - Official Cinematic Trailer.mp4" type="video/mp4">
             Seu navegador não suporta a reprodução de vídeo.
         </video>
     </div>

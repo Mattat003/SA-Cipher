@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FIFA 22</title>
-    <link rel="website icon" type="png" href="img/capybara.png">
-    <link rel="stylesheet" href="css/jogos.css">
+    <link rel="website icon" type="png" href="../img/capybara.png">
+    <link rel="stylesheet" href="../css/jogos.css">
 </head>
 <body>
     <header> FIFA 22 </header>
     <div class="game-container">
         <div class="game-image">
-            <img src="img/fifa22.avif">
+            <img src="../img/fifa22.avif">
         </div>
     <!-- Descrição-->
     <div class="game-info">
@@ -23,8 +23,8 @@
     </div>
 </div>
 <div class="video-container">
-    <video autoplay muted loop playsinline poster="img/poster.jpg">
-        <source src="img/FIFA 22 ｜ Official Gameplay Trailer.mp4 " type="video/mp4">
+    <video autoplay muted loop playsinline poster="../img/poster.jpg">
+        <source src="../img/FIFA 22 ｜ Official Gameplay Trailer.mp4 " type="video/mp4">
         Seu navegador não suporta a reprodução de vídeo.
     </video>
 </div>
