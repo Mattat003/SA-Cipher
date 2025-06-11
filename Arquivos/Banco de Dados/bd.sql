@@ -246,22 +246,22 @@ select * from jogo;
 
 /*ADD ADMs*/
 insert adm values
-(1,'Matheus Leal','matheus_fm_leal@estudante.sesisenai.org.br','23553#NG',5),
-(2,'Endryo Bittencourt','endryo_bittencourt@estudante.sesisenai.org.br','342#@134',3),
-(3,'Pamella Rafaeli','pamella_rafaeli@estudante.sesisenai.org.br','123#3F37',4),
-(4,'Neon Gustavo','neon_bruehmueller@estudante.sesisenai.org.br','8538#5342',3),
-(5,'Amanda de Oliveira','amanda_oliveira22@estudante.sesisenai.org.br','894375AM',2);
+(1,'Matheus Leal','matheus@email.com','12345678',5),
+(2,'Endryo Bittencourt','endryo@email.com','12345678',3),
+(3,'Pamella Rafaeli','pamella@email.com','12345678',4),
+(4,'Neon Gustavo','neon@email.com','12345678',3),
+(5,'Amanda de Oliveira','amanda@email.com','12345678',2);
 select * from adm;
 
 /*=================*/
 
 /*ADD Usuários*/
 insert usuario values
-(1,'Lúcio Andrade','lucio.andrade@hotmail.com','L@ndrade2024!','2024-03-15'),
-(2,'Maya Costa','maya.costa@gmail.com','Maya#C0st@!','2024-07-02'),
-(3,'Henrique Vasques','henrique.vasques@gmail.com','HenV@1234#','2024-11-28'),
-(4,'Júlia Monteiro','julia.monteiro@gmail.com','JMonteiro!22','2025-01-10'),
-(5,'Caio Silveira','caio.silveira@gmail.com','Caio_S1lv#','2025-04-05');
+(1,'Lúcio Andrade','lucio@email.com','12345678','2024-03-15',0,''),
+(2,'Maya Costa','maya@email.com','12345678','2024-07-02',0,''),
+(3,'Henrique Vasques','henrique@email.com','12345678','2024-11-28',0,''),
+(4,'Júlia Monteiro','julia@email.com','12345678','2025-01-10',0,''),
+(5,'Caio Silveira','caio@email.com','12345678','2025-04-05',0,'');
 select * from usuario;
 
 ALTER TABLE usuario MODIFY senha_user VARCHAR(255) NOT NULL;
