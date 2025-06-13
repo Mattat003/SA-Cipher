@@ -96,7 +96,20 @@ body {
     width: 100%;
     max-width: 400px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+    animation: fadeIn 1s ease-in-out;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 h2 {
     font-size: 28px;
     margin-bottom: 25px;
@@ -115,12 +128,16 @@ label {
     color: #e0c3fc;
     font-size: 14px;
 }
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
 input {
     width: 100%;
     padding: 12px 15px;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 20px;
     background: rgba(255, 255, 255, 0.05);
     color: white;
     outline: none;
@@ -135,6 +152,22 @@ input::placeholder {
     color: #cbbde2;
     opacity: 0.7;
 }
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #cbbde2;
+    font-size: 18px;
+    transition: color 0.2s ease;
+}
+
+.toggle-password:hover {
+    color: #e0c3fc;
+}
+
 button {
     background: linear-gradient(to right, #8639df, #6a0dad);
     color: white;
@@ -180,12 +213,31 @@ p[style='color: #ffcccc;'] {
     <form action="login.php" method="post" autocomplete="off">
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" required placeholder="Digite seu email" value="<?= htmlspecialchars($email_raw ?? '') ?>">
+        
         <label for="senha">Senha:</label>
-        <input type="password" name="senha" id="senha" required placeholder="Digite sua senha">
+        <div class="input-group">
+            <input type="password" name="senha" id="senha" required placeholder="Digite sua senha">
+            <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
+        </div>
+        
         <button type="submit">Entrar</button>
     </form>
     <p><a href="esqueceuSenha.php">Esqueci minha senha</a></p>
     <p><a href="cadastro.php">Criar conta</a></p>
 </div>
+
+<script>
+    function togglePasswordVisibility() {
+        const passwordField = document.getElementById('senha');
+        const toggleButton = document.querySelector('.toggle-password');
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleButton.textContent = '🙈'; // Change to hide icon
+        } else {
+            passwordField.type = 'password';
+            toggleButton.textContent = '👁️'; // Change to show icon
+        }
+    }
+</script>
 </body>
 </html>
