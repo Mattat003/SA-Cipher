@@ -79,6 +79,14 @@ desenvolvedora varchar(150),
 publicadora varchar(150)
 );
 
+CREATE TABLE biblioteca_usuario (
+    pk_usuario
+    nome_jogo VARCHAR(255) NOT NULL,
+    imagem_jogo VARCHAR(255),
+    url_jogo VARCHAR(255),
+    UNIQUE KEY (usuario_id, nome_jogo)
+);
+
 /*Tabela de Categorias*/
 create table genero(
 pk_genero int auto_increment primary key,
@@ -214,7 +222,7 @@ select * from estilo;
 
 /*ADD Cargos*/
 insert cargo values
-(1,'Adiministrador Geral', 5),
+(1,'Administrador Geral', 5),
 (2,'funcionário', 1);
 select * from cargo;
 /*=================*/
@@ -280,6 +288,7 @@ UPDATE adm SET fk_cargo = 1 WHERE pk_adm = 3;
 /*=================*/
 
 /*Ver TUDO*/
+select * from biblioteca_usuario;
 select * from adm;
 select * from cargo;
 select * from codigo_game;
