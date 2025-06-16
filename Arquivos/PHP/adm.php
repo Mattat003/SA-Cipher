@@ -1,163 +1,214 @@
 <?php
-session_start();
-if (!isset($_SESSION['tipo'])) {
-    header("Location: login.php");
-    exit();
+session_start(); //
+if (!isset($_SESSION['tipo'])) { //
+    header("Location: login.php"); //
+    exit(); //
 }
-require_once 'conexao.php';
+require_once 'conexao.php'; //
 
 // Pega o fk_cargo da sessão
-$fk_cargo = $_SESSION['fk_cargo'] ?? null;
-$nomeCargo = '';
-$nome = $_SESSION['adm'] ?? 'Usuário';
+$fk_cargo = $_SESSION['fk_cargo'] ?? null; //
+$nomeCargo = ''; //
+$nome = $_SESSION['adm'] ?? 'Usuário'; //
 
 // Busca o nome do cargo na tabela cargo
-if ($fk_cargo) {
-    $stmt = $pdo->prepare("SELECT nome_cargo FROM cargo WHERE pk_cargo = :id");
-    $stmt->bindParam(":id", $fk_cargo, PDO::PARAM_INT);
-    $stmt->execute();
-    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $nomeCargo = $row['nome_cargo'];
+if ($fk_cargo) { //
+    try {
+        $stmt = $pdo->prepare("SELECT nome_cargo FROM cargo WHERE pk_cargo = :id"); //
+        $stmt->bindParam(":id", $fk_cargo, PDO::PARAM_INT); //
+        $stmt->execute(); //
+        if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { //
+            $nomeCargo = $row['nome_cargo']; //
+        }
+    } catch (PDOException $e) {
+        // Handle database error, e.g., log it or display a user-friendly message
+        echo "Erro ao buscar nome do cargo: " . $e->getMessage(); //
+        $nomeCargo = 'Erro'; // Fallback //
     }
 }
 
-// Defina os IDs dos cargos
-define('CARGO_ADMIN', 1);
-define('CARGO_FUNCIONARIO', 2);
-
-// Defina as permissões/menus para cada cargo
-$menus = [
-    CARGO_ADMIN => [
-        "Usuários" => [
-            "Adicionar Usuário" => "cadastrar_usuario.php",
-            "Pesquisar Usuários" => "buscar_usuario.php",
-            "Listar Usuários" => "listar_usuario.php",
-            "Excluir Usuário" => "excluir_usuario.php",
-        ],
-        "Clientes e Fornecedores" => [
-            "Buscar Cliente" => "buscar_cliente.php",
-            "Buscar Fornecedor" => "buscar_fornecedor.php",
-        ],
-        "Jogos" => [
-            "Buscar Jogo" => "buscar_jogo.php",
-            "Adicionar Jogo" => "adicionar_jogo.php",
-        ],
-        "Desenvolvedoras" => [
-            "Buscar Desenvolvedora" => "buscar_desenvolvedora.php",
-            "Adicionar Desenvolvedora" => "cadastrar_desenvolvedora.php",
-        ]
-    ],
-    CARGO_FUNCIONARIO => [
-        "Conteúdo" => [
-            "Adicionar Conteúdo" => "cadastrar_conteudo.php",
-        ],
-        "Usuários" => [
-            "Adicionar Usuário" => "cadastrar_usuario.php",
-        ],
-        "Clientes e Fornecedores" => [
-            "Buscar Cliente" => "buscar_cliente.php",
-            "Buscar Fornecedor" => "buscar_fornecedor.php",
-        ],
-        "Jogos" => [
-            "Buscar Jogo" => "buscar_jogo.php",
-        ]
-    ],
-    // Outros cargos podem ser adicionados aqui
-];
-
-// Defina o menu do cargo logado
-$menus_cargo = $menus[$fk_cargo] ?? [];
+// Exemplo: defina os IDs dos cargos
+define('CARGO_ADMIN', 1); //
+define('CARGO_FUNCIONARIO', 2); //
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Painel do <?=htmlspecialchars($nomeCargo ?: 'Usuário')?> </title>
+    <title>Painel do <?=htmlspecialchars($nomeCargo ?: 'Usuário')?></title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f6f6fa; margin: 0; }
-        header { background: #2c056e; color: #fff; padding: 18px 28px; display: flex; justify-content: space-between; align-items: center; }
-        .logout-btn { background: #900; color: #fff; padding: 8px 16px; border: none; border-radius: 5px; cursor:pointer;}
-        nav { background: #fff; padding: 18px 0; }
-        ul.menu { list-style: none; padding: 0; margin: 0; display: flex; gap: 18px; justify-content: center; }
-        ul.menu > li { position: relative; }
-        ul.menu > li > button, ul.menu > li > a {
-            color: #2c056e; background: #e6e1f4;
-            padding: 10px 22px; border-radius: 6px; text-decoration: none; font-weight: 600; border: none; cursor:pointer; transition: background 0.2s;
-            font-size: 1rem;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-purple: #5E35B1; /* Deep Purple */
+            --dark-purple: #311B92;    /* Darker Deep Purple */
+            --light-purple: #9575CD;   /* Medium Purple for backgrounds */
+            --text-color: #f0f0f0;     /* Lighter text for dark backgrounds */
+            --white-color: #263238;    /* Dark gray for containers */
+            --danger-red: #C62828;     /* Darker Crimson */
+            --success-green: #2E7D32;  /* Darker Green */
+            --info-blue: #0277BD;      /* Darker Blue */
+            --shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            --border-radius: 10px;     /* Slightly larger radius */
         }
-        ul.menu > li > button:hover, ul.menu > li > a:hover { background: #510d96; color: #fff; }
-        ul.dropdown-menu {
-            display: none; position: absolute; top: 44px; left: 0; background: #fff;
-            min-width: 200px; box-shadow: 0 4px 24px #0001; border-radius: 0 0 8px 8px; padding: 0; z-index: 100;
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--dark-purple) 0%, #1A237E 100%);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
         }
-        ul.menu > li.open > ul.dropdown-menu,
-        ul.menu > li:hover > ul.dropdown-menu {
-            display: block;
+
+        .container {
+            background-color: var(--white-color);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            width: 90%;
+            animation: fadeIn 1s ease-out;
         }
-        ul.dropdown-menu li { list-style: none; }
-        ul.dropdown-menu a {
-            display: block; padding: 10px 18px; color: #2c056e; text-decoration: none; border-radius: 0; transition: background 0.2s;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        ul.dropdown-menu a:hover { background: #510d96; color: #fff; }
-        @media (max-width: 700px) {
-            ul.menu { flex-direction: column; gap: 0; }
-            ul.menu > li { margin-bottom: 5px; }
-            ul.dropdown-menu { position: static; box-shadow: none; border-radius:0; }
+
+        h1 {
+            color: var(--light-purple);
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: var(--primary-purple);
+        }
+
+        .painel-func {
+            margin: 30px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .painel-func a,
+        button {
+            padding: 12px 25px;
+            margin: 5px;
+            display: inline-block;
+            text-decoration: none;
+            background: var(--primary-purple);
+            color: var(--text-color);
+            border: none;
+            border-radius: 25px; /* Pill shape for buttons/links */
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .painel-func a:hover,
+        button:hover {
+            background: var(--light-purple);
+            color: var(--white-color); /* Change text color for better contrast on hover if needed */
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+        }
+
+        .painel-func a::before,
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .painel-func a:hover::before,
+        button:hover::before {
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+        }
+
+        .painel-func a span,
+        button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        button.logout-btn {
+            background: var(--danger-red);
+            margin-top: 20px;
+        }
+
+        button.logout-btn:hover {
+            background: #B71C1C; /* Even darker red */
+            transform: translateY(-4px);
+        }
+
+        .painel-func p {
+            color: var(--light-purple);
+            font-style: italic;
+            padding: 10px;
+            border: 1px dashed var(--primary-purple);
+            border-radius: var(--border-radius);
+            background-color: rgba(0, 0, 0, 0.2);
         }
     </style>
-    <script>
-    // Dropdown para mobile/touch e acessibilidade
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('ul.menu > li > button').forEach(function(btn){
-            btn.addEventListener('click', function(e){
-                e.preventDefault();
-                let li = btn.parentElement;
-                // Fecha outros abertos
-                document.querySelectorAll('ul.menu > li.open').forEach(x=>{
-                    if(x!==li) x.classList.remove('open');
-                });
-                li.classList.toggle('open');
-            });
-        });
-        // Fecha dropdown ao clicar fora
-        document.addEventListener('click', function(e){
-            document.querySelectorAll('ul.menu > li.open').forEach(function(li){
-                if (!li.contains(e.target)) li.classList.remove('open');
-            });
-        });
-    });
-    </script>
 </head>
 <body>
-    <header>
-        <div>
-            <h2>Painel do <?=htmlspecialchars($nomeCargo ?: 'Usuário')?></h2>
-            <span>Bem-vindo, <strong><?=htmlspecialchars($nome)?></strong>!</span>
+    <div class="container">
+        <h1>Painel do <?=htmlspecialchars($nomeCargo ?: 'Usuário')?></h1>
+        <p>Bem-vindo, <strong><?= htmlspecialchars($nome) ?></strong>!</p>
+        <p>Você está logado como <strong><?= htmlspecialchars($nomeCargo ?: 'Usuário') ?></strong></p>
+        <div class="painel-func">
+            <?php if ($fk_cargo == CARGO_ADMIN): ?>
+                <a href="cadastrar_usuario.php"><span>Adicionar Usuário</span></a>
+                <a href="buscar_usuario.php"><span>Pesquisar Usuários</span></a>
+                <a href="listar_usuario.php"><span>Listar Usuários</span></a>
+                <a href="excluir_usuario.php"><span>Excluir Usuário</span></a>
+                <a href="buscar_cliente.php"> <span>Buscar Cliente</span> </a>
+                <a href="buscar_fornecedor.php"> <span>Buscar Fornecedor</span> </a>
+                <a href="buscar_jogo.php"> <span>Buscar Jogo</span> </a>
+                <a href="buscar_desenvolvedora.php"> <span>Buscar Desenvolvedora</span> </a>
+                <a href="cadastrar_desenvolvedora.php"> <span>Adicionar Desenvolvedora</span> </a>
+            <?php elseif ($fk_cargo == CARGO_FUNCIONARIO): ?>
+                <a href="cadastrar_conteudo.php"><span>Adicionar Conteúdo</span></a>
+                <a href="cadastrar_usuario.php"> <span>Adicionar Usuário</span></a>
+                <a href="buscar_cliente.php"> <span>Buscar Cliente</span> </a>
+                <a href="buscar_fornecedor.php"> <span>Buscar Fornecedor</span> </a>
+                <a href="buscar_jogo.php"> <span>Buscar Jogo</span> </a>
+            <?php else: ?>
+                <p>Você não possui permissões administrativas.</p>
+            <?php endif; ?>
         </div>
-        <form action="logout.php" method="post" style="margin:0;">
-            <button class="logout-btn" type="submit">Sair</button>
+        <form action="logout.php" method="post">
+            <button class="logout-btn" type="submit"><span>Sair</span></button>
         </form>
-    </header>
-
-    <?php if ($menus_cargo): ?>
-        <nav>
-            <ul class="menu">
-                <?php foreach ($menus_cargo as $categoria => $links): ?>
-                    <li>
-                        <button type="button" aria-haspopup="true" aria-expanded="false"><?= htmlspecialchars($categoria) ?></button>
-                        <ul class="dropdown-menu">
-                            <?php foreach ($links as $titulo => $url): ?>
-                                <li><a href="<?= htmlspecialchars($url) ?>"><?= htmlspecialchars($titulo) ?></a></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </nav>
-    <?php else: ?>
-        <div style="margin:40px auto; text-align:center;">
-            <p>Você não possui permissões administrativas.</p>
-        </div>
-    <?php endif; ?>
+    </div>
 </body>
 </html>

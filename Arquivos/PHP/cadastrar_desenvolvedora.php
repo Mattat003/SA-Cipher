@@ -4,25 +4,23 @@ if (!isset($_SESSION['tipo'])) {
     header("Location: login.php");
     exit();
 }
-require_once 'conexao.php'; // Certifique-se de que este caminho está correto
+require_once 'conexao.php';
 
-// Lógica para adicionar usuário (você preencherá isso)
+// Lógica para adicionar desenvolvedora (você preencherá isso)
 $mensagem = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Exemplo básico: Capturar dados do formulário
-    // $nome = $_POST['nome_usuario'];
-    // $email = $_POST['email_usuario'];
-    // $senha = password_hash($_POST['senha_usuario'], PASSWORD_DEFAULT); // Sempre hash senhas!
-    // $fk_cargo = $_POST['cargo_usuario'];
+    // $nome_desenvolvedora = $_POST['nome_desenvolvedora'];
+    // $pais_desenvolvedora = $_POST['pais_desenvolvedora'];
 
     // try {
-    //     $stmt = $pdo->prepare("INSERT INTO usuario (nome_usuario, email_usuario, senha_usuario, fk_cargo) VALUES (?, ?, ?, ?)");
-    //     $stmt->execute([$nome, $email, $senha, $fk_cargo]);
-    //     $mensagem = "<p class='success-message'>Usuário cadastrado com sucesso!</p>";
+    //     $stmt = $pdo->prepare("INSERT INTO desenvolvedora (nome_desenvolvedora, pais_desenvolvedora) VALUES (?, ?)");
+    //     $stmt->execute([$nome_desenvolvedora, $pais_desenvolvedora]);
+    //     $mensagem = "<p class='success-message'>Desenvolvedora cadastrada com sucesso!</p>";
     // } catch (PDOException $e) {
-    //     $mensagem = "<p class='error-message'>Erro ao cadastrar usuário: " . $e->getMessage() . "</p>";
+    //     $mensagem = "<p class='error-message'>Erro ao cadastrar desenvolvedora: " . $e->getMessage() . "</p>";
     // }
-    $mensagem = "<p class='success-message'>Lógica de cadastro de usuário será implementada aqui!</p>";
+    $mensagem = "<p class='success-message'>Lógica de cadastro de desenvolvedora será implementada aqui!</p>";
 }
 
 ?>
@@ -30,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Usuário</title>
+    <title>Adicionar Desenvolvedora</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
@@ -90,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: var(--border-radius);
             margin-bottom: 20px;
             font-weight: 600;
-            color: #fff; /* Ensure messages are visible on dark backgrounds */
+            color: #fff;
         }
 
         .success-message {
@@ -112,29 +110,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         label {
             font-weight: 600;
-            color: var(--light-purple); /* Lighter text for labels */
+            color: var(--light-purple);
             margin-bottom: 5px;
         }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        select {
+        input[type="text"] {
             padding: 10px;
-            border: 1px solid #546E7A; /* Darker border */
+            border: 1px solid #546E7A;
             border-radius: 5px;
             font-size: 1em;
             width: 100%;
             box-sizing: border-box;
             transition: border-color 0.3s ease;
-            background-color: #37474F; /* Dark background for inputs */
-            color: var(--text-color); /* Light text in inputs */
+            background-color: #37474F;
+            color: var(--text-color);
         }
 
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="password"]:focus,
-        select:focus {
+        input[type="text"]:focus {
             border-color: var(--light-purple);
             outline: none;
         }
@@ -182,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="container">
-        <h1>Cadastrar Novo Usuário</h1>
+        <h1>Adicionar Nova Desenvolvedora</h1>
 
         <?php if ($mensagem): ?>
             <div class="message <?= strpos($mensagem, 'sucesso') !== false ? 'success-message' : 'error-message' ?>">
@@ -190,28 +182,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
 
-        <form action="cadastrar_usuario.php" method="post">
+        <form action="cadastrar_desenvolvedora.php" method="post">
             <div>
-                <label for="nome_usuario">Nome de Usuário:</label>
-                <input type="text" id="nome_usuario" name="nome_usuario" required>
+                <label for="nome_desenvolvedora">Nome da Desenvolvedora:</label>
+                <input type="text" id="nome_desenvolvedora" name="nome_desenvolvedora" required>
             </div>
             <div>
-                <label for="email_usuario">Email:</label>
-                <input type="email" id="email_usuario" name="email_usuario" required>
+                <label for="pais_desenvolvedora">País de Origem:</label>
+                <input type="text" id="pais_desenvolvedora" name="pais_desenvolvedora">
             </div>
-            <div>
-                <label for="senha_usuario">Senha:</label>
-                <input type="password" id="senha_usuario" name="senha_usuario" required>
-            </div>
-            <div>
-                <label for="fk_cargo">Cargo:</label>
-                <select id="fk_cargo" name="fk_cargo" required>
-                    <option value="">Selecione um cargo</option>
-                    <option value="1">Administrador</option>
-                    <option value="2">Funcionário</option>
-                    </select>
-            </div>
-            <button type="submit">Cadastrar Usuário</button>
+            <button type="submit">Cadastrar Desenvolvedora</button>
         </form>
 
         <a href="adm.php" class="back-button">Voltar ao Painel</a>
