@@ -214,11 +214,8 @@ select * from estilo;
 
 /*ADD Cargos*/
 insert cargo values
-(1,'Administrador Geral',5),
-(2,'Gerenciador de Conteúdo',4),
-(3,'Moderador',3),
-(4,'Analista de Dados',4),
-(5,'Suporte Técnico',2);
+(1,'Adiministrador Geral', 5),
+(2,'funcionário', 1);
 select * from cargo;
 /*=================*/
 
@@ -245,13 +242,13 @@ select * from jogo;
 /*=================*/
 
 /*ADD ADMs*/
-insert adm values
-(1,'Matheus Leal','matheus@email.com','12345678',5),
-(2,'Endryo Bittencourt','endryo@email.com','12345678',3),
-(3,'Pamella Rafaeli','pamella@email.com','12345678',4),
-(4,'Neon Gustavo','neon@email.com','12345678',3),
+INSERT INTO adm VALUES
+(1,'Matheus Leal','matheus@email.com','12345678',1),
+(2,'Endryo Bittencourt','endryo@email.com','12345678',1),
+(3,'Pamella Rafaeli','pamella@email.com','12345678',2),
+(4,'Neon Gustavo','neon@email.com','12345678',2),
 (5,'Amanda de Oliveira','amanda@email.com','12345678',2);
-select * from adm;
+
 
 /*=================*/
 
@@ -284,7 +281,7 @@ UPDATE adm SET fk_cargo = 1 WHERE pk_adm = 3;
 
 /*Ver TUDO*/
 select * from adm;
-select * from perfil;
+select * from cargo;
 select * from codigo_game;
 select * from desenvolvedora;
 select * from estilo;
