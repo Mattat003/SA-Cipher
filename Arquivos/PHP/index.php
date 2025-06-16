@@ -219,52 +219,27 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 
 <div class="header">BIBLIOTECA DE JOGOS</div>
 
+<?php
+// Recupera jogos personalizados desse usuário (tabela biblioteca_usuario)
+$meu_id = $_SESSION['pk_usuario'];
+$stmt = $pdo->prepare("SELECT * FROM biblioteca_usuario WHERE usuario_id = ?");
+$stmt->execute([$meu_id]);
+$meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <div class="games-container">
-    <!-- JOGOS ESTÁTICOS -->
-    <div class="game-tile">
-        <img src="../img/game1.jpg" alt="Grand Theft Auto 6" />
-        <h3>Grand Theft Auto 6</h3>
-        <a href="#" onclick="registrarEEntrar('Grand Theft Auto 6', 'URL'); return false;">JOGAR AGORA</a>
-    </div>
-    <div class="game-tile">
-        <img src="../img/game2.jpg" alt="Jujutsu Kaisen Game Memory" />
-        <h3>Jujutsu Kaisen Game Memory</h3>
-        <a href="/SA-Cipher/Arquivos/PHP/Testes/endryo/JJk-Card-Game-main/index.html"
-           onclick="registrarEEntrar('Jujutsu Kaisen Game Memory', '/SA-Cipher/Arquivos/PHP/Testes/endryo/JJk-Card-Game-main/index.html'); return false;">
-           JOGAR AGORA
-        </a>
-    </div>
-    <div class="game-tile">
-        <img src="../img/game3.jpg" alt="Metroid Prime 4: Beyond" />
-        <h3>Metroid Prime 4: Beyond</h3>
-        <a href="#" onclick="registrarEEntrar('Metroid Prime 4: Beyond', 'URL'); return false;">JOGAR AGORA</a>
-    </div>
-    <div class="game-tile">
-        <img src="../img/game4.jpg" alt="Pokémon Legends: Z-A" />
-        <h3>Pokémon Legends: Z-A</h3>
-        <a href="#" onclick="registrarEEntrar('Pokémon Legends: Z-A', 'URL'); return false;">JOGAR AGORA</a>
-    </div>
-    <div class="game-tile">
-        <img src="../img/game5.jpg" alt="Death Stranding 2" />
-        <h3>Death Stranding 2</h3>
-        <a href="#" onclick="registrarEEntrar('Death Stranding 2', 'URL'); return false;">JOGAR AGORA</a>
-    </div>
-    <div class="game-tile">
-        <img src="../img/game6.jpg" alt="Elden Ring: Nightreign" />
-        <h3>Elden Ring: Nightreign</h3>
-        <a href="#" onclick="registrarEEntrar('Elden Ring: Nightreign', 'URL'); return false;">JOGAR AGORA</a>
-    </div>
-    <div class="game-tile">
-        <img src="../img/game7.jpg" alt="Final Fantasy VII Rebirth" />
-        <h3>Final Fantasy VII Rebirth</h3>
-        <a href="#" onclick="registrarEEntrar('Final Fantasy VII Rebirth', 'URL'); return false;">JOGAR AGORA</a>
-    </div>
-    <div class="game-tile">
-        <img src="../img/game8.jpg" alt="League of Legends" />
-        <h3>League of Legends</h3>
-        <a href="#" onclick="registrarEEntrar('League of Legends', 'URL'); return false;">JOGAR AGORA</a>
-    </div>
-    
+    <!-- JOGOS PERSONALIZADOS DO USUÁRIO -->
+    <?php foreach ($meus_jogos as $jogo): ?>
+        <div class="game-tile">
+            <img src="<?= htmlspecialchars($jogo['imagem_jogo'] ?: '../img/default-game.jpg') ?>" alt="<?= htmlspecialchars($jogo['nome_jogo']) ?>" />
+            <h3><?= htmlspecialchars($jogo['nome_jogo']) ?></h3>
+            <a href="<?= htmlspecialchars($jogo['url_jogo']) ?>"
+               onclick="registrarEEntrar('<?= addslashes($jogo['nome_jogo']) ?>', '<?= addslashes($jogo['url_jogo']) ?>'); return false;">
+               JOGAR AGORA
+            </a>
+        </div>
+    <?php endforeach; ?>
+
+
     <!-- JOGOS AUTOMÁTICOS DA PASTA games -->
     <?php
     $gamesDir = __DIR__ . '/games';
