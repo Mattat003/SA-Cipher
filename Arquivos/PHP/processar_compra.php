@@ -10,6 +10,7 @@
     <div class="container">
         <h1>Obrigado pela compra!</h1>
         <p>Seu pedido foi processado com sucesso.</p>
+        <a href = "index.php"> Voltar</a>
     </div>
 </body>
 </html>
