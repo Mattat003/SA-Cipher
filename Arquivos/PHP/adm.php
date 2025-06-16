@@ -54,6 +54,7 @@ define('CARGO_FUNCIONARIO', 2);
             <a href = "buscar_jogo.php"> Buscar Jogo </a>
             <a href = "buscar_desenvolvedora.php"> Buscar desenvolvedora </a>
             <a href = "cadastrar_desenvolvedora.php"> Adicionar Desenvolvedora</a> 
+            <a href = "adicionar_jogo.php"> Adicionar Jogo </a>
             <!--funcionario-->
         <?php elseif ($fk_cargo == CARGO_FUNCIONARIO): ?>
             <a href="cadastrar_conteudo.php">Adicionar Conteúdo</a>
