@@ -4,25 +4,23 @@ if (!isset($_SESSION['tipo'])) {
     header("Location: login.php");
     exit();
 }
-require_once 'conexao.php'; // Certifique-se de que este caminho está correto
+require_once 'conexao.php';
 
-// Lógica para adicionar usuário (você preencherá isso)
+// Lógica para adicionar conteúdo (você preencherá isso)
 $mensagem = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Exemplo básico: Capturar dados do formulário
-    // $nome = $_POST['nome_usuario'];
-    // $email = $_POST['email_usuario'];
-    // $senha = password_hash($_POST['senha_usuario'], PASSWORD_DEFAULT); // Sempre hash senhas!
-    // $fk_cargo = $_POST['cargo_usuario'];
+    // $titulo_conteudo = $_POST['titulo'];
+    // $texto_conteudo = $_POST['texto'];
 
     // try {
-    //     $stmt = $pdo->prepare("INSERT INTO usuario (nome_usuario, email_usuario, senha_usuario, fk_cargo) VALUES (?, ?, ?, ?)");
-    //     $stmt->execute([$nome, $email, $senha, $fk_cargo]);
-    //     $mensagem = "<p class='success-message'>Usuário cadastrado com sucesso!</p>";
+    //     $stmt = $pdo->prepare("INSERT INTO conteudo (titulo, texto, fk_usuario) VALUES (?, ?, ?)");
+    //     $stmt->execute([$titulo_conteudo, $texto_conteudo, $_SESSION['id_usuario']]);
+    //     $mensagem = "<p class='success-message'>Conteúdo adicionado com sucesso!</p>";
     // } catch (PDOException $e) {
-    //     $mensagem = "<p class='error-message'>Erro ao cadastrar usuário: " . $e->getMessage() . "</p>";
+    //     $mensagem = "<p class='error-message'>Erro ao adicionar conteúdo: " . $e->getMessage() . "</p>";
     // }
-    $mensagem = "<p class='success-message'>Lógica de cadastro de usuário será implementada aqui!</p>";
+    $mensagem = "<p class='success-message'>Lógica de adição de conteúdo será implementada aqui!</p>";
 }
 
 ?>
@@ -30,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Usuário</title>
+    <title>Adicionar Conteúdo</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
@@ -65,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             padding: 40px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            max-width: 600px;
+            max-width: 800px;
             width: 100%;
             text-align: center;
             animation: fadeIn 1s ease-out;
@@ -90,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: var(--border-radius);
             margin-bottom: 20px;
             font-weight: 600;
-            color: #fff; /* Ensure messages are visible on dark backgrounds */
+            color: #fff;
         }
 
         .success-message {
@@ -112,31 +110,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         label {
             font-weight: 600;
-            color: var(--light-purple); /* Lighter text for labels */
+            color: var(--light-purple);
             margin-bottom: 5px;
         }
 
         input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        select {
+        textarea {
             padding: 10px;
-            border: 1px solid #546E7A; /* Darker border */
+            border: 1px solid #546E7A;
             border-radius: 5px;
             font-size: 1em;
             width: 100%;
             box-sizing: border-box;
             transition: border-color 0.3s ease;
-            background-color: #37474F; /* Dark background for inputs */
-            color: var(--text-color); /* Light text in inputs */
+            background-color: #37474F;
+            color: var(--text-color);
         }
 
         input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="password"]:focus,
-        select:focus {
+        textarea:focus {
             border-color: var(--light-purple);
             outline: none;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
         }
 
         button[type="submit"] {
@@ -182,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="container">
-        <h1>Cadastrar Novo Usuário</h1>
+        <h1>Adicionar Novo Conteúdo</h1>
 
         <?php if ($mensagem): ?>
             <div class="message <?= strpos($mensagem, 'sucesso') !== false ? 'success-message' : 'error-message' ?>">
@@ -190,28 +189,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
 
-        <form action="cadastrar_usuario.php" method="post">
+        <form action="cadastrar_conteudo.php" method="post">
             <div>
-                <label for="nome_usuario">Nome de Usuário:</label>
-                <input type="text" id="nome_usuario" name="nome_usuario" required>
+                <label for="titulo">Título do Conteúdo:</label>
+                <input type="text" id="titulo" name="titulo" required>
             </div>
             <div>
-                <label for="email_usuario">Email:</label>
-                <input type="email" id="email_usuario" name="email_usuario" required>
+                <label for="texto">Texto do Conteúdo:</label>
+                <textarea id="texto" name="texto" required></textarea>
             </div>
-            <div>
-                <label for="senha_usuario">Senha:</label>
-                <input type="password" id="senha_usuario" name="senha_usuario" required>
-            </div>
-            <div>
-                <label for="fk_cargo">Cargo:</label>
-                <select id="fk_cargo" name="fk_cargo" required>
-                    <option value="">Selecione um cargo</option>
-                    <option value="1">Administrador</option>
-                    <option value="2">Funcionário</option>
-                    </select>
-            </div>
-            <button type="submit">Cadastrar Usuário</button>
+            <button type="submit">Adicionar Conteúdo</button>
         </form>
 
         <a href="adm.php" class="back-button">Voltar ao Painel</a>
