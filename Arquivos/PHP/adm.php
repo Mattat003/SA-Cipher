@@ -49,7 +49,12 @@ define('CARGO_FUNCIONARIO', 2);
             <a href="buscar_usuario.php">Pesquisar Usuários</a>
             <a href="listar_usuario.php">Listar Usuários</a>
             <a href="excluir_usuario.php">Excluir Usuário</a>
-            <!-- Adicione mais funções conforme necessário -->
+            <a href = "buscar_cliente.php"> Buscar Cliente </a>
+            <a href = "buscar_fornecedor.php"> Buscar Fornecedor </a>
+            <a href = "buscar_jogo.php"> Buscar Jogo </a>
+            <a href = "buscar_desenvolvedora.php"> Buscar desenvolvedora </a>
+            <a href = "cadastrar_desenvolvedora.php"> Adicionar Desenvolvedora</a> 
+            <!--funcionario-->
         <?php elseif ($fk_cargo == CARGO_FUNCIONARIO): ?>
             <a href="cadastrar_conteudo.php">Adicionar Conteúdo</a>
             <a href = "cadastrar_usuario.php"> Adicionar Usuário</a>
