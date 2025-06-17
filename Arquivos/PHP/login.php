@@ -7,25 +7,25 @@ require_once 'conexao.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_raw = $_POST["email"] ?? '';
+    $senha_raw = $_POST["senha"] ?? '';
     $email = filter_var(trim($email_raw), FILTER_SANITIZE_EMAIL);
+    $senha = trim($senha_raw);
 
     if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erro = "Formato de email inválido!";
     } else {
-        // 1. Tenta como usuário
+        // 1. USUÁRIO
         $stmt = $pdo->prepare("SELECT * FROM usuario WHERE email_user = :email");
         $stmt->bindParam(":email", $email);
         $stmt->execute();
 
         if ($stmt->rowCount() == 1) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if (password_verify($_POST["senha"], $usuario['senha_user']) || $_POST["senha"] === $usuario['senha_user']) {
+            if (password_verify($senha, $usuario['senha_user']) || $senha === $usuario['senha_user']) {
                 $_SESSION['pk_usuario'] = $usuario['pk_usuario'];
                 $_SESSION['usuario'] = $usuario['nome_user'];
                 $_SESSION['foto_perfil'] = $usuario['foto_perfil'] ?? null;
-                $_SESSION['tipo'] = 'usuario';
-
+                $_SESSION['tipo'] = $usuario['perfil'] ?? 'usuario';
                 if (!empty($usuario['senha_temporaria'])) {
                     header("Location: alterar_senha.php");
                     exit();
@@ -38,14 +38,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $erro = "Email ou senha inválidos!";
             }
         } else {
-            // 2. Tenta como admin
+            // echo "Não achou em usuario<br>";
+            // 2. ADM
             $stmt2 = $pdo->prepare("SELECT * FROM adm WHERE email_adm = :email");
             $stmt2->bindParam(":email", $email);
             $stmt2->execute();
 
             if ($stmt2->rowCount() == 1) {
                 $adm = $stmt2->fetch(PDO::FETCH_ASSOC);
-                if (password_verify($_POST["senha"], $adm['senha_user']) || $_POST["senha"] === $adm['senha_user']) {
+                if (password_verify($senha, $adm['senha_user']) || $senha === $adm['senha_user']) {
                     $_SESSION['pk_adm'] = $adm['pk_adm'];
                     $_SESSION['adm'] = $adm['nome_adm'];
                     $_SESSION['tipo'] = 'adm';
@@ -57,7 +58,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $erro = "Email ou senha inválidos!";
                 }
             } else {
-                $erro = "Email ou senha inválidos!";
+                // echo "Não achou em adm<br>";
+                // 3. FUNCIONÁRIO
+                $stmt3 = $pdo->prepare("SELECT * FROM funcionario WHERE email_func = :email");
+                $stmt3->bindParam(":email", $email);
+                $stmt3->execute();
+
+                if ($stmt3->rowCount() == 1) {
+                    $funcionario = $stmt3->fetch(PDO::FETCH_ASSOC);
+                    if (password_verify($senha, $funcionario['senha_func']) || $senha === $funcionario['senha_func']) {
+                        $_SESSION['pk_funcionario'] = $funcionario['pk_funcionario'];
+                        $_SESSION['funcionario'] = $funcionario['nome_func'];
+                        $_SESSION['tipo'] = 'funcionario';
+                        $_SESSION['fk_cargo'] = $funcionario['fk_cargo']; 
+                        session_write_close();
+                        header("Location: adm.php");
+                        exit();
+                    } else {
+                        $erro = "Email ou senha inválidos!";
+                    }
+                } else {
+                    $erro = "Email ou senha inválidos!";
+                }
             }
         }
     }

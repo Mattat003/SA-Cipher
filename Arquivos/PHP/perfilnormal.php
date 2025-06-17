@@ -191,7 +191,7 @@ if (isset($_SESSION['usuario'])) {
         }
         /* Histórico */
         #historico-jogos .jogo {
-            background: rgba(93, 13, 173, 0.22);
+            background: rgba(116, 39, 192, 0.55);
             padding: 10px 14px;
             border-radius: 7px;
             margin-bottom: 12px;
