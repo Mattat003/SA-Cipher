@@ -9,7 +9,8 @@ require_once 'conexao.php';
 // Pega o fk_cargo da sessão
 $fk_cargo = $_SESSION['fk_cargo'] ?? null;
 $nomeCargo = '';
-$nome = $_SESSION['adm'] ?? 'Usuário';
+$nome = $_SESSION['adm'] ?? 'Funcionário';
+
 
 // Busca o nome do cargo na tabela cargo
 if ($fk_cargo) {
@@ -33,6 +34,7 @@ $menus = [
             "Pesquisar Usuários" => "buscar_usuario.php",
             "Listar Usuários" => "listar_usuario.php",
             "Excluir Usuário" => "excluir_usuario.php",
+            "Alterar Usuário" => "alterar_usuario.php",
         ],
         "Funcionarios" => [
             "Buscar Funcionario" => "buscar_funcionario.php",

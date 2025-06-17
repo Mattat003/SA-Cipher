@@ -17,23 +17,23 @@ $stmt_cargo = $pdo->query("SELECT pk_cargo, nome_cargo FROM cargo");
 $cargos = $stmt_cargo->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nome = trim($_POST['nome_func'] ?? '');
-    $email = trim($_POST['email_func'] ?? '');
-    $senha = $_POST['senha_func'] ?? '';
+    $nome = trim($_POST['nome_adm'] ?? '');
+    $email = trim($_POST['email_adm'] ?? '');
+    $senha = $_POST['senha_user'] ?? '';
     $fk_cargo_form = $_POST['fk_cargo'] ?? null;
 
     if (empty($nome) || empty($email) || empty($senha) || empty($fk_cargo_form)) {
         $mensagem = "Todos os campos são obrigatórios.";
     } else {
         // Verifica e-mail duplicado
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM funcionario WHERE email_func = :email");
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM adm WHERE email_adm = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         if ($stmt->fetchColumn() > 0) {
             $mensagem = "E-mail já cadastrado!";
         } else {
             $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO funcionario (nome_func, email_func, senha_func, fk_cargo) VALUES (:nome, :email, :senha, :fk_cargo)";
+            $sql = "INSERT INTO adm (nome_adm, email_adm, senha_user, fk_cargo) VALUES (:nome, :email, :senha, :fk_cargo)";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':nome', $nome);
             $stmt->bindParam(':email', $email);
@@ -74,14 +74,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if (!empty($mensagem)): ?>
             <div class="mensagem"><?= htmlspecialchars($mensagem); ?></div>
         <?php endif; ?>
-        <label for="nome_func">Nome:</label>
-        <input type="text" id="nome_func" name="nome_func" required>
+        <label for="nome_adm">Nome:</label>
+        <input type="text" id="nome_adm" name="nome_adm" required>
 
-        <label for="email_func">E-mail:</label>
-        <input type="email" id="email_func" name="email_func" required>
+        <label for="email_adm">E-mail:</label>
+        <input type="email" id="email_adm" name="email_adm" required>
 
-        <label for="senha_func">Senha:</label>
-        <input type="password" id="senha_func" name="senha_func" required>
+        <label for="senha_user">Senha:</label>
+        <input type="password" id="senha_user" name="senha_user" required>
         
         <label for="fk_cargo">Cargo:</label>
         <select id="fk_cargo" name="fk_cargo" required>
