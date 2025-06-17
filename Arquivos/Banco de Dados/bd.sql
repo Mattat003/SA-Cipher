@@ -11,6 +11,16 @@ data_criacao datetime,
 senha_temporaria BOOLEAN DEFAULT FALSE,
 foto_perfil VARCHAR(255) NULL
 );
+CREATE TABLE funcionario (
+    pk_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+    nome_func VARCHAR(40) NOT NULL,
+    email_func VARCHAR(40) NOT NULL,
+    senha_func VARCHAR(40) NOT NULL,
+    fk_cargo INT NOT NULL,
+    FOREIGN KEY (fk_cargo) REFERENCES cargo(pk_cargo)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
 
 create table cargo(
 pk_cargo int auto_increment primary key,
@@ -79,12 +89,16 @@ desenvolvedora varchar(150),
 publicadora varchar(150)
 );
 
+DROP TABLE IF EXISTS biblioteca_usuario;
+
 CREATE TABLE biblioteca_usuario (
-    pk_usuario
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
     nome_jogo VARCHAR(255) NOT NULL,
     imagem_jogo VARCHAR(255),
     url_jogo VARCHAR(255),
-    UNIQUE KEY (usuario_id, nome_jogo)
+    UNIQUE KEY (usuario_id, nome_jogo),
+    FOREIGN KEY (usuario_id) REFERENCES usuario(pk_usuario)
 );
 
 /*Tabela de Categorias*/
@@ -279,16 +293,24 @@ DESCRIBE usuario;
 DESCRIBE historico_jogos;
 
 ALTER TABLE usuario ADD COLUMN foto_perfil VARCHAR(255) NULL AFTER senha_temporaria;
+ALTER TABLE funcionario MODIFY senha_func VARCHAR(255) NOT NULL;
 
 SELECT * FROM adm WHERE email_adm = 'pamella_rafaeli@estudante.sesisenai.org.';
-UPDATE adm SET email_adm = 'matheus_fm_leal@estudante.sesisenai.org' WHERE pk_adm = 1;
-UPDATE adm SET email_adm = 'pamella_rafaeli@estudante.sesisenai.org' WHERE pk_adm = 3;
+UPDATE adm SET email_adm = 'matheus@admin.com' WHERE pk_adm = 1;
+UPDATE adm SET email_adm = 'pamella@admin.com' WHERE pk_adm = 3;
 UPDATE adm SET fk_cargo = 1 WHERE pk_adm = 3;
+-- Corrija os campos de senha para aceitar hash
+ALTER TABLE usuario MODIFY senha_user VARCHAR(255) NOT NULL;
+ALTER TABLE funcionario MODIFY senha_func VARCHAR(255) NOT NULL;
+ALTER TABLE adm MODIFY senha_user VARCHAR(255) NOT NULL;
+ALTER TABLE usuario
+ADD COLUMN perfil ENUM('adm', 'funcionario', 'cliente') NOT NULL DEFAULT 'cliente';
 
 /*=================*/
 
 /*Ver TUDO*/
 select * from biblioteca_usuario;
+select * from funcionario;
 select * from adm;
 select * from cargo;
 select * from codigo_game;
