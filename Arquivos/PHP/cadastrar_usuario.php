@@ -4,7 +4,7 @@ require_once 'conexao.php';
 
 $fk_cargo = $_SESSION['fk_cargo'] ?? null;
 
-if ($fk_cargo != 1 && $fk_cargo != 4) {
+if ($fk_cargo != 1 && $fk_cargo != 2) {
     echo "Acesso negado";
     exit;
 }

@@ -37,8 +37,11 @@ $menus = [
             "Alterar Usuário" => "alterar_usuario.php",
         ],
         "Funcionarios" => [
-            "Buscar Funcionario" => "buscar_funcionario.php",
-            "Cadastrar Funcionario" => "cadastrar_funcionario.php"
+            "Adicionar Funcionários" => "cadastrar_funcionario.php",
+            "Pesquisar Funcionários" => "buscar_funcionario.php",
+            "Listar Funcionários" => "listar_funcionario.php",
+            "Excluir Funcionários" => "excluir_funcionario.php",
+            "Alterar Funcionários" => "alterar_funcionario.php",
         ],
         "Jogos" => [
             "Buscar Jogo" => "buscar_jogo.php",
