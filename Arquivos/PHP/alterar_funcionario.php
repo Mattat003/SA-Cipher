@@ -9,27 +9,26 @@ if ($fk_cargo != 1 && $fk_cargo != 4) {
     exit;
 }
 
-
-$funcionario = null;
+$adm = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST['busca_funcionario'])) {
         $busca = trim($_POST['busca_funcionario']);
 
         if (is_numeric($busca)) {
-            $sql = "SELECT * FROM funcionario WHERE pk_funcionario = :busca";
+            $sql = "SELECT * FROM adm WHERE pk_adm = :busca";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':busca', $busca, PDO::PARAM_INT);
         } else {
-            $sql = "SELECT * FROM funcionario WHERE nome_func LIKE :busca";
+            $sql = "SELECT * FROM adm WHERE nome_adm LIKE :busca";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':busca', "%$busca%", PDO::PARAM_STR);
         }
 
         $stmt->execute();
-        $funcionario = $stmt->fetch(PDO::FETCH_ASSOC);
+        $adm = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$funcionario) {
+        if (!$adm) {
             echo "<script>alert('Funcionário não encontrado!');</script>";
         }
     }
@@ -41,7 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Alterar Funcionário</title>
-
     <style>
         body { 
             font-family: Arial, sans-serif; 
@@ -105,21 +103,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit">Buscar</button>
     </form>
 
-    <?php if ($funcionario): ?>
+    <?php if ($adm): ?>
         <form action="processa_alteracao_funcionario.php" method="POST">
-            <input type="hidden" name="pk_funcionario" value="<?= htmlspecialchars($funcionario['pk_funcionario']) ?>">
+            <input type="hidden" name="pk_adm" value="<?= htmlspecialchars($adm['pk_adm']) ?>">
 
-            <label for="nome_func">Nome:</label>
-            <input type="text" id="nome_func" name="nome_func" value="<?= htmlspecialchars($funcionario['nome_func']) ?>" required>
+            <label for="nome_adm">Nome:</label>
+            <input type="text" id="nome_adm" name="nome_adm" value="<?= htmlspecialchars($adm['nome_adm']) ?>" required>
 
-            <label for="email_func">Email:</label>
-            <input type="email" id="email_func" name="email_func" value="<?= htmlspecialchars($funcionario['email_func']) ?>" required>
+            <label for="email_adm">Email:</label>
+            <input type="email" id="email_adm" name="email_adm" value="<?= htmlspecialchars($adm['email_adm']) ?>" required>
 
-            <label for="senha_func">Nova Senha (preencha só se quiser alterar):</label>
-            <input type="password" id="senha_func" name="senha_func">
+            <label for="senha_user">Nova Senha (preencha só se quiser alterar):</label>
+            <input type="password" id="senha_user" name="senha_user">
 
             <label for="fk_cargo">Cargo:</label>
-            <input type="text" id="fk_cargo" name="fk_cargo" value="<?= htmlspecialchars($funcionario['fk_cargo']) ?>">
+            <input type="text" id="fk_cargo" name="fk_cargo" value="<?= htmlspecialchars($adm['fk_cargo']) ?>">
 
             <button type="submit">Alterar</button>
         </form>

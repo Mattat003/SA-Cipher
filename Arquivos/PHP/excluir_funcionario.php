@@ -4,34 +4,32 @@ require_once 'conexao.php';
 
 $fk_cargo = $_SESSION['fk_cargo'] ?? null;
 
+// Permissão de acesso
 if ($fk_cargo != 1 && $fk_cargo != 4) {
     echo "Acesso negado";
     exit;
 }
 
-// Inicializa a variável para armazenar os funcionários
-$funcionarios = [];
-
-// Busca todos os funcionários cadastrados, em ordem alfabética
-$sql = "SELECT * FROM funcionario ORDER BY nome_func ASC";
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$funcionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Se um ID for passado via GET, exclui o funcionário
+// Excluir funcionário da tabela adm
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $id_funcionario = $_GET['id'];
-
-    $sql = "DELETE FROM funcionario WHERE pk_funcionario = :id";
+    $id_adm = $_GET['id'];
+    $sql = "DELETE FROM adm WHERE pk_adm = :id";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':id', $id_funcionario, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $id_adm, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
         echo "<script>alert('Funcionário excluído com sucesso!'); window.location.href='excluir_funcionario.php';</script>";
+        exit;
     } else {
         echo "<script>alert('Erro ao excluir o funcionário!');</script>";
     }
 }
+
+// Buscar todos os funcionários da tabela adm
+$sql = "SELECT * FROM adm ORDER BY nome_adm ASC";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$adms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +46,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         color: #333;
         line-height: 1.6;
     }
-
     h2 {
         color: #2c056e;
         text-align: center;
@@ -56,7 +53,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         font-size: 2em;
         font-weight: 700;
     }
-
     table {
         width: 100%;
         border-collapse: collapse;
@@ -65,14 +61,12 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         border-radius: 8px;
         overflow: hidden;
     }
-
     table th, table td {
         border: 1px solid #eee;
         padding: 15px 18px;
         text-align: left;
         vertical-align: middle;
     }
-
     table th {
         background: #e6e1f4;
         color: #2c056e;
@@ -80,15 +74,12 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         text-transform: uppercase;
         font-size: 0.9em;
     }
-
     table tr:nth-child(even) {
         background: #f9f9f9;
     }
-
     table tr:hover {
         background: #f0f0f0;
     }
-
     table a {
         color: #510d96;
         text-decoration: none;
@@ -96,12 +87,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         font-weight: 500;
         transition: color 0.2s, text-decoration 0.2s;
     }
-
     table a:hover {
         color: #2c056e;
         text-decoration: underline;
     }
-
     p {
         text-align: center;
         color: #777;
@@ -112,7 +101,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         border-radius: 5px;
         background: #fefefe;
     }
-
     .back-link {
         display: block;
         text-align: center;
@@ -130,19 +118,16 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         transition: background 0.2s, color 0.2s, box-shadow 0.2s;
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-
     .back-link:hover {
         background: #2c056e;
         color: #fff;
         box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         transform: translateY(-1px);
     }
-
     .back-link:active {
         transform: translateY(0);
         box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }
-
     @media (max-width: 768px) {
         .container {
             margin: 10px;
@@ -156,7 +141,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             margin-right: 5px;
         }
     }
-
     @media (max-width: 480px) {
         h2 {
             font-size: 1.8em;
@@ -170,21 +154,23 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 <body>
     <h2>Excluir Funcionário</h2>
 
-    <?php if (!empty($funcionarios)): ?>
+    <?php if (!empty($adms)): ?>
         <table border="1">
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Email</th>
+                <th> Cargo </th>
                 <th>Ações</th>
             </tr>
-            <?php foreach ($funcionarios as $funcionario): ?>
+            <?php foreach ($adms as $adm): ?>
                 <tr>
-                    <td><?= htmlspecialchars($funcionario['pk_funcionario']) ?></td>
-                    <td><?= htmlspecialchars($funcionario['nome_func']) ?></td>
-                    <td><?= htmlspecialchars($funcionario['email_func']) ?></td>
+                    <td><?= htmlspecialchars($adm['pk_adm']) ?></td>
+                    <td><?= htmlspecialchars($adm['nome_adm']) ?></td>
+                    <td><?= htmlspecialchars($adm['email_adm']) ?></td>
+                    <td><?= htmlspecialchars($adm['fk_cargo']) ?></td> 
                     <td>
-                        <a href="excluir_funcionario.php?id=<?= htmlspecialchars($funcionario['pk_funcionario']) ?>" onclick="return confirm('Tem certeza que deseja excluir este funcionário?')">Excluir</a>
+                        <a href="excluir_funcionario.php?id=<?= htmlspecialchars($adm['pk_adm']) ?>" onclick="return confirm('Tem certeza que deseja excluir este funcionário?')">Excluir</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

@@ -8,46 +8,48 @@ if ($fk_cargo != 1 && $fk_cargo != 4) {
     echo "Acesso negado";
     exit;
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $pk_funcionario = $_POST['pk_funcionario'];
-    $nome_func = trim($_POST['nome_func']);
-    $email_func = trim($_POST['email_func']);
-    $senha_func = trim($_POST['senha_func']);
+    $pk_adm = $_POST['pk_adm'];
+    $nome_adm = trim($_POST['nome_adm']);
+    $email_adm = trim($_POST['email_adm']);
+    $senha_user = trim($_POST['senha_user']);
     $fk_cargo = trim($_POST['fk_cargo']);
 
-    if (empty($nome_func) || empty($email_func)) {
+    if (empty($nome_adm) || empty($email_adm)) {
         echo "<script>alert('Nome e Email são obrigatórios!'); history.back();</script>";
         exit();
     }
 
-    if (!empty($senha_func)) {
-        $senha_hash = password_hash($senha_func, PASSWORD_DEFAULT);
+    if (!empty($senha_user)) {
+        // ATENÇÃO: sua tabela tem senha_user VARCHAR(16) — aumente para 255 se usar password_hash!
+        $senha_hash = password_hash($senha_user, PASSWORD_DEFAULT);
 
-        $sql = "UPDATE funcionario SET 
-                    nome_func = :nome_func,
-                    email_func = :email_func,
-                    senha_func = :senha_func,
+        $sql = "UPDATE adm SET 
+                    nome_adm = :nome_adm,
+                    email_adm = :email_adm,
+                    senha_user = :senha_user,
                     fk_cargo = :fk_cargo
-                WHERE pk_funcionario = :pk_funcionario";
+                WHERE pk_adm = :pk_adm";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':nome_func', $nome_func);
-        $stmt->bindParam(':email_func', $email_func);
-        $stmt->bindParam(':senha_func', $senha_hash);
+        $stmt->bindParam(':nome_adm', $nome_adm);
+        $stmt->bindParam(':email_adm', $email_adm);
+        $stmt->bindParam(':senha_user', $senha_hash);
         $stmt->bindParam(':fk_cargo', $fk_cargo);
-        $stmt->bindParam(':pk_funcionario', $pk_funcionario, PDO::PARAM_INT);
+        $stmt->bindParam(':pk_adm', $pk_adm, PDO::PARAM_INT);
     } else {
-        $sql = "UPDATE funcionario SET 
-                    nome_func = :nome_func,
-                    email_func = :email_func,
+        $sql = "UPDATE adm SET 
+                    nome_adm = :nome_adm,
+                    email_adm = :email_adm,
                     fk_cargo = :fk_cargo
-                WHERE pk_funcionario = :pk_funcionario";
+                WHERE pk_adm = :pk_adm";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':nome_func', $nome_func);
-        $stmt->bindParam(':email_func', $email_func);
+        $stmt->bindParam(':nome_adm', $nome_adm);
+        $stmt->bindParam(':email_adm', $email_adm);
         $stmt->bindParam(':fk_cargo', $fk_cargo);
-        $stmt->bindParam(':pk_funcionario', $pk_funcionario, PDO::PARAM_INT);
+        $stmt->bindParam(':pk_adm', $pk_adm, PDO::PARAM_INT);
     }
 
     if ($stmt->execute()) {

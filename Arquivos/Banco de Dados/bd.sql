@@ -11,16 +11,6 @@ data_criacao datetime,
 senha_temporaria BOOLEAN DEFAULT FALSE,
 foto_perfil VARCHAR(255) NULL
 );
-CREATE TABLE funcionario (
-    pk_funcionario INT AUTO_INCREMENT PRIMARY KEY,
-    nome_func VARCHAR(40) NOT NULL,
-    email_func VARCHAR(40) NOT NULL,
-    senha_func VARCHAR(40) NOT NULL,
-    fk_cargo INT NOT NULL,
-    FOREIGN KEY (fk_cargo) REFERENCES cargo(pk_cargo)
-        ON DELETE RESTRICT
-        ON UPDATE CASCADE
-);
 
 create table cargo(
 pk_cargo int auto_increment primary key,
@@ -77,19 +67,18 @@ CREATE TABLE historico_jogos (
     nome_jogo VARCHAR(100) NOT NULL,
     hora_entrada DATETIME NOT NULL
 );
-create table jogo(
-pk_jogo int auto_increment primary key,
-nome_jogo varchar(100) not null,
-data_lanc date not null,
-fk_codigo int not null,
-foreign key (fk_codigo) references codigo_game(pk_codgame)
-on delete restrict 
-on update cascade,
-desenvolvedora varchar(150),
-publicadora varchar(150)
-);
 
-DROP TABLE IF EXISTS biblioteca_usuario;
+
+CREATE TABLE jogo (
+    pk_jogo INT AUTO_INCREMENT PRIMARY KEY,
+    nome_jogo VARCHAR(100) NOT NULL,
+    data_lanc DATE NOT NULL,
+    fk_codigo INT NOT NULL,
+    FOREIGN KEY (fk_codigo) REFERENCES codigo_game(pk_codgame)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    desenvolvedora VARCHAR(150)
+);
 
 CREATE TABLE biblioteca_usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -99,6 +88,24 @@ CREATE TABLE biblioteca_usuario (
     url_jogo VARCHAR(255),
     UNIQUE KEY (usuario_id, nome_jogo),
     FOREIGN KEY (usuario_id) REFERENCES usuario(pk_usuario)
+);
+CREATE TABLE compras (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    cartao VARCHAR(20) NOT NULL,      
+    data_validade VARCHAR(5) NOT NULL,
+    data_compra DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE funcionario (
+    pk_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+    nome_func VARCHAR(40) NOT NULL,
+    email_func VARCHAR(40) NOT NULL,
+    senha_func VARCHAR(40) NOT NULL,
+    fk_cargo INT NOT NULL,
+    FOREIGN KEY (fk_cargo) REFERENCES cargo(pk_cargo)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
 
 /*Tabela de Categorias*/
@@ -253,14 +260,14 @@ select * from codigo_game;
 /*=================*/
 
 /*ADD Jogos*/
-insert jogo values
-(1,'The Last of Us Part II','2020-06-19',1,6,5),
-(2,'Elden Ring','2022-02-25',2,7,7),
-(3,'Mario Odyssey','2017-10-27',3,1,1),
-(4,'Enigma do Medo','2024-11-28',4,10,10),
-(5,'Blue Prince','2025-04-10',5,8,9),
-(6,'Assassin''s Creed Valhalla','2020-11-10',6,4,4);
-select * from jogo;
+INSERT INTO jogo (pk_jogo, nome_jogo, data_lanc, fk_codigo)
+VALUES
+(1,'The Last of Us Part II','2020-06-19',1),
+(2,'Elden Ring','2022-02-25',2),
+(3,'Mario Odyssey','2017-10-27',3),
+(4,'Enigma do Medo','2024-11-28',4),
+(5,'Blue Prince','2025-04-10',5),
+(6,'Assassin''s Creed Valhalla','2020-11-10',6);
 /*=================*/
 
 /*ADD ADMs*/
@@ -305,20 +312,25 @@ ALTER TABLE funcionario MODIFY senha_func VARCHAR(255) NOT NULL;
 ALTER TABLE adm MODIFY senha_user VARCHAR(255) NOT NULL;
 ALTER TABLE usuario
 ADD COLUMN perfil ENUM('adm', 'funcionario', 'cliente') NOT NULL DEFAULT 'cliente';
+ALTER TABLE usuario MODIFY perfil ENUM('adm', 'funcionario') NOT NULL DEFAULT 'funcionario';
+ALTER TABLE compras ADD COLUMN jogo_id INT NOT NULL;
+ALTER TABLE compras ADD CONSTRAINT fk_jogo_id FOREIGN KEY (jogo_id) REFERENCES jogo(pk_jogo)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE;
 
 /*=================*/
+DESCRIBE funcionario;
 
 /*Ver TUDO*/
 select * from biblioteca_usuario;
+select * from compras;
 select * from funcionario;
-select * from adm;
 select * from cargo;
-select * from codigo_game;
-select * from desenvolvedora;
 select * from estilo;
 select * from genero;
 select * from idioma;
 select * from jogo;
+describe jogo;
 select * from modo;
 select * from plataforma;
 select * from publicadora;

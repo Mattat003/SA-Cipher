@@ -35,6 +35,7 @@ $menus = [
             "Listar Usuários" => "listar_usuario.php",
             "Excluir Usuário" => "excluir_usuario.php",
             "Alterar Usuário" => "alterar_usuario.php",
+            "Adicionar Jogo" => "adicionar_jogo.php",
         ],
         "Funcionarios" => [
             "Adicionar Funcionários" => "cadastrar_funcionario.php",
@@ -43,9 +44,12 @@ $menus = [
             "Excluir Funcionários" => "excluir_funcionario.php",
             "Alterar Funcionários" => "alterar_funcionario.php",
         ],
-        "Jogos" => [
+       "Jogos" => [
             "Buscar Jogo" => "buscar_jogo.php",
-            "Adicionar Jogo" => "adicionar_jogo.php",
+            "Cadastrar Jogo" => "cadastrar_jogo.php",
+            "Registrar Venda" => "registrar_venda.php",
+            "Relatório de Vendas" => "relatorio_vendas.php", 
+            "Gerenciar Estoque" => "estoque_jogo.php" 
         ],
         "Desenvolvedoras" => [
             "Buscar Desenvolvedora" => "buscar_desenvolvedora.php",

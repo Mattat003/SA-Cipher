@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'conexao.php';
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $fk_cargo = $_SESSION['fk_cargo'] ?? null;
 
@@ -8,6 +9,7 @@ $fk_cargo = $_SESSION['fk_cargo'] ?? null;
 if ($fk_cargo != 1) {
     echo "Acesso negado";
     exit;
+    
 }
 
 $mensagem = "";

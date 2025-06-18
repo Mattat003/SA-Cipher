@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'conexao.php';
+
 // Verifica se o usuário está logado
 if (!isset($_SESSION['pk_usuario'])) {
     header('Location: login.php');
@@ -9,6 +10,12 @@ if (!isset($_SESSION['pk_usuario'])) {
 
 // Pega o nome do usuário da sessão
 $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
+
+// Recupera jogos personalizados desse usuário (tabela biblioteca_usuario)
+$meu_id = $_SESSION['pk_usuario'];
+$stmt = $pdo->prepare("SELECT * FROM biblioteca_usuario WHERE usuario_id = ?");
+$stmt->execute([$meu_id]);
+$meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -127,6 +134,35 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
             border-top: 1px solid #333;
             margin-top: 20px;
         }
+        /* Estilo para resultados de busca */
+        .search-results {
+            position: absolute;
+            background: #222;
+            border: 1px solid #111;
+            z-index: 99;
+            width: 100%;
+            max-width: 350px;
+            left: 0;
+            top: 45px;
+            border-radius: 0 0 10px 10px;
+            display: none;
+        }
+        .result-item {
+            padding: 10px;
+            color: #fff;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+        }
+        .result-item:hover {
+            background: #00a1ff;
+            color: #fff;
+        }
+        .busca {
+            position: relative;
+            display: inline-block;
+            width: 350px;
+        }
     </style>
 </head>
 <body>
@@ -145,7 +181,7 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 
     <div class="busca">
         <span class="lupa">&#128269;</span>
-        <input type="text" id="searchInput" placeholder="Buscar..." />
+        <input type="text" id="searchInput" placeholder="Buscar na sua biblioteca..." autocomplete="off" />
         <div id="results" class="search-results"></div>
     </div>
 
@@ -157,7 +193,7 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 </header>
 
 <div class="container mt-3">
-    <div id="results" class="text-white"></div>
+    <div id="searchFeedback" class="text-white"></div>
 </div>
 
 <div class="container mt-5">
@@ -217,16 +253,9 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
     </div>
 </div>
 
-<div class="header">BIBLIOTECA DE JOGOS</div>
+<div class="header">MINHA BIBLIOTECA DE JOGOS</div>
 
-<?php
-// Recupera jogos personalizados desse usuário (tabela biblioteca_usuario)
-$meu_id = $_SESSION['pk_usuario'];
-$stmt = $pdo->prepare("SELECT * FROM biblioteca_usuario WHERE usuario_id = ?");
-$stmt->execute([$meu_id]);
-$meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
-<div class="games-container">
+<div class="games-container" id="minhaBiblioteca">
     <!-- JOGOS PERSONALIZADOS DO USUÁRIO -->
     <?php foreach ($meus_jogos as $jogo): ?>
         <div class="game-tile">
@@ -238,45 +267,6 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </a>
         </div>
     <?php endforeach; ?>
-
-
-    <!-- JOGOS AUTOMÁTICOS DA PASTA games -->
-    <?php
-    $gamesDir = __DIR__ . '/games';
-    $gamesUrlBase = 'games';
-    if (is_dir($gamesDir)) {
-        $games = scandir($gamesDir);
-        foreach ($games as $game) {
-            if ($game === '.' || $game === '..') continue;
-            $gamePath = $gamesDir . '/' . $game;
-            if (is_dir($gamePath)) {
-                $mainFile = null;
-                if (file_exists("$gamePath/index.html")) {
-                    $mainFile = 'index.html';
-                } elseif (file_exists("$gamePath/index.php")) {
-                    $mainFile = 'index.php';
-                } else {
-                    continue;
-                }
-                $cover = null;
-                foreach (['cover.jpg', 'cover.png', 'thumbnail.jpg', 'thumbnail.png'] as $img) {
-                    if (file_exists("$gamePath/$img")) {
-                        $cover = $gamesUrlBase . "/$game/$img";
-                        break;
-                    }
-                }
-                if (!$cover) $cover = '../img/default-game.jpg';
-                $gameName = ucwords(str_replace(['-', '_'], ' ', $game));
-                echo '
-                <div class="game-tile">
-                    <img src="' . htmlspecialchars($cover) . '" alt="' . htmlspecialchars($gameName) . '" />
-                    <h3>' . htmlspecialchars($gameName) . '</h3>
-                    <a href="' . $gamesUrlBase . '/' . $game . '/' . $mainFile . '" onclick="registrarEEntrar(\'' . addslashes($gameName) . '\', \'' . $gamesUrlBase . '/' . $game . '/' . $mainFile . '\'); return false;">JOGAR AGORA</a>
-                </div>';
-            }
-        }
-    }
-    ?>
 </div>
 
 <footer>
@@ -309,49 +299,62 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Passa os jogos do usuário para o JS -->
 <script>
-   document.addEventListener("DOMContentLoaded", () => {
+const userGames = <?php
+    $jsArray = [];
+    foreach ($meus_jogos as $jogo) {
+        // Usa "#" caso não haja URL
+        $jsArray[] = [
+            "nome" => $jogo["nome_jogo"],
+            "url" => $jogo["url_jogo"] ?: "#",
+            "imagem" => $jogo["imagem_jogo"] ?: "../img/default-game.jpg"
+        ];
+    }
+    echo json_encode($jsArray, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+?>;
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("searchInput");
     const resultsContainer = document.getElementById("results");
-
-    // Itens de exemplo para busca
-    const items = {
-        "Cyberpunk 2077": "cyberpunk.php",
-        "The Last of Us": "tlou.php",
-        "Red Dead Redemption 2": "rdr.php",
-        "Minecraft": "minecraft.php",
-        "God of War": "gow.php",
-        "Hollow Knight": "hollowknight.php",
-        "FIFA 22": "fifa.php"
-    };
+    const bibliotecaContainer = document.getElementById("minhaBiblioteca");
 
     // Limpar o campo de busca quando a página for carregada
     window.addEventListener('load', function() {
-        searchInput.value = '';  // Limpa o campo de busca
-        resultsContainer.innerHTML = '';  // Limpa qualquer resultado anterior
-        resultsContainer.style.display = "none";  // Esconde a lista de resultados
+        searchInput.value = '';
+        resultsContainer.innerHTML = '';
+        resultsContainer.style.display = "none";
     });
 
     // Função para tratar o input de busca
     searchInput.addEventListener("input", () => {
         const searchTerm = searchInput.value.toLowerCase().trim();
-        resultsContainer.innerHTML = "";  // Limpa os resultados anteriores
+        resultsContainer.innerHTML = "";
 
         if (searchTerm === "") {
-            resultsContainer.style.display = "none";  // Esconde resultados quando não há texto
+            resultsContainer.style.display = "none";
+            // Exibe todos os jogos da biblioteca
+            bibliotecaContainer.querySelectorAll(".game-tile").forEach(tile => tile.style.display = "");
             return;
         }
 
-        const filteredItems = Object.keys(items).filter(item =>
-            item.toLowerCase().includes(searchTerm)
+        // Filtra os jogos do usuário
+        const filteredGames = userGames.filter(jogo =>
+            jogo.nome.toLowerCase().includes(searchTerm)
         );
 
-        if (filteredItems.length > 0) {
-            filteredItems.forEach(item => {
+        if (filteredGames.length > 0) {
+            // Exibe sugestões de busca
+            filteredGames.forEach(jogo => {
                 const link = document.createElement("a");
                 link.className = "result-item";
-                link.textContent = item;
-                link.href = items[item];  // Vai para a página correspondente
+                link.textContent = jogo.nome;
+                link.href = jogo.url;
+                link.onclick = function(e) {
+                    e.preventDefault();
+                    registrarEEntrar(jogo.nome, jogo.url);
+                };
                 resultsContainer.appendChild(link);
             });
         } else {
@@ -361,12 +364,23 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             resultsContainer.appendChild(noResult);
         }
 
-        resultsContainer.style.display = "block";  // Exibe os resultados
+        resultsContainer.style.display = "block";
+
+        // Filtrar a biblioteca exibida
+        bibliotecaContainer.querySelectorAll(".game-tile").forEach(tile => {
+            const title = tile.querySelector("h3").textContent.toLowerCase();
+            tile.style.display = title.includes(searchTerm) ? "" : "none";
+        });
+    });
+
+    // Esconde as sugestões ao clicar fora
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+            resultsContainer.style.display = "none";
+        }
     });
 });
-</script>
-<script>
-    function registrarEEntrar(nomeJogo, urlDestino) {
+function registrarEEntrar(nomeJogo, urlDestino) {
     fetch('registrar_entrada.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -378,6 +392,5 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     });
 }
 </script>
-
 </body>
 </html>
