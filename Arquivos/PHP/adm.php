@@ -96,7 +96,7 @@ $menus_cargo = $menus[$fk_cargo] ?? [];
         }
         ul.menu > li > button:hover, ul.menu > li > a:hover { background: #510d96; color: #fff; }
         ul.dropdown-menu {
-            display: none; position: absolute; top: 44px; left: 0; background: #fff;
+            display: none; position: absolute; top: 39px; left: 0; background: #fff;
             min-width: 200px; box-shadow: 0 4px 24px #0001; border-radius: 0 0 8px 8px; padding: 0; z-index: 100;
         }
         ul.menu > li.open > ul.dropdown-menu,
