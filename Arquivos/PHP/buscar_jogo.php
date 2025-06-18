@@ -15,7 +15,7 @@ $resultados = [];
 
 if ($busca !== '') {
     $stmt = $pdo->prepare(
-        "SELECT * FROM jogo_fisico 
+        "SELECT * FROM jogo 
         WHERE nome_jogo LIKE ? OR plataforma LIKE ? OR desenvolvedora LIKE ?"
     );
     $like = "%$busca%";
@@ -23,7 +23,7 @@ if ($busca !== '') {
     $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
     // Se não buscou, mostra todos
-    $stmt = $pdo->query("SELECT * FROM jogo_fisico");
+    $stmt = $pdo->query("SELECT * FROM jogo");
     $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
@@ -35,7 +35,7 @@ if ($busca !== '') {
 </head>
 <body>
     <h2>Buscar Jogos Físicos</h2>
-    <form method="get" action="buscar_jogo_fisico.php" autocomplete="off">
+    <form method="get" action="buscar_jogo.php" autocomplete="off">
         <input type="text" name="busca" placeholder="Nome, plataforma ou desenvolvedora..." value="<?= htmlspecialchars($busca) ?>">
         <button type="submit">Buscar</button>
     </form>
