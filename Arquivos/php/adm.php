@@ -46,12 +46,13 @@ $menus = [
        "Jogos" => [
             "Buscar Jogo" => "buscar_jogo.php",
             "Cadastrar Jogo" => "cadastrar_jogo.php",
+            "Lista de Jogos" => "listar_jogo.php",
+            "Excluir Jogos" => "excluir_jogo.php",
             "Locaçoes pendentes" => "liberar_locacoes.php", 
         ],
     ],
     CARGO_FUNCIONARIO => [
         "Usuários" => [
-            "Adicionar Usuário" => "cadastrar_usuario.php",
             "Pesquisar Usuários" => "buscar_usuario.php",
             "Listar Usuários" => "listar_usuario.php",
         ],
