@@ -53,17 +53,172 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Cadastrar Usuário</title>
     <style>
-        body { background: #f8f8fc; font-family: Arial, sans-serif; }
-        form { max-width: 350px; background: #fff; margin: 40px auto; border-radius: 10px; padding: 28px 25px 18px 25px; box-shadow: 0 4px 24px #0001; }
-        h2 { text-align: center; color: #510d96; }
-        label { color: #222; font-weight: 500; }
-        input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #bbb; margin-bottom: 18px; }
-        button { background: #510d96; color: #fff; border: none; padding: 8px 20px; border-radius: 6px; font-size: 1rem; margin-right: 8px; cursor: pointer; }
-        button[type="reset"] { background: #bbb; color: #222; }
-        .mensagem { text-align: center; color: #510d96; margin-bottom: 12px; font-weight: bold; }
-        a { display: block; text-align: center; margin-top: 14px; color: #510d96; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-    </style>
+    body {
+        background-color: #12002b;
+        font-family: 'Motiva Sans', 'Segoe UI', sans-serif;
+        color: #f0e6ff;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+
+    form {
+        max-width: 350px;
+        background: #1e1b2e;
+        margin: 60px auto;
+        border-radius: 12px;
+        padding: 28px 25px 20px 25px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+        border: 1px solid #5d3bad;
+    }
+
+    h2 {
+        text-align: center;
+        color: #c084fc;
+        margin-bottom: 20px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    label {
+        color: #e9d5ff;
+        font-weight: 500;
+        display: block;
+        margin-top: 12px;
+        margin-bottom: 6px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid #2a2540;
+        background: #252836;
+        color: #f0e6ff;
+        margin-bottom: 18px;
+        font-size: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+    }
+
+    input:focus {
+        border-color: #7a5af5;
+        background-color: #2a2e3c;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(122, 90, 245, 0.3);
+    }
+
+    /* BOTÃO idêntico ao .back-link */
+    button[type="submit"],
+    button[type="reset"]  {
+        display: block;
+        text-align: center;
+        background: #510d96;
+        color: #fff;
+        font-weight: 600;
+        padding: 12px 25px;
+        border: 1px solid #510d96;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button:hover {
+        background: #7a5af5;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        transform: translateY(-1px);
+    }
+
+    button:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+   
+
+    .mensagem {
+        text-align: center;
+        color: #c084fc;
+        margin-bottom: 14px;
+        font-weight: bold;
+    }
+
+    a {
+        display: block;
+        text-align: center;
+        margin-top: 18px;
+        color: #c084fc;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: #e9d5ff;
+    }
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        color: #fff;
+        background: #510d96;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 12px 25px;
+        border: 1px solid #510d96;
+        border-radius: 8px;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .back-link:hover {
+        background: #7a5af5;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        transform: translateY(-1px);
+    }
+
+    .back-link:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+        .container {
+            margin: 10px;
+            padding: 20px;
+        }
+
+        table th, table td {
+            padding: 10px;
+            font-size: 0.85em;
+        }
+
+        table a {
+            margin-right: 5px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h2 {
+            font-size: 1.8em;
+        }
+
+        .back-link {
+            max-width: 100%;
+        }
+    }
+</style>
+
+
+
 </head>
 <body>
     <form action="cadastrar_usuario.php" method="POST" autocomplete="off">
@@ -83,7 +238,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <button type="submit">Cadastrar</button>
         <button type="reset">Cancelar</button>
-        <a href="adm.php">Voltar</a>
     </form>
+    <a href="adm.php" class="back-link">Voltar</a>
 </body>
 </html>
