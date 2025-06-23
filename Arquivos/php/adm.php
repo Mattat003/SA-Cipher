@@ -35,7 +35,6 @@ $menus = [
             "Listar Usuários" => "listar_usuario.php",
             "Excluir Usuário" => "excluir_usuario.php",
             "Alterar Usuário" => "alterar_usuario.php",
-            "Adicionar Jogo" => "adicionar_jogo.php",
         ],
         "Funcionarios" => [
             "Adicionar Funcionários" => "cadastrar_funcionario.php",
@@ -49,27 +48,23 @@ $menus = [
             "Cadastrar Jogo" => "cadastrar_jogo.php",
             "Locaçoes pendentes" => "liberar_locacoes.php", 
         ],
-        "Desenvolvedoras" => [
-            "Buscar Desenvolvedora" => "buscar_desenvolvedora.php",
-            "Adicionar Desenvolvedora" => "cadastrar_desenvolvedora.php",
-        ]
     ],
     CARGO_FUNCIONARIO => [
-        "Conteúdo" => [
-            "Adicionar Conteúdo" => "cadastrar_conteudo.php",
-        ],
         "Usuários" => [
             "Adicionar Usuário" => "cadastrar_usuario.php",
+            "Pesquisar Usuários" => "buscar_usuario.php",
+            "Listar Usuários" => "listar_usuario.php",
         ],
-        "Clientes e Fornecedores" => [
-            "Buscar Cliente" => "buscar_cliente.php",
-            "Buscar Fornecedor" => "buscar_fornecedor.php",
+        "Funcionários" => [
+            "Pesquisar Funcionários" => "buscar_funcionario.php",
+            "Listar Funcionários" => "listar_funcionario.php",
         ],
+       
         "Jogos" => [
             "Buscar Jogo" => "buscar_jogo.php",
+            "Lista de Jogos" => "listar_jogo.php",
         ]
     ],
-    // Outros cargos podem ser adicionados aqui
 ];
 
 // Defina o menu do cargo logado

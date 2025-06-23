@@ -57,13 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="date" name="data_lanc" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">Código do Game</label>
-            <select name="fk_codigo" class="form-control" required>
-                <option value="">Selecione</option>
-                <?php foreach ($codigos as $codigo): ?>
-                    <option value="<?= $codigo['pk_codgame'] ?>"><?= htmlspecialchars($codigo['codigo']) ?></option>
-                <?php endforeach; ?>
-            </select>
         </div>
         <div class="mb-3">
             <label class="form-label">Link do Jogo</label>

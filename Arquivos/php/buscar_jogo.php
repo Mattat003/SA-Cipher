@@ -2,10 +2,9 @@
 session_start();
 require_once 'conexao.php';
 
+// Só permite acesso para cargos 1 e 2
 $fk_cargo = $_SESSION['fk_cargo'] ?? null;
-
-// Só permite acesso para cargos 1 e 4
-if ($fk_cargo != 1 && $fk_cargo != 4) {
+if ($fk_cargo != 1 && $fk_cargo != 2) {
     echo "Acesso negado";
     exit;
 }
@@ -13,16 +12,19 @@ if ($fk_cargo != 1 && $fk_cargo != 4) {
 $busca = trim($_GET['busca'] ?? '');
 $resultados = [];
 
+// Ajuste os nomes dos campos conforme seu banco de dados.
+// Exemplo de estrutura: 
+// id_jogo | nome_jogo | data_lanc | fk_plataforma | fk_desenvolvedora | fk_genero | imagem_jogo | link_gif
+
 if ($busca !== '') {
     $stmt = $pdo->prepare(
         "SELECT * FROM jogo 
-        WHERE nome_jogo LIKE ? OR plataforma LIKE ? OR desenvolvedora LIKE ?"
+        WHERE nome_jogo LIKE ?"
     );
     $like = "%$busca%";
-    $stmt->execute([$like, $like, $like]);
+    $stmt->execute([$like]);
     $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
-    // Se não buscou, mostra todos
     $stmt = $pdo->query("SELECT * FROM jogo");
     $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -32,35 +34,47 @@ if ($busca !== '') {
 <head>
     <meta charset="UTF-8">
     <title>Buscar Jogos Físicos</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        h2 { color: #222; }
+        table { background: #fff; border-collapse: collapse; margin: 24px 0; }
+        th, td { padding: 8px 14px; border: 1px solid #ccc; text-align: center; }
+        th { background: #eee; }
+        img { max-width: 70px; max-height: 70px; border-radius: 6px; }
+        .form-area { margin: 24px 0; }
+    </style>
 </head>
 <body>
     <h2>Buscar Jogos Físicos</h2>
-    <form method="get" action="buscar_jogo.php" autocomplete="off">
-        <input type="text" name="busca" placeholder="Nome, plataforma ou desenvolvedora..." value="<?= htmlspecialchars($busca) ?>">
+    <form method="get" action="buscar_jogo.php" autocomplete="off" class="form-area">
+        <input type="text" name="busca" placeholder="Nome do jogo..." value="<?= htmlspecialchars($busca) ?>">
         <button type="submit">Buscar</button>
     </form>
 
-    <h3>Resultados:</h3>
+    <h3>Resultados (<?= count($resultados) ?>):</h3>
     <?php if (count($resultados) > 0): ?>
-        <table border="1" cellpadding="6" cellspacing="0">
+        <table>
             <tr>
+                <th>Imagem</th>
                 <th>Nome</th>
-                <th>Plataforma</th>
-                <th>Desenvolvedora</th>
-                <th>Gênero</th>
-                <th>Preço</th>
-                <th>Estoque</th>
-                <th>Data de Cadastro</th>
+                <th>Data de Lançamento</th>
             </tr>
             <?php foreach ($resultados as $jogo): ?>
                 <tr>
+                    <td>
+                        <?php if (!empty($jogo['imagem_jogo'])): ?>
+                            <img src="<?= htmlspecialchars($jogo['imagem_jogo']) ?>" alt="<?= htmlspecialchars($jogo['nome_jogo']) ?>">
+                        <?php else: ?>
+                            <span>Sem imagem</span>
+                        <?php endif; ?>
+                    </td>
                     <td><?= htmlspecialchars($jogo['nome_jogo']) ?></td>
-                    <td><?= htmlspecialchars($jogo['plataforma']) ?></td>
-                    <td><?= htmlspecialchars($jogo['desenvolvedora']) ?></td>
-                    <td><?= htmlspecialchars($jogo['genero']) ?></td>
-                    <td>R$ <?= number_format($jogo['preco'], 2, ',', '.') ?></td>
-                    <td><?= $jogo['estoque'] ?></td>
-                    <td><?= $jogo['data_cadastro'] ?></td>
+                    <td>
+                        <?= ($jogo['data_lanc'] && $jogo['data_lanc'] != '0000-00-00') 
+                            ? date('d/m/Y', strtotime($jogo['data_lanc'])) 
+                            : 'Indefinida' ?>
+                    </td>
+                
                 </tr>
             <?php endforeach; ?>
         </table>
