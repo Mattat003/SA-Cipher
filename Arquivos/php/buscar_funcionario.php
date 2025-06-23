@@ -43,84 +43,206 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Administrador</title>
     <style>
-        /* ... seu CSS permanece igual ... */
-        body {
-            font-family: Arial, sans-serif;
-            background: #f6f6fa;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
+    body {
+        font-family: 'Motiva Sans', 'Segoe UI', sans-serif;
+        background-color: #12002b;
+        color: #f0e6ff;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        background: #1e003a;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+        color: #c7b3e6;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2em;
+        font-weight: 700;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background: #2a0a4a;
+        border-radius: 10px;
+        box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.1);
+    }
+
+    form label {
+        font-weight: 600;
+        color: #c7b3e6;
+    }
+
+    form input[type="text"] {
+        padding: 12px 18px;
+        border: 1px solid #3e2f6d;
+        border-radius: 6px;
+        background: #1b112e;
+        color: #f0e6ff;
+        flex-grow: 1;
+        max-width: 350px;
+        font-size: 1em;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    form input[type="text"]:focus {
+        border-color: #9d7aff;
+        box-shadow: 0 0 0 3px rgba(122, 90, 245, 0.3);
+        outline: none;
+    }
+
+    form button {
+        background: #7a5af5;
+        color: #fff;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1em;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    form button:hover {
+        background: #9d7aff;
+        box-shadow: 0 0 12px rgba(122, 90, 245, 0.6);
+        transform: translateY(-1px);
+    }
+
+    form button:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        background: #1e1b2e;
+    }
+
+    table th, table td {
+        border: 1px solid #2b204d;
+        padding: 15px 18px;
+        text-align: left;
+        vertical-align: middle;
+        color: #f0e6ff;
+    }
+
+    table th {
+        background: #2a0a4a;
+        color: #9d7aff;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 0.9em;
+    }
+
+    table tr:nth-child(even) {
+        background: #1a1627;
+    }
+
+    table tr:hover {
+        background: #2c234a;
+    }
+
+    table a {
+        color: #9d7aff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s, text-decoration 0.2s;
+    }
+
+    table a:hover {
+        color: #ffffff;
+        text-decoration: underline;
+    }
+
+    p {
+        text-align: center;
+        color: #c7b3e6;
+        margin-top: 20px;
+        font-size: 1.1em;
+        padding: 10px;
+        border: 1px dashed #5d3bad;
+        border-radius: 6px;
+        background: #1e1b2e;
+    }
+
+    
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        color: #fff;
+        background: #510d96;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 12px 25px;
+        border: 1px solid #510d96;
+        border-radius: 8px;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .back-link:hover {
+        background: #7a5af5;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        transform: translateY(-1px);
+    }
+
+    .back-link:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
         .container {
-            max-width: 900px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+            margin: 10px;
+            padding: 20px;
         }
-        h2 { color: #2c056e; text-align: center; margin-bottom: 30px; font-size: 2em; font-weight: 700; }
-        form {
-            display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; justify-content: center; align-items: center;
-            padding: 15px; background: #e6e1f4; border-radius: 8px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-        }
-        form label { font-weight: 600; color: #555; flex-shrink: 0; }
-        form input[type="text"] {
-            padding: 12px 18px; border: 1px solid #ddd; border-radius: 5px;
-            flex-grow: 1; max-width: 350px; font-size: 1em; transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        form input[type="text"]:focus {
-            border-color: #510d96; box-shadow: 0 0 0 3px rgba(81, 13, 150, 0.2); outline: none;
-        }
-        form button {
-            background: #510d96; color: #fff; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer;
-            transition: background 0.2s ease, transform 0.1s ease; font-size: 1em; font-weight: 600;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        form button:hover {
-            background: #2c056e; transform: translateY(-1px);
-        }
-        form button:active {
-            transform: translateY(0); box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
-        table {
-            width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border-radius: 8px; overflow: hidden;
-        }
+
         table th, table td {
-            border: 1px solid #eee; padding: 15px 18px; text-align: left; vertical-align: middle;
+            padding: 10px;
+            font-size: 0.85em;
         }
-        table th {
-            background: #e6e1f4; color: #2c056e; font-weight: 700; text-transform: uppercase; font-size: 0.9em;
+
+        table a {
+            margin-right: 5px;
         }
-        table tr:nth-child(even) { background: #f9f9f9; }
-        table tr:hover { background: #f0f0f0; }
-        table a { color: #510d96; text-decoration: none; margin-right: 12px; font-weight: 500; transition: color 0.2s, text-decoration 0.2s; }
-        table a:hover { color: #2c056e; text-decoration: underline; }
-        p {
-            text-align: center; color: #777; margin-top: 20px; font-size: 1.1em; padding: 10px; border: 1px dashed #ccc;
-            border-radius: 5px; background: #fefefe;
+    }
+
+    @media (max-width: 480px) {
+        h2 {
+            font-size: 1.8em;
         }
+
         .back-link {
-            display: block; text-align: center; margin-top: 30px; color: #fff; background: #510d96; text-decoration: none;
-            font-weight: 600; padding: 12px 25px; border: 1px solid #510d96; border-radius: 5px; max-width: 200px;
-            margin-left: auto; margin-right: auto; transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            max-width: 100%;
         }
-        .back-link:hover { background: #2c056e; color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transform: translateY(-1px); }
-        .back-link:active { transform: translateY(0); box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-        @media (max-width: 768px) {
-            .container { margin: 10px; padding: 20px; }
-            form { flex-direction: column; align-items: stretch; }
-            form input[type="text"], form button { width: 100%; max-width: none; }
-            table th, table td { padding: 10px; font-size: 0.85em; }
-            table a { margin-right: 5px; }
-        }
-        @media (max-width: 480px) {
-            h2 { font-size: 1.8em; }
-            .back-link { max-width: 100%; }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
     <div class="container">
@@ -159,7 +281,8 @@ try {
                 <p>Nenhum administrador encontrado com os critérios de busca.</p>
             <?php endif; ?>
         <?php endif; ?>
-        <a href="adm.php" class="back-link">Voltar ao Painel</a>
+       
     </div>
+    <a href="adm.php" class="back-link">Voltar</a>
 </body>
 </html>

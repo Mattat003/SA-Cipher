@@ -42,137 +42,149 @@ function nomeCargo($fk_cargo) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar Funcionários</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f6f6fa;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-            line-height: 1.6;
-        }
+    body {
+        background-color: #12002b;
+        color: #f0e6ff;
+        font-family: 'Motiva Sans', 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+        line-height: 1.6;
+    }
 
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        background: #1e1b2e;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        border: 1px solid #5d3bad;
+    }
+
+    h2 {
+        color: #c084fc;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2em;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #252836;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    }
+
+    table th, table td {
+        border: 1px solid #2a2540;
+        padding: 15px 18px;
+        text-align: left;
+        vertical-align: middle;
+        color: #f0e6ff;
+    }
+
+    table th {
+        background: #5d3bad;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 0.9em;
+    }
+
+    table tr:nth-child(even) {
+        background: #2a2e3c;
+    }
+
+    table tr:hover {
+        background: #373b51;
+    }
+
+    table a {
+        color: #c084fc;
+        text-decoration: none;
+        margin-right: 12px;
+        font-weight: 500;
+        transition: color 0.2s, text-decoration 0.2s;
+    }
+
+    table a:hover {
+        color: #7a5af5;
+        text-decoration: underline;
+    }
+
+    p {
+        text-align: center;
+        color: #c4b5fd;
+        margin-top: 20px;
+        font-size: 1.1em;
+        padding: 10px;
+        border: 1px dashed #5d3bad;
+        border-radius: 8px;
+        background: #1e1b2e;
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        color: #fff;
+        background: #510d96;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 12px 25px;
+        border: 1px solid #510d96;
+        border-radius: 8px;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .back-link:hover {
+        background: #7a5af5;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        transform: translateY(-1px);
+    }
+
+    .back-link:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
         .container {
-            max-width: 900px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            color: #2c056e;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2em;
-            font-weight: 700;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border-radius: 8px;
-            overflow: hidden;
+            margin: 10px;
+            padding: 20px;
         }
 
         table th, table td {
-            border: 1px solid #eee;
-            padding: 15px 18px;
-            text-align: left;
-            vertical-align: middle;
-        }
-
-        table th {
-            background: #e6e1f4;
-            color: #2c056e;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.9em;
-        }
-
-        table tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-        table tr:hover {
-            background: #f0f0f0;
+            padding: 10px;
+            font-size: 0.85em;
         }
 
         table a {
-            color: #510d96;
-            text-decoration: none;
-            margin-right: 12px;
-            font-weight: 500;
-            transition: color 0.2s, text-decoration 0.2s;
+            margin-right: 5px;
         }
-        table a:hover {
-            color: #2c056e;
-            text-decoration: underline;
-        }
+    }
 
-        p {
-            text-align: center;
-            color: #777;
-            margin-top: 20px;
-            font-size: 1.1em;
-            padding: 10px;
-            border: 1px dashed #ccc;
-            border-radius: 5px;
-            background: #fefefe;
+    @media (max-width: 480px) {
+        h2 {
+            font-size: 1.8em;
         }
 
         .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 30px;
-            color: #fff;
-            background: #510d96;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 12px 25px;
-            border: 1px solid #510d96;
-            border-radius: 5px;
-            max-width: 200px;
-            margin-left: auto;
-            margin-right: auto;
-            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            max-width: 100%;
         }
-        .back-link:hover {
-            background: #2c056e;
-            color: #fff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            transform: translateY(-1px);
-        }
-        .back-link:active {
-            transform: translateY(0);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                padding: 20px;
-            }
-            table th, table td {
-                padding: 10px;
-                font-size: 0.85em;
-            }
-            table a {
-                margin-right: 5px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h2 {
-                font-size: 1.8em;
-            }
-            .back-link {
-                max-width: 100%;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
     <div class="container">
