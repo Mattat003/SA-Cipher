@@ -34,7 +34,7 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="games-container">
         <?php foreach ($jogos as $jogo): ?>
             <div class="game-tile">
-                <img src="/SA-Cipher-main/Arquivos/PHP/<?= htmlspecialchars($jogo['imagem_jogo']) ?>" alt="<?= htmlspecialchars($jogo['nome_jogo']) ?>" />
+            <img src="<?= htmlspecialchars($jogo['imagem_jogo']) ?>" alt="<?= htmlspecialchars($jogo['nome_jogo']) ?>" />
                 <h3><?= htmlspecialchars($jogo['nome_jogo']) ?></h3>
                 <form method="post" action="locar_jogo.php">
                     <input type="hidden" name="jogo_id" value="<?= $jogo['pk_jogo'] ?>">

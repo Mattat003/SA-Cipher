@@ -10,12 +10,10 @@ if (!isset($_SESSION['pk_usuario'])) {
 $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 $meu_id = $_SESSION['pk_usuario'];
 
-// Agora usando JOIN para pegar info correta do jogo
 $stmt = $pdo->prepare("
-    SELECT j.nome_jogo, j.imagem_jogo, j.url_jogo
-    FROM biblioteca_usuario bu
-    JOIN jogo j ON bu.jogo_id = j.pk_jogo
-    WHERE bu.usuario_id = ?
+    SELECT nome_jogo, imagem_jogo, url_jogo
+    FROM biblioteca_usuario
+    WHERE usuario_id = ?
 ");
 $stmt->execute([$meu_id]);
 $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
