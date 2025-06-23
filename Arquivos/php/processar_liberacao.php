@@ -23,21 +23,25 @@ if (isset($_POST['locacao_id'], $_POST['acao'])) {
             $jogo = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($jogo) {
-                // Adiciona na biblioteca do usuário com imagem e url
+                // Adiciona na biblioteca do usuário com os dados completos
                 $stmt = $pdo->prepare(
-                    "INSERT IGNORE INTO biblioteca_usuario (usuario_id, nome_jogo, imagem_jogo, url_jogo) VALUES (?, ?, ?, ?)"
+                    "INSERT IGNORE INTO biblioteca_usuario (usuario_id, nome_jogo, imagem_jogo, url_jogo, jogo_id)
+                     VALUES (?, ?, ?, ?, ?)"
                 );
                 $stmt->execute([
                     $locacao['usuario_id'],
                     $jogo['nome_jogo'],
                     $jogo['imagem_jogo'],
-                    $jogo['url_jogo']
+                    $jogo['url_jogo'],
+                    $locacao['jogo_id']
                 ]);
             }
+
             // Atualiza status da locação
             $stmt = $pdo->prepare("UPDATE locacoes_pendentes SET status = 'liberado' WHERE id = ?");
             $stmt->execute([$locacao_id]);
-        } elseif ($acao == 'recusar') {
+
+        } elseif ($acao === 'recusar') {
             $stmt = $pdo->prepare("UPDATE locacoes_pendentes SET status = 'recusado' WHERE id = ?");
             $stmt->execute([$locacao_id]);
         }
