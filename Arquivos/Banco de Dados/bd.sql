@@ -18,6 +18,7 @@ CREATE TABLE usuario (
     senha_temporaria BOOLEAN DEFAULT FALSE,
     foto_perfil VARCHAR(255) NULL
 );
+ALTER TABLE usuario ADD COLUMN perfil ENUM('adm', 'funcionario', 'cliente') NOT NULL DEFAULT 'cliente';
 
 CREATE TABLE adm (
     pk_adm INT AUTO_INCREMENT PRIMARY KEY,
