@@ -256,13 +256,13 @@ INSERT INTO codigo_game (pk_codgame, codigo) VALUES
 (5,'1234A-5678B-9CDEF-GHIJK-LMNOP'),
 (6,'QAZ12-WSX34-EDC56-RFV78-TGB90');
 
-INSERT INTO jogo (pk_jogo, nome_jogo, data_lanc, fk_codigo, desenvolvedora) VALUES
-(1,'The Last of Us Part II','2020-06-19',1,'Naughty Dog'),
-(2,'Elden Ring','2022-02-25',2,'FromSoftware'),
-(3,'Mario Odyssey','2017-10-27',3,'Nintendo'),
-(4,'Enigma do Medo','2024-11-28',4,'Independente'),
-(5,'Blue Prince','2025-04-10',5,'Independente'),
-(6,'Assassin''s Creed Valhalla','2020-11-10',6,'Ubisoft');
+INSERT INTO jogo (pk_jogo, nome_jogo, data_lanc, fk_codigo, desenvolvedora, imagem_jogo) VALUES
+(1,'The Last of Us Part II','2020-06-19',1,'Naughty Dog','uploads/jogo_685aebf609de3.jpg'),
+(2,'Elden Ring','2022-02-25',2,'FromSoftware','uploads/jogo_685ae7e5a55a9.jpg'),
+(3,'Mario Odyssey','2017-10-27',3,'Nintendo','uploads/jogo_685ae82644148.jpg'),
+(4,'Enigma do Medo','2024-11-28',4,'Independente','uploads/jogo_685adc87c44be.jpg'),
+(5,'Blue Prince','2025-04-10',5,'Independente','uploads/jogo_685ae89243103.jpg'),
+(6,'Assassin''s Creed Valhalla','2020-11-10',6,'Ubisoft','uploads/jogo_685ae8cc1ba2a.jpg');
 
 INSERT INTO adm (pk_adm, nome_adm, email_adm, senha_user, fk_cargo) VALUES
 (1,'Matheus Leal','matheus@admin.com', '12345678',1),
