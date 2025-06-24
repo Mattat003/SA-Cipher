@@ -83,9 +83,74 @@ $plataformas = $pdo->query("SELECT pk_plataforma, nome_plat FROM plataforma ORDE
         .filtro-form button:hover {
             background: #2c056e;
         }
-        h6{
-            text-align: left;
-            padding-left: 25px;
+        h6, h3{
+            text-align: center;
+        }
+        .game-tile a {
+            display: inline-block;
+            background: linear-gradient(45deg,rgb(91, 21, 148),rgb(59, 15, 179));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 45px 15px;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: calc(100% - 30px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .game-tile a:hover {
+            background: linear-gradient(45deg,rgb(77, 31, 184),rgb(149, 51, 230));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .game-tile a:active {
+            transform: translateY(0);
+        }
+        .voltar-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-family: 'Motiva Sans', Arial, Helvetica, sans-serif;
+            font-size: 1.06rem;
+            font-weight: 600;
+            padding: 6px 22px;
+            border-radius: 18px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: color 0.17s, background 0.17s, text-decoration 0.19s;
+            box-shadow: none;
+            outline: none;
+            line-height: 1.4;
+            vertical-align: middle;
+            display: inline-block;
+            margin-left: 24px;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .voltar-btn:hover,
+        .voltar-btn:focus {
+            color: #ffffff;
+            background: #5d3bad;
+            text-decoration: underline;
+        }
+
+        .voltar-btn:active {
+            color: #ffffff;
+            background: #5d3bad;
+        }
+        footer {
+            background-color: #2a0a4a;
+            color: white;
+            margin-top: 40px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            border-top: 1px solid #333;
         }
     </style>
 </head>
@@ -95,7 +160,7 @@ $plataformas = $pdo->query("SELECT pk_plataforma, nome_plat FROM plataforma ORDE
         <h1>CIPHER</h1>
         <img src="../img/capybara.png" alt="Logo Capivara" height="48" />
     </div>
-    <a href="index.php" class="voltar-btn">Voltar para o Início</a>
+    <a href="index.php" class="voltar-btn" style="text-decoration: none;">Voltar para o Início</a>
 </header>
 
 <div class="header">JOGOS PARA LOCAÇÃO</div>
@@ -148,12 +213,18 @@ $plataformas = $pdo->query("SELECT pk_plataforma, nome_plat FROM plataforma ORDE
             <h6><?= htmlspecialchars($jogo['desenvolvedora']) ?></h6>
             <form method="post" action="locar_jogo.php">
                 <input type="hidden" name="jogo_id" value="<?= $jogo['pk_jogo'] ?>">
-                <button type="submit" class="locar-btn">Locar Jogo</button>
+                <button type="submit" name="locar" value="ID_DO_JOGO" style="all: unset; cursor: pointer; text-align: center;">
+                    <a>Locar Jogo</a>
+                </button>
             </form>
         </div>
     <?php endforeach; ?>
 </div>
-
+<footer>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Cipher Games. Todos os direitos reservados.</p>
+    </div>
+</footer>
 <script>
     const selectCategoria = document.getElementById('categoria_tipo');
     const hiddenCategoriaId = document.getElementById('categoria_id');

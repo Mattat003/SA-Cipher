@@ -38,7 +38,7 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
-            padding: 20px;
+            padding: 75px;
         }
         .game-tile {
             background-color: #1a1a1a;
@@ -109,7 +109,7 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             padding: 0 20px;
         }
         .footer-section h3 {
-            color: #00a1ff;
+            color:rgb(255, 255, 255);
             margin-bottom: 15px;
         }
         .footer-section p, .footer-section a {
@@ -156,31 +156,31 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             width: 350px;
         }
        header a[href="jogos.php"] {
-    color:rgb(255, 255, 255);
-    background: none;
-    border: none;
-    font-family: 'Motiva Sans', Arial, Helvetica, sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    padding: 3px 10px;
-    margin: 0 12px 0 0;
-    border-radius: 6px;
-    letter-spacing: 0.5px;
-    text-decoration: none;
-    transition: color 0.17s, background 0.17s, text-decoration 0.19s;
-    box-shadow: none;
-    outline: none;
-    line-height: 1.4;
-    vertical-align: middle;
-    display: inline-block;
-}
+            color:rgb(255, 255, 255);
+            background: none;
+            border: none;
+            font-family: 'Motiva Sans', Arial, Helvetica, sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            margin: 0 12px 0 450px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: color 0.17s, background 0.17s, text-decoration 0.19s;
+            box-shadow: none;
+            outline: none;
+            line-height: 1.4;
+            vertical-align: middle;
+            display: inline-block;
+        }
 
-header a[href="jogos.php"]:hover,
-header a[href="jogos.php"]:focus {
-    color: #fff;
-    background:rgba(41, 17, 129, 0.84);
-    text-decoration: none;
-}
+        header a[href="jogos.php"]:hover,
+        header a[href="jogos.php"]:focus {
+            color: #fff;
+            background:rgba(41, 17, 129, 0.84);
+            text-decoration: none;
+        }
 
 
     </style>
@@ -281,7 +281,7 @@ header a[href="jogos.php"]:focus {
 <div class="games-container" id="minhaBiblioteca">
     <?php foreach ($meus_jogos as $jogo): ?>
         <div class="game-tile">
-<img src="<?= $jogo['imagem_jogo'] ? htmlspecialchars($jogo['imagem_jogo']) : '../img/default-game.jpg' ?>" alt="<?= htmlspecialchars($jogo['nome_jogo']) ?>" />
+            <img src="<?= htmlspecialchars($jogo['imagem_jogo']) ? htmlspecialchars($jogo['imagem_jogo']) : '../img/semImage.jpg'?>" alt="<?= htmlspecialchars($jogo['nome_jogo']) ?>" />
             <h3><?= htmlspecialchars($jogo['nome_jogo']) ?></h3>
             <a href="<?= htmlspecialchars($jogo['url_jogo']) ?>"
                 onclick="registrarEEntrar('<?= addslashes($jogo['nome_jogo']) ?>', '<?= addslashes($jogo['url_jogo']) ?>'); return false;">
@@ -295,11 +295,11 @@ header a[href="jogos.php"]:focus {
     <div class="footer-content">
         <div class="footer-section">
             <h3>Sobre Nós</h3>
-            <p>A Cipher é a maior plataforma de distribuição digital de jogos para PC, com uma biblioteca vasta e diversificada.</p>
+            <p>A Cipher é a maior plataforma de gerenciamento digital de jogos, com uma biblioteca vasta e diversificada.</p>
         </div>
         <div class="footer-section">
             <h3>Contato</h3>
-            <p>Email: contato@ciphergames.com</p>
+            <p>Email: contatociphergames@gmail.com</p>
             <p>Telefone: (11) 1234-5678</p>
         </div>
         <div class="footer-section">
@@ -316,7 +316,7 @@ header a[href="jogos.php"]:focus {
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2023 Cipher Games. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Cipher Games. Todos os direitos reservados.</p>
     </div>
 </footer>
 

@@ -219,8 +219,7 @@ function nomeCargo($fk_cargo) {
         <?php else : ?>
             <p>Nenhum usuário cadastrado no sistema ou erro ao carregar.</p>
         <?php endif; ?>
-
-        <a href="adm.php" class="back-link">Voltar ao Painel</a>
     </div>
+    <a href="adm.php" class="back-link">Voltar</a>
 </body>
 </html>

@@ -280,7 +280,7 @@ if ($tipo && isset($categorias[$tipo])) {
         .btn-group a:hover { background: #2c056e; }
         form {
             display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto 20px auto;
-            background:rgb(11, 10, 17); padding: 20px; border-radius: 10px;
+            background:#2a0a4a; padding: 20px; border-radius: 10px;
         }
         input[type="text"] {
             padding: 10px; border: 1px solid #ccc; border-radius: 6px;
@@ -290,8 +290,11 @@ if ($tipo && isset($categorias[$tipo])) {
             font-weight: bold; cursor: pointer;
         }
         button:hover { background: #2c056e; }
-        .mensagem {
-            text-align: center; font-weight: bold; color: #2c056e; margin-bottom: 15px;
+        .msg {
+            text-align: center; 
+            color: #c7b3e6; 
+            margin-bottom: 15px; 
+            font-style: italic;
         }
         .back-link {
             display: block; text-align: center; margin-top: 30px; background: #510d96; color: #fff;

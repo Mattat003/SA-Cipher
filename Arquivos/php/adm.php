@@ -52,6 +52,7 @@ $menus = [
         "Categorias" => [
             "Buscar Categorias" => "buscar_categoria.php",
             "Cadastrar Categorias" => "cadastrar_categoria.php",
+            "Gerenciar Categorias" => "listar_categoria.php",
         ]
     ],
     CARGO_FUNCIONARIO => [

@@ -246,12 +246,10 @@ if ($busca !== '') {
             max-height: 50px;
         }
     }
-</style>
-
-     
+    </style>
 </head>
 <body>
-    <h2>Buscar Jogos Físicos</h2>
+    <h2>Buscar Jogos</h2>
     <form method="get" action="buscar_jogo.php" autocomplete="off" class="form-area">
         <input type="text" name="busca" placeholder="Nome do jogo..." value="<?= htmlspecialchars($busca) ?>">
         <button type="submit">Buscar</button>
