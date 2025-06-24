@@ -18,6 +18,7 @@ CREATE TABLE usuario (
     senha_temporaria BOOLEAN DEFAULT FALSE,
     foto_perfil VARCHAR(255) NULL
 );
+ALTER TABLE usuario ADD COLUMN perfil ENUM('adm', 'funcionario', 'cliente') NOT NULL DEFAULT 'cliente';
 
 CREATE TABLE adm (
     pk_adm INT AUTO_INCREMENT PRIMARY KEY,
@@ -264,17 +265,17 @@ INSERT INTO jogo (pk_jogo, nome_jogo, data_lanc, fk_codigo, desenvolvedora) VALU
 (6,'Assassin''s Creed Valhalla','2020-11-10',6,'Ubisoft');
 
 INSERT INTO adm (pk_adm, nome_adm, email_adm, senha_user, fk_cargo) VALUES
-(1,'Matheus Leal','matheus@admin.com', 'HASH_DA_SENHA',1),
-(2,'Endryo Bittencourt','endryo@email.com', 'HASH_DA_SENHA',1),
-(3,'Pamella Rafaeli','pamella@admin.com', 'HASH_DA_SENHA',1),
-(4,'Neon Gustavo','neon@email.com', 'HASH_DA_SENHA',2),
-(5,'Amanda de Oliveira','amanda@email.com', 'HASH_DA_SENHA',2);
+(1,'Matheus Leal','matheus@admin.com', '12345678',1),
+(2,'Endryo Bittencourt','endryo@email.com', '12345678',1),
+(3,'Pamella Rafaeli','pamella@admin.com', '12345678',1),
+(4,'Neon Gustavo','neon@email.com', '12345678',2),
+(5,'Amanda de Oliveira','amanda@email.com', '12345678',2);
 
 INSERT INTO usuario (pk_usuario, nome_user, email_user, senha_user, data_criacao, senha_temporaria, foto_perfil, perfil) VALUES
-(1,'Lúcio Andrade','lucio@email.com', 'HASH_DA_SENHA','2024-03-15',0,'','cliente'),
-(2,'Maya Costa','maya@email.com', 'HASH_DA_SENHA','2024-07-02',0,'','cliente'),
-(3,'Henrique Vasques','henrique@email.com', 'HASH_DA_SENHA','2024-11-28',0,'','cliente'),
-(4,'Júlia Monteiro','julia@email.com', 'HASH_DA_SENHA','2025-01-10',0,'','cliente'),
-(5,'Caio Silveira','caio@email.com', 'HASH_DA_SENHA','2025-04-05',0,'','cliente');
+(1,'Lúcio Andrade','lucio@email.com', '12345678','2024-03-15',0,'','cliente'),
+(2,'Maya Costa','maya@email.com', '12345678','2024-07-02',0,'','cliente'),
+(3,'Henrique Vasques','henrique@email.com', '12345678','2024-11-28',0,'','cliente'),
+(4,'Júlia Monteiro','julia@email.com', '12345678','2025-01-10',0,'','cliente'),
+(5,'Caio Silveira','caio@email.com', '12345678','2025-04-05',0,'','cliente');
 
 select * from usuario;
