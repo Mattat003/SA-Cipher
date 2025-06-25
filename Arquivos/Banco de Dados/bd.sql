@@ -61,6 +61,8 @@ CREATE TABLE jogo (
         ON UPDATE CASCADE
 );
 
+ALTER TABLE locacoes_pendentes add column data_expiracao DATETIME null after status;
+
 CREATE TABLE biblioteca_usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
