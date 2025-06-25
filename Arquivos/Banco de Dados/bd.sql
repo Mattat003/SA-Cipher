@@ -255,13 +255,21 @@ INSERT INTO codigo_game (pk_codgame, codigo) VALUES
 (5,'1234A-5678B-9CDEF-GHIJK-LMNOP'),
 (6,'QAZ12-WSX34-EDC56-RFV78-TGB90');
 
-INSERT INTO jogo (pk_jogo, nome_jogo, data_lanc, fk_codigo, desenvolvedora, imagem_jogo) VALUES
-(1,'The Last of Us Part II','2020-06-19',1,'Naughty Dog','uploads/jogo_685aebf609de3.jpg'),
-(2,'Elden Ring','2022-02-25',2,'FromSoftware','uploads/jogo_685ae7e5a55a9.jpg'),
-(3,'Mario Odyssey','2017-10-27',3,'Nintendo','uploads/jogo_685ae82644148.jpg'),
-(4,'Enigma do Medo','2024-11-28',4,'Independente','uploads/jogo_685adc87c44be.jpg'),
-(5,'Blue Prince','2025-04-10',5,'Independente','uploads/jogo_685ae89243103.jpg'),
-(6,'Assassin''s Creed Valhalla','2020-11-10',6,'Ubisoft','uploads/jogo_685ae8cc1ba2a.jpg');
+INSERT INTO jogo (pk_jogo, nome_jogo, data_lanc, desenvolvedora, imagem_jogo) VALUES
+(1,'The Last of Us Part II','2020-06-19','Naughty Dog','uploads/jogo_685aebf609de3.jpg'),
+(2,'Elden Ring','2022-02-25','FromSoftware','uploads/jogo_685ae7e5a55a9.jpg'),
+(3,'Mario Odyssey','2017-10-27','Nintendo','uploads/jogo_685ae82644148.jpg'),
+(4,'Enigma do Medo','2024-11-28','Independente','uploads/jogo_685adc87c44be.jpg'),
+(5,'Blue Prince','2025-04-10','Independente','uploads/jogo_685ae89243103.jpg'),
+(6,'Assassin''s Creed Valhalla','2020-11-10','Ubisoft','uploads/jogo_685ae8cc1ba2a.jpg'),
+(7,'Subnáutica','2025-06-25','Unknown Worlds Entertainment','uploads/685c4c53618dc.jpg'),
+(8,'Minecraft','2009-05-17','Mojang','uploads/685c4cc9b3163.jpeg'),
+(9,'Red Dead Redemption 2','2010-05-18','Rockstar Games','uploads/685c4cf835480.jpg'),
+(10,'FIFA 22','2021-09-27','EA','uploads/685c4d2b7ccdb.avif'),
+(11,'FIFA 24','2023-09-29','EA','uploads/685c4d78318d3.png'),
+(12,'Hollow Knight','2017-02-27','Team Cherry','uploads/685c4db92d920.avif'),
+(13,'Pokemon ZA Legends','2025-07-24','Game Freak','uploads/685c4e1c0c411.jpg'),
+(14,'Deltarune','2018-10-31','Toby Fox','uploads/685c4e6a0a25c.jpg');
 
 INSERT INTO adm (pk_adm, nome_adm, email_adm, senha_user, fk_cargo) VALUES
 (1,'Matheus Leal','matheus@admin.com', '12345678',1),
