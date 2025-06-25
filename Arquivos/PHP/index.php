@@ -10,15 +10,31 @@ if (!isset($_SESSION['pk_usuario'])) {
 $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 $meu_id = $_SESSION['pk_usuario'];
 
-$stmt = $pdo->prepare("
-    SELECT nome_jogo, imagem_jogo, url_jogo
-    FROM biblioteca_usuario
-    WHERE usuario_id = ?
-");
-$stmt->execute([$meu_id]);
-$meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
+// Remover da biblioteca os jogos cuja locação expirou (opcional)
+// Recomendo rodar essa limpeza em outra rotina, mas se quiser aqui:
+// $stmt = $pdo->prepare("DELETE FROM biblioteca_usuario WHERE EXISTS (
+//         SELECT 1 FROM locacoes_pendentes l
+//         WHERE l.usuario_id = biblioteca_usuario.usuario_id
+//           AND l.jogo_id = biblioteca_usuario.jogo_id
+//           AND l.status = 'liberado'
+//           AND l.data_expiracao <= NOW()
+//     )");
+// $stmt->execute();
 
+// Buscar jogos liberados e não expirados com data_expiracao
+$stmt = $pdo->prepare("
+    SELECT b.*, l.data_expiracao
+    FROM biblioteca_usuario b
+    JOIN locacoes_pendentes l
+      ON b.usuario_id = l.usuario_id AND b.jogo_id = l.jogo_id
+    WHERE b.usuario_id = :usuario_id
+      AND l.status = 'liberado'
+      AND l.data_expiracao > NOW()
+");
+$stmt->execute([':usuario_id' => $meu_id]);
+$jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -63,6 +79,12 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             padding: 15px 15px 5px;
             margin: 0;
             font-size: 1.1rem;
+        }
+        .timer {
+            color:#ccc; 
+            font-size: 0.9rem; 
+            padding: 0 15px 10px; 
+            font-weight: 600;
         }
         .game-tile a {
             display: inline-block;
@@ -181,8 +203,12 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             background:rgba(41, 17, 129, 0.84);
             text-decoration: none;
         }
-
-
+        .play-link.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+            background: grey !important;
+            cursor: default;
+        }
     </style>
 </head>
 <body>
@@ -191,16 +217,14 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="logo">
         <h1>CIPHER</h1>
         <img src="../img/capybara.png" alt="Logo Capivara" />
-        
     </div>
 
     <?php if ($nomeUsuario): ?>
         <div class="welcome-message" style="color: white; margin-left: 15px; font-weight: bold;">
             Bem-vindo, <?php echo htmlspecialchars($nomeUsuario); ?>!
-              <a href="jogos.php"> Jogos </a>
+            <a href="jogos.php"> Jogos </a>
         </div>
     <?php endif; ?>
-
 
     <div class="busca">
         <span class="lupa">&#128269;</span>
@@ -220,9 +244,8 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <div class="container mt-5">
-    <!-- seu carousel aqui (sem alterações) -->
+    <!-- Carousel aqui (sem alterações) -->
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-        <!-- ... código do carousel ... -->
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -279,17 +302,22 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <div class="games-container" id="minhaBiblioteca">
-    <?php foreach ($meus_jogos as $jogo): ?>
-        <div class="game-tile">
-            <img src="<?= htmlspecialchars($jogo['imagem_jogo']) ? htmlspecialchars($jogo['imagem_jogo']) : '../img/semImage.jpg'?>" alt="<?= htmlspecialchars($jogo['nome_jogo']) ?>" />
+    <?php foreach ($jogos as $jogo): ?>
+        <div class="game-tile" data-expiracao="<?= htmlspecialchars($jogo['data_expiracao']) ?>">
+            <img src="<?= htmlspecialchars($jogo['imagem_jogo']) ? htmlspecialchars($jogo['imagem_jogo']) : '../img/semImage.jpg' ?>" alt="<?= htmlspecialchars($jogo['nome_jogo']) ?>" />
             <h3><?= htmlspecialchars($jogo['nome_jogo']) ?></h3>
+            <div class="timer">
+                Tempo restante: <span class="countdown">--:--:--</span>
+            </div>
             <a href="<?= htmlspecialchars($jogo['url_jogo']) ?>"
-                onclick="registrarEEntrar('<?= addslashes($jogo['nome_jogo']) ?>', '<?= addslashes($jogo['url_jogo']) ?>'); return false;">
+               class="play-link"
+               onclick="registrarEEntrar('<?= addslashes($jogo['nome_jogo']) ?>', '<?= addslashes($jogo['url_jogo']) ?>'); return false;">
                 JOGAR AGORA
             </a>
         </div>
     <?php endforeach; ?>
 </div>
+
 
 <footer>
     <div class="footer-content">
@@ -324,75 +352,52 @@ $meus_jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <script>
 const userGames = <?php
     $jsArray = [];
-    foreach ($meus_jogos as $jogo) {
+    foreach ($jogos as $jogo) {
         $jsArray[] = [
             "nome" => $jogo["nome_jogo"],
             "url" => $jogo["url_jogo"] ?: "#",
-            "imagem" => $jogo["imagem_jogo"] ?: "../img/default-game.jpg"
+            "imagem" => $jogo["imagem_jogo"] ?: "../img/default-game.jpg",
+            "data_expiracao" => $jogo["data_expiracao"],
         ];
     }
     echo json_encode($jsArray, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 ?>;
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.getElementById("searchInput");
-    const resultsContainer = document.getElementById("results");
-    const bibliotecaContainer = document.getElementById("minhaBiblioteca");
 
-    window.addEventListener('load', function() {
-        searchInput.value = '';
-        resultsContainer.innerHTML = '';
-        resultsContainer.style.display = "none";
-    });
+function atualizarTimers() {
+    const jogos = document.querySelectorAll('.game-tile');
 
-    searchInput.addEventListener("input", () => {
-        const searchTerm = searchInput.value.toLowerCase().trim();
-        resultsContainer.innerHTML = "";
+    jogos.forEach(jogo => {
+        const expiracaoStr = jogo.getAttribute('data-expiracao');
+        const countdownEl = jogo.querySelector('.countdown');
 
-        if (searchTerm === "") {
-            resultsContainer.style.display = "none";
-            bibliotecaContainer.querySelectorAll(".game-tile").forEach(tile => tile.style.display = "");
-            return;
-        }
+        if (!expiracaoStr || !countdownEl) return;
 
-        const filteredGames = userGames.filter(jogo =>
-            jogo.nome.toLowerCase().includes(searchTerm)
-        );
+        const expiracao = new Date(expiracaoStr);
+        const agora = new Date();
 
-        if (filteredGames.length > 0) {
-            filteredGames.forEach(jogo => {
-                const link = document.createElement("a");
-                link.className = "result-item";
-                link.textContent = jogo.nome;
-                link.href = jogo.url;
-                link.onclick = function(e) {
-                    e.preventDefault();
-                    registrarEEntrar(jogo.nome, jogo.url);
-                };
-                resultsContainer.appendChild(link);
-            });
+        let diff = expiracao - agora; // milissegundos restantes
+
+        if (diff <= 0) {
+            countdownEl.textContent = 'Expirado';
+            // Opcional: jogo.style.display = 'none';
         } else {
-            const noResult = document.createElement("div");
-            noResult.className = "result-item";
-            noResult.textContent = "Nenhum resultado encontrado.";
-            resultsContainer.appendChild(noResult);
-        }
+            const horas = Math.floor(diff / (1000 * 60 * 60));
+            const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diff % (1000 * 60)) / 1000);
 
-        resultsContainer.style.display = "block";
-
-        bibliotecaContainer.querySelectorAll(".game-tile").forEach(tile => {
-            const title = tile.querySelector("h3").textContent.toLowerCase();
-            tile.style.display = title.includes(searchTerm) ? "" : "none";
-        });
-    });
-
-    document.addEventListener('click', function(e) {
-        if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
-            resultsContainer.style.display = "none";
+            countdownEl.textContent = 
+                String(horas).padStart(2, '0') + ':' +
+                String(minutos).padStart(2, '0') + ':' +
+                String(segundos).padStart(2, '0');
         }
     });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    atualizarTimers();
+    setInterval(atualizarTimers, 1000);
 });
+
 function registrarEEntrar(nomeJogo, urlDestino) {
     fetch('registrar_entrada.php', {
         method: 'POST',
@@ -404,6 +409,54 @@ function registrarEEntrar(nomeJogo, urlDestino) {
         window.location.href = urlDestino;
     });
 }
+
+function msParaTemponormal(ms) {
+    if (ms <= 0) return 'Expirado';
+    const m = 60 * 1000, h = 60 * m, d = 24 * h;
+    const dias = Math.floor(ms / d);
+    const horas = Math.floor((ms % d) / h);
+    const minutos = Math.floor((ms % h) / m);
+    const partes = [];
+    if (dias > 0) partes.push(`${dias} dia${dias > 1 ? 's' : ''}`);
+    if (horas > 0) partes.push(`${horas} hora${horas > 1 ? 's' : ''}`);
+    if (minutos > 0) partes.push(`${minutos} minuto${minutos > 1 ? 's' : ''}`);
+    return partes.length ? partes.join(' e ') + ' restantes' : 'Menos de 1 minuto restante';
+}
+
+function atualizarTimers() {
+    const jogos = document.querySelectorAll('.game-tile');
+    jogos.forEach(jogo => {
+        const expiracaoStr = jogo.getAttribute('data-expiracao');
+        const countdownEl = jogo.querySelector('.countdown');
+        const link = jogo.querySelector('.play-link');
+        if (!expiracaoStr || !countdownEl || !link) return;
+        const expiracao = new Date(expiracaoStr);
+        const agora = new Date();
+        let diff = expiracao - agora;
+        if (diff <= 0) {
+            countdownEl.textContent = 'Expirado';
+            link.classList.add('disabled');
+            link.textContent = 'Tempo de jogo expirado';
+            link.onclick = e => e.preventDefault();
+            link.removeAttribute('href');
+        } else {
+            countdownEl.textContent = msParaTemponormal(diff);
+        }
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Salva urls originais no atributo data-url para possível restauração
+    document.querySelectorAll('.play-link').forEach(link => {
+        link.dataset.urlOriginal = link.getAttribute('href');
+    });
+    
+    atualizarTimers();
+    setInterval(atualizarTimers, 1000);
+});
+
 </script>
+
 </body>
 </html>

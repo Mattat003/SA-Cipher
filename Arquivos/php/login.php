@@ -84,6 +84,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
+
+// remover_jogos_expirados.php
+
+require_once 'conexao.php';
+
+// Remove da biblioteca onde a data de expiração passou
+$stmt = $pdo->prepare("
+    DELETE FROM biblioteca_usuario 
+    WHERE EXISTS (
+        SELECT 1 FROM locacoes_pendentes l
+        WHERE l.usuario_id = biblioteca_usuario.usuario_id
+          AND l.jogo_id = biblioteca_usuario.jogo_id
+          AND l.status = 'liberado'
+          AND l.data_expiracao <= NOW()
+    )
+");
+$stmt->execute();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
