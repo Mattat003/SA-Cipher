@@ -51,14 +51,10 @@ CREATE TABLE jogo (
     pk_jogo INT AUTO_INCREMENT PRIMARY KEY,
     nome_jogo VARCHAR(100) NOT NULL,
     data_lanc DATE NOT NULL,
-    fk_codigo INT NOT NULL,
     desenvolvedora VARCHAR(150),
     disponivel_locacao BOOLEAN DEFAULT TRUE,
     imagem_jogo VARCHAR(255) NULL,
-    url_jogo VARCHAR(255) NULL,
-    FOREIGN KEY (fk_codigo) REFERENCES codigo_game(pk_codgame)
-        ON DELETE RESTRICT
-        ON UPDATE CASCADE
+    url_jogo VARCHAR(255) NULL
 );
 
 
