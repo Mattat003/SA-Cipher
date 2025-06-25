@@ -61,8 +61,6 @@ CREATE TABLE jogo (
         ON UPDATE CASCADE
 );
 
-ALTER TABLE locacoes_pendentes add column data_expiracao DATETIME null after status;
-ALTER TABLE locacoes_pendentes add column data_liberacao DATETIME null after status data_expiracao;
 
 CREATE TABLE biblioteca_usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -94,6 +92,8 @@ CREATE TABLE locacoes_pendentes (
     usuario_id INT NOT NULL,
     jogo_id INT NOT NULL,
     data_pedido DATETIME DEFAULT CURRENT_TIMESTAMP,
+    data_expiracao DATETIME,
+    data_liberacao DATETIME,
     status ENUM('pendente', 'liberado', 'recusado') DEFAULT 'pendente',
     FOREIGN KEY (usuario_id) REFERENCES usuario(pk_usuario),
     FOREIGN KEY (jogo_id) REFERENCES jogo(pk_jogo)
