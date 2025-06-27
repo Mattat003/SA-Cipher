@@ -10,16 +10,16 @@ if ($fk_cargo != 1 && $fk_cargo != 4) {
 }
 
 
-// Inicializa a variável para armazenar os usuários
+// Inicializa a variável para armazenar os Clientes
 $usuarios = [];
 
-// Busca todos os usuários cadastrados, em ordem alfabética
+// Busca todos os Clientes cadastrados, em ordem alfabética
 $sql = "SELECT * FROM usuario ORDER BY nome_user ASC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Se um ID for passado via GET, exclui o usuário
+// Se um ID for passado via GET, exclui o Cliente
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id_usuario = $_GET['id'];
 
@@ -28,9 +28,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $stmt->bindParam(':id', $id_usuario, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Usuário excluído com sucesso!'); window.location.href='excluir_usuario.php';</script>";
+        echo "<script>alert('Cliente excluído com sucesso!'); window.location.href='excluir_usuario.php';</script>";
     } else {
-        echo "<script>alert('Erro ao excluir o usuário!');</script>";
+        echo "<script>alert('Erro ao excluir o Cliente!');</script>";
     }
 }
 ?>
@@ -39,7 +39,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Excluir Usuário</title>
+    <title>Excluir Cliente</title>
     <style>
     body {
         font-family: 'Motiva Sans', 'Segoe UI', sans-serif;
@@ -176,7 +176,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 </head>
 <body>
-    <h2>Excluir Usuário</h2>
+    <h2>Excluir Cliente</h2>
 
     <?php if (!empty($usuarios)): ?>
         <table border="1">
@@ -194,13 +194,13 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     <td><?= htmlspecialchars($usuario['email_user']) ?></td>
                     <td><?= htmlspecialchars($usuario['data_criacao']) ?></td>
                     <td>
-                        <a href="excluir_usuario.php?id=<?= htmlspecialchars($usuario['pk_usuario']) ?>" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">Excluir</a>
+                        <a href="excluir_usuario.php?id=<?= htmlspecialchars($usuario['pk_usuario']) ?>" onclick="return confirm('Tem certeza que deseja excluir este Cliente?')">Excluir</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </table>
     <?php else: ?>
-        <p>Nenhum usuário encontrado.</p>
+        <p>Nenhum Cliente encontrado.</p>
     <?php endif; ?>
 
     <br>

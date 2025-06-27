@@ -29,37 +29,42 @@ define('CARGO_FUNCIONARIO', 2);
 // Defina as permissões/menus para cada cargo
 $menus = [
     CARGO_ADMIN => [
-        "Usuários" => [
-            "Adicionar Usuário" => "cadastrar_usuario.php",
-            "Pesquisar Usuários" => "buscar_usuario.php",
-            "Listar Usuários" => "listar_usuario.php",
-            "Excluir Usuário" => "excluir_usuario.php",
-            "Alterar Usuário" => "alterar_usuario.php",
+        "Clientes" => [
+            "Alterar Clientes" => "alterar_usuario.php",
+            "Adicionar Clientes" => "cadastrar_usuario.php",
+            "Pesquisar Clientes" => "buscar_usuario.php",
+            "Listar Clientes" => "listar_usuario.php",
+            "Excluir Clientes" => "excluir_usuario.php",
+          
         ],
         "Funcionarios" => [
+            "Alterar Funcionários" => "alterar_funcionario.php",
             "Adicionar Funcionários" => "cadastrar_funcionario.php",
             "Pesquisar Funcionários" => "buscar_funcionario.php",
             "Listar Funcionários" => "listar_funcionario.php",
             "Excluir Funcionários" => "excluir_funcionario.php",
-            "Alterar Funcionários" => "alterar_funcionario.php",
+            
         ],
        "Jogos" => [
-            "Buscar Jogo" => "buscar_jogo.php",
-            "Cadastrar Jogo" => "cadastrar_jogo.php",
-            "Locaçoes pendentes" => "liberar_locacoes.php",
             "Alterar Jogo" => "alterar_jogo.php",
+            "Adicionar Jogo" => "cadastrar_jogo.php",
+            "Pesquisar Jogo" => "buscar_jogo.php",
+            "Lista de Jogos" => "listar_jogo.php",
+            "Locações pendentes" => "liberar_locacoes.php",
+            
+            
         ],
         "Categorias" => [
-            "Buscar Categorias" => "buscar_categoria.php",
-            "Cadastrar Categorias" => "cadastrar_categoria.php",
+            "Adicionar Categorias" => "cadastrar_categoria.php",
+            "Pesquisar Categorias" => "buscar_categoria.php",
             "Gerenciar Categorias" => "listar_categoria.php",
         ]
     ],
     CARGO_FUNCIONARIO => [
-        "Usuários" => [
-            "Adicionar Usuário" => "cadastrar_usuario.php",
-            "Pesquisar Usuários" => "buscar_usuario.php",
-            "Listar Usuários" => "listar_usuario.php",
+        "Clientes" => [
+            "Adicionar Clientes" => "cadastrar_usuario.php",
+            "Pesquisar Clientes" => "buscar_usuario.php",
+            "Listar Clientes" => "listar_usuario.php",
         ],
         "Funcionários" => [
             "Pesquisar Funcionários" => "buscar_funcionario.php",
@@ -67,7 +72,7 @@ $menus = [
         ],
        
         "Jogos" => [
-            "Buscar Jogo" => "buscar_jogo.php",
+            "Pesquisar Jogo" => "buscar_jogo.php",
             "Lista de Jogos" => "listar_jogo.php",
         ]
     ],
@@ -80,7 +85,7 @@ $menus_cargo = $menus[$fk_cargo] ?? [];
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Painel do <?=htmlspecialchars($nomeCargo ?: 'Usuário')?> </title>
+    <title>Painel do <?=htmlspecialchars($nomeCargo ?: 'Clientes')?> </title>
     <style>
     body {
         font-family: 'Motiva Sans', 'Segoe UI', sans-serif;
@@ -262,7 +267,7 @@ $menus_cargo = $menus[$fk_cargo] ?? [];
 <body>
     <header>
         <div>
-            <h2>Painel do <?=htmlspecialchars($nomeCargo ?: 'Usuário')?></h2>
+            <h2>Painel do <?=htmlspecialchars($nomeCargo ?: 'Clientes')?></h2>
             <span>Bem-vindo, <strong><?=htmlspecialchars($nome)?></strong>!</span>
         </div>
         <form action="logout.php" method="post" style="margin:0;">

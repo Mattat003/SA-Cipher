@@ -10,18 +10,6 @@ if (!isset($_SESSION['pk_usuario'])) {
 $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 $meu_id = $_SESSION['pk_usuario'];
 
-// Remover da biblioteca os jogos cuja locação expirou (opcional)
-// Recomendo rodar essa limpeza em outra rotina, mas se quiser aqui:
-// $stmt = $pdo->prepare("DELETE FROM biblioteca_usuario WHERE EXISTS (
-//         SELECT 1 FROM locacoes_pendentes l
-//         WHERE l.usuario_id = biblioteca_usuario.usuario_id
-//           AND l.jogo_id = biblioteca_usuario.jogo_id
-//           AND l.status = 'liberado'
-//           AND l.data_expiracao <= NOW()
-//     )");
-// $stmt->execute();
-
-// Buscar jogos liberados e não expirados com data_expiracao
 $stmt = $pdo->prepare("
     SELECT b.*, l.data_expiracao
     FROM biblioteca_usuario b
@@ -209,6 +197,28 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             background: grey !important;
             cursor: default;
         }
+        header, .logo, .header-user-container, .welcome-message {
+    text-align: left !important;
+}
+.header-jogos-link {
+    margin: 0 12px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.05rem;
+    transition: color 0.17s;
+    transform: translateX(-50px);
+}
+.header-jogos-link:hover {
+    color: #c084fc;
+}
+.welcome-message {
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: 1rem;
+    margin: 0 10px;
+}
     </style>
 </head>
 <body>
@@ -218,20 +228,17 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>CIPHER</h1>
         <img src="../img/capybara.png" alt="Logo Capivara" />
     </div>
-
     <?php if ($nomeUsuario): ?>
-        <div class="welcome-message" style="color: white; margin-left: 15px; font-weight: bold;">
-            Bem-vindo, <?php echo htmlspecialchars($nomeUsuario); ?>!
-            <a href="jogos.php"> Jogos </a>
-        </div>
+    <span class="welcome-message">
+        Bem-vindo, <?php echo htmlspecialchars($nomeUsuario); ?>!
+    </span>
+    <a href="jogos.php" class="header-jogos-link">Jogos</a>
     <?php endif; ?>
-
     <div class="busca">
         <span class="lupa">&#128269;</span>
         <input type="text" id="searchInput" placeholder="Buscar na sua biblioteca..." autocomplete="off" />
         <div id="results" class="search-results"></div>
     </div>
-
     <div class="perfil">
         <a href="perfilnormal.php">
             <span class="material-symbols-outlined">account_circle</span>

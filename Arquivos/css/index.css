@@ -9,12 +9,13 @@ body {
 }
 
 header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px; /* opcional, dá espaçamento entre itens */
     background: linear-gradient(135deg, #1e003a, #2a0a4a);
     width: 100%;
     height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 0 40px;
     box-sizing: border-box;
     position: sticky;
@@ -29,7 +30,6 @@ header {
     display: flex;
     align-items: center;
     gap: 15px;
-    transition: transform 0.3s ease;
 }
 
 .logo:hover {
@@ -41,6 +41,7 @@ header {
     width: auto;
     filter: drop-shadow(0 0 8px rgba(122, 90, 245, 0.3));
     transition: transform 0.3s ease;
+    
 }
 
 .logo img:hover {
@@ -492,3 +493,6 @@ h1 {
         font-size: 22px;
     }
 }
+
+
+

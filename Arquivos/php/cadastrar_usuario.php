@@ -38,9 +38,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':foto', $foto);
 
             if ($stmt->execute()) {
-                $mensagem = "Usuário cadastrado com sucesso!";
+                $mensagem = "Cliente cadastrado com sucesso!";
             } else {
-                $mensagem = "Erro ao cadastrar usuário!";
+                $mensagem = "Erro ao cadastrar Cliente!";
             }
         }
     }
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Usuário</title>
+    <title>Cadastrar Cliente</title>
     <style>
     body {
         background-color: #12002b;
@@ -221,11 +221,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </head>
 <body>
+    <?php if (!empty($mensagem)): ?>
+    <script>
+        alert("<?= addslashes($mensagem); ?>");
+    </script>
+    <?php endif; ?>
+
     <form action="cadastrar_usuario.php" method="POST" autocomplete="off">
-        <h2>Cadastrar Usuário</h2>
-        <?php if (!empty($mensagem)): ?>
+        <h2>Cadastrar Cliente</h2>
+        <!-- Remova ou comente a linha abaixo para exibir só o alert! -->
+        <?php /* if (!empty($mensagem)): ?>
             <div class="mensagem"><?= htmlspecialchars($mensagem); ?></div>
-        <?php endif; ?>
+        <?php endif; */ ?>
         <label for="nome_user">Nome:</label>
         <input type="text" id="nome_user" name="nome_user" required>
 
@@ -234,7 +241,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label for="senha_user">Senha:</label>
         <input type="password" id="senha_user" name="senha_user" required>
-        
 
         <button type="submit">Cadastrar</button>
         <button type="reset">Cancelar</button>

@@ -2,7 +2,7 @@
 session_start();
 require_once 'conexao.php'; // Certifique-se de que este arquivo existe e faz a conexão PDO
 
-// Verifica se o usuário está logado e tem perfil de adm (1) ou funcionário (2)
+// Verifica se o Cliente está logado e tem perfil de adm (1) ou funcionário (2)
 if (!isset($_SESSION['fk_cargo']) || ($_SESSION['fk_cargo'] != 1 && $_SESSION['fk_cargo'] != 2)) {
     echo "<script>alert('Acesso negado! Você não tem permissão para acessar esta página.'); window.location.href='principal.php';</script>";
     exit;
@@ -31,7 +31,7 @@ try {
         $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 } catch (PDOException $e) {
-    echo "<p style='color: red; text-align: center;'>Erro ao carregar usuários: " . htmlspecialchars($e->getMessage()) . "</p>";
+    echo "<p style='color: red; text-align: center;'>Erro ao carregar Clientes: " . htmlspecialchars($e->getMessage()) . "</p>";
     $usuarios = [];
 }
 ?>
@@ -41,7 +41,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Usuário</title>
+    <title>Buscar Cliente</title>
     <style>
     body {
         font-family: 'Motiva Sans', 'Segoe UI', sans-serif;
@@ -247,11 +247,11 @@ try {
 </head>
 <body>
     <div class="container">
-        <h2>Pesquisar Usuários</h2>
+        <h2>Pesquisar Clientes</h2>
         <!-- FORMULARIO PARA BUSCAR USUARIOS -->
         <form action="buscar_usuario.php" method="POST">
             <label for="busca">Buscar por ID ou Nome:</label>
-            <input type="text" id="busca" name="busca" placeholder="Digite o ID ou nome do usuário" value="<?= isset($_POST['busca']) ? htmlspecialchars($_POST['busca']) : '' ?>">
+            <input type="text" id="busca" name="busca" placeholder="Digite o ID ou nome do Cliente" value="<?= isset($_POST['busca']) ? htmlspecialchars($_POST['busca']) : '' ?>">
             <button type="submit">Pesquisar</button>
         </form>
         <?php if ($busca_realizada): ?>
@@ -273,14 +273,14 @@ try {
                                 <td><?= htmlspecialchars($usuario['email_user']); ?></td>
                                 <td>
                                     <a href="alterar_usuario.php?id=<?= htmlspecialchars($usuario['pk_usuario']); ?>">Alterar</a>
-                                    <a href="excluir_usuario.php?id=<?= htmlspecialchars($usuario['pk_usuario']); ?>" onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Excluir</a>
+                                    <a href="excluir_usuario.php?id=<?= htmlspecialchars($usuario['pk_usuario']); ?>" onclick="return confirm('Tem certeza que deseja excluir este Cliente?');">Excluir</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             <?php else: ?>
-                <p>Nenhum usuário encontrado com os critérios de busca.</p>
+                <p>Nenhum Cliente encontrado com os critérios de busca.</p>
             <?php endif; ?>
         <?php endif; ?>
     </div>

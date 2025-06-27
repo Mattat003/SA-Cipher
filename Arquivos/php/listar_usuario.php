@@ -12,7 +12,7 @@ if (!isset($_SESSION['fk_cargo']) || ($_SESSION['fk_cargo'] != 1 && $_SESSION['f
 $usuarios = []; // Inicializa o array para armazenar resultados
 
 try {
-    // Consulta para selecionar todos os usuários
+    // Consulta para selecionar todos os Cliente
     // A coluna 'perfil' foi temporariamente removida do SELECT devido ao erro "Column not found".
     // Assim que a coluna for adicionada ao seu banco de dados, avise para que possamos incluí-la novamente.
     $sql = "SELECT pk_usuario, nome_user, email_user FROM usuario ORDER BY nome_user ASC";
@@ -24,8 +24,8 @@ try {
 } catch (PDOException $e) {
     // Em um ambiente de produção, registre o erro em vez de exibi-lo diretamente
     // error_log("Erro no banco de dados: " . $e->getMessage());
-    echo "<p style='color: red; text-align: center;'>Erro ao carregar usuários: " . htmlspecialchars($e->getMessage()) . "</p>";
-    $usuarios = []; // Garante que o array de usuários esteja vazio em caso de erro
+    echo "<p style='color: red; text-align: center;'>Erro ao carregar Cliente: " . htmlspecialchars($e->getMessage()) . "</p>";
+    $usuarios = []; // Garante que o array de Cliente esteja vazio em caso de erro
 }
 
 ?>
@@ -35,7 +35,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar Usuários</title>
+    <title>Listar Cliente</title>
     <style>
     body {
         background-color: #12002b;
@@ -184,7 +184,7 @@ try {
 </head>
 <body>
     <div class="container">
-        <h2>Lista de Usuários</h2>
+        <h2>Lista de Cliente</h2>
 
         <?php if (!empty($usuarios)) : ?>
             <table>

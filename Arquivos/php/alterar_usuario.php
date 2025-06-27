@@ -12,7 +12,7 @@ if ($fk_cargo != 1 && $fk_cargo != 4) {
 // Inicializa variável
 $usuario = null;
 
-// Busca o usuário se o formulário foi enviado
+// Busca o Cliente se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['busca_usuario'])) {
     $busca = trim($_POST['busca_usuario']);
 
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['busca_usuario'])) {
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$usuario) {
-        echo "<script>alert('Usuário não encontrado!');</script>";
+        echo "<script>alert( Cliente não encontrado!');</script>";
     }
 }
 ?>
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['busca_usuario'])) {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Alterar Usuário</title>
+    <title>Alterar Cliente</title>
     <style>
         body {
             background-color: #12002b;
@@ -184,11 +184,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['busca_usuario'])) {
     </style>
 </head>
 <body>
-    <h2>Alterar Usuário</h2>
+    <h2>Alterar Cliente</h2>
 
     <!-- Formulário de busca -->
     <form action="alterar_usuario.php" method="POST">
-        <label for="busca_usuario">Digite o ID ou Nome do usuário:</label>
+        <label for="busca_usuario">Digite o ID ou Nome do Cliente:</label>
         <input type="text" id="busca_usuario" name="busca_usuario" required>
         <button type="submit">Buscar</button>
     </form>

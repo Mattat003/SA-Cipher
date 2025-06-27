@@ -5,12 +5,9 @@ $fk_cargo = $_SESSION['fk_cargo'] ?? null;
 $nomeCargo = '';
 $nome = $_SESSION['adm'] ?? 'Funcionário';
 
-$codigos = $pdo->query("SELECT pk_codgame, codigo FROM codigo_game")->fetchAll(PDO::FETCH_ASSOC);
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome_jogo = $_POST['nome_jogo'];
     $data_lanc = $_POST['data_lanc'];
-    $fk_codigo = $_POST['fk_codigo'];
     $url_jogo = $_POST['url_jogo'];
     $imagem_jogo = null;
 
@@ -26,10 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt = $pdo->prepare(
-        "INSERT INTO jogo (nome_jogo, data_lanc, fk_codigo, imagem_jogo, url_jogo, disponivel_locacao)
-         VALUES (?, ?, ?, ?, ?, 1)"
+        "INSERT INTO jogo (nome_jogo, data_lanc, imagem_jogo, url_jogo, disponivel_locacao)
+         VALUES (?, ?, ?, ?, 1)"
     );
-    $stmt->execute([$nome_jogo, $data_lanc, $fk_codigo, $imagem_jogo, $url_jogo]);
+    $stmt->execute([$nome_jogo, $data_lanc,  $imagem_jogo, $url_jogo]);
     header('Location: cadastrar_jogo.php?sucesso=1');
     exit();
 }
@@ -207,13 +204,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body class="bg-dark text-light">
+<?php if (isset($_GET['sucesso'])): ?>
+<script>
+    alert("Jogo cadastrado com sucesso!");
+</script>
+<?php endif; ?>
 <div class="container mt-5">
-    
-    <?php if (isset($_GET['sucesso'])): ?>
-        <div class="alert alert-success">Jogo cadastrado com sucesso!</div>
-    <?php endif; ?>
     <form method="post" enctype="multipart/form-data">
-    <h2>Cadastrar Novo Jogo</h2>
+        <h2>Cadastrar Novo Jogo</h2>
         <div class="mb-3">
             <label class="form-label">Nome do Jogo</label>
             <input type="text" name="nome_jogo" class="form-control" required>
@@ -221,8 +219,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="mb-3">
             <label class="form-label">Data de Lançamento</label>
             <input type="date" name="data_lanc" class="form-control" required>
-        </div>
-        <div class="mb-3">
         </div>
         <div class="mb-3">
             <label class="form-label">Link do Jogo</label>
@@ -234,8 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar Jogo</button>
     </form>
-</div>]
+</div>
 <a href="adm.php" class="back-link">Voltar</a>
-
 </body>
 </html>

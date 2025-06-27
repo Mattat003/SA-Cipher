@@ -246,10 +246,10 @@ try {
 </head>
 <body>
     <div class="container">
-        <h2>Pesquisar Administrador</h2>
+        <h2>Pesquisar Funcionário ou Adm</h2>
         <form action="buscar_funcionario.php" method="POST">
             <label for="busca">Buscar por ID ou Nome:</label>
-            <input type="text" id="busca" name="busca" placeholder="Digite o ID ou nome do administrador" value="<?= isset($_POST['busca']) ? htmlspecialchars($_POST['busca']) : '' ?>">
+            <input type="text" id="busca" name="busca" placeholder="Digite o ID ou nome do funcionário " value="<?= isset($_POST['busca']) ? htmlspecialchars($_POST['busca']) : '' ?>">
             <button type="submit">Pesquisar</button>
         </form>
         <?php if ($busca_realizada): ?>
@@ -270,8 +270,8 @@ try {
                                 <td><?= htmlspecialchars($adm['nome_adm']); ?></td>
                                 <td><?= htmlspecialchars($adm['email_adm']); ?></td>
                                 <td>
-                                    <a href="alterar_adm.php?id=<?= htmlspecialchars($adm['pk_adm']); ?>">Alterar</a>
-                                    <a href="excluir_adm.php?id=<?= htmlspecialchars($adm['pk_adm']); ?>" onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Excluir</a>
+                                    <a href="alterar_funcionario.php?id=<?= htmlspecialchars($adm['pk_adm']); ?>">Alterar</a>
+                                    <a href="excluir_funcionario.php?id=<?= htmlspecialchars($adm['pk_adm']); ?>" onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Excluir</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

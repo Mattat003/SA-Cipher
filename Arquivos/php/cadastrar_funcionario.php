@@ -9,7 +9,6 @@ $fk_cargo = $_SESSION['fk_cargo'] ?? null;
 if ($fk_cargo != 1) {
     echo "Acesso negado";
     exit;
-    
 }
 
 $mensagem = "";
@@ -112,7 +111,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         box-shadow: 0 0 0 3px rgba(122, 90, 245, 0.3);
     }
 
-    /* BOTÃO idêntico ao .back-link */
     button[type="submit"],
     button[type="reset"]  {
         display: block;
@@ -142,8 +140,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }
 
-   
-
     .mensagem {
         text-align: center;
         color: #c084fc;
@@ -165,35 +161,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         color: #e9d5ff;
     }
     select {
-    width: 100%;
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 1px solid #2a2540;
-    background: #252836;
-    color: #f0e6ff;
-    font-size: 15px;
-    margin-bottom: 18px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    appearance: none; /* Remove a seta padrão do select */
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23c084fc' stroke-width='2'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 12px 8px;
-    cursor: pointer;
-    transition: border-color 0.3s, background-color 0.3s;
-}
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid #2a2540;
+        background: #252836;
+        color: #f0e6ff;
+        font-size: 15px;
+        margin-bottom: 18px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23c084fc' stroke-width='2'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 12px 8px;
+        cursor: pointer;
+        transition: border-color 0.3s, background-color 0.3s;
+    }
 
-select:focus {
-    border-color: #7a5af5;
-    background-color: #2a2e3c;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(122, 90, 245, 0.3);
-}
+    select:focus {
+        border-color: #7a5af5;
+        background-color: #2a2e3c;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(122, 90, 245, 0.3);
+    }
 
-option {
-    background-color: #252836;
-    color: #f0e6ff;
-}
+    option {
+        background-color: #252836;
+        color: #f0e6ff;
+    }
 
     .back-link {
         display: block;
@@ -225,7 +221,6 @@ option {
         box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }
 
-    /* Responsivo */
     @media (max-width: 768px) {
         .container {
             margin: 10px;
@@ -251,14 +246,20 @@ option {
             max-width: 100%;
         }
     }
-</style>
+    </style>
 </head>
 <body>
+    <?php if (!empty($mensagem)): ?>
+    <script>
+        alert("<?= addslashes($mensagem); ?>");
+    </script>
+    <?php endif; ?>
     <form action="cadastrar_funcionario.php" method="POST" autocomplete="off">
         <h2>Cadastrar Funcionário</h2>
-        <?php if (!empty($mensagem)): ?>
+        <!-- Se quiser exibir só no alert, remova a linha abaixo -->
+        <?php /* if (!empty($mensagem)): ?>
             <div class="mensagem"><?= htmlspecialchars($mensagem); ?></div>
-        <?php endif; ?>
+        <?php endif; */ ?>
         <label for="nome_adm">Nome:</label>
         <input type="text" id="nome_adm" name="nome_adm" required>
 
