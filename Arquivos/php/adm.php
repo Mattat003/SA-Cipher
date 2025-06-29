@@ -74,6 +74,10 @@ $menus = [
         "Jogos" => [
             "Pesquisar Jogo" => "buscar_jogo.php",
             "Lista de Jogos" => "listar_jogo.php",
+        ],
+        "Categorias" => [
+            "Pesquisar Categorias" => "buscar_categoria.php",
+            "Listar Categorias" => "listar_categoria.php",
         ]
     ],
 ];
