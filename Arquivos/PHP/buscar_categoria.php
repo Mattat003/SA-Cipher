@@ -2,12 +2,13 @@
 session_start();
 require_once 'conexao.php';
 
+// Verifica se o usuário tem permissão de acesso (admin ou cargo 2)
 if (!isset($_SESSION['fk_cargo']) || ($_SESSION['fk_cargo'] != 1 && $_SESSION['fk_cargo'] != 2)) {
     echo "<script>alert('Acesso negado!'); window.location.href='principal.php';</script>";
     exit;
 }
 
-// Categorias disponíveis
+// Define as tabelas e colunas de cada tipo de categoria disponível para busca
 $categorias = [
     'genero' => ['pk_genero', 'nome_gen'],
     'idioma' => ['pk_idioma', 'nome_idioma'],
@@ -17,30 +18,36 @@ $categorias = [
     'estilo' => ['pk_estilo', 'nome_estilo']
 ];
 
-$tipo = $_GET['tipo'] ?? null;
+$tipo = $_GET['tipo'] ?? null; // tipo de categoria selecionado (ex: genero, idioma)
 $busca_realizada = false;
 $resultados = [];
 
 if ($tipo && isset($categorias[$tipo])) {
+    // Define os nomes das colunas para ID e Nome, conforme a categoria escolhida
     $col_id = $categorias[$tipo][0];
     $col_nome = $categorias[$tipo][1];
 
+    // Se foi enviado o formulário de busca
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $busca = trim($_POST['busca'] ?? '');
 
+        // Monta a query SQL de busca
         $sql = "SELECT $col_id, $col_nome FROM $tipo";
         $params = [];
 
         if ($busca !== '') {
+            // Se busca for numérica, pesquisa por ID exato
             if (is_numeric($busca)) {
                 $sql .= " WHERE $col_id = :busca_id";
                 $params[':busca_id'] = $busca;
             } else {
+                // Caso contrário, pesquisa por nome (LIKE)
                 $sql .= " WHERE $col_nome LIKE :busca_nome";
                 $params[':busca_nome'] = "%" . $busca . "%";
             }
         }
 
+        // Executa uma consulta e armazena os resultados
         try {
             $stmt = $pdo->prepare($sql);
             $stmt->execute($params);

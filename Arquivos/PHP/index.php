@@ -219,6 +219,19 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     font-size: 1rem;
     margin: 0 10px;
 }
+.perfil {
+    display: flex;
+    align-items: center;
+    margin-left: 18px;
+}
+.material-symbols-outlined {
+    font-size: 45px !important;
+    color: #c084fc;
+    transition: color 0.2s;
+}
+.material-symbols-outlined:hover {
+    color: #fff;
+}
     </style>
 </head>
 <body>
@@ -240,7 +253,7 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div id="results" class="search-results"></div>
     </div>
     <div class="perfil">
-        <a href="perfilnormal.php">
+        <a href="perfilnormal.php" >
             <span class="material-symbols-outlined">account_circle</span>
         </a>
     </div>
@@ -339,15 +352,10 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="footer-section">
             <h3>Localização</h3>
-            <p>Av. Paulista, 1000</p>
-            <p>São Paulo - SP, 01310-100</p>
-        </div>
-        <div class="footer-section">
-            <h3>Redes Sociais</h3>
-            <a href="#">Facebook</a>
-            <a href="#">Twitter</a>
-            <a href="#">Instagram</a>
-            <a href="#">YouTube</a>
+            <p>Rua Augusta, 2073
+            Cerqueira César</p>
+            <p>São Paulo - SP</p>
+            <p> CEP: 01413-000 </p>
         </div>
     </div>
     <div class="footer-bottom">
@@ -369,53 +377,6 @@ const userGames = <?php
     }
     echo json_encode($jsArray, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 ?>;
-
-function atualizarTimers() {
-    const jogos = document.querySelectorAll('.game-tile');
-
-    jogos.forEach(jogo => {
-        const expiracaoStr = jogo.getAttribute('data-expiracao');
-        const countdownEl = jogo.querySelector('.countdown');
-
-        if (!expiracaoStr || !countdownEl) return;
-
-        const expiracao = new Date(expiracaoStr);
-        const agora = new Date();
-
-        let diff = expiracao - agora; // milissegundos restantes
-
-        if (diff <= 0) {
-            countdownEl.textContent = 'Expirado';
-            // Opcional: jogo.style.display = 'none';
-        } else {
-            const horas = Math.floor(diff / (1000 * 60 * 60));
-            const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diff % (1000 * 60)) / 1000);
-
-            countdownEl.textContent = 
-                String(horas).padStart(2, '0') + ':' +
-                String(minutos).padStart(2, '0') + ':' +
-                String(segundos).padStart(2, '0');
-        }
-    });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    atualizarTimers();
-    setInterval(atualizarTimers, 1000);
-});
-
-function registrarEEntrar(nomeJogo, urlDestino) {
-    fetch('registrar_entrada.php', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: 'nome_jogo=' + encodeURIComponent(nomeJogo)
-    })
-    .then(response => response.json())
-    .then(data => {
-        window.location.href = urlDestino;
-    });
-}
 
 function msParaTemponormal(ms) {
     if (ms <= 0) return 'Expirado';
@@ -452,7 +413,6 @@ function atualizarTimers() {
     });
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     // Salva urls originais no atributo data-url para possível restauração
     document.querySelectorAll('.play-link').forEach(link => {
@@ -463,6 +423,17 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(atualizarTimers, 1000);
 });
 
+function registrarEEntrar(nomeJogo, urlDestino) {
+    fetch('registrar_entrada.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'nome_jogo=' + encodeURIComponent(nomeJogo)
+    })
+    .then(response => response.json())
+    .then(data => {
+        window.location.href = urlDestino;
+    });
+}
 </script>
 
 </body>

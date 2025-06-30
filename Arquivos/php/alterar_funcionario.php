@@ -20,12 +20,14 @@ $cargos = $stmt_cargo->fetchAll(PDO::FETCH_ASSOC);
 // Busca o ADM/FUNCIONÁRIO se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['busca_adm'])) {
     $busca = trim($_POST['busca_adm']);
-
+    // Busca por número
     if (is_numeric($busca)) {
         $sql = "SELECT * FROM adm WHERE pk_adm = :busca";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':busca', $busca, PDO::PARAM_INT);
-    } else {
+    } 
+    // busca por nome
+    else {
         $sql = "SELECT * FROM adm WHERE nome_adm LIKE :busca";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':busca', "%$busca%", PDO::PARAM_STR);

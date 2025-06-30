@@ -25,6 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($nome) || empty($email) || empty($senha) || empty($fk_cargo_form)) {
         $mensagem = "Todos os campos são obrigatórios.";
+    } elseif (strlen($senha) < 8) {
+        $mensagem = "A senha deve ter pelo menos 8 dígitos.";
     } else {
         // Verifica e-mail duplicado
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM adm WHERE email_adm = :email");
@@ -266,8 +268,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="email_adm">E-mail:</label>
         <input type="email" id="email_adm" name="email_adm" required>
 
-        <label for="senha_user">Senha:</label>
-        <input type="password" id="senha_user" name="senha_user" required>
+        <label for="senha_user">Senha (mínimo 8 dígitos):</label>
+        <input type="password" id="senha_user" name="senha_user" minlength="8" required>
         
         <label for="fk_cargo">Cargo:</label>
         <select id="fk_cargo" name="fk_cargo" required>

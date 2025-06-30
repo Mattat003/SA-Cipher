@@ -10,6 +10,15 @@ if ($fk_cargo != 1 && $fk_cargo != 4) {
 
 $jogo = null;
 
+// Carrega listas de categorias
+$generos = $pdo->query("SELECT pk_genero, nome_gen FROM genero ORDER BY nome_gen")->fetchAll(PDO::FETCH_ASSOC);
+$estilos = $pdo->query("SELECT pk_estilo, nome_estilo FROM estilo ORDER BY nome_estilo")->fetchAll(PDO::FETCH_ASSOC);
+$plataformas = $pdo->query("SELECT pk_plataforma, nome_plat FROM plataforma ORDER BY nome_plat")->fetchAll(PDO::FETCH_ASSOC);
+
+$generos_selecionados = [];
+$estilos_selecionados = [];
+$plataformas_selecionadas = [];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
     $busca = trim($_POST['busca_jogo']);
 
@@ -22,7 +31,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
     }
 
     $jogo = $stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$jogo) {
+
+    if ($jogo) {
+        // Busca categorias já associadas
+        $stmt = $pdo->prepare("SELECT genero_id FROM jogo_genero WHERE jogo_id = ?");
+        $stmt->execute([$jogo['pk_jogo']]);
+        $generos_selecionados = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        $stmt = $pdo->prepare("SELECT estilo_id FROM jogo_estilo WHERE jogo_id = ?");
+        $stmt->execute([$jogo['pk_jogo']]);
+        $estilos_selecionados = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        $stmt = $pdo->prepare("SELECT plataforma_id FROM jogo_plataforma WHERE jogo_id = ?");
+        $stmt->execute([$jogo['pk_jogo']]);
+        $plataformas_selecionadas = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    } else {
         echo "<script>alert('Jogo não encontrado!');</script>";
     }
 }
@@ -67,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
             color: #e9d5ff;
         }
 
-        input[type="text"], input[type="date"], input[type="file"] {
+        input[type="text"], input[type="date"], input[type="file"], select {
             width: 100%;
             padding: 12px 15px;
             margin-top: 8px;
@@ -80,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
             box-sizing: border-box;
         }
 
-        input:focus {
+        input:focus, select:focus {
             border-color: #7a5af5;
             background-color: #2a2e3c;
             outline: none;
@@ -228,6 +251,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
                 <label class="form-label mt-2">Nova Imagem (opcional)</label>
                 <input type="file" name="imagem_jogo" class="form-control" accept="image/*">
             </div>
+
+            <!-- Categorias -->
+            <div class="mb-3">
+                <label class="form-label">Gênero(s)</label>
+                <select name="generos[]" multiple class="form-control" size="5">
+                    <?php foreach ($generos as $g): ?>
+                        <option value="<?= $g['pk_genero'] ?>" <?= in_array($g['pk_genero'], $generos_selecionados) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($g['nome_gen']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <small style="color:#c084fc">Segure Ctrl (Windows) ou Command (Mac) para selecionar mais de um.</small>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Estilo(s)</label>
+                <select name="estilos[]" multiple class="form-control" size="4">
+                    <?php foreach ($estilos as $e): ?>
+                        <option value="<?= $e['pk_estilo'] ?>" <?= in_array($e['pk_estilo'], $estilos_selecionados) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($e['nome_estilo']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Plataforma(s)</label>
+                <select name="plataformas[]" multiple class="form-control" size="5">
+                    <?php foreach ($plataformas as $p): ?>
+                        <option value="<?= $p['pk_plataforma'] ?>" <?= in_array($p['pk_plataforma'], $plataformas_selecionadas) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($p['nome_plat']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <!-- Fim categorias -->
 
             <div class="btn-row">
                 <button type="submit" class="btn-custom">Salvar Alterações</button>

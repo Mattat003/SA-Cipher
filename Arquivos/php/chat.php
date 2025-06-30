@@ -2,22 +2,24 @@
 session_start();
 require 'conexao.php';
 
+// Se o usuário clicar em "sair", a sessão é destruída e volta para a página inicial
 if (isset($_GET['sair']) && $_GET['sair'] === 'true') {
     session_destroy();
     header('Location: index.php');
     exit();
 }
 
+// Se não estiver logado, redireciona para a tela de login
 if (!isset($_SESSION['pk_usuario'])) {
     header('Location: login.php');
     exit();
 }
 
-
+// Pega o ID do usuário logado e o nome para exibir no chat
 $usuario_id = $_SESSION['pk_usuario'];
 $usuario_nome = $_SESSION['usuario'];
 
-
+// Busca todos os amigos do usuário logado para exibir na barra lateral
 $stmt = $pdo->prepare("
     SELECT u.pk_usuario AS id, u.nome_user AS nome 
     FROM usuario u
@@ -26,7 +28,6 @@ $stmt = $pdo->prepare("
 ");
 $stmt->execute(['usuario_id' => $usuario_id]);
 $amigos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

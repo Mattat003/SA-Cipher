@@ -18,7 +18,7 @@ header {
     height: 80px;
     padding: 0 40px;
     box-sizing: border-box;
-    position: sticky;
+    position: relative;
     top: 0;
     z-index: 1000;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -323,12 +323,11 @@ h1 {
     top: 20px;
     right: 20px;
     z-index: 1000;
-    transform: translateX(5px);
-    transform: translateY(-8px);
+  
 }
 
 .perfil a {
-    display: flex;
+
     align-items: center;
     justify-content: center;
     width: 56px;
@@ -362,6 +361,7 @@ h1 {
     font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 40;
     transition: all 0.3s ease;
     text-shadow: 0 0 8px rgba(192, 132, 252, 0.6);
+   
 }
 
 .perfil a:hover .material-symbols-outlined {

@@ -3,6 +3,7 @@ session_start();
 require_once 'conexao.php';
 
 $fk_cargo = $_SESSION['fk_cargo'] ?? null;
+$adm_logado_id = $_SESSION['pk_adm'] ?? null; // ID do adm logado
 
 // Permissão de acesso
 if ($fk_cargo != 1 && $fk_cargo != 4) {
@@ -13,6 +14,13 @@ if ($fk_cargo != 1 && $fk_cargo != 4) {
 // Excluir funcionário da tabela adm
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id_adm = $_GET['id'];
+
+    // Não permitir autoexclusão
+    if ($id_adm == $adm_logado_id) {
+        echo "<script>alert('Você não pode excluir a si mesmo!'); window.location.href='excluir_funcionario.php';</script>";
+        exit;
+    }
+
     $sql = "DELETE FROM adm WHERE pk_adm = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':id', $id_adm, PDO::PARAM_INT);
