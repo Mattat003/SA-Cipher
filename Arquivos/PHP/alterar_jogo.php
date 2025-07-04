@@ -1,54 +1,60 @@
 <?php
-session_start();
-require_once 'conexao.php';
+    session_start();
+    require_once 'conexao.php';
 
-$fk_cargo = $_SESSION['fk_cargo'] ?? null;
-if ($fk_cargo != 1 && $fk_cargo != 4) {
-    echo "Acesso negado";
-    exit;
-}
-
-$jogo = null;
-
-// Carrega listas de categorias
-$generos = $pdo->query("SELECT pk_genero, nome_gen FROM genero ORDER BY nome_gen")->fetchAll(PDO::FETCH_ASSOC);
-$estilos = $pdo->query("SELECT pk_estilo, nome_estilo FROM estilo ORDER BY nome_estilo")->fetchAll(PDO::FETCH_ASSOC);
-$plataformas = $pdo->query("SELECT pk_plataforma, nome_plat FROM plataforma ORDER BY nome_plat")->fetchAll(PDO::FETCH_ASSOC);
-
-$generos_selecionados = [];
-$estilos_selecionados = [];
-$plataformas_selecionadas = [];
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
-    $busca = trim($_POST['busca_jogo']);
-
-    if (is_numeric($busca)) {
-        $stmt = $pdo->prepare("SELECT * FROM jogo WHERE pk_jogo = ?");
-        $stmt->execute([$busca]);
-    } else {
-        $stmt = $pdo->prepare("SELECT * FROM jogo WHERE nome_jogo LIKE ?");
-        $stmt->execute(["%$busca%"]);
+    $fk_cargo = $_SESSION['fk_cargo'] ?? null;
+    if ($fk_cargo != 1 && $fk_cargo != 4) {
+        echo "Acesso negado";
+        exit;
     }
 
-    $jogo = $stmt->fetch(PDO::FETCH_ASSOC);
+    $jogo = null;
 
-    if ($jogo) {
-        // Busca categorias já associadas
-        $stmt = $pdo->prepare("SELECT genero_id FROM jogo_genero WHERE jogo_id = ?");
-        $stmt->execute([$jogo['pk_jogo']]);
-        $generos_selecionados = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    // Carrega listas de categorias
+    $generos = $pdo->query("SELECT pk_genero, nome_gen FROM genero ORDER BY nome_gen")->fetchAll(PDO::FETCH_ASSOC);
+    $estilos = $pdo->query("SELECT pk_estilo, nome_estilo FROM estilo ORDER BY nome_estilo")->fetchAll(PDO::FETCH_ASSOC);
+    $plataformas = $pdo->query("SELECT pk_plataforma, nome_plat FROM plataforma ORDER BY nome_plat")->fetchAll(PDO::FETCH_ASSOC);
+    $idiomas = $pdo->query("SELECT pk_idioma, nome_idioma FROM idioma ORDER BY nome_idioma")->fetchAll(PDO::FETCH_ASSOC);
 
-        $stmt = $pdo->prepare("SELECT estilo_id FROM jogo_estilo WHERE jogo_id = ?");
-        $stmt->execute([$jogo['pk_jogo']]);
-        $estilos_selecionados = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    $generos_selecionados = [];
+    $estilos_selecionados = [];
+    $plataformas_selecionadas = [];
+    $idiomas_selecionados = [];
 
-        $stmt = $pdo->prepare("SELECT plataforma_id FROM jogo_plataforma WHERE jogo_id = ?");
-        $stmt->execute([$jogo['pk_jogo']]);
-        $plataformas_selecionadas = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    } else {
-        echo "<script>alert('Jogo não encontrado!');</script>";
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
+        $busca = trim($_POST['busca_jogo']);
+
+        if (is_numeric($busca)) {
+            $stmt = $pdo->prepare("SELECT * FROM jogo WHERE pk_jogo = ?");
+            $stmt->execute([$busca]);
+        } else {
+            $stmt = $pdo->prepare("SELECT * FROM jogo WHERE nome_jogo LIKE ?");
+            $stmt->execute(["%$busca%"]);
+        }
+
+        $jogo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($jogo) {
+            // Busca categorias já associadas
+            $stmt = $pdo->prepare("SELECT genero_id FROM jogo_genero WHERE jogo_id = ?");
+            $stmt->execute([$jogo['pk_jogo']]);
+            $generos_selecionados = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+            $stmt = $pdo->prepare("SELECT estilo_id FROM jogo_estilo WHERE jogo_id = ?");
+            $stmt->execute([$jogo['pk_jogo']]);
+            $estilos_selecionados = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+            $stmt = $pdo->prepare("SELECT plataforma_id FROM jogo_plataforma WHERE jogo_id = ?");
+            $stmt->execute([$jogo['pk_jogo']]);
+            $plataformas_selecionadas = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+            $stmt = $pdo->prepare("SELECT idioma_id FROM jogo_idioma WHERE jogo_id = ?");
+            $stmt->execute([$jogo['pk_jogo']]);
+            $plataformas_selecionadas = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        } else {
+            echo "<script>alert('Jogo não encontrado!');</script>";
+        }
     }
-}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -58,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
     <style>
         body {
             background-color: #12002b;
-            color: #f0e6ff;
             font-family: 'Motiva Sans', 'Segoe UI', sans-serif;
             margin: 0;
             padding: 0;
@@ -136,6 +141,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
         }
 
+        /* Select2 container */
+        .select2-container--default .select2-selection--multiple {
+        background-color: #292929 !important;
+        border: 1px solid #333;
+        color: white;
+        border-radius: 4px;
+        min-height: 40px;
+        }
+
+        /* Tags */
+        .select2-selection__choice {
+        background-color: #292929 !important;
+        color: white;
+        border: 1px solid #555;
+        padding: 4px 8px;
+        border-radius: 3px;
+        }
+
+        .select2-selection__choice__remove {
+        color:rgb(255, 255, 255) !important;
+        margin-left: 4px;
+        cursor: pointer;
+        padding: 1px !important;
+        padding-left: 1px;
+        }
+
+        /* Dropdown */
+        .select2-dropdown {
+        background-color: #292929 !important;
+        border: 1px solid #333;
+        }
+
+        .select2-results__option {
+        background-color: #292929 !important;
+        color: white;
+        padding: 8px;
+        }
+
+        .select2-results__option--highlighted {
+        background-color:rgb(65, 65, 65) !important;
+        color: white;
+        }
+
+        /* Placeholder no campo */
+        .select2-search__field {
+        background: transparent;
+        color: white;
+        }
+
         .alert {
             padding: 15px;
             border-radius: 8px;
@@ -204,6 +258,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
     }
 
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -255,18 +312,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
             <!-- Categorias -->
             <div class="mb-3">
                 <label class="form-label">Gênero(s)</label>
-                <select name="generos[]" multiple class="form-control" size="5">
+                <select id="generos" multiple="multiple" style="width: 300px; background-color: #121212; color: white;">
                     <?php foreach ($generos as $g): ?>
                         <option value="<?= $g['pk_genero'] ?>" <?= in_array($g['pk_genero'], $generos_selecionados) ? 'selected' : '' ?>>
                             <?= htmlspecialchars($g['nome_gen']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <small style="color:#c084fc">Segure Ctrl (Windows) ou Command (Mac) para selecionar mais de um.</small>
             </div>
             <div class="mb-3">
                 <label class="form-label">Estilo(s)</label>
-                <select name="estilos[]" multiple class="form-control" size="4">
+                <select id="estilos" multiple="multiple" style="width: 300px; background-color: #121212; color: white;">
                     <?php foreach ($estilos as $e): ?>
                         <option value="<?= $e['pk_estilo'] ?>" <?= in_array($e['pk_estilo'], $estilos_selecionados) ? 'selected' : '' ?>>
                             <?= htmlspecialchars($e['nome_estilo']) ?>
@@ -276,10 +332,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
             </div>
             <div class="mb-3">
                 <label class="form-label">Plataforma(s)</label>
-                <select name="plataformas[]" multiple class="form-control" size="5">
+                <select id="plataformas" multiple="multiple" style="width: 300px; background-color: #121212; color: white;">
                     <?php foreach ($plataformas as $p): ?>
                         <option value="<?= $p['pk_plataforma'] ?>" <?= in_array($p['pk_plataforma'], $plataformas_selecionadas) ? 'selected' : '' ?>>
                             <?= htmlspecialchars($p['nome_plat']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Idioma(s)</label>
+                <select id="idiomas" multiple="multiple" style="width: 300px; background-color: #121212; color: white;">
+                    <?php foreach ($idiomas as $i): ?>
+                        <option value="<?= $i['pk_idioma'] ?>" <?= in_array($i['pk_idioma'], $idiomas_selecionados) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($i['nome_idioma']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -298,5 +364,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['busca_jogo'])) {
     
 </div>
 <a href="adm.php" class="back-link">Voltar</a>
+<script>
+    $(document).ready(function() {
+        $('#generos').select2({
+            placeholder: "Selecione os gêneros"
+        });
+    });
+    $(document).ready(function() {
+        $('#estilos').select2({
+            placeholder: "Selecione os estilos"
+        });
+    });
+    $(document).ready(function() {
+        $('#plataformas').select2({
+            placeholder: "Selecione as plataformas"
+        });
+    });
+    $(document).ready(function() {
+        $('#idiomas').select2({
+            placeholder: "Selecione os idiomas"
+        });
+    });
+</script>
 </body>
 </html>

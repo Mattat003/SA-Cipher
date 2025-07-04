@@ -42,8 +42,11 @@ if ($tipo && isset($categorias[$tipo])) {
                 $params[':busca_id'] = $busca;
             } else {
                 // Caso contrário, pesquisa por nome (LIKE)
-                $sql .= " WHERE $col_nome LIKE :busca_nome";
-                $params[':busca_nome'] = "%" . $busca . "%";
+                $sql .= " WHERE $col_nome LIKE :letra_qualquer ORDER BY 
+                CASE WHEN $col_nome LIKE :letra_inicio THEN 0 ELSE 1 END, 
+                $col_nome ASC";
+                $params[':letra_inicio'] = $busca . '%';
+                $params[':letra_qualquer'] = '%' . $busca . '%';
             }
         }
 
