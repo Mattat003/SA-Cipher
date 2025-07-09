@@ -11,7 +11,7 @@ $nomeUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
 $meu_id = $_SESSION['pk_usuario'];
 
 $stmt = $pdo->prepare("
-    SELECT b.*, l.data_expiracao
+    SELECT b.*, l.data_expiracao, l.data_inicio
     FROM biblioteca_usuario b
     JOIN locacoes_pendentes l
       ON b.usuario_id = l.usuario_id AND b.jogo_id = l.jogo_id
@@ -29,8 +29,7 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Index</title>
-    
-    <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="../css/index.css" />
@@ -69,9 +68,9 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             font-size: 1.1rem;
         }
         .timer {
-            color:#ccc; 
-            font-size: 0.9rem; 
-            padding: 0 15px 10px; 
+            color:#ccc;
+            font-size: 0.9rem;
+            padding: 0 15px 10px;
             font-weight: 600;
         }
         .game-tile a {
@@ -264,7 +263,6 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <div class="container mt-5">
-    <!-- Carousel aqui (sem alterações) -->
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -323,10 +321,12 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="games-container" id="minhaBiblioteca">
     <?php foreach ($jogos as $jogo): ?>
-        <div class="game-tile" data-expiracao="<?= htmlspecialchars($jogo['data_expiracao']) ?>">
+        <div class="game-tile" data-inicio="<?= htmlspecialchars($jogo['data_inicio']) ?>" data-expiracao="<?= htmlspecialchars($jogo['data_expiracao']) ?>">
             <img src="<?= htmlspecialchars($jogo['imagem_jogo']) ? htmlspecialchars($jogo['imagem_jogo']) : '../img/semImage.jpg' ?>" alt="<?= htmlspecialchars($jogo['nome_jogo']) ?>" />
             <h3><?= htmlspecialchars($jogo['nome_jogo']) ?></h3>
             <div class="timer">
+                Início: <span class="start-time">--/--/---- --:--</span><br>
+                Fim: <span class="end-time">--/--/---- --:--</span><br>
                 Tempo restante: <span class="countdown">--:--:--</span>
             </div>
             <a href="<?= htmlspecialchars($jogo['url_jogo']) ?>"
@@ -372,6 +372,7 @@ const userGames = <?php
             "nome" => $jogo["nome_jogo"],
             "url" => $jogo["url_jogo"] ?: "#",
             "imagem" => $jogo["imagem_jogo"] ?: "../img/default-game.jpg",
+            "data_inicio" => $jogo["data_inicio"],
             "data_expiracao" => $jogo["data_expiracao"],
         ];
     }
@@ -380,28 +381,61 @@ const userGames = <?php
 
 function msParaTemponormal(ms) {
     if (ms <= 0) return 'Expirado';
-    const m = 60 * 1000, h = 60 * m, d = 24 * h;
+    const s = 1000, m = 60 * s, h = 60 * m, d = 24 * h;
+
     const dias = Math.floor(ms / d);
     const horas = Math.floor((ms % d) / h);
     const minutos = Math.floor((ms % h) / m);
+    const segundos = Math.floor((ms % m) / s);
+
     const partes = [];
     if (dias > 0) partes.push(`${dias} dia${dias > 1 ? 's' : ''}`);
     if (horas > 0) partes.push(`${horas} hora${horas > 1 ? 's' : ''}`);
     if (minutos > 0) partes.push(`${minutos} minuto${minutos > 1 ? 's' : ''}`);
-    return partes.length ? partes.join(' e ') + ' restantes' : 'Menos de 1 minuto restante';
+    if (segundos > 0) partes.push(`${segundos} segundo${segundos > 1 ? 's' : ''}`);
+
+
+    return partes.length ? partes.join(' e ') + ' restantes' : 'Menos de 1 segundo restante';
+}
+
+function formatDateTime(dateTimeStr) {
+    const date = new Date(dateTimeStr);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 
 function atualizarTimers() {
     const jogos = document.querySelectorAll('.game-tile');
     jogos.forEach(jogo => {
+        const inicioStr = jogo.getAttribute('data-inicio');
         const expiracaoStr = jogo.getAttribute('data-expiracao');
         const countdownEl = jogo.querySelector('.countdown');
+        const startEl = jogo.querySelector('.start-time');
+        const endEl = jogo.querySelector('.end-time');
         const link = jogo.querySelector('.play-link');
-        if (!expiracaoStr || !countdownEl || !link) return;
+
+        if (!inicioStr || !expiracaoStr || !countdownEl || !startEl || !endEl || !link) return;
+
+        const inicio = new Date(inicioStr);
         const expiracao = new Date(expiracaoStr);
         const agora = new Date();
+
+        startEl.textContent = formatDateTime(inicioStr);
+        endEl.textContent = formatDateTime(expiracaoStr);
+
         let diff = expiracao - agora;
-        if (diff <= 0) {
+
+        if (agora < inicio) {
+            countdownEl.textContent = 'Aguardando início';
+            link.classList.add('disabled');
+            link.textContent = 'Aguardando início';
+            link.onclick = e => e.preventDefault();
+            link.removeAttribute('href');
+        } else if (diff <= 0) {
             countdownEl.textContent = 'Expirado';
             link.classList.add('disabled');
             link.textContent = 'Tempo de jogo expirado';
@@ -409,6 +443,10 @@ function atualizarTimers() {
             link.removeAttribute('href');
         } else {
             countdownEl.textContent = msParaTemponormal(diff);
+            link.classList.remove('disabled');
+            link.textContent = 'JOGAR AGORA';
+            link.setAttribute('href', link.dataset.urlOriginal); // Restaura o href original
+            link.onclick = () => registrarEEntrar(jogo.querySelector('h3').textContent, link.dataset.urlOriginal);
         }
     });
 }
@@ -418,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.play-link').forEach(link => {
         link.dataset.urlOriginal = link.getAttribute('href');
     });
-    
+
     atualizarTimers();
     setInterval(atualizarTimers, 1000);
 });
@@ -437,4 +475,4 @@ function registrarEEntrar(nomeJogo, urlDestino) {
 </script>
 
 </body>
-</html>
+</html> 
