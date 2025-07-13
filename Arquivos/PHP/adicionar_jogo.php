@@ -1,31 +1,40 @@
 <?php
 session_start();
 require_once 'conexao.php';
+
+// Exibe todos os erros PHP (útil para debug)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Verifica se o usuário tem permissão (apenas cargo 1 - admin)
 $fk_cargo = $_SESSION['fk_cargo'] ?? null;
 if ($fk_cargo != 1) {
     echo "Acesso negado";
     exit;
 }
 
+// Mensagem de feedback (sucesso/erro) via sessão
 $mensagem = $_SESSION['msg_cadastro_jogo'] ?? '';
 unset($_SESSION['msg_cadastro_jogo']);
 
+// Busca todos os usuários para o select do formulário
 $stmt = $pdo->query("SELECT pk_usuario, nome_user FROM usuario ORDER BY nome_user");
 $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Se o formulário foi enviado (POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Recebe e sanitiza os dados do formulário
     $usuario_id = intval($_POST['usuario_id'] ?? 0);
     $nome_jogo = trim($_POST['nome_jogo'] ?? '');
     $url_jogo = trim($_POST['url_jogo'] ?? '');
     $imagem_jogo = trim($_POST['imagem_jogo'] ?? '');
 
+    // Valida os campos obrigatórios
     if (!$usuario_id || !$nome_jogo || !$url_jogo) {
         $mensagem = "Usuário, nome do jogo e URL do jogo são obrigatórios.";
     } else {
+        // Tenta inserir na biblioteca_usuario (evita duplicidade com INSERT IGNORE)
         $stmt = $pdo->prepare("INSERT IGNORE INTO biblioteca_usuario (usuario_id, nome_jogo, url_jogo, imagem_jogo) VALUES (?, ?, ?, ?)");
         $stmt->execute([$usuario_id, $nome_jogo, $url_jogo, $imagem_jogo]);
         if ($stmt->rowCount() > 0) {
@@ -34,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mensagem = "Esse jogo já está na biblioteca desse usuário ou houve um erro!";
         }
     }
-
 }
 ?>
 <!DOCTYPE html>

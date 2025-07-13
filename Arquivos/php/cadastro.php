@@ -60,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    
 </head>
 <body style="background: linear-gradient(135deg, #0f0c29, #302b63); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;">
 
@@ -88,8 +89,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <input type="submit" value="Cadastrar-se" style="background: linear-gradient(to right, #8639df, #6a0dad); color: white; padding: 15px; margin-top: 20px; cursor: pointer; font-size: 16px; font-weight: 600; border-radius: 8px; border: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(134, 57, 223, 0.3);" />
+            <a href="login.php" style="background: linear-gradient(to right, #8639df, #6a0dad); color: white; padding: 15px; margin-top: 1px; cursor: pointer; font-size: 16px; font-weight: 600; border-radius: 8px; border: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(134, 57, 223, 0.3); text-align: center;">Voltar</a>
         </fieldset>
     </form>
+    
 
     <script>
         function mostrarSenha(id, el) {

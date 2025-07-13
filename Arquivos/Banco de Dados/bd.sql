@@ -286,3 +286,9 @@ INSERT INTO usuario (pk_usuario, nome_user, email_user, senha_user, data_criacao
 (5,'Caio Silveira','caio@email.com', '12345678','2025-04-05',0,'','cliente');
 
 select * from usuario;
+
+ALTER TABLE locacoes_pendentes
+ADD COLUMN data_inicio DATETIME;
+
+ALTER TABLE locacoes_pendentes
+ADD COLUMN valor_total DECIMAL(10, 2);

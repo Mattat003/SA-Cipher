@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cypher Corporation - Painel Administrativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/Tela_ADM.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/Tela_ADM.js" defer></script>
+    <script src="../js/dashboard.js" defer></script>
+
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-cube"></i>
+                    <span>Cipher<span class="logo-highlight">X</span></span>
+                </div>
+                <button class="sidebar-toggle" aria-label="Alternar menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="sidebar-profile">
+                <div class="profile-avatar">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWJAMnWsbM3K9CRgWeqXXxUCCwNrA3ACj1GQ&s" alt="Avatar do Usuário">
+                </div>
+                <div class="profile-info">
+                    <h3 id="profile-name">Dev Admin</h3>
+                    <p id="profile-role">Administrador</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="#" data-section="dashboard" class="active">
+                            <i class="fas fa-tachometer-alt"></i> <span data-translate="dashboard">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="users-management">
+                            <i class="fas fa-users"></i> <span data-translate="users">Usuários</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="employees-management">
+                            <i class="fas fa-user-friends"></i> <span data-translate="employees">Funcionários</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="categories-management">
+                            <i class="fas fa-tags"></i> <span data-translate="categories">Categorias</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="games-management">
+                            <i class="fas fa-gamepad"></i> <span data-translate="games">Jogos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="reports-management">
+                            <i class="fas fa-chart-line"></i> <span data-translate="reports">Relatórios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="history-management">
+                            <i class="fas fa-history"></i> <span data-translate="history">Histórico</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="profile-settings">
+                            <i class="fas fa-user-circle"></i> <span data-translate="profile">Perfil</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="settings-management">
+                            <i class="fas fa-cogs"></i> <span data-translate="settings">Configurações</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="logout">
+                            <i class="fas fa-sign-out-alt"></i> <span data-translate="logout">Sair</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="lang-selector">
+                    <label for="lang-select" class="sr-only">Selecionar Idioma</label>
+                    <select id="lang-select">
+                        <option value="pt-BR">Português (BR)</option>
+                        <option value="en-US">English (US)</option>
+                        <option value="de-DE">Deutsch (DE)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="sidebar-overlay"></div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button class="sidebar-toggle-mobile" aria-label="Alternar menu mobile">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-right">
+                    <div class="user-dropdown">
+                        <button class="user-avatar-btn">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWJAMnWsbM3K9CRgWeqXXxUCCwNrA3ACj1GQ&s" alt="Avatar do Usuário">
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <h2 data-translate="dashboard">Dashboard</h2>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <h3 data-translate="totalUsers">Total de Usuários</h3>
+                        <p id="total-users-stat">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-gamepad"></i>
+                        <h3 data-translate="totalGames">Total de Jogos</h3>
+                        <p id="total-games-stat">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-truck-moving"></i>
+                        <h3 data-translate="pendingRentals">Locações Pendentes</h3>
+                        <p id="pending-rentals-stat">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h3 data-translate="totalSales">Total de Compras</h3>
+                        <p id="total-sales-stat">0</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-box">
+                        <canvas id="userProfileChart"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <canvas id="gameReleaseChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Management Section -->
+            <section id="users-management" class="content-section">
+                <h2 data-translate="users">Gerenciamento de Usuários</h2>
+                <div class="table-actions">
+                    <div class="filters">
+                        <input type="text" id="user-search" placeholder="Buscar..." data-translate-placeholder="searchPlaceholder" />
+                        <select id="user-profile-filter">
+                            <option value="all" data-translate="allProfiles">Todos os Perfis</option>
+                            <option value="adm" data-translate="admin">Admin</option>
+                            <option value="funcionario" data-translate="employee">Funcionário</option>
+                            <option value="cliente" data-translate="client">Cliente</option>
+                        </select>
+                        <select id="user-status-filter">
+                            <option value="all" data-translate="allStatuses">Todos os Status</option>
+                            <option value="true" data-translate="temporaryPassword">Senha Temporária</option>
+                            <option value="false" data-translate="permanentPassword">Senha Permanente</option>
+                        </select>
+                    </div>
+                    <button id="add-user-btn" class="btn btn-primary"><i class="fas fa-plus"></i> <span data-translate="addUser">Adicionar Usuário</span></button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th data-translate="userName">Nome do Usuário</th>
+                                <th data-translate="userEmail">Email</th>
+                                <th data-translate="userProfile">Perfil</th>
+                                <th data-translate="userTemporaryPassword">Senha Temporária</th>
+                                <th data-translate="actions">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Employees Management Section -->
+            <section id="employees-management" class="content-section">
+                <h2 data-translate="employees">Gerenciamento de Funcionários</h2>
+                <div class="table-actions">
+                    <div class="filters">
+                        <input type="text" id="employee-search" placeholder="Buscar..." data-translate-placeholder="searchPlaceholder" />
+                        <select id="employee-role-filter">
+                            <option value="all" data-translate="allRoles">Todos os Cargos</option>
+                            <!-- Options will be populated by JS from 'cargo' table -->
+                        </select>
+                    </div>
+                    <button id="add-employee-btn" class="btn btn-primary"><i class="fas fa-plus"></i> <span data-translate="addEmployee">Adicionar Funcionário</span></button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th data-translate="employeeName">Nome</th>
+                                <th data-translate="employeeEmail">Email</th>
+                                <th data-translate="employeeRole">Cargo</th>
+                                <th data-translate="actions">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employee-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Categories Management Section -->
+            <section id="categories-management" class="content-section">
+                <h2 data-translate="categories">Gerenciamento de Categorias</h2>
+                <div class="category-tabs">
+                    <select id="category-type-select">
+                        <option value="genero" data-translate="genre">Gênero</option>
+                        <option value="tema" data-translate="theme">Tema</option>
+                        <option value="estilo" data-translate="style">Estilo</option>
+                        <option value="plataforma" data-translate="platform">Plataforma</option>
+                        <option value="idioma" data-translate="language">Idioma</option>
+                        <option value="modo" data-translate="mode">Modo</option>
+                    </select>
+                    <input type="text" id="category-search" placeholder="Buscar categoria..." data-translate-placeholder="searchCategoryPlaceholder" />
+                    <button id="add-category-btn" class="btn btn-primary"><i class="fas fa-plus"></i> <span data-translate="addCategory">Adicionar Categoria</span></button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th data-translate="categoryName">Nome da Categoria</th>
+                                <th data-translate="actions">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="category-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Games Management Section -->
+            <section id="games-management" class="content-section">
+                <h2 data-translate="games">Gerenciamento de Jogos</h2>
+                <div class="table-actions">
+                    <div class="filters">
+                        <input type="text" id="game-search" placeholder="Buscar..." data-translate-placeholder="searchPlaceholder" />
+                        <select id="game-availability-filter">
+                            <option value="all" data-translate="allAvailability">Todos</option>
+                            <option value="true" data-translate="availableForRent">Disponível para Locação</option>
+                            <option value="false" data-translate="notAvailableForRent">Não Disponível para Locação</option>
+                        </select>
+                    </div>
+                    <button id="add-game-btn" class="btn btn-primary"><i class="fas fa-plus"></i> <span data-translate="addGame">Adicionar Jogo</span></button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th data-translate="gameName">Nome do Jogo</th>
+                                <th data-translate="releaseDate">Data de Lançamento</th>
+                                <th data-translate="developer">Desenvolvedora</th>
+                                <th data-translate="gameCode">Código</th>
+                                <th data-translate="availableForRent">Disponível para Locação</th>
+                                <th data-translate="actions">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="game-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Reports Management Section -->
+            <section id="reports-management" class="content-section">
+                <div class="section-header">
+                    <h2 data-translate="reportsTitle">Gerar Relatórios</h2>
+                </div>
+                <div class="card">
+                    <div class="form-group">
+                        <label for="report-type" data-translate="reportType">Tipo de Relatório:</label>
+                        <select id="report-type" class="form-control">
+                            <option value="users" data-translate="reportTypeUsers">Usuários</option>
+                            <option value="employees" data-translate="reportTypeEmployees">Funcionários</option>
+                            <option value="games" data-translate="reportTypeGames">Jogos</option>
+                            <option value="purchases" data-translate="reportTypePurchases">Compras</option>
+                            <option value="pendingRentals" data-translate="reportTypePendingRentals">Locações Pendentes</option>
+                            <option value="gameHistory" data-translate="reportTypeGameHistory">Histórico de Jogos</option>
+                            <option value="custom" data-translate="reportTypeCustom">Relatório Personalizado (Texto Livre)</option>
+                        </select>
+                    </div>
+
+                    <div id="data-report-fields">
+                        <div class="form-group">
+                            <label for="report-period-start" data-translate="reportPeriodStart">Data de Início:</label>
+                            <input type="date" id="report-period-start" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="report-period-end" data-translate="reportPeriodEnd">Data de Fim:</label>
+                            <input type="date" id="report-period-end" class="form-control">
+                        </div>
+                    </div>
+
+                    <div id="custom-report-fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="custom-report-text" data-translate="customReportText">Conteúdo do Relatório Personalizado:</label>
+                            <textarea id="custom-report-text" class="form-control" rows="10" placeholder="Digite seu relatório aqui..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="custom-report-filename" data-translate="customReportFilename">Nome do Arquivo (sem extensão):</label>
+                            <input type="text" id="custom-report-filename" class="form-control" value="relatorio_personalizado">
+                        </div>
+                    </div>
+
+                    <div class="report-actions">
+                        <button class="btn btn-primary" id="generate-report-btn"><i class="fas fa-file-csv"></i> <span data-translate="generateReport">Gerar Relatório</span></button>
+                        <button class="btn btn-secondary" id="download-report-btn" style="display: none;"><i class="fas fa-download"></i> <span data-translate="downloadReport">Download Relatório</span></button>
+                    </div>
+
+                    <div id="report-preview" class="report-preview" style="display: none;">
+                        <h3 data-translate="reportPreview">Prévia do Relatório:</h3>
+                        <pre id="report-data"></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Management Section -->
+            <section id="history-management" class="content-section">
+                <h2 data-translate="history">Histórico de Jogos</h2>
+                <div class="table-actions">
+                    <input type="text" id="history-search" placeholder="Buscar por usuário ou jogo..." data-translate-placeholder="searchHistoryPlaceholder" />
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th data-translate="historyUser">Usuário</th>
+                                <th data-translate="historyGame">Jogo</th>
+                                <th data-translate="entryTime">Hora de Entrada</th>
+                            </tr>
+                        </thead>
+                        <tbody id="game-history-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Profile Settings Section -->
+            <section id="profile-settings" class="content-section">
+                <div class="section-header">
+                    <h2 data-translate="profileTitle">Meu Perfil</h2>
+                </div>
+                <div class="profile-avatar-display">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWJAMnWsbM3K9CRgWeqXXxUCCwNrA3ACj1GQ&s" alt="Avatar do Usuário" id="profile-page-avatar">
+                    <button class="btn btn-secondary"><i class="fas fa-camera"></i> <span data-translate="changeAvatar">Alterar Avatar</span></button>
+                </div>
+                <h3><span data-translate="personalInfo">Informações Pessoais</span></h3>
+                <form class="profile-form">
+                    <div class="form-group">
+                        <label for="profileNameInput" data-translate="profileName">Nome:</label>
+                        <input type="text" id="profileNameInput" value="Dev Admin">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileEmailInput" data-translate="profileEmail">Email:</label>
+                        <input type="email" id="profileEmailInput" value="dev.admin@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileRoleInput" data-translate="profileRole">Função:</label>
+                        <input type="text" id="profileRoleInput" value="Administrador" readonly>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-translate="updateProfile">Atualizar Perfil</span></button>
+                </form>
+                <br>
+                <h3><span data-translate="changePassword">Alterar Senha</span></h3>
+                <form class="password-form">
+                    <div class="form-group">
+                        <label for="currentPassword" data-translate="currentPassword">Senha Atual:</label>
+                        <input type="password" id="currentPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword" data-translate="newPassword">Nova Senha:</label>
+                        <input type="password" id="newPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmNewPassword" data-translate="confirmNewPassword">Confirmar Nova Senha:</label>
+                        <input type="password" id="confirmNewPassword">
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-key"></i> <span data-translate="changePassword">Alterar Senha</span></button>
+                </form>
+            </section>
+
+            <!-- Settings Management Section -->
+            <section id="settings-management" class="content-section">
+                <div class="section-header">
+                    <h2 data-translate="settingsTitle">Configurações do Painel</h2>
+                </div>
+
+                <div class="card">
+                    <h3 data-translate="appearanceSettings">Aparência</h3>
+                    <div class="form-group">
+                        <label data-translate="themeMode">Modo do Tema:</label>
+                        <div class="radio-group">
+                            <input type="radio" id="theme-light" name="theme-mode" value="light">
+                            <label for="theme-light" data-translate="themeLight">Claro</label>
+                            <input type="radio" id="theme-dark" name="theme-mode" value="dark" checked>
+                            <label for="theme-dark" data-translate="themeDark">Escuro</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="primaryColor">Cor Primária:</label>
+                        <input type="color" id="primary-color-picker" value="#6f42c1" class="form-control" style="width: 100px;">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 data-translate="languageSettings">Configurações de Idioma</h3>
+                    <div class="form-group">
+                        <label for="language-select-settings" data-translate="selectLanguage">Selecionar Idioma:</label>
+                        <select id="language-select-settings" class="form-control">
+                            <option value="pt-BR">Português (Brasil)</option>
+                            <option value="en-US">English (US)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 data-translate="dataUtilities">Dados & Utilidades</h3>
+                    <div class="form-group">
+                        <button class="btn btn-secondary" id="clear-cache-btn"><i class="fas fa-eraser"></i> <span data-translate="clearCache">Limpar Cache Local</span></button>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-secondary" id="export-settings-btn"><i class="fas fa-file-export"></i> <span data-translate="exportSettings">Exportar Configurações</span></button>
+                    </div>
+                    <div class="form-group">
+                        <label for="import-settings-file" class="btn btn-secondary"><i class="fas fa-file-import"></i> <span data-translate="importSettings">Importar Configurações</span></label>
+                        <input type="file" id="import-settings-file" accept=".json" style="display: none;">
+                        <span id="import-file-name" style="margin-left: 10px; color: var(--text-muted);"></span>
+                    </div>
+                    <h4 data-translate="activityLogs">Logs de Atividade Recente:</h4>
+                    <pre id="activity-log-display" class="report-preview" style="max-height: 150px; overflow-y: auto;"></pre>
+                </div>
+
+                <div class="card">
+                    <h3 data-translate="aboutApp">Sobre o Cypher Corporation</h3>
+                    <p data-translate="appVersion">Versão: 1.0.0</p>
+                    <p data-translate="lastUpdated">Última Atualização: Junho de 2025</p>
+                    <p><a href="#" target="_blank" data-translate="helpDocs">Acessar Documentação de Ajuda</a></p>
+                </div>
+
+            </section>
+
+            <!-- Logout Section - Not a full section, just a placeholder for the link -->
+            <section id="logout" class="content-section" style="display: none;">
+                <h2>Deslogando...</h2>
+            </section>
+
+            <!-- Universal Modal Structure -->
+            <div id="main-modal" class="modal-backdrop" style="display: none;">
+                <div class="modal-content">
+                    <h2 id="modal-title"></h2>
+                    <div id="modal-body">
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>

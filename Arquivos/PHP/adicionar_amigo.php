@@ -2,17 +2,19 @@
 session_start();
 require 'conexao.php';
 
+// Verifica se o usuário está logado
 if (!isset($_SESSION['pk_usuario'])) {
     die("Acesso negado");
 }
 
 $usuario_id = $_SESSION['pk_usuario'];
 
+// Processa o formulário somente se for um POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $amigo_email = $_POST['email'] ?? '';
 
     if ($amigo_email) {
-        // Buscar o usuário pelo email
+        // Busca o ID do usuário correspondente ao email informado
         $stmt = $pdo->prepare("SELECT pk_usuario FROM usuario WHERE email_user = :email");
         $stmt->execute(['email' => $amigo_email]);
         $amigo = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -20,12 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($amigo) {
             $amigo_id = $amigo['pk_usuario'];
 
+            // Impede o usuário de enviar pedido de amizade para si mesmo
             if ($amigo_id == $usuario_id) {
                 echo "Você não pode enviar pedido para si mesmo.";
                 exit;
             }
 
-            // Verificar se já são amigos
+            // Verifica se já são amigos (relacionamento já existe)
             $stmt = $pdo->prepare("SELECT id FROM amigos WHERE usuario_id = :uid AND amigo_id = :aid");
             $stmt->execute(['uid' => $usuario_id, 'aid' => $amigo_id]);
 
@@ -34,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
 
-            // Verificar se já existe pedido pendente
+            // Verifica se já existe um pedido de amizade pendente (em qualquer direção)
             $stmt = $pdo->prepare("
                 SELECT id FROM pedidos_amizade 
                 WHERE ((de_id = :uid AND para_id = :aid) OR (de_id = :aid AND para_id = :uid)) 
@@ -47,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
 
-            // Inserir pedido
+            // Insere o pedido de amizade na tabela pedidos_amizade
             $stmt = $pdo->prepare("INSERT INTO pedidos_amizade (de_id, para_id, status) VALUES (:uid, :aid, 'pendente')");
             if ($stmt->execute(['uid' => $usuario_id, 'aid' => $amigo_id])) {
                 echo "Pedido de amizade enviado com sucesso!";
@@ -56,9 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
         } else {
+            // Email não corresponde a nenhum usuário
             echo "Usuário não encontrado.";
         }
     } else {
+        // Campo de email não foi preenchido
         echo "Informe o email do amigo.";
     }
     exit;

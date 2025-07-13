@@ -14,6 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data_lanc = $_POST['data_lanc'];
     $url_jogo = $_POST['url_jogo'];
     $desenvolvedora = $_POST['desenvolvedora'];
+    $generos = $_POST['generos'] ?? [];
+    $estilos = $_POST['estilos'] ?? [];
+    $plataformas = $_POST['plataformas'] ?? [];
+    $idiomas = $_POST['idiomas'] ?? [];
+
+    $jogo_id = $_POST['pk_jogo'];
 
     // Pega imagem atual do banco
     $stmt = $pdo->prepare("SELECT imagem_jogo FROM jogo WHERE pk_jogo = ?");
@@ -37,6 +43,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $imagem_jogo = $caminho;
         }
     }
+
+    //Atualiza as Categorias
+    // Atualiza GÊNEROS
+    $stmt = $pdo->prepare("INSERT INTO jogo_genero (jogo_id, genero_id) VALUES (?, ?)");
+    $stmt->execute([$jogo_id, $generos]);
+
+    // Atualiza ESTILOS
+    $stmt = $pdo->prepare("INSERT INTO jogo_estilo (jogo_id, estilo_id) VALUES (?, ?)");
+    $stmt->execute([$jogo_id, $estilos]);
+
+    // Atualiza PLATAFORMAS
+    $stmt = $pdo->prepare("INSERT INTO jogo_plataforma (jogo_id, plataforma_id) VALUES (?, ?)");
+    $stmt->execute([$jogo_id, $plataformas]);
+    
+    // Atualiza IDIOMAS
+    $stmt = $pdo->prepare("INSERT INTO jogo_idioma (jogo_id, idioma_id) VALUES (?, ?)");
+    $stmt->execute([$jogo_id, $idiomas]);
 
     // Atualizar no banco
     $stmt = $pdo->prepare("

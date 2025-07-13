@@ -1,0 +1,861 @@
+/* Tela_ADM.css */
+
+/* Variáveis CSS para fácil personalização */
+:root {
+    /* Cores */
+    --primary-color: #6f42c1; /* Roxo vibrante (agora primário) */
+    --secondary-color: #007bff; /* Azul vibrante (agora secundário) */
+    --background-dark: #1a1a2e; /* Fundo principal escuro */
+    --sidebar-dark: #16213e; /* Fundo da sidebar um pouco mais escuro */
+    --card-background: #0f3460; /* Fundo de cards/elementos */
+    --text-light: #e0e0e0; /* Texto claro principal */
+    --text-muted: #a0a0a0; /* Texto secundário/subtítulo */
+    --border-color: rgba(255, 255, 255, 0.1); /* Bordas sutis */
+    --success-color: #28a745; /* Verde para sucesso */
+    --danger-color: #dc3545; /* Vermelho para perigo/erro */
+    --info-color: #17a2b8; /* Azul claro para informação */
+    --warning-color: #ffc107; /* Amarelo para aviso */
+    --purple-color: #6f42c1; /* Mantido para referência, mas já é primary */
+    --ghost-btn-text: #e0e0e0; /* Cor do texto para botões fantasmas */
+
+    /* Sombras */
+    --shadow-light: rgba(0, 0, 0, 0.2); /* Sombra leve para elementos */
+    --shadow-deep: rgba(0, 0, 0, 0.4); /* Sombra mais profunda para modais/dropdowns */
+
+    /* Espaçamento */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+
+    /* Transições */
+    --transition-speed: 0.3s;
+}
+
+/* Modo Claro (exemplo - precisaríamos de mais ajustes se for um tema completo) */
+body[data-theme="light"] {
+    --primary-color: #6f42c1; /* Pode ser ajustado para um roxo mais claro */
+    --secondary-color: #007bff;
+    --background-dark: #f0f2f5; /* Fundo mais claro */
+    --sidebar-dark: #ffffff; /* Sidebar clara */
+    --card-background: #ffffff;
+    --text-light: #333333; /* Texto escuro */
+    --text-muted: #666666;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-deep: rgba(0, 0, 0, 0.2);
+    --ghost-btn-text: #333333;
+}
+
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+/* Estrutura do Container Admin */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    transition: margin-left var(--transition-speed); /* Para a animação da sidebar */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-dark);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-md) var(--spacing-sm);
+    box-shadow: 2px 0 10px var(--shadow-deep);
+    position: fixed; /* Fixa a sidebar na tela */
+    height: 100%;
+    overflow-y: auto; /* Permite rolagem se o conteúdo for grande */
+    z-index: 1000; /* Garante que fique acima de outros conteúdos */
+    transition: transform var(--transition-speed) ease-in-out, width var(--transition-speed) ease-in-out;
+}
+
+.sidebar.collapsed {
+    width: 70px; /* Largura quando colapsada */
+}
+
+.sidebar.collapsed .sidebar-header .logo span,
+.sidebar.collapsed .sidebar-profile .profile-info,
+.sidebar.collapsed .sidebar-menu span,
+.sidebar.collapsed .sidebar-footer span {
+    display: none; /* Esconde texto quando colapsada */
+}
+
+.sidebar.collapsed .sidebar-header .logo,
+.sidebar.collapsed .sidebar-profile,
+.sidebar.collapsed .sidebar-footer a {
+    justify-content: center; /* Centraliza ícones */
+    width: 100%;
+}
+
+.sidebar.collapsed .sidebar-menu ul {
+    align-items: center; /* Centraliza itens do menu */
+}
+
+.sidebar.collapsed .sidebar-menu a {
+    padding: var(--spacing-sm); /* Ajusta padding para ícone */
+    text-align: center;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.sidebar-header .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+.sidebar-header .logo i {
+    color: var(--primary-color);
+    margin-right: 10px;
+    font-size: 1.8rem;
+}
+
+.sidebar-header .logo-highlight {
+    color: var(--secondary-color);
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+}
+
+.sidebar-toggle:hover {
+    color: var(--primary-color);
+}
+
+.sidebar-profile {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+    margin-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profile-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+}
+
+.profile-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.profile-info p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.sidebar-menu {
+    flex-grow: 1; /* Permite que o menu ocupe o espaço restante */
+}
+
+.sidebar-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 12px var(--spacing-sm);
+    color: var(--text-light);
+    border-radius: 5px;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.sidebar-menu a i {
+    font-size: 1.2rem;
+    width: 25px; /* Garante alinhamento dos ícones */
+    text-align: center;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+    background-color: rgba(var(--primary-color), 0.2); /* Usa RGBA para ter transparência */
+    color: var(--primary-color);
+}
+
+.sidebar-menu a.active {
+    box-shadow: inset 3px 0 0 var(--primary-color); /* Linha indicando ativo */
+}
+
+.sidebar-footer {
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-footer a {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 10px var(--spacing-sm);
+    color: var(--text-muted);
+    border-radius: 5px;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.sidebar-footer a i {
+    font-size: 1.1rem;
+    width: 25px;
+    text-align: center;
+}
+
+.sidebar-footer a:hover {
+    background-color: rgba(var(--secondary-color), 0.1);
+    color: var(--secondary-color);
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    margin-left: 250px; /* Offset para a largura da sidebar */
+    padding: var(--spacing-md);
+    transition: margin-left var(--transition-speed);
+}
+
+.main-content.collapsed {
+    margin-left: 70px; /* Offset quando sidebar colapsada */
+}
+
+/* Header do Conteúdo Principal */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--card-background);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 2px 5px var(--shadow-light);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.lang-selector select {
+    background-color: var(--sidebar-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.user-dropdown {
+    position: relative;
+}
+
+.user-avatar-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.user-avatar-btn img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary-color);
+}
+
+
+/* Conteúdo das Seções */
+.content-section {
+    display: none; /* Escondido por padrão, mostrado via JS */
+    background-color: var(--card-background);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--shadow-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+.content-section.active {
+    display: block;
+}
+
+.content-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: var(--spacing-sm);
+}
+
+/* Dashboard */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.stat-card {
+    background-color: var(--sidebar-dark);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px var(--shadow-light);
+    transition: transform 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card i {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.stat-card h3 {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+.chart-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.chart-box {
+    background-color: var(--sidebar-dark);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--shadow-light);
+    height: 350px; /* Altura fixa para os gráficos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tabelas e Ações de Tabela */
+.table-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Permite que os itens quebrem linha em telas pequenas */
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.table-actions .filters {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.table-actions input[type="text"],
+.table-actions select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.table-responsive {
+    overflow-x: auto; /* Adiciona rolagem horizontal para tabelas grandes */
+    margin-bottom: var(--spacing-lg);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px; /* Garante que a tabela não fique muito estreita */
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+    background-color: var(--sidebar-dark);
+    color: var(--primary-color);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.data-table tr:hover {
+    background-color: rgba(var(--primary-color), 0.05);
+}
+
+/* Botões */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: bold;
+    transition: background-color var(--transition-speed), transform 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #5a36a0; /* Um pouco mais escuro que o primary */
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #0069d9; /* Um pouco mais escuro que o secondary */
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-info {
+    background-color: var(--info-color);
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.btn-ghost {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--ghost-btn-text);
+}
+
+.btn-ghost:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-light);
+}
+
+.btn-sm {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+}
+
+/* Badges de Status */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    min-width: 70px; /* Garante largura mínima para consistência */
+}
+
+/* Status do Usuário / Senha Temporária */
+.status-badge.true { /* Para senha temporária = TRUE */
+    background-color: var(--warning-color);
+    color: #333;
+}
+.status-badge.false { /* Para senha temporária = FALSE */
+    background-color: var(--success-color);
+}
+
+/* Status de Disponibilidade (Jogos) */
+.status-badge.available {
+    background-color: var(--success-color);
+}
+.status-badge.not-available {
+    background-color: var(--danger-color);
+}
+
+/* Status de Locação Pendente */
+.status-badge.pendente {
+    background-color: var(--warning-color);
+    color: #333;
+}
+.status-badge.liberado {
+    background-color: var(--success-color);
+}
+.status-badge.recusado {
+    background-color: var(--danger-color);
+}
+
+
+/* Formulários e Inputs */
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="tel"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input[type="color"] {
+    width: 80px; /* Ajusta largura para o color picker */
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: none;
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color), 0.3);
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 80px;
+}
+
+/* Modais */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background-color: var(--card-background);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px var(--shadow-deep);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh; /* Limita a altura para modais grandes */
+    overflow-y: auto; /* Adiciona rolagem se o conteúdo for grande */
+    position: relative;
+    transform: translateY(-20px); /* Pequena animação */
+    animation: modalFadeIn 0.3s forwards;
+}
+
+@keyframes modalFadeIn {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-lg);
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-sm);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Relatórios */
+.report-options {
+    background-color: var(--sidebar-dark);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-light);
+}
+
+.report-options .form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.report-specific-options {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+.recent-reports ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recent-reports li {
+    background-color: var(--sidebar-dark);
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* --- Estilos para a Seção de Perfil --- */
+
+.profile-avatar-display {
+    display: flex;
+    flex-direction: column; /* Organiza avatar e botão em coluna */
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--card-background); /* Fundo similar ao card */
+    border-radius: 8px; /* Use um valor fixo ou variável */
+    box-shadow: var(--shadow-light);
+}
+
+.profile-avatar-display img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Torna o avatar redondo */
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--primary-color); /* Borda para destaque */
+}
+
+.profile-avatar-display .btn {
+    margin-top: 10px; /* Espaço entre a imagem e o botão */
+}
+
+/* Opcional: Estilo para os formulários dentro do perfil se quiser separá-los como cards */
+.profile-form, .password-form {
+    background-color: var(--sidebar-dark); /* Fundo similar ao da sidebar para distinção */
+    padding: var(--spacing-md);
+    border-radius: 8px; /* Use um valor fixo ou variável */
+    box-shadow: var(--shadow-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* New CSS for Category Tabs */
+.category-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.category-tabs select {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Game thumbnail for tables */
+.game-thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 250px;
+        transform: translateX(-100%); /* Esconde a sidebar por padrão */
+        position: fixed;
+        height: 100vh;
+    }
+
+    .sidebar.active {
+        transform: translateX(0); /* Mostra a sidebar */
+    }
+
+    .main-content {
+        margin-left: 0; /* Ocupa toda a largura */
+        width: 100%;
+        padding: var(--spacing-sm);
+    }
+
+    .main-content.collapsed {
+        margin-left: 0; /* Não há colapso em mobile, apenas mostra/esconde */
+    }
+
+    .sidebar-toggle-mobile {
+        display: block; /* Mostra o botão de toggle mobile */
+        background: none;
+        border: none;
+        color: var(--text-light);
+        font-size: 1.8rem;
+        cursor: pointer;
+        margin-right: var(--spacing-md); /* Espaçamento do canto */
+    }
+
+    .main-header {
+        justify-content: flex-start; /* Alinha o toggle à esquerda */
+    }
+
+    .header-right {
+        margin-left: auto; /* Empurra os itens para a direita */
+    }
+
+    .dashboard-stats, .chart-container {
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 0 var(--spacing-sm);
+    }
+
+    .table-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .table-actions .filters {
+        width: 100%;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .table-actions .filters input,
+    .table-actions .filters select,
+    .table-actions .btn {
+        width: 100%;
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none; /* Escondido por padrão */
+    }
+}
+
+/* Hide all submenus by default */
+.submenu {
+    display: none;
+    list-style: none; /* Remove bullet points */
+    padding-left: 20px; /* Indent submenu items if desired */
+}
+/* REMOVIDO: li:hover > .submenu { display: block; } */

@@ -5,7 +5,7 @@ require_once 'conexao.php';
 // Permissão de acesso: só ADM (1) acessa
 $fk_cargo = $_SESSION['fk_cargo'] ?? null;
 if ($fk_cargo != 1) {
-    echo "<script>alert('Acesso negado! Você não tem permissão para acessar esta página.'); window.location.href='principal.php';</script>";
+    echo "Acesso negado!";
     exit;
 }
 
@@ -43,124 +43,158 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Excluir Jogo</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f6f6fa;
-        margin: 0;
+body {
+    font-family: 'Motiva Sans', 'Segoe UI', sans-serif;
+    background: #12002b;
+    color: #f0e6ff;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+h2 {
+    color: #c7b3e6;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+    font-weight: 700;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #1e1b2e;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th, table td {
+    border: 1px solid #3e2f6d;
+    padding: 15px 18px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+table th {
+    background: #2a1f4d;
+    color: #d4c2f0;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+table tr:nth-child(even) {
+    background: #1a1828;
+}
+
+table tr:hover {
+    background: #2d2449;
+}
+
+table a,
+button.btn-excluir {
+    color: #9d7aff;
+    text-decoration: none;
+    margin-right: 12px;
+    font-weight: 600;
+    transition: color 0.2s, text-decoration 0.2s, background 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 0;
+}
+
+table a:hover,
+button.btn-excluir:hover {
+    color: #f0e6ff;
+    text-decoration: underline;
+    background: none;
+}
+
+img {
+    max-width: 70px;
+    max-height: 70px;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto;
+}
+
+p {
+    text-align: center;
+    color: #c7b3e6;
+    margin-top: 20px;
+    font-size: 1.1em;
+    padding: 12px;
+    border: 1px dashed #3e2f6d;
+    border-radius: 8px;
+    background: #1e1b2e;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    color: #fff;
+    background: #510d96;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 25px;
+    border: 1px solid #510d96;
+    border-radius: 8px;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.back-link:hover {
+    background: #7a5af5;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transform: translateY(-1px);
+}
+
+.back-link:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
         padding: 20px;
-        color: #333;
-        line-height: 1.6;
     }
-    h2 {
-        color: #2c056e;
-        text-align: center;
-        margin-bottom: 30px;
-        font-size: 2em;
-        font-weight: 700;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        border-radius: 8px;
-        overflow: hidden;
-    }
+
     table th, table td {
-        border: 1px solid #eee;
-        padding: 15px 18px;
-        text-align: left;
-        vertical-align: middle;
-    }
-    table th {
-        background: #e6e1f4;
-        color: #2c056e;
-        font-weight: 700;
-        text-transform: uppercase;
-        font-size: 0.9em;
-    }
-    table tr:nth-child(even) {
-        background: #f9f9f9;
-    }
-    table tr:hover {
-        background: #f0f0f0;
-    }
-    table a {
-        color: #510d96;
-        text-decoration: none;
-        margin-right: 12px;
-        font-weight: 500;
-        transition: color 0.2s, text-decoration 0.2s;
-    }
-    table a:hover {
-        color: #2c056e;
-        text-decoration: underline;
-    }
-    img {
-        max-width: 70px;
-        max-height: 70px;
-        border-radius: 6px;
-        display: block;
-        margin: 0 auto;
-    }
-    p {
-        text-align: center;
-        color: #777;
-        margin-top: 20px;
-        font-size: 1.1em;
         padding: 10px;
-        border: 1px dashed #ccc;
-        border-radius: 5px;
-        background: #fefefe;
+        font-size: 0.85em;
     }
+
+    table a,
+    button.btn-excluir {
+        margin-right: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.8em;
+    }
+
     .back-link {
-        display: block;
-        text-align: center;
-        margin-top: 30px;
-        color: #fff;
-        background: #510d96;
-        text-decoration: none;
-        font-weight: 600;
-        padding: 12px 25px;
-        border: 1px solid #510d96;
-        border-radius: 5px;
-        max-width: 200px;
-        margin-left: auto;
-        margin-right: auto;
-        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        max-width: 100%;
     }
-    .back-link:hover {
-        background: #2c056e;
-        color: #fff;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        transform: translateY(-1px);
+
+    img {
+        max-width: 40px;
+        max-height: 40px;
     }
-    .back-link:active {
-        transform: translateY(0);
-        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    }
-    @media (max-width: 768px) {
-        .container {
-            margin: 10px;
-            padding: 20px;
-        }
-        table th, table td {
-            padding: 10px;
-            font-size: 0.85em;
-        }
-        table a {
-            margin-right: 5px;
-        }
-    }
-    @media (max-width: 480px) {
-        h2 {
-            font-size: 1.8em;
-        }
-        .back-link {
-            max-width: 100%;
-        }
-    }
+}
     </style>
 </head>
 <body>

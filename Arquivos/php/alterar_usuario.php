@@ -15,12 +15,14 @@ $usuario = null;
 // Busca o Cliente se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['busca_usuario'])) {
     $busca = trim($_POST['busca_usuario']);
-
+// Busca por número
     if (is_numeric($busca)) {
         $sql = "SELECT * FROM usuario WHERE pk_usuario = :busca";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':busca', $busca, PDO::PARAM_INT);
-    } else {
+    }
+    // busca por Nome
+     else {
         $sql = "SELECT * FROM usuario WHERE nome_user LIKE :busca";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':busca', "%$busca%", PDO::PARAM_STR);

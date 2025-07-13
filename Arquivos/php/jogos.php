@@ -7,240 +7,205 @@ if (!isset($_SESSION['pk_usuario'])) {
     exit();
 }
 
-$busca = trim($_GET['busca'] ?? '');
-$categoria_tipo = $_GET['categoria_tipo'] ?? '';
-$categoria_id = $_GET['categoria_id'] ?? '';
+$mensagem = '';
+$tipo_mensagem = '';
 
-$sql = "SELECT DISTINCT j.* FROM jogo j
-        LEFT JOIN jogo_genero jg ON j.pk_jogo = jg.jogo_id
-        LEFT JOIN genero g ON jg.genero_id = g.pk_genero
-        LEFT JOIN jogo_estilo je ON j.pk_jogo = je.jogo_id
-        LEFT JOIN estilo e ON je.estilo_id = e.pk_estilo
-        LEFT JOIN jogo_plataforma jp ON j.pk_jogo = jp.jogo_id
-        LEFT JOIN plataforma p ON jp.plataforma_id = p.pk_plataforma
-        WHERE j.disponivel_locacao = 1";
+// Processar a busca
+$termo_busca = $_GET['busca'] ?? '';
+$condicao_busca = '';
+$parametros = [];
 
-$params = [];
-
-if ($busca !== '') {
-    $sql .= " AND j.nome_jogo LIKE :busca";
-    $params[':busca'] = "%$busca%";
+if (!empty($termo_busca)) {
+    $condicao_busca = " WHERE nome_jogo LIKE :termo_busca";
+    $parametros[':termo_busca'] = '%' . $termo_busca . '%';
 }
 
-if ($categoria_tipo !== '' && $categoria_id !== '') {
-    if ($categoria_tipo === 'genero') {
-        $sql .= " AND g.pk_genero = :categoria_id";
-        $params[':categoria_id'] = $categoria_id;
-    } elseif ($categoria_tipo === 'estilo') {
-        $sql .= " AND e.pk_estilo = :categoria_id";
-        $params[':categoria_id'] = $categoria_id;
-    } elseif ($categoria_tipo === 'plataforma') {
-        $sql .= " AND p.pk_plataforma = :categoria_id";
-        $params[':categoria_id'] = $categoria_id;
-    }
-}
-
-$stmt = $pdo->prepare($sql);
-$stmt->execute($params);
+// Buscar todos os jogos
+$stmt = $pdo->prepare("SELECT pk_jogo, nome_jogo, imagem_jogo, url_jogo FROM jogo" . $condicao_busca);
+$stmt->execute($parametros);
 $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$generos = $pdo->query("SELECT pk_genero, nome_gen FROM genero ORDER BY nome_gen")->fetchAll(PDO::FETCH_ASSOC);
-$estilos = $pdo->query("SELECT pk_estilo, nome_estilo FROM estilo ORDER BY nome_estilo")->fetchAll(PDO::FETCH_ASSOC);
-$plataformas = $pdo->query("SELECT pk_plataforma, nome_plat FROM plataforma ORDER BY nome_plat")->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <title>Jogos para Locação</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="../img/capybara.png" />
-    <link rel="stylesheet" href="../css/jogos_locacao.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos Disponíveis</title>
     <style>
-        .filtro-form {
+        body {
+            font-family: 'Motiva Sans', sans-serif;
+            background-color: #12002b;
+            color: #f0e6ff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1e1b2e;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            border: 1px solid #5d3bad;
+        }
+        h2 {
+            text-align: center;
+            color: #c084fc;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .search-bar {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: 30px 0;
-            flex-wrap: wrap;
+            margin-bottom: 30px;
         }
-        .filtro-form input,
-        .filtro-form select,
-        .filtro-form button {
-            padding: 10px;
-            font-size: 1em;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-        .filtro-form button {
-            background: #510d96;
-            color: white;
-            border: none;
-            transition: 0.2s;
-        }
-        .filtro-form button:hover {
-            background: #2c056e;
-        }
-        h6, h3{
-            text-align: center;
-        }
-        .game-tile a {
-            display: inline-block;
-            background: linear-gradient(45deg,rgb(91, 21, 148),rgb(59, 15, 179));
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 10px 45px 15px;
-            transition: all 0.3s ease;
-            text-align: center;
-            width: calc(100% - 30px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        .game-tile a:hover {
-            background: linear-gradient(45deg,rgb(77, 31, 184),rgb(149, 51, 230));
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-        .game-tile a:active {
-            transform: translateY(0);
-        }
-        .voltar-btn {
-            background: none;
-            border: none;
-            color: #ffffff;
-            font-family: 'Motiva Sans', Arial, Helvetica, sans-serif;
-            font-size: 1.06rem;
-            font-weight: 600;
-            padding: 6px 22px;
-            border-radius: 18px;
-            letter-spacing: 1px;
-            text-decoration: none;
-            transition: color 0.17s, background 0.17s, text-decoration 0.19s;
-            box-shadow: none;
+        .search-bar input[type="text"] {
+            width: 70%;
+            padding: 10px 15px;
+            border-radius: 8px 0 0 8px;
+            border: 1px solid #7a5af5;
+            background-color: #2e2152;
+            color: #f0e6ff;
+            font-size: 1rem;
             outline: none;
-            line-height: 1.4;
-            vertical-align: middle;
-            display: inline-block;
-            margin-left: 24px;
-            margin-top: 0;
-            margin-bottom: 0;
         }
-
-        .voltar-btn:hover,
-        .voltar-btn:focus {
-            color: #ffffff;
-            background: #5d3bad;
-            text-decoration: underline;
-        }
-
-        .voltar-btn:active {
-            color: #ffffff;
-            background: #5d3bad;
-        }
-        footer {
-            background-color: #2a0a4a;
+        .search-bar button {
+            padding: 10px 20px;
+            border-radius: 0 8px 8px 0;
+            border: none;
+            background-color: #510d96;
             color: white;
-            margin-top: 40px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
         }
-        .footer-bottom {
+        .search-bar button:hover {
+            background-color: #7a5af5;
+        }
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            justify-content: center;
+        }
+        .game-card {
+            background-color: #2e2152;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            border: 1px solid #7a5af5;
             text-align: center;
-            padding-top: 20px;
-            padding-bottom: 10px;
-            border-top: 1px solid #333;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+        .game-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-bottom: 1px solid #5d3bad;
+        }
+        .game-card h3 {
+            font-size: 1.2rem;
+            color: #e9d5ff;
+            margin: 15px 10px 10px;
+            word-wrap: break-word;
+        }
+        .game-card .actions {
+            padding: 15px;
+            background-color: #1e1b2e;
+            border-top: 1px solid #5d3bad;
+        }
+        .btn-primary {
+            display: block;
+            width: calc(100% - 20px);
+            margin: 0 auto;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #510d96;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #7a5af5;
+            transform: translateY(-2px);
+        }
+        .alert {
+            background: #2e2152;
+            border: 1px solid #7a5af5;
+            color: #e9d5ff;
+            padding: 15px;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #fff;
+            background: #510d96;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 25px;
+            border: 1px solid #510d96;
+            border-radius: 8px;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .back-link:hover {
+            background: #7a5af5;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transform: translateY(-1px);
         }
     </style>
 </head>
 <body>
-<header>
-    <div class="logo">
-        <h1>CIPHER</h1>
-        <img src="../img/capybara.png" alt="Logo Capivara" height="48" />
+    <div class="container">
+        <h2>Jogos Disponíveis</h2>
+
+        <?php if (!empty($mensagem)): ?>
+            <p class="alert <?= $tipo_mensagem ?>"><?= htmlspecialchars($mensagem) ?></p>
+        <?php endif; ?>
+
+        <form action="jogos.php" method="GET" class="search-bar">
+            <input type="text" name="busca" placeholder="Buscar jogo..." value="<?= htmlspecialchars($termo_busca) ?>">
+            <button type="submit">Buscar</button>
+        </form>
+
+        <?php if (count($jogos) > 0): ?>
+            <div class="game-grid">
+                <?php foreach ($jogos as $jogo): ?>
+                    <div class="game-card">
+                        <img src="<?= htmlspecialchars($jogo['imagem_jogo']) ?>" alt="<?= htmlspecialchars($jogo['nome_jogo']) ?>">
+                        <h3><?= htmlspecialchars($jogo['nome_jogo']) ?></h3>
+                        <div class="actions">
+                            <a href="confirmar_locacao.php?jogo_id=<?= $jogo['pk_jogo'] ?>" class="btn-primary">Locar Jogo</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <div class="alert alert-info">Nenhum jogo encontrado.</div>
+        <?php endif; ?>
+
+        <a href="index.php" class="back-link">Voltar para a Biblioteca</a>
     </div>
-    <a href="index.php" class="voltar-btn" style="text-decoration: none;">Voltar para o Início</a>
-</header>
-
-<div class="header">JOGOS PARA LOCAÇÃO</div>
-
-<form method="GET" class="filtro-form">
-    <input type="text" name="busca" placeholder="Buscar por nome..." value="<?= htmlspecialchars($busca) ?>" />
-
-    <select name="categoria_tipo" id="categoria_tipo">
-        <option value="">Selecionar Categoria </option>
-
-        <optgroup label="Gêneros">
-            <?php foreach ($generos as $gen): ?>
-                <option value="genero" <?= ($categoria_tipo === 'genero' && $categoria_id == $gen['pk_genero']) ? 'selected' : '' ?> data-id="<?= $gen['pk_genero'] ?>">
-                    <?= htmlspecialchars($gen['nome_gen']) ?>
-                </option>
-            <?php endforeach; ?>
-        </optgroup>
-
-        <optgroup label="Estilos">
-            <?php foreach ($estilos as $est): ?>
-                <option value="estilo" <?= ($categoria_tipo === 'estilo' && $categoria_id == $est['pk_estilo']) ? 'selected' : '' ?> data-id="<?= $est['pk_estilo'] ?>">
-                    <?= htmlspecialchars($est['nome_estilo']) ?>
-                </option>
-            <?php endforeach; ?>
-        </optgroup>
-
-        <optgroup label="Plataformas">
-            <?php foreach ($plataformas as $plat): ?>
-                <option value="plataforma" <?= ($categoria_tipo === 'plataforma' && $categoria_id == $plat['pk_plataforma']) ? 'selected' : '' ?> data-id="<?= $plat['pk_plataforma'] ?>">
-                    <?= htmlspecialchars($plat['nome_plat']) ?>
-                </option>
-            <?php endforeach; ?>
-        </optgroup>
-    </select>
-
-    <input type="hidden" name="categoria_id" id="categoria_id" value="<?= htmlspecialchars($categoria_id) ?>" />
-
-    <button type="submit">Filtrar</button>
-</form>
-
-<div class="games-container">
-    <?php if (count($jogos) === 0): ?>
-        <div style="color: white; text-align:center;">Nenhum jogo encontrado com os critérios selecionados.</div>
-    <?php endif; ?>
-
-    <?php foreach ($jogos as $jogo): ?>
-        <div class="game-tile">
-            <img src="<?= htmlspecialchars($jogo['imagem_jogo']) ? htmlspecialchars($jogo['imagem_jogo']) : '../img/semImage.jpg'?>" alt="<?= htmlspecialchars($jogo['nome_jogo']) ?>" />
-            <h3><?= htmlspecialchars($jogo['nome_jogo']) ?></h3>
-            <h6><?= htmlspecialchars($jogo['desenvolvedora']) ?></h6>
-            <form method="post" action="locar_jogo.php">
-                <input type="hidden" name="jogo_id" value="<?= $jogo['pk_jogo'] ?>">
-                <button type="submit" name="locar" value="ID_DO_JOGO" style="all: unset; cursor: pointer; text-align: center;">
-                    <a>Locar Jogo</a>
-                </button>
-            </form>
-        </div>
-    <?php endforeach; ?>
-</div>
-<footer>
-    <div class="footer-bottom">
-        <p>&copy; 2024 Cipher Games. Todos os direitos reservados.</p>
-    </div>
-</footer>
-<script>
-    const selectCategoria = document.getElementById('categoria_tipo');
-    const hiddenCategoriaId = document.getElementById('categoria_id');
-
-    selectCategoria.addEventListener('change', function() {
-        const selectedOption = this.options[this.selectedIndex];
-        const categoriaId = selectedOption.getAttribute('data-id') || '';
-        hiddenCategoriaId.value = categoriaId;
-    });
-
-    window.addEventListener('DOMContentLoaded', () => {
-        const selectedOption = selectCategoria.options[selectCategoria.selectedIndex];
-        const categoriaId = selectedOption.getAttribute('data-id') || '';
-        hiddenCategoriaId.value = categoriaId;
-    });
-</script>
-
 </body>
 </html>
