@@ -285,10 +285,20 @@ INSERT INTO usuario (pk_usuario, nome_user, email_user, senha_user, data_criacao
 (4,'Júlia Monteiro','julia@email.com', '12345678','2025-01-10',0,'','cliente'),
 (5,'Caio Silveira','caio@email.com', '12345678','2025-04-05',0,'','cliente');
 
-select * from usuario;
-
+-- Adicionando colunas que foram definidas por ALTER TABLE
 ALTER TABLE locacoes_pendentes
 ADD COLUMN data_inicio DATETIME;
 
 ALTER TABLE locacoes_pendentes
 ADD COLUMN valor_total DECIMAL(10, 2);
+
+ALTER TABLE locacoes_pendentes
+ADD COLUMN duracao_horas DECIMAL(10, 2) NOT NULL;
+
+-- Inserções de exemplo para locacoes_pendentes
+INSERT INTO locacoes_pendentes (usuario_id, jogo_id, data_pedido, data_expiracao, status, data_inicio, valor_total, duracao_horas) VALUES
+(1, 1, '2025-07-10 10:00:00', '2025-07-17 10:00:00', 'pendente', NULL, 15.00, 24.00),
+(2, 3, '2025-07-11 14:30:00', '2025-07-18 14:30:00', 'pendente', NULL, 10.00, 12.00),
+(3, 6, '2025-07-12 09:00:00', '2025-07-19 09:00:00', 'pendente', NULL, 20.00, 48.00);
+
+select * from usuario;

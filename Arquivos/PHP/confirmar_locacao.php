@@ -209,6 +209,12 @@ $min_fim = date('Y-m-d\\TH:i', strtotime('+1 hour'));
         .card-details-row > div {
             flex: 1;
         }
+        .validation-message {
+            color: #ff6b6b; /* Cor vermelha para mensagens de erro */
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: none; /* Escondido por padrão */
+        }
         @media (max-width: 576px) {
             .container-custom {
                 padding: 20px;
@@ -240,7 +246,7 @@ $min_fim = date('Y-m-d\\TH:i', strtotime('+1 hour'));
             </div>
         </div>
 
-        <form action="pagar_locacao.php" method="post" class="form-section">
+        <form action="pagar_locacao.php" method="post" class="form-section" id="paymentForm">
             <input type="hidden" name="jogo_id" value="<?= htmlspecialchars($jogo['pk_jogo']) ?>">
             <input type="hidden" name="nome_jogo" value="<?= htmlspecialchars($jogo['nome_jogo']) ?>">
             <input type="hidden" name="imagem_jogo" value="<?= htmlspecialchars($jogo['imagem_jogo']) ?>">
@@ -266,19 +272,23 @@ $min_fim = date('Y-m-d\\TH:i', strtotime('+1 hour'));
                 <div class="card-input-group">
                     <label for="card_number">Número do Cartão:</label>
                     <input type="text" id="card_number" name="card_number" class="form-control" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required>
+                    <div id="card_number_error" class="validation-message">O número do cartão deve conter 16 dígitos.</div>
                 </div>
                 <div class="card-input-group">
                     <label for="card_name">Nome no Cartão:</label>
                     <input type="text" id="card_name" name="card_name" class="form-control" placeholder="Nome Completo" required>
+                    <div id="card_name_error" class="validation-message">O nome no cartão deve conter apenas letras e espaços.</div>
                 </div>
                 <div class="card-details-row">
                     <div class="card-input-group">
                         <label for="card_expiry">Validade (MM/AA):</label>
                         <input type="text" id="card_expiry" name="card_expiry" class="form-control" placeholder="MM/AA" maxlength="5" required>
+                        <div id="card_expiry_error" class="validation-message">A validade deve ser no formato MM/AA.</div>
                     </div>
                     <div class="card-input-group">
                         <label for="card_cvv">CVV:</label>
                         <input type="text" id="card_cvv" name="card_cvv" class="form-control" placeholder="XXX" maxlength="4" required>
+                        <div id="card_cvv_error" class="validation-message">O CVV deve conter no mínimo 3 dígitos.</div>
                     </div>
                 </div>
             </div>
@@ -360,18 +370,110 @@ $min_fim = date('Y-m-d\\TH:i', strtotime('+1 hour'));
         dataFimInput.addEventListener('change', calcularDuracaoEValor);
 
 
+        // --- Validações e formatação de campos de cartão ---
+        const cardNumberInput = document.getElementById('card_number');
+        const cardNameInput = document.getElementById('card_name');
+        const cardExpiryInput = document.getElementById('card_expiry');
+        const cardCvvInput = document.getElementById('card_cvv');
+        const paymentForm = document.getElementById('paymentForm');
+
+        const cardNumberError = document.getElementById('card_number_error');
+        const cardNameError = document.getElementById('card_name_error');
+        const cardExpiryError = document.getElementById('card_expiry_error');
+        const cardCvvError = document.getElementById('card_cvv_error');
+
         // Card number formatting
-        document.getElementById('card_number').addEventListener('input', function (e) {
+        cardNumberInput.addEventListener('input', function (e) {
             e.target.value = e.target.value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1 ');
+            // Esconde erro ao digitar
+            cardNumberError.style.display = 'none';
         });
 
         // Card expiry formatting MM/AA
-        document.getElementById('card_expiry').addEventListener('input', function (e) {
+        cardExpiryInput.addEventListener('input', function (e) {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length > 2) {
                 value = value.slice(0, 2) + '/' + value.slice(2, 4);
             }
             e.target.value = value;
+            // Esconde erro ao digitar
+            cardExpiryError.style.display = 'none';
+        });
+
+        // Validação para Nome no Cartão (apenas letras e espaços)
+        cardNameInput.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+            // Esconde erro ao digitar
+            cardNameError.style.display = 'none';
+        });
+
+        // Validação para CVV (apenas números)
+        cardCvvInput.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+            // Esconde erro ao digitar
+            cardCvvError.style.display = 'none';
+        });
+
+        // Validação no SUBMIT do formulário
+        paymentForm.addEventListener('submit', function(e) {
+            let isValid = true;
+
+            // 1. Validação do Número do Cartão (16 dígitos obrigatórios)
+            const cardNumberClean = cardNumberInput.value.replace(/\s/g, '');
+            if (cardNumberClean.length !== 16) {
+                cardNumberError.style.display = 'block';
+                isValid = false;
+            } else {
+                cardNumberError.style.display = 'none';
+            }
+
+            // 2. Validação do Nome no Cartão (apenas letras e espaços, e não vazio)
+            if (!/^[a-zA-Z\s]+$/.test(cardNameInput.value) || cardNameInput.value.trim() === '') {
+                cardNameError.style.display = 'block';
+                isValid = false;
+            } else {
+                cardNameError.style.display = 'none';
+            }
+
+            // 3. Validação da Validade (MM/AA - 4 dígitos numéricos)
+            const cardExpiryClean = cardExpiryInput.value.replace('/', '');
+            if (cardExpiryClean.length !== 4) {
+                cardExpiryError.style.display = 'block';
+                isValid = false;
+            } else {
+                // Opcional: Validação de data futura e meses válidos
+                const month = parseInt(cardExpiryClean.slice(0, 2), 10);
+                const year = parseInt(cardExpiryClean.slice(2, 4), 10) + 2000; // Assume 20xx
+                const currentYear = new Date().getFullYear();
+                const currentMonth = new Date().getMonth() + 1; // Mês atual (1-12)
+
+                if (month < 1 || month > 12) {
+                    cardExpiryError.textContent = 'Mês inválido (MM).';
+                    cardExpiryError.style.display = 'block';
+                    isValid = false;
+                } else if (year < currentYear || (year === currentYear && month < currentMonth)) {
+                    cardExpiryError.textContent = 'Data de validade expirada.';
+                    cardExpiryError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    cardExpiryError.style.display = 'none';
+                }
+            }
+
+
+            // 4. Validação do CVV (mínimo de 3 dígitos)
+            const cvvClean = cardCvvInput.value.replace(/\D/g, '');
+            if (cvvClean.length < 3) {
+                cardCvvError.style.display = 'block';
+                isValid = false;
+            } else {
+                cardCvvError.style.display = 'none';
+            }
+
+            if (!isValid) {
+                e.preventDefault(); // Impede o envio do formulário se a validação falhar
+                alert('Por favor, corrija os erros nos campos do cartão.'); // Alerta genérico
+            }
         });
     </script>
 </body>
