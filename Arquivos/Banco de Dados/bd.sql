@@ -295,10 +295,7 @@ ADD COLUMN valor_total DECIMAL(10, 2);
 ALTER TABLE locacoes_pendentes
 ADD COLUMN duracao_horas DECIMAL(10, 2) NOT NULL;
 
--- Inserções de exemplo para locacoes_pendentes
-INSERT INTO locacoes_pendentes (usuario_id, jogo_id, data_pedido, data_expiracao, status, data_inicio, valor_total, duracao_horas) VALUES
-(1, 1, '2025-07-10 10:00:00', '2025-07-17 10:00:00', 'pendente', NULL, 15.00, 24.00),
-(2, 3, '2025-07-11 14:30:00', '2025-07-18 14:30:00', 'pendente', NULL, 10.00, 12.00),
-(3, 6, '2025-07-12 09:00:00', '2025-07-19 09:00:00', 'pendente', NULL, 20.00, 48.00);
+ALTER TABLE locacoes_pendentes
+MODIFY COLUMN status ENUM('pendente', 'pago_aguardando_admin', 'liberado', 'recusado') DEFAULT 'pendente';
 
 select * from usuario;
